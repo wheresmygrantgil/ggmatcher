@@ -1,23 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Grant Matcher</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header>
-    <h1>Grant Matcher</h1>
-  </header>
-  <main>
-    <div class="selector">
-      <label for="researcher-input">Find your name:</label>
-      <input id="researcher-input" list="researchers" placeholder="Start typing" />
-      <datalist id="researchers"></datalist>
-    </div>
-    <section id="grants"></section>
-  </main>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HaifaUniGrantsMatching</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Grant Matcher for Haifa university</h1>
+    </header>
+
+    <main>
+      <div class="selector">
+        <label for="researcher-input">Find your name</label>
+        <div class="input-wrapper">
+          <input
+            id="researcher-input"
+            type="text"
+            placeholder="Start typing…"
+            autocomplete="off"
+          />
+          <div id="suggestions" class="suggestions"></div>
+        </div>
+      </div>
+
+      <section id="grants" class="grants"></section>
+    </main>
+
+    <footer>
+      <small>Powered by Gil Zeevi</small>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>

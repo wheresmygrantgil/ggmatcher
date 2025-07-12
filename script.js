@@ -1,42 +1,130 @@
+let matchesData = [];
+let grantsData = [];
+let researcherNames = [];
+
 async function loadData() {
   const [matchesResp, grantsResp] = await Promise.all([
     fetch('matches.json'),
-    fetch('grants.json')
+    fetch('grants.json'),
   ]);
-  const matches = await matchesResp.json();
-  const grants = await grantsResp.json();
-  return { matches, grants };
+
+  const matchesText = await matchesResp.text();
+  const grantsText = await grantsResp.text();
+
+  matchesData = JSON.parse(matchesText);
+  grantsData = JSON.parse(grantsText);
+
+  researcherNames = matchesData.map((m) => m.name);
 }
 
-function populateResearchers(matches) {
-  const datalist = document.getElementById('researchers');
-  matches.forEach(m => {
-    const opt = document.createElement('option');
-    opt.value = m.name;
-    datalist.appendChild(opt);
+function createSuggestion(name) {
+  const div = document.createElement('div');
+  div.className = 'suggestion-item';
+  div.tabIndex = 0;
+  div.textContent = name;
+  div.addEventListener('click', () => {
+    selectResearcher(name);
   });
-  const input = document.getElementById('researcher-input');
-  input.addEventListener('change', () => showGrants(matches, grantsData, input.value));
+  return div;
 }
 
-function showGrants(matches, grants, name) {
-  const container = document.getElementById('grants');
-  container.innerHTML = '';
-  const match = matches.find(m => m.name === name);
+function updateSuggestions(value) {
+  const suggBox = document.getElementById('suggestions');
+  suggBox.innerHTML = '';
+
+  if (!value) {
+    suggBox.style.display = 'none';
+    return;
+  }
+
+  const filtered = researcherNames
+    .filter((n) => n.toLowerCase().includes(value.toLowerCase()))
+    .slice(0, 8);
+
+  if (filtered.length === 0) {
+    suggBox.style.display = 'none';
+    return;
+  }
+
+  filtered.forEach((name) => suggBox.appendChild(createSuggestion(name)));
+  suggBox.style.display = 'block';
+}
+
+function selectResearcher(name) {
+  document.getElementById('researcher-input').value = name;
+  document.getElementById('suggestions').style.display = 'none';
+  showGrants(name);
+}
+
+function formatDate(d) {
+  if (Array.isArray(d)) return d[0];
+  return d;
+}
+
+function moneyFmt(m) {
+  if (m === null || m === undefined || Number.isNaN(m)) return '';
+  return m.toLocaleString();
+}
+
+function createGrantCard(grant) {
+  const card = document.createElement('div');
+  card.className = 'grant';
+
+  card.innerHTML = `
+      <h3>${grant.title}</h3>
+      <p><strong>Provider:</strong> ${grant.provider}</p>
+      <p><strong>Due Date:</strong> ${formatDate(grant.due_date)}</p>
+      <p><strong>Proposed Money:</strong> ${moneyFmt(grant.proposed_money)}</p>
+      <p><a href="${grant.submission_link}" target="_blank" rel="noopener">Submission Link ↗</a></p>
+    `;
+
+  // Summary toggle
+  const btn = document.createElement('button');
+  btn.className = 'summary-toggle';
+  btn.textContent = '▶ Summary';
+
+  const summary = document.createElement('div');
+  summary.className = 'summary';
+  summary.textContent = grant.summary_text;
+  summary.hidden = true;
+
+  btn.addEventListener('click', () => {
+    const open = !summary.hidden;
+    summary.hidden = open; // toggle visibility
+    btn.textContent = open ? '▶ Summary' : '▼ Summary';
+  });
+
+  card.appendChild(btn);
+  card.appendChild(summary);
+
+  return card;
+}
+
+function showGrants(name) {
+  const grantsContainer = document.getElementById('grants');
+  grantsContainer.innerHTML = '';
+
+  const match = matchesData.find((m) => m.name === name);
   if (!match) return;
-  const grantIds = match.grants;
-  grantIds.forEach(id => {
-    const g = grants.find(gr => gr.grant_id === id);
-    if (!g) return;
-    const div = document.createElement('div');
-    div.className = 'grant';
-    div.innerHTML = `<h3>${g.title}</h3><p><strong>Provider:</strong> ${g.provider}</p>`;
-    container.appendChild(div);
+
+  match.grants.forEach((id) => {
+    const grant = grantsData.find((g) => g.grant_id === id);
+    if (!grant) return;
+    grantsContainer.appendChild(createGrantCard(grant));
   });
 }
 
-let grantsData = [];
-loadData().then(({ matches, grants }) => {
-  grantsData = grants;
-  populateResearchers(matches);
-});
+async function init() {
+  await loadData();
+
+  const input = document.getElementById('researcher-input');
+  input.addEventListener('input', (e) => updateSuggestions(e.target.value));
+  input.addEventListener('focus', (e) => updateSuggestions(e.target.value));
+  document.addEventListener('click', (e) => {
+    if (!document.querySelector('.selector').contains(e.target)) {
+      document.getElementById('suggestions').style.display = 'none';
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
