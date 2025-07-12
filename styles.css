@@ -1,8 +1,15 @@
+/* ===========================
+   Grant-Matcher UI – full CSS
+   Palette:
+     --primary: #213646  (deep navy)
+     --accent : #1DBEE6  (vivid cyan)
+=========================== */
+
 :root {
   --primary: #213646;
-  --accent: #1DBEE6;
-  --bg: #ffffff;
-  --text: #213646;
+  --accent : #1DBEE6;
+  --bg     : #ffffff;
+  --text   : #213646;
 }
 
 * {
@@ -13,27 +20,64 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background : var(--bg);
+  color      : var(--text);
   line-height: 1.55;
-  display: flex;
+  display    : flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height : 100vh;
 }
 
+/* ========= Fancy animated header ========= */
 header {
-  background: var(--primary);
-  color: #ffffff;
-  padding: 2rem 1rem;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(-45deg,
+              var(--primary) 0%,
+              #19506a 25%,
+              var(--accent) 55%,
+              #3ee1ff 80%);
+  background-size: 400% 400%;
+  animation: bgShift 14s ease-in-out infinite;
+
+  color        : #ffffff;
+  padding      : 3.8rem 1rem;
+  text-align   : center;
+  position     : relative;
+  overflow     : hidden;
+  border-bottom: 4px solid #ffffff10;
+  box-shadow   : 0 6px 18px rgba(0,0,0,0.25);
+}
+header::before,
+header::after {
+  content : '';
+  position: absolute;
+  width   : 260px;
+  height  : 260px;
+  background: rgba(255,255,255,0.08);
+  filter  : blur(60px);
+  border-radius: 45% 55% 60% 40%;
+  pointer-events: none;
+  animation: float 20s ease-in-out infinite;
+}
+header::before { top:-70px; left:-90px; animation-delay:2.5s; }
+header::after  { bottom:-90px; right:-70px; animation-direction:reverse; }
+
+@keyframes bgShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position:100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes float {
+  0%,100% { transform: translate(0,0) rotate(0deg); }
+  50%     { transform: translate(25px,-20px) rotate(10deg); }
 }
 
 h1 {
-  font-size: 2.25rem;
+  font-size: clamp(2.2rem, 4vw + 1rem, 3rem);
   font-weight: 600;
+  letter-spacing: 0.6px;
 }
 
+/* ================= Main layout ================ */
 main {
   flex: 1;
   width: 100%;
@@ -42,25 +86,23 @@ main {
   padding: 0 1rem;
 }
 
+/* ========== Researcher selector ========== */
 .selector {
   position: relative;
   text-align: center;
   margin-bottom: 3rem;
 }
-
 .selector label {
   display: block;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
-
 .input-wrapper {
   position: relative;
   width: 100%;
   max-width: 450px;
   margin: 0 auto;
 }
-
 #researcher-input {
   width: 100%;
   padding: 0.8rem 1rem;
@@ -69,28 +111,25 @@ main {
   border-radius: 10px;
   outline: none;
   transition: border-color 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
 }
-
-#researcher-input:focus {
-  border-color: var(--accent);
-}
+#researcher-input:focus { border-color: var(--accent); }
 
 /* Suggestions dropdown */
 .suggestions {
   position: absolute;
-  top: calc(100% + 0.3rem);
+  top : calc(100% + 0.3rem);
   left: 0;
   right: 0;
   background: #ffffff;
   border: 2px solid var(--primary);
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
   z-index: 20;
   max-height: 300px;
   overflow-y: auto;
-  display: none; /* shown via JS */
+  display: none;  /* shown via JS */
 }
-
 .suggestion-item {
   padding: 0.9rem 1.1rem;
   cursor: pointer;
@@ -100,53 +139,40 @@ main {
   transition: background 0.15s ease;
   border-bottom: 1px solid #f0f0f0;
 }
-
-.suggestion-item:last-child {
-  border-bottom: none;
-}
-
+.suggestion-item:last-child { border-bottom: none; }
 .suggestion-item:hover,
-.suggestion-item:focus {
-  background: var(--accent);
-  color: #ffffff;
-}
+.suggestion-item:focus  { background: var(--accent); color: #ffffff; }
 
-/* Grant cards */
+/* ========== Grant cards ========== */
 .grants {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
   gap: 1.5rem;
 }
-
 .grant {
   background: #ffffff;
   border: 2px solid var(--primary);
   border-left: 6px solid var(--accent);
   border-radius: 14px;
   padding: 1.25rem 1.25rem 1.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-
 .grant:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
-
 .grant h3 {
   font-size: 1.125rem;
   color: var(--accent);
   margin-bottom: 0.5rem;
   font-weight: 600;
 }
+.grant p { margin-bottom: 0.25rem; font-size: 0.95rem; }
 
-.grant p {
-  margin-bottom: 0.25rem;
-  font-size: 0.95rem;
-}
-
+/* Summary toggle */
 .summary-toggle {
   margin-top: 0.4rem;
   align-self: flex-start;
@@ -161,16 +187,28 @@ main {
   user-select: none;
   font-size: 0.95rem;
 }
-
 .summary {
   margin-top: 0.5rem;
   font-size: 0.92rem;
   line-height: 1.45;
 }
 
+/* ========== Footer with LinkedIn ========== */
 footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
   text-align: center;
   padding: 1rem 0 1.5rem;
   font-size: 0.85rem;
   color: #7a8b99;
 }
+footer .linkedin {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.15s ease;
+}
+footer .linkedin svg { fill: var(--accent); }
+footer .linkedin:hover { transform: scale(1.15); }
