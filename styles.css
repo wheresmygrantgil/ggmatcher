@@ -1,0 +1,41 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #213646;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #213646;
+  color: #ffffff;
+  padding: 1rem;
+  text-align: center;
+}
+
+.selector {
+  margin: 1rem;
+}
+
+select {
+  padding: 0.5rem;
+  border: 1px solid #213646;
+  border-radius: 4px;
+}
+
+#grants {
+  margin: 1rem;
+}
+
+.grant {
+  border: 1px solid #213646;
+  border-left: 4px solid #1DBEE6;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  background: #ffffff;
+}
+
+.grant h3 {
+  margin-top: 0;
+  color: #1DBEE6;
+}
