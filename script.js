@@ -9,23 +9,22 @@ async function loadData() {
 }
 
 function populateResearchers(matches) {
-  const select = document.getElementById('researcher-select');
-  matches.forEach((m, i) => {
+  const datalist = document.getElementById('researchers');
+  matches.forEach(m => {
     const opt = document.createElement('option');
-    opt.value = i;
-    opt.textContent = m.name;
-    select.appendChild(opt);
+    opt.value = m.name;
+    datalist.appendChild(opt);
   });
-  select.addEventListener('change', () => showGrants(matches, grantsData));
+  const input = document.getElementById('researcher-input');
+  input.addEventListener('change', () => showGrants(matches, grantsData, input.value));
 }
 
-function showGrants(matches, grants) {
-  const select = document.getElementById('researcher-select');
+function showGrants(matches, grants, name) {
   const container = document.getElementById('grants');
   container.innerHTML = '';
-  const idx = select.value;
-  if (idx === '') return;
-  const grantIds = matches[idx].grants;
+  const match = matches.find(m => m.name === name);
+  if (!match) return;
+  const grantIds = match.grants;
   grantIds.forEach(id => {
     const g = grants.find(gr => gr.grant_id === id);
     if (!g) return;
