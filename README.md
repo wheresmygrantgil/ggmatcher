@@ -11,7 +11,7 @@ Any simple static file server can be used to preview the site. If Python is inst
 python3 -m http.server 8000
 ```
 
-Then open [http://localhost:8000/app/](http://localhost:8000/app/) in a browser.
+Then open [http://localhost:8000/](http://localhost:8000/) in a browser.
 
 ## Deployment
 
