@@ -226,12 +226,14 @@ footer .linkedin:hover { transform: scale(1.15); }
   border-radius: 14px;
 }
 .teaser-card {
-  width: 90%;
-  max-width: 600px;
+  grid-column: 1 / -1;
+  width: 95%;
+  max-width: 700px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background: var(--primary);
-  color: #ffffff;
+  background: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--primary);
   border-radius: 14px;
   text-align: center;
   box-shadow: 0 6px 14px rgba(0,0,0,0.15);
@@ -240,10 +242,12 @@ footer .linkedin:hover { transform: scale(1.15); }
   animation: fadeUp 0.6s forwards;
 }
 .teaser-card img {
+  display: block;
   width: 100%;
+  max-width: 650px;
   height: auto;
   border-radius: 8px;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem;
 }
 .teaser-card button {
   margin-top: 1rem;
