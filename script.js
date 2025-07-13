@@ -211,7 +211,8 @@ function showDashboard() {
     },
     options: {
       plugins: { legend: { display: false } },
-      animation: { duration: 800 }
+      animation: { duration: 800 },
+      aspectRatio: 1
     }
   });
 
@@ -248,7 +249,8 @@ function showDashboard() {
         y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
         x: { grid: { display: false } }
       },
-      animation: { duration: 800 }
+      animation: { duration: 800 },
+      aspectRatio: 1
     }
   });
 }
