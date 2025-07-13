@@ -112,6 +112,10 @@ function showGrants(name) {
     if (!grant) return;
     grantsContainer.appendChild(createGrantCard(grant));
   });
+
+  grantsContainer.dispatchEvent(
+    new CustomEvent('grantsUpdated', { detail: { name } })
+  );
 }
 
 async function init() {
