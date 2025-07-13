@@ -77,6 +77,32 @@ h1 {
   letter-spacing: 0.6px;
 }
 
+/* ======== Tab navigation ======== */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tab {
+  background: #ffffff;
+  border: none;
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tab.active {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.hidden { display: none; }
+
 /* ================= Main layout ================ */
 main {
   flex: 1;
@@ -142,6 +168,57 @@ main {
 .suggestion-item:last-child { border-bottom: none; }
 .suggestion-item:hover,
 .suggestion-item:focus  { background: var(--accent); color: #ffffff; }
+
+/* ========== Dataset stats dashboard ========== */
+.dashboard {
+  margin: 2rem auto;
+  max-width: 900px;
+  padding: 0 1rem;
+}
+.stats-dashboard {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.chart-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.chart-grid canvas {
+  background: #ffffff;
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.stat {
+  background: #ffffff;
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  text-align: center;
+  min-width: 120px;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-weight: 600;
+  color: var(--primary);
+}
 
 /* ========== Grant cards ========== */
 .grants {

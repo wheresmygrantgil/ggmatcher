@@ -1,6 +1,8 @@
 let matchesData = [];
 let grantsData = [];
 let researcherNames = [];
+let providerChart;
+let deadlineChart;
 
 function showLandingWizard() {
   const container = document.getElementById('grants');
@@ -105,11 +107,6 @@ function moneyFmt(m) {
   return m.toLocaleString();
 }
 
-function moneyFmt(m) {
-  if (m === null || m === undefined || Number.isNaN(m)) return '';
-  return m.toLocaleString();
-}
-
 function createGrantCard(grant) {
   const card = document.createElement('div');
   card.className = 'grant';
@@ -144,6 +141,139 @@ function createGrantCard(grant) {
   return card;
 }
 
+function parseDueDate(raw) {
+  if (!raw) return null;
+  let str = '';
+  if (Array.isArray(raw)) {
+    str = raw[0];
+  } else {
+    try {
+      const arr = JSON.parse(raw.replace(/'/g, '"'));
+      str = Array.isArray(arr) ? arr[0] : arr;
+    } catch {
+      str = raw;
+    }
+  }
+  const [datePart, timePart = '00:00:00'] = str.split(' ');
+  let dd, mm, yyyy;
+  if (/^\d{4}-\d{2}-\d{2}/.test(datePart)) {
+    [yyyy, mm, dd] = datePart.split('-');
+  } else {
+    [dd, mm, yyyy] = datePart.split('-');
+  }
+  return new Date(`${yyyy}-${mm}-${dd}T${timePart}Z`);
+}
+
+function animateNumber(el, value, duration = 800) {
+  if (!el) return;
+  const start = performance.now();
+  const nf = new Intl.NumberFormat();
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    el.textContent = nf.format(Math.floor(progress * value));
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function showDashboard() {
+  const grantTotal = grantsData.length;
+  const researcherTotal = matchesData.length;
+  const matchTotal = matchesData.reduce((s, r) => s + (r.grants ? r.grants.length : 0), 0);
+
+  animateNumber(document.getElementById('grant-count'), grantTotal);
+  animateNumber(document.getElementById('researcher-count'), researcherTotal);
+  animateNumber(document.getElementById('match-count'), matchTotal);
+
+  const styles = getComputedStyle(document.documentElement);
+  const accent = styles.getPropertyValue('--accent').trim();
+  const primary = styles.getPropertyValue('--primary').trim();
+
+  const providerCounts = {};
+  grantsData.forEach(g => {
+    const label = g.provider.startsWith('HORIZON') ? 'EU Horizon' : g.provider;
+    providerCounts[label] = (providerCounts[label] || 0) + 1;
+  });
+  const providerLabels = Object.keys(providerCounts);
+  const providerValues = providerLabels.map(l => providerCounts[l]);
+
+  if (providerChart) providerChart.destroy();
+  providerChart = new Chart(document.getElementById('providerChart'), {
+    type: 'doughnut',
+    data: {
+      labels: providerLabels,
+      datasets: [{
+        data: providerValues,
+        backgroundColor: providerLabels.map((_, i) => i % 2 ? primary : accent),
+        borderColor: '#ffffff',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      animation: { duration: 800 }
+    }
+  });
+
+  const now = new Date();
+  const baseIndex = now.getFullYear() * 12 + now.getMonth();
+  const months = [];
+  const monthCounts = new Array(6).fill(0);
+
+  for (let i = 0; i < 6; i++) {
+    const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+    months.push(d.toLocaleString('default', { month: 'short' }));
+  }
+
+  grantsData.forEach(g => {
+    const d = parseDueDate(g.due_date);
+    if (!d || isNaN(d)) return;
+    const idx = d.getFullYear() * 12 + d.getMonth() - baseIndex;
+    if (idx >= 0 && idx < 6) monthCounts[idx]++;
+  });
+
+  if (deadlineChart) deadlineChart.destroy();
+  deadlineChart = new Chart(document.getElementById('deadlineChart'), {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [{
+        data: monthCounts,
+        backgroundColor: accent
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
+        x: { grid: { display: false } }
+      },
+      animation: { duration: 800 }
+    }
+  });
+}
+
+function showTab(name) {
+  const rec = document.getElementById('recommendations');
+  const dash = document.getElementById('dashboard');
+  const recTab = document.getElementById('tab-recommendations');
+  const statTab = document.getElementById('tab-stats');
+
+  if (name === 'stats') {
+    dash.classList.remove('hidden');
+    rec.classList.add('hidden');
+    recTab.classList.remove('active');
+    statTab.classList.add('active');
+    // Wait until the section is visible so Chart.js can size canvases correctly
+    requestAnimationFrame(showDashboard);
+  } else {
+    dash.classList.add('hidden');
+    rec.classList.remove('hidden');
+    recTab.classList.add('active');
+    statTab.classList.remove('active');
+  }
+}
+
 function showGrants(name) {
   const grantsContainer = document.getElementById('grants');
   grantsContainer.innerHTML = '';
@@ -167,6 +297,9 @@ async function init() {
 
   showLandingWizard();
 
+  document.getElementById('tab-recommendations').addEventListener('click', () => showTab('recommendations'));
+  document.getElementById('tab-stats').addEventListener('click', () => showTab('stats'));
+
   const input = document.getElementById('researcher-input');
   input.addEventListener('input', (e) => updateSuggestions(e.target.value));
   input.addEventListener('focus', (e) => updateSuggestions(e.target.value));
@@ -175,6 +308,8 @@ async function init() {
       document.getElementById('suggestions').style.display = 'none';
     }
   });
+
+  showTab('recommendations');
 }
 
 document.addEventListener('DOMContentLoaded', init);

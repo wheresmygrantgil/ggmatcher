@@ -14,9 +14,33 @@
   <body>
     <header>
       <h1>Grant Matcher for Haifa University</h1>
+      <nav class="tabs">
+        <button id="tab-recommendations" class="tab active">Recommendations</button>
+        <button id="tab-stats" class="tab">Statistics</button>
+      </nav>
     </header>
+    <section id="dashboard" class="dashboard hidden">
+      <div class="stats-dashboard">
+        <div class="stat">
+          <span id="grant-count" class="stat-number"></span>
+          <span class="stat-label">Grants</span>
+        </div>
+        <div class="stat">
+          <span id="researcher-count" class="stat-number"></span>
+          <span class="stat-label">Researchers</span>
+        </div>
+        <div class="stat">
+          <span id="match-count" class="stat-number"></span>
+          <span class="stat-label">Matches</span>
+        </div>
+      </div>
+      <div class="chart-grid">
+        <canvas id="providerChart" width="320" height="320" aria-label="Grants by provider" role="img"></canvas>
+        <canvas id="deadlineChart" width="320" height="320" aria-label="Upcoming deadlines" role="img"></canvas>
+      </div>
+    </section>
 
-    <main>
+    <main id="recommendations">
       <div class="selector">
         <label for="researcher-input">Find your name</label>
         <div class="input-wrapper">
@@ -50,6 +74,7 @@
       </a>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="script.js"></script>
     <script src="teaser.js"></script>
   </body>
