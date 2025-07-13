@@ -189,7 +189,8 @@ function showDashboard() {
 
   const providerCounts = {};
   grantsData.forEach(g => {
-    providerCounts[g.provider] = (providerCounts[g.provider] || 0) + 1;
+    const label = g.provider.startsWith('HORIZON') ? 'EU Horizon' : g.provider;
+    providerCounts[label] = (providerCounts[label] || 0) + 1;
   });
   const providerLabels = Object.keys(providerCounts);
   const providerValues = providerLabels.map(l => providerCounts[l]);
@@ -248,6 +249,25 @@ function showDashboard() {
   });
 }
 
+function showTab(name) {
+  const rec = document.getElementById('recommendations');
+  const dash = document.getElementById('dashboard');
+  const recTab = document.getElementById('tab-recommendations');
+  const statTab = document.getElementById('tab-stats');
+
+  if (name === 'stats') {
+    dash.classList.remove('hidden');
+    rec.classList.add('hidden');
+    recTab.classList.remove('active');
+    statTab.classList.add('active');
+  } else {
+    dash.classList.add('hidden');
+    rec.classList.remove('hidden');
+    recTab.classList.add('active');
+    statTab.classList.remove('active');
+  }
+}
+
 function showGrants(name) {
   const grantsContainer = document.getElementById('grants');
   grantsContainer.innerHTML = '';
@@ -273,6 +293,9 @@ async function init() {
 
   showLandingWizard();
 
+  document.getElementById('tab-recommendations').addEventListener('click', () => showTab('recommendations'));
+  document.getElementById('tab-stats').addEventListener('click', () => showTab('stats'));
+
   const input = document.getElementById('researcher-input');
   input.addEventListener('input', (e) => updateSuggestions(e.target.value));
   input.addEventListener('focus', (e) => updateSuggestions(e.target.value));
@@ -281,6 +304,8 @@ async function init() {
       document.getElementById('suggestions').style.display = 'none';
     }
   });
+
+  showTab('recommendations');
 }
 
 document.addEventListener('DOMContentLoaded', init);

@@ -77,6 +77,32 @@ h1 {
   letter-spacing: 0.6px;
 }
 
+/* ======== Tab navigation ======== */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tab {
+  background: #ffffff;
+  border: none;
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tab.active {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.hidden { display: none; }
+
 /* ================= Main layout ================ */
 main {
   flex: 1;

@@ -14,8 +14,12 @@
   <body>
     <header>
       <h1>Grant Matcher for Haifa University</h1>
+      <nav class="tabs">
+        <button id="tab-recommendations" class="tab active">Recommendations</button>
+        <button id="tab-stats" class="tab">Statistics</button>
+      </nav>
     </header>
-    <section id="dashboard" class="dashboard">
+    <section id="dashboard" class="dashboard hidden">
       <div class="stats-dashboard">
         <div class="stat">
           <span id="grant-count" class="stat-number"></span>
@@ -36,7 +40,7 @@
       </div>
     </section>
 
-    <main>
+    <main id="recommendations">
       <div class="selector">
         <label for="researcher-input">Find your name</label>
         <div class="input-wrapper">
