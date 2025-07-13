@@ -144,6 +144,12 @@ function createGrantCard(grant) {
   return card;
 }
 
+function showStats() {
+  const el = document.getElementById('stats');
+  if (!el) return;
+  el.textContent = `${researcherNames.length} researchers • ${grantsData.length} grants`;
+}
+
 function showGrants(name) {
   const grantsContainer = document.getElementById('grants');
   grantsContainer.innerHTML = '';
@@ -164,6 +170,8 @@ function showGrants(name) {
 
 async function init() {
   await loadData();
+
+  showStats();
 
   showLandingWizard();
 

@@ -143,6 +143,14 @@ main {
 .suggestion-item:hover,
 .suggestion-item:focus  { background: var(--accent); color: #ffffff; }
 
+/* ========== Dataset stats ========== */
+.stats {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
 /* ========== Grant cards ========== */
 .grants {
   display: grid;
