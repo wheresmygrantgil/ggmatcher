@@ -1,6 +1,8 @@
 let matchesData = [];
 let grantsData = [];
 let researcherNames = [];
+let providerChart;
+let deadlineChart;
 
 function showLandingWizard() {
   const container = document.getElementById('grants');
@@ -195,7 +197,8 @@ function showDashboard() {
   const providerLabels = Object.keys(providerCounts);
   const providerValues = providerLabels.map(l => providerCounts[l]);
 
-  new Chart(document.getElementById('providerChart'), {
+  if (providerChart) providerChart.destroy();
+  providerChart = new Chart(document.getElementById('providerChart'), {
     type: 'doughnut',
     data: {
       labels: providerLabels,
@@ -229,7 +232,8 @@ function showDashboard() {
     if (idx >= 0 && idx < 6) monthCounts[idx]++;
   });
 
-  new Chart(document.getElementById('deadlineChart'), {
+  if (deadlineChart) deadlineChart.destroy();
+  deadlineChart = new Chart(document.getElementById('deadlineChart'), {
     type: 'bar',
     data: {
       labels: months,
@@ -256,6 +260,7 @@ function showTab(name) {
   const statTab = document.getElementById('tab-stats');
 
   if (name === 'stats') {
+    showDashboard();
     dash.classList.remove('hidden');
     rec.classList.add('hidden');
     recTab.classList.remove('active');
@@ -288,8 +293,6 @@ function showGrants(name) {
 
 async function init() {
   await loadData();
-
-  showDashboard();
 
   showLandingWizard();
 
