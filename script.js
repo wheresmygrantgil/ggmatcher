@@ -260,11 +260,12 @@ function showTab(name) {
   const statTab = document.getElementById('tab-stats');
 
   if (name === 'stats') {
-    showDashboard();
     dash.classList.remove('hidden');
     rec.classList.add('hidden');
     recTab.classList.remove('active');
     statTab.classList.add('active');
+    // Wait until the section is visible so Chart.js can size canvases correctly
+    requestAnimationFrame(showDashboard);
   } else {
     dash.classList.add('hidden');
     rec.classList.remove('hidden');
