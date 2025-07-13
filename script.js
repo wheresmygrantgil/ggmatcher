@@ -64,9 +64,36 @@ function selectResearcher(name) {
   showGrants(name);
 }
 
-function formatDate(d) {
-  if (Array.isArray(d)) return d[0];
-  return d;
+function formatDate(raw) {
+  if (!raw) return '';
+
+  /* 1 ▸ turn the incoming value into an array
+        - If grants.json already gives an array → keep it.
+        - If it’s the Python-style string "['…','…']"
+          replace single quotes with double quotes and JSON-parse it. */
+  const arr = Array.isArray(raw) ? raw
+           : JSON.parse(raw.replace(/'/g, '"'));
+
+  /* 2 ▸ helper to map "DD-MM-YYYY HH:MM:SS"
+        → "DD Mon YYYY HH:MM" */
+  const MONTHS = [
+    'Jan','Feb','Mar','Apr','May','Jun',
+    'Jul','Aug','Sep','Oct','Nov','Dec'
+  ];
+  const pretty = (ts) => {
+    const [datePart, timePart] = ts.split(' ');
+    const [dd, mm, yyyy] = datePart.split('-');
+    const [hh, min]      = timePart.split(':');
+    return `${dd} ${MONTHS[Number(mm)-1]} ${yyyy} ${hh}:${min}`;
+  };
+
+  /* 3 ▸ format one or many dates */
+  return arr.map(pretty).join(' / ');
+}
+
+function moneyFmt(m) {
+  if (m === null || m === undefined || Number.isNaN(m)) return '';
+  return m.toLocaleString();
 }
 
 function moneyFmt(m) {
