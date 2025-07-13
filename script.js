@@ -2,6 +2,14 @@ let matchesData = [];
 let grantsData = [];
 let researcherNames = [];
 
+function showLandingWizard() {
+  const container = document.getElementById('grants');
+  container.innerHTML = `
+    <div class="landing-wizard">
+      <img src="assets/wizardoc.png" alt="Cartoon robot scanning grant proposals">
+    </div>`;
+}
+
 async function loadData() {
   const [matchesResp, grantsResp] = await Promise.all([
     fetch('matches.json'),
@@ -112,10 +120,16 @@ function showGrants(name) {
     if (!grant) return;
     grantsContainer.appendChild(createGrantCard(grant));
   });
+
+  grantsContainer.dispatchEvent(
+    new CustomEvent('grantsUpdated', { detail: { name } })
+  );
 }
 
 async function init() {
   await loadData();
+
+  showLandingWizard();
 
   const input = document.getElementById('researcher-input');
   input.addEventListener('input', (e) => updateSuggestions(e.target.value));
