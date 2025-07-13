@@ -105,11 +105,6 @@ function moneyFmt(m) {
   return m.toLocaleString();
 }
 
-function moneyFmt(m) {
-  if (m === null || m === undefined || Number.isNaN(m)) return '';
-  return m.toLocaleString();
-}
-
 function createGrantCard(grant) {
   const card = document.createElement('div');
   card.className = 'grant';
@@ -144,11 +139,113 @@ function createGrantCard(grant) {
   return card;
 }
 
-function showStats() {
-  const r = document.getElementById('researcher-count');
-  const g = document.getElementById('grant-count');
-  if (r) r.textContent = researcherNames.length;
-  if (g) g.textContent = grantsData.length;
+function parseDueDate(raw) {
+  if (!raw) return null;
+  let str = '';
+  if (Array.isArray(raw)) {
+    str = raw[0];
+  } else {
+    try {
+      const arr = JSON.parse(raw.replace(/'/g, '"'));
+      str = Array.isArray(arr) ? arr[0] : arr;
+    } catch {
+      str = raw;
+    }
+  }
+  const [datePart, timePart = '00:00:00'] = str.split(' ');
+  let dd, mm, yyyy;
+  if (/^\d{4}-\d{2}-\d{2}/.test(datePart)) {
+    [yyyy, mm, dd] = datePart.split('-');
+  } else {
+    [dd, mm, yyyy] = datePart.split('-');
+  }
+  return new Date(`${yyyy}-${mm}-${dd}T${timePart}Z`);
+}
+
+function animateNumber(el, value, duration = 800) {
+  if (!el) return;
+  const start = performance.now();
+  const nf = new Intl.NumberFormat();
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    el.textContent = nf.format(Math.floor(progress * value));
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function showDashboard() {
+  const grantTotal = grantsData.length;
+  const researcherTotal = matchesData.length;
+  const matchTotal = matchesData.reduce((s, r) => s + (r.grants ? r.grants.length : 0), 0);
+
+  animateNumber(document.getElementById('grant-count'), grantTotal);
+  animateNumber(document.getElementById('researcher-count'), researcherTotal);
+  animateNumber(document.getElementById('match-count'), matchTotal);
+
+  const styles = getComputedStyle(document.documentElement);
+  const accent = styles.getPropertyValue('--accent').trim();
+  const primary = styles.getPropertyValue('--primary').trim();
+
+  const providerCounts = {};
+  grantsData.forEach(g => {
+    providerCounts[g.provider] = (providerCounts[g.provider] || 0) + 1;
+  });
+  const providerLabels = Object.keys(providerCounts);
+  const providerValues = providerLabels.map(l => providerCounts[l]);
+
+  new Chart(document.getElementById('providerChart'), {
+    type: 'doughnut',
+    data: {
+      labels: providerLabels,
+      datasets: [{
+        data: providerValues,
+        backgroundColor: providerLabels.map((_, i) => i % 2 ? primary : accent),
+        borderColor: '#ffffff',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      animation: { duration: 800 }
+    }
+  });
+
+  const now = new Date();
+  const baseIndex = now.getFullYear() * 12 + now.getMonth();
+  const months = [];
+  const monthCounts = new Array(6).fill(0);
+
+  for (let i = 0; i < 6; i++) {
+    const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+    months.push(d.toLocaleString('default', { month: 'short' }));
+  }
+
+  grantsData.forEach(g => {
+    const d = parseDueDate(g.due_date);
+    if (!d || isNaN(d)) return;
+    const idx = d.getFullYear() * 12 + d.getMonth() - baseIndex;
+    if (idx >= 0 && idx < 6) monthCounts[idx]++;
+  });
+
+  new Chart(document.getElementById('deadlineChart'), {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [{
+        data: monthCounts,
+        backgroundColor: accent
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
+        x: { grid: { display: false } }
+      },
+      animation: { duration: 800 }
+    }
+  });
 }
 
 function showGrants(name) {
@@ -172,7 +269,7 @@ function showGrants(name) {
 async function init() {
   await loadData();
 
-  showStats();
+  showDashboard();
 
   showLandingWizard();
 

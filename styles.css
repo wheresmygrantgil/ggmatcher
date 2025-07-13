@@ -144,11 +144,31 @@ main {
 .suggestion-item:focus  { background: var(--accent); color: #ffffff; }
 
 /* ========== Dataset stats dashboard ========== */
+.dashboard {
+  margin: 2rem auto;
+  max-width: 900px;
+  padding: 0 1rem;
+}
 .stats-dashboard {
-  margin: 2rem auto 2.5rem;
   display: flex;
   justify-content: center;
   gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.chart-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.chart-grid canvas {
+  background: #ffffff;
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 .stat {
