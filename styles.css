@@ -8,7 +8,7 @@
 :root {
   --primary: #213646;
   --accent : #1DBEE6;
-  --bg     : #ffffff;
+  --bg     : #fefbf2;
   --text   : #213646;
 }
 
@@ -214,16 +214,14 @@ footer .linkedin svg { fill: var(--accent); }
 footer .linkedin:hover { transform: scale(1.15); }
 
 /* === Grant-Scouting teaser === */
-.landing-wizard {
-  width: 90%;
-  max-width: 600px;
-  margin: 2rem auto;
-  text-align: center;
-}
 .landing-wizard img {
-  width: 100%;
+  display: block;
+  width: 200%;
+  max-width: 850px;         /* Increase image size */
   height: auto;
+  margin: 3rem auto 2rem;   /* Center and space */
   border-radius: 14px;
+  background: var(--bg);    /* Match background */
 }
 .teaser-card {
   grid-column: 1 / -1;
