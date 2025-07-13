@@ -1,9 +1,10 @@
 let selectedName = '';
 let observer;
+let teaserShown = false;
 
 function showTeaser() {
-  if (localStorage.getItem('teaserShown')) return;
-  localStorage.setItem('teaserShown', 'true');
+  if (teaserShown) return;
+  teaserShown = true;
 
   const card = document.createElement('div');
   card.className = 'teaser-card';
@@ -46,6 +47,7 @@ function openModal() {
 
 document.getElementById('grants').addEventListener('grantsUpdated', (e) => {
   selectedName = e.detail.name;
+  teaserShown = false;
   if (observer) observer.disconnect();
   const last = document.querySelector('#grants .grant:last-child');
   if (!last) return;

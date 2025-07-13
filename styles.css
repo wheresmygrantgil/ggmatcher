@@ -214,6 +214,17 @@ footer .linkedin svg { fill: var(--accent); }
 footer .linkedin:hover { transform: scale(1.15); }
 
 /* === Grant-Scouting teaser === */
+.landing-wizard {
+  width: 90%;
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
+}
+.landing-wizard img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
 .teaser-card {
   width: 90%;
   max-width: 600px;
