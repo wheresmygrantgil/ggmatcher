@@ -145,9 +145,10 @@ function createGrantCard(grant) {
 }
 
 function showStats() {
-  const el = document.getElementById('stats');
-  if (!el) return;
-  el.textContent = `${researcherNames.length} researchers • ${grantsData.length} grants`;
+  const r = document.getElementById('researcher-count');
+  const g = document.getElementById('grant-count');
+  if (r) r.textContent = researcherNames.length;
+  if (g) g.textContent = grantsData.length;
 }
 
 function showGrants(name) {
