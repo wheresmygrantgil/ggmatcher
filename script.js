@@ -66,25 +66,34 @@ function selectResearcher(name) {
 
 function formatDate(raw) {
   if (!raw) return '';
-
-  /* 1 ▸ turn the incoming value into an array
-        - If grants.json already gives an array → keep it.
-        - If it’s the Python-style string "['…','…']"
-          replace single quotes with double quotes and JSON-parse it. */
-  const arr = Array.isArray(raw) ? raw
-           : JSON.parse(raw.replace(/'/g, '"'));
-
-  /* 2 ▸ helper to map "DD-MM-YYYY HH:MM:SS"
-        → "DD Mon YYYY HH:MM" */
+  let arr;
+  if (Array.isArray(raw)) {
+    arr = raw;
+  } else {
+    try {
+      // Python-style string "['…','…']" -> JSON parse
+      arr = JSON.parse(raw.replace(/'/g, '"'));
+    } catch {
+      // simple "YYYY-MM-DD HH:MM:SS" string
+      arr = [raw];
+    }
+  }
   const MONTHS = [
     'Jan','Feb','Mar','Apr','May','Jun',
     'Jul','Aug','Sep','Oct','Nov','Dec'
   ];
+
   const pretty = (ts) => {
     const [datePart, timePart] = ts.split(' ');
-    const [dd, mm, yyyy] = datePart.split('-');
-    const [hh, min]      = timePart.split(':');
-    return `${dd} ${MONTHS[Number(mm)-1]} ${yyyy} ${hh}:${min}`;
+    let dd, mm, yyyy;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(datePart)) {
+      // got YYYY-MM-DD -> flip order
+      [yyyy, mm, dd] = datePart.split('-');
+    } else {
+      [dd, mm, yyyy] = datePart.split('-');
+    }
+    const [hh, min] = timePart.split(':');
+    return `${dd} ${MONTHS[Number(mm) - 1]} ${yyyy} ${hh}:${min}`;
   };
 
   /* 3 ▸ format one or many dates */
@@ -143,7 +152,7 @@ function showGrants(name) {
   if (!match) return;
 
   match.grants.forEach((id) => {
-    const grant = grantsData.find((g) => g.grant_id === id);
+    const grant = grantsData.find(g => Number(g.grant_id) === Number(id));
     if (!grant) return;
     grantsContainer.appendChild(createGrantCard(grant));
   });
