@@ -214,14 +214,16 @@ footer .linkedin svg { fill: var(--accent); }
 footer .linkedin:hover { transform: scale(1.15); }
 
 /* === Grant-Scouting teaser === */
+.landing-wizard {                 /* the wrapper div injected by script.js  */
+  grid-column: 1 / -1;           /* span the full row inside .grants grid   */
+  display: flex;                 /* create a flex context                   */
+  justify-content: center;       /* centre its lone child horizontally      */
+}
+
 .landing-wizard img {
-  display: block;
-  width: 200%;
-  max-width: 850px;         /* Increase image size */
-  height: auto;
-  margin: 3rem auto 2rem;   /* Center and space */
-  border-radius: 14px;
-  background: var(--bg);    /* Match background */
+  width: 100%;                   /* responsive, no more overflow            */
+  max-width: 450px;              /* keep it nicely sized on big screens     */
+  margin: 3rem 0 2rem;           /* top + bottom spacing                    */
 }
 .teaser-card {
   grid-column: 1 / -1;
