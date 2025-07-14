@@ -211,9 +211,24 @@ function showDashboard() {
       }]
     },
     options: {
-      plugins: { legend: { display: false } },
+      plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Grants by Provider',
+            color: '#213646',
+            font: {
+              size: 18,
+              weight: 'bold'
+            },
+            padding: {
+              top: 10,
+              bottom: 10
+            }
+          }
+        },
       animation: { duration: 800 },
-      aspectRatio: 1
+      aspectRatio: 2
     }
   });
 
@@ -245,13 +260,28 @@ function showDashboard() {
       }]
     },
     options: {
-      plugins: { legend: { display: false } },
+      plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Upcoming Deadlines (Next 6 Months)',
+            color: '#213646',
+            font: {
+              size: 18,
+              weight: 'bold'
+            },
+            padding: {
+              top: 10,
+              bottom: 10
+            }
+          }
+      },
       scales: {
         y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
         x: { grid: { display: false } }
       },
       animation: { duration: 800 },
-      aspectRatio: 1
+      aspectRatio: 2
     }
   });
 }
