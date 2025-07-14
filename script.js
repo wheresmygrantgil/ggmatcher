@@ -344,7 +344,8 @@ function initGrantsTable() {
   });
 
   // Range filters
-  $.fn.dataTable.ext.search.push(function(settings,data){
+    $.fn.dataTable.ext.search.push(function(settings,data){
+      if(settings.nTable.id !== 'grants-table') return true;
     if(settings.nTable.id !== 'grants-table') return true;
     const moneyMin = parseFloat($('#money-min').val()) || -Infinity;
     const moneyMax = parseFloat($('#money-max').val()) || Infinity;
