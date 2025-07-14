@@ -406,12 +406,12 @@ footer .linkedin:hover { transform: scale(1.15); }
   cursor: pointer;
 }
 
-.dt-button {
-  background: var(--primary) !important;
-  color: #fff !important;
-  border: none !important;
-  padding: 0.4rem 0.8rem !important;
-  border-radius: 6px !important;
+.dt-buttons .dt-button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
   margin-right: 0.3rem;
 }
 
