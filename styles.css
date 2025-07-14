@@ -407,7 +407,7 @@ footer .linkedin:hover { transform: scale(1.15); }
 }
 
 .dt-button {
-  background: var(--primary) !important;
+  background: var(--accent) !important;
   color: #fff !important;
   border: none !important;
   padding: 0.4rem 0.8rem !important;
