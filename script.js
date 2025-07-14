@@ -345,17 +345,27 @@ function initGrantsTable() {
   });
 
   // Range filters
-  $.fn.dataTable.ext.search.push(function(settings,data){
+  $.fn.dataTable.ext.search.push(function(settings, data) {
     if(settings.nTable.id !== 'grants-table') return true;
+
+    const moneyColIdx = settings.aoColumns.findIndex(c => c.data === 'money');
+    const dateColIdx = settings.aoColumns.findIndex(c => c.data === 'due_date');
+
     const moneyMin = parseFloat($('#money-min').val()) || -Infinity;
     const moneyMax = parseFloat($('#money-max').val()) || Infinity;
-    const money = parseFloat(data[5]) || 0;
+    const money = parseFloat(data[moneyColIdx]) || 0;
     if(money < moneyMin || money > moneyMax) return false;
 
     const dMin = $('#date-min').val() ? new Date($('#date-min').val()) : null;
     const dMax = $('#date-max').val() ? new Date($('#date-max').val()) : null;
-    const due = new Date(data[3]);
-    if((dMin && due < dMin) || (dMax && due > dMax)) return false;
+
+    // Use only the first date for filtering when multiple are present
+    const dateStr = data[dateColIdx].split(' / ')[0];
+    if (!dateStr) return true; // Don't filter out rows with no due date
+    const due = new Date(dateStr);
+
+    if ((dMin && due < dMin) || (dMax && due > dMax)) return false;
+
     return true;
   });
 
