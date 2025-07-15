@@ -353,7 +353,7 @@ function initGrantsTable() {
     title: g.title,
     due_date: formatDate(g.due_date),
     money: g.proposed_money,
-    suggested_to: idToNames[g.grant_id]
+    suggested_collaborators: idToNames[g.grant_id]
       ? idToNames[g.grant_id]
           .slice(0, 10)
           .join(' <strong>·</strong> ')
@@ -377,7 +377,7 @@ function initGrantsTable() {
       { data: 'title', title: 'Title' },
       { data: 'due_date', title: 'Due Date' },
       { data: 'money', title: 'Money' },
-      { data: 'suggested_to', title: 'Suggested To' },
+      { data: 'suggested_collaborators', title: 'Suggested Collaborators' },
       { data: 'link', title: 'Link', orderable: false, render: d => `<a href="${d}" target="_blank" rel="noopener">Open</a>` },
     ]
   });
