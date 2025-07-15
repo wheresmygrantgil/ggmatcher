@@ -338,13 +338,26 @@ function showGrants(name) {
 }
 
 function initGrantsTable() {
+  const idToNames = {};
+  matchesData.forEach(m => {
+    if (!Array.isArray(m.grants)) return;
+    m.grants.forEach(id => {
+      if (!idToNames[id]) idToNames[id] = [];
+      idToNames[id].push(m.name);
+    });
+  });
+
   const rows = grantsData.map(g => ({
     grant_id: g.grant_id,
     provider: g.provider,
     title: g.title,
     due_date: formatDate(g.due_date),
-    eligibility: g.eligibility_israel ? 'Yes' : 'No',
     money: g.proposed_money,
+    suggested_collaborators: idToNames[g.grant_id]
+      ? idToNames[g.grant_id]
+          .slice(0, 10)
+          .join(' <strong>·</strong> ')
+      : '',
     link: g.submission_link,
   }));
 
@@ -363,8 +376,8 @@ function initGrantsTable() {
       { data: 'provider', title: 'Provider' },
       { data: 'title', title: 'Title' },
       { data: 'due_date', title: 'Due Date' },
-      { data: 'eligibility', title: 'IL Eligible' },
       { data: 'money', title: 'Money' },
+      { data: 'suggested_collaborators', title: 'Suggested Collaborators' },
       { data: 'link', title: 'Link', orderable: false, render: d => `<a href="${d}" target="_blank" rel="noopener">Open</a>` },
     ]
   });
@@ -373,23 +386,6 @@ function initGrantsTable() {
     grantsTable.search(this.value).draw();
   });
 
-  // Range filters
-    $.fn.dataTable.ext.search.push(function(settings,data){
-      if(settings.nTable.id !== 'grants-table') return true;
-    if(settings.nTable.id !== 'grants-table') return true;
-    const moneyMin = parseFloat($('#money-min').val()) || -Infinity;
-    const moneyMax = parseFloat($('#money-max').val()) || Infinity;
-    const money = parseFloat(data[5]) || 0;
-    if(money < moneyMin || money > moneyMax) return false;
-
-    const dMin = $('#date-min').val() ? new Date($('#date-min').val()) : null;
-    const dMax = $('#date-max').val() ? new Date($('#date-max').val()) : null;
-    const due = new Date(data[3]);
-    if((dMin && due < dMin) || (dMax && due > dMax)) return false;
-    return true;
-  });
-
-  $('#money-min,#money-max,#date-min,#date-max').on('change', () => grantsTable.draw());
 }
 
 async function init() {
