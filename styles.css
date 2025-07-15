@@ -392,8 +392,8 @@ footer .linkedin:hover { transform: scale(1.15); }
 }
 
 .table-controls input[type="search"] {
-  flex: 0 1 300px;
-  max-width: 400px;
+  flex: 0 1 400px;
+  max-width: 500px;
   padding: 0.4rem 0.6rem;
   border: 2px solid var(--primary);
   border-radius: 6px;

@@ -353,7 +353,11 @@ function initGrantsTable() {
     title: g.title,
     due_date: formatDate(g.due_date),
     money: g.proposed_money,
-    suggested_to: idToNames[g.grant_id] ? idToNames[g.grant_id].join(', ') : '',
+    suggested_to: idToNames[g.grant_id]
+      ? idToNames[g.grant_id]
+          .slice(0, 10)
+          .join(' <strong>·</strong> ')
+      : '',
     link: g.submission_link,
   }));
 
