@@ -411,9 +411,16 @@ function initGrantsTable() {
     ]
   });
 
+  let searchTimeout;
   $('#grant-global-search').on('input', function(){
     grantsTable.search(this.value).draw();
-    track('search_grants', { query: this.value });
+    clearTimeout(searchTimeout);
+    if (this.value.trim()) {
+      searchTimeout = setTimeout(() => {
+        track('search_grants', { query: this.value });
+      }, 500);
+    }
+  });
   });
 
 }
