@@ -427,6 +427,11 @@ async function init() {
   document.getElementById('tab-grants-btn').addEventListener('click', () => showTab('grants'));
   document.getElementById('tab-stats').addEventListener('click', () => showTab('stats'));
 
+  const linkedInLink = document.querySelector('footer .linkedin');
+  if (linkedInLink) {
+    linkedInLink.addEventListener('click', () => track('click_linkedin'));
+  }
+
   const input = document.getElementById('researcher-input');
   input.addEventListener('input', (e) => updateSuggestions(e.target.value));
   input.addEventListener('focus', (e) => updateSuggestions(e.target.value));
