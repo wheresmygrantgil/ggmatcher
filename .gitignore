@@ -1,0 +1,20 @@
+# General
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+
+# PyCharm IDE directories
+.idea/
+.idea*/
+.ideas/
+.ideas*/
+
