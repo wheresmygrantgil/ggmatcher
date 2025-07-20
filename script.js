@@ -5,6 +5,17 @@ let providerChart;
 let deadlineChart;
 let grantsTable;
 
+// ---------- Google Analytics event helper ----------
+function track(eventName, params = {}) {
+  try {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, params);
+    }
+  } catch (err) {
+    /* no-op */
+  }
+}
+
 function showLandingWizard() {
   const container = document.getElementById('grants');
   container.innerHTML = `
@@ -65,6 +76,7 @@ function selectResearcher(name) {
   document.getElementById('researcher-input').value = name;
   document.getElementById('suggestions').style.display = 'none';
   showGrants(name);
+  track('select_researcher', { researcher_name: name });
 }
 
 function formatDate(raw) {
@@ -120,6 +132,14 @@ function createGrantCard(grant) {
       <p><a href="${grant.submission_link}" target="_blank" rel="noopener">Submission Link ↗</a></p>
     `;
 
+  // Track outbound submission link clicks
+  card.querySelector('a').addEventListener('click', () =>
+    track('click_submission_link', {
+      grant_id: grant.grant_id,
+      provider: grant.provider
+    })
+  );
+
   // Summary toggle
   const btn = document.createElement('button');
   btn.className = 'summary-toggle';
@@ -134,6 +154,7 @@ function createGrantCard(grant) {
     const open = !summary.hidden;
     summary.hidden = open; // toggle visibility
     btn.textContent = open ? '▶ Summary' : '▼ Summary';
+    track(open ? 'collapse_summary' : 'expand_summary', { grant_id: grant.grant_id });
   });
 
   card.appendChild(btn);
@@ -307,15 +328,18 @@ function showTab(name) {
     statTab.classList.add('active');
     statTab.setAttribute('aria-selected', 'true');
     requestAnimationFrame(showDashboard);
+    track('view_stats_tab');
   } else if (name === 'grants') {
     grantsSec.classList.remove('hidden');
     grantsTab.classList.add('active');
     grantsTab.setAttribute('aria-selected', 'true');
     if (!grantsTable) initGrantsTable();
+    track('view_grants_tab');
   } else {
     rec.classList.remove('hidden');
     recTab.classList.add('active');
     recTab.setAttribute('aria-selected', 'true');
+    track('view_recommendations_tab');
   }
 }
 
@@ -368,7 +392,12 @@ function initGrantsTable() {
     dom: 'Bfrtip',
     searchHighlight: true,
     buttons: [
-      { extend: 'csvHtml5', text: 'Export CSV', exportOptions: { columns: ':visible' }, title: 'grants', filename: 'grants' },
+      { extend: 'csvHtml5', text: 'Export CSV', exportOptions: { columns: ':visible' }, title: 'grants', filename: 'grants',
+        action: function(e, dt, button, config) {
+          track('export_grants_csv');
+          $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, button, config);
+        }
+      },
       'colvis'
     ],
     columns: [
@@ -384,6 +413,7 @@ function initGrantsTable() {
 
   $('#grant-global-search').on('input', function(){
     grantsTable.search(this.value).draw();
+    track('search_grants', { query: this.value });
   });
 
 }

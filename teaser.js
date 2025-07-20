@@ -15,7 +15,11 @@ function showTeaser() {
     <button class="teaser-cta">Engage the Robot \ud83e\udd16</button>
   `;
   document.getElementById('grants').appendChild(card);
-  card.querySelector('button').addEventListener('click', openModal);
+  const teaserBtn = card.querySelector('button');
+  teaserBtn.addEventListener('click', openModal);
+  teaserBtn.addEventListener('click', () =>
+    track('click_teaser_cta', { researcher_name: selectedName })
+  );
 }
 
 function openModal() {
