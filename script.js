@@ -1,6 +1,7 @@
 let matchesData = [];
 let grantsData = [];
 let researcherNames = [];
+let usingReranked = false;
 let providerChart;
 let deadlineChart;
 let grantsTable;
@@ -25,13 +26,28 @@ function showLandingWizard() {
 }
 
 async function loadData() {
-  const [matchesResp, grantsResp] = await Promise.all([
-    fetch('matches.json'),
-    fetch('grants.json'),
-  ]);
+  const grantsResp = await fetch('grants.json');
 
-  const matchesText = await matchesResp.text();
-  const grantsText = await grantsResp.text();
+  let rerankedResp;
+  try {
+    rerankedResp = await fetch('reranked_matches.json');
+  } catch {
+    /* network error */
+  }
+
+  let matchesResp;
+  if (rerankedResp && rerankedResp.ok) {
+    usingReranked = true;
+    matchesResp = rerankedResp;
+  } else {
+    usingReranked = false;
+    matchesResp = await fetch('matches.json');
+  }
+
+  const [matchesText, grantsText] = await Promise.all([
+    matchesResp.text(),
+    grantsResp.text(),
+  ]);
 
   matchesData = JSON.parse(matchesText);
   grantsData = JSON.parse(grantsText);
@@ -120,7 +136,7 @@ function moneyFmt(m) {
   return m.toLocaleString();
 }
 
-function createGrantCard(grant) {
+function createGrantCard(grant, reason = '') {
   const card = document.createElement('div');
   card.className = 'grant';
 
@@ -131,6 +147,13 @@ function createGrantCard(grant) {
       <p><strong>Proposed Money:</strong> ${moneyFmt(grant.proposed_money)}</p>
       <p><a href="${grant.submission_link}" target="_blank" rel="noopener">Submission Link ↗</a></p>
     `;
+
+  if (reason) {
+    const why = document.createElement('p');
+    why.className = 'match-reason';
+    why.innerHTML = `<strong>Ask AI Why:</strong> ${reason}`;
+    card.appendChild(why);
+  }
 
   // Track outbound submission link clicks
   card.querySelector('a').addEventListener('click', () =>
@@ -350,10 +373,12 @@ function showGrants(name) {
   const match = matchesData.find((m) => m.name === name);
   if (!match) return;
 
-  match.grants.forEach((id) => {
-    const grant = grantsData.find(g => Number(g.grant_id) === Number(id));
+  match.grants.forEach((g) => {
+    const id = typeof g === 'object' ? g.grant_id : g;
+    const reason = typeof g === 'object' ? g.match_reason : '';
+    const grant = grantsData.find(gr => Number(gr.grant_id) === Number(id));
     if (!grant) return;
-    grantsContainer.appendChild(createGrantCard(grant));
+    grantsContainer.appendChild(createGrantCard(grant, reason));
   });
 
   grantsContainer.dispatchEvent(
@@ -365,7 +390,8 @@ function initGrantsTable() {
   const idToNames = {};
   matchesData.forEach(m => {
     if (!Array.isArray(m.grants)) return;
-    m.grants.forEach(id => {
+    m.grants.forEach(g => {
+      const id = typeof g === 'object' ? g.grant_id : g;
       if (!idToNames[id]) idToNames[id] = [];
       idToNames[id].push(m.name);
     });

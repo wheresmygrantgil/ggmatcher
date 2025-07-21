@@ -273,6 +273,12 @@ main {
   line-height: 1.45;
 }
 
+.match-reason {
+  margin-top: 0.5rem;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
 /* ========== Footer with LinkedIn ========== */
 footer {
   display: flex;
