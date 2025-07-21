@@ -1,0 +1,152 @@
+[
+  {
+    "name": "Aaronson, Ely",
+    "grants": [
+      {
+        "grant_id": 335547,
+        "rank": 1,
+        "match_reason": "Focus on drug abuse and policy changes aligns with research on cannabis legalization and penal policy."
+      },
+      {
+        "grant_id": 48339048,
+        "rank": 2,
+        "match_reason": "Addresses societal issues related to crime and radicalization, relevant to transnational legal ordering and criminal justice."
+      },
+      {
+        "grant_id": 48337773,
+        "rank": 3,
+        "match_reason": "Explores radicalization and hate speech, linking to socio-legal implications of criminalization and governance."
+      },
+      {
+        "grant_id": 48337899,
+        "rank": 4,
+        "match_reason": "Focus on disinformation and freedom of expression relates to governance and social control in legal contexts."
+      },
+      {
+        "grant_id": 48337817,
+        "rank": 5,
+        "match_reason": "Research on antisemitism and Jewish life intersects with issues of social control and governance."
+      }
+    ]
+  },
+  {
+    "name": "Abd Alghani, Jalal",
+    "grants": [
+      {
+        "grant_id": 48338203,
+        "rank": 1,
+        "match_reason": "Focus on culture and creativity as catalysts for conflict prevention aligns with literature's role in societal dialogue."
+      },
+      {
+        "grant_id": 48338271,
+        "rank": 2,
+        "match_reason": "Explores arts and culture's impact on well-being, relevant to literary studies and cultural narratives."
+      },
+      {
+        "grant_id": 48338055,
+        "rank": 3,
+        "match_reason": "Investigates intangible cultural heritage, relevant to literary traditions and innovative approaches to cultural dynamics."
+      },
+      {
+        "grant_id": 48338148,
+        "rank": 4,
+        "match_reason": "Examines cultural evolution in virtual spaces, relevant to contemporary interpretations of medieval literature."
+      },
+      {
+        "grant_id": 48338114,
+        "rank": 5,
+        "match_reason": "Explores AI's impact on cultural industries, relevant for innovative approaches in literary studies and cultural production."
+      }
+    ]
+  },
+  {
+    "name": "Abecasis, Donna",
+    "grants": [
+      {
+        "grant_id": 350561,
+        "rank": 1,
+        "match_reason": "Focuses on neural mechanisms of cognition, including creativity, using neuroimaging and stimulation techniques."
+      },
+      {
+        "grant_id": 332217,
+        "rank": 2,
+        "match_reason": "Investigates modifying neural activity patterns, relevant to enhancing creative cognition and originality."
+      },
+      {
+        "grant_id": 332218,
+        "rank": 3,
+        "match_reason": "Similar to R01, focuses on modifying neural activity patterns, applicable to creative processes."
+      },
+      {
+        "grant_id": 357601,
+        "rank": 4,
+        "match_reason": "Supports innovative technologies for recording/modulating neural activity, relevant to understanding creativity."
+      },
+      {
+        "grant_id": 355301,
+        "rank": 5,
+        "match_reason": "Develops platforms linking behavior and brain activity, crucial for studying creative cognition."
+      },
+      {
+        "grant_id": 335070,
+        "rank": 6,
+        "match_reason": "Advances neuroimaging research, essential for studying neural mechanisms of creativity."
+      }
+    ]
+  },
+  {
+    "name": "Abeliovich, Ruthie",
+    "grants": [
+      {
+        "grant_id": 48338203,
+        "rank": 1,
+        "match_reason": "Focus on culture as a catalyst for conflict prevention and reconciliation, relevant to Israeli-Palestinian relations."
+      },
+      {
+        "grant_id": 48337817,
+        "rank": 2,
+        "match_reason": "Establishing a research hub on contemporary antisemitism and Jewish life, aligning with Jewish literature and identity themes."
+      },
+      {
+        "grant_id": 48338271,
+        "rank": 3,
+        "match_reason": "Explores arts and culture's impact on well-being, relevant to themes of trauma and identity."
+      },
+      {
+        "grant_id": 48338055,
+        "rank": 4,
+        "match_reason": "Addresses intangible cultural heritage, relevant to cultural representation and community resilience."
+      },
+      {
+        "grant_id": 48338114,
+        "rank": 5,
+        "match_reason": "Explores AI's impact on cultural industries, relevant to performance studies and creative expression."
+      }
+    ]
+  },
+  {
+    "name": "Abramovich, Shoshana",
+    "grants": [
+      {
+        "grant_id": 325500,
+        "rank": 1,
+        "match_reason": "Focus on various areas of analysis, including functional analysis, relevant to inequalities and convex functions."
+      },
+      {
+        "grant_id": 340545,
+        "rank": 2,
+        "match_reason": "Geometric methods in convex sets align with research on convex and superquadratic functions."
+      },
+      {
+        "grant_id": 358569,
+        "rank": 3,
+        "match_reason": "Addresses mathematical problems in science and engineering, relevant to optimization and functional analysis."
+      },
+      {
+        "grant_id": 340544,
+        "rank": 4,
+        "match_reason": "Research in algebraic topology may intersect with generalized convexity concepts."
+      }
+    ]
+  }
+]
