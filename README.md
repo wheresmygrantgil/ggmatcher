@@ -8,7 +8,7 @@ Researchers can type their name into a search box and view grants that are relev
 Any simple static file server can be used to preview the site. If Python is installed, run:
 
 ```bash
-python3 -m http.server 8000
+python -m http.server 8000
 ```
 
 Then open [http://localhost:8000/](http://localhost:8000/) in a browser.
