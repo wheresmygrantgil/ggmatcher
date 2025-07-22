@@ -1,5 +1,6 @@
 let matchesData = [];
 let grantsData = [];
+let rerankedLoaded = false;
 let grantsMap;
 let researcherNames = [];
 let providerChart;
@@ -33,6 +34,7 @@ async function loadData() {
 
   let matchesText;
   if (matchesResp && matchesResp.ok) {
+    rerankedLoaded = true;
     matchesText = await matchesResp.text();
   } else {
     const fallback = await fetch('matches.json');
@@ -392,10 +394,18 @@ function initGrantsTable() {
   const idToNames = {};
   matchesData.forEach(m => {
     if (!Array.isArray(m.grants)) return;
-    m.grants.forEach(id => {
-      if (!idToNames[id]) idToNames[id] = [];
-      idToNames[id].push(m.name);
-    });
+    if (rerankedLoaded) {
+      m.grants.forEach(g => {
+        const id = typeof g === 'object' ? g.grant_id : g;
+        if (!idToNames[id]) idToNames[id] = [];
+        idToNames[id].push(m.name);
+      });
+    } else {
+      m.grants.forEach(id => {
+        if (!idToNames[id]) idToNames[id] = [];
+        idToNames[id].push(m.name);
+      });
+    }
   });
 
   const rows = grantsData.map(g => ({
