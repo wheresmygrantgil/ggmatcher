@@ -512,6 +512,7 @@ const api = {
   post(id, type) {
     return this.fetch('/vote', {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         grant_id: id,
         researcher_id: CURRENT_USER,
