@@ -507,16 +507,18 @@ const api = {
     return this.fetch(`/votes/summary/${id}`);
   },
   userVote(id, user) {
-    return this.fetch(`/vote/${id}/${user}`);
+    const safeUser = encodeURIComponent(user);
+    return this.fetch(`/vote/${id}/${safeUser}`);
   },
   post(id, type) {
     return this.fetch('/vote', {
       method: 'POST',
-      body: JSON.stringify({ grant_id: id, user: CURRENT_USER, type })
+      body: JSON.stringify({ grant_id: id, researcher_id: CURRENT_USER, action: type })
     });
   },
   remove(id) {
-    return this.fetch(`/vote/${id}/${CURRENT_USER}`, { method: 'DELETE' });
+    const safeUser = encodeURIComponent(CURRENT_USER);
+    return this.fetch(`/vote/${id}/${safeUser}`, { method: 'DELETE' });
   }
 };
 
