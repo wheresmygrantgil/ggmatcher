@@ -23,3 +23,7 @@ No build step is required; the site consists only of HTML, CSS and JavaScript fi
 ## Colors
 
 The design uses a white background with deep navy (`#213646`) and vivid cyan (`#1DBEE6`) accents.
+
+## Voting on Grants
+
+If `window.researcherId` is defined, each grant card shows like and dislike buttons. Clicking a button records your vote via the backend API and updates the counts displayed on the card. Clicking an already selected option removes your vote.

@@ -7,6 +7,9 @@ let providerChart;
 let deadlineChart;
 let grantsTable;
 
+const API_BASE = 'https://ggm-backend.onrender.com';
+const researcherId = window.researcherId || 'gil';
+
 // ---------- Google Analytics event helper ----------
 function track(eventName, params = {}) {
   try {
@@ -186,6 +189,96 @@ function createGrantCard(grant, matchReason = null) {
 
   card.appendChild(btn);
   card.appendChild(summary);
+
+  const votes = document.createElement('div');
+  votes.className = 'votes';
+  votes.innerHTML = `
+    <button class="vote-btn like-btn" aria-pressed="false">👍 <span class="count">0</span></button>
+    <button class="vote-btn dislike-btn" aria-pressed="false">👎 <span class="count">0</span></button>
+  `;
+  card.appendChild(votes);
+
+  const likeBtn = votes.querySelector('.like-btn');
+  const dislikeBtn = votes.querySelector('.dislike-btn');
+  const likeCount = likeBtn.querySelector('.count');
+  const dislikeCount = dislikeBtn.querySelector('.count');
+
+  let currentVote = null;
+
+  async function refreshCounts() {
+    try {
+      const resp = await fetch(`${API_BASE}/votes/${grant.grant_id}`);
+      if (resp.ok) {
+        const data = await resp.json();
+        likeCount.textContent = data.likes;
+        dislikeCount.textContent = data.dislikes;
+      }
+    } catch {}
+  }
+
+  async function refreshUserVote() {
+    if (!researcherId) return;
+    try {
+      const resp = await fetch(`${API_BASE}/vote/${grant.grant_id}/${researcherId}`);
+      if (resp.ok) {
+        const data = await resp.json();
+        currentVote = data.action;
+      } else {
+        currentVote = null;
+      }
+    } catch {
+      currentVote = null;
+    }
+    likeBtn.classList.toggle('active', currentVote === 'like');
+    dislikeBtn.classList.toggle('active', currentVote === 'dislike');
+    likeBtn.setAttribute('aria-pressed', currentVote === 'like');
+    dislikeBtn.setAttribute('aria-pressed', currentVote === 'dislike');
+  }
+
+  async function sendVote(action) {
+    try {
+      await fetch(`${API_BASE}/vote`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ grant_id: grant.grant_id, researcher_id: researcherId, action })
+      });
+    } catch {}
+  }
+
+  async function deleteVote() {
+    try {
+      await fetch(`${API_BASE}/vote/${grant.grant_id}/${researcherId}`, { method: 'DELETE' });
+    } catch {}
+  }
+
+  likeBtn.addEventListener('click', async () => {
+    if (!researcherId) return;
+    if (currentVote === 'like') {
+      await deleteVote();
+      currentVote = null;
+    } else {
+      await sendVote('like');
+      currentVote = 'like';
+    }
+    await refreshCounts();
+    await refreshUserVote();
+  });
+
+  dislikeBtn.addEventListener('click', async () => {
+    if (!researcherId) return;
+    if (currentVote === 'dislike') {
+      await deleteVote();
+      currentVote = null;
+    } else {
+      await sendVote('dislike');
+      currentVote = 'dislike';
+    }
+    await refreshCounts();
+    await refreshUserVote();
+  });
+
+  refreshCounts();
+  refreshUserVote();
 
   return card;
 }
