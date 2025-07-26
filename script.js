@@ -6,6 +6,8 @@ let researcherNames = [];
 let providerChart;
 let deadlineChart;
 let grantsTable;
+const API_BASE = 'https://ggm-backend.onrender.com';
+let currentResearcherId = null;
 
 // ---------- Google Analytics event helper ----------
 function track(eventName, params = {}) {
@@ -85,6 +87,7 @@ function updateSuggestions(value) {
 function selectResearcher(name) {
   document.getElementById('researcher-input').value = name;
   document.getElementById('suggestions').style.display = 'none';
+  currentResearcherId = name;
   showGrants(name);
   track('select_researcher', { researcher_name: name });
 }
@@ -184,8 +187,21 @@ function createGrantCard(grant, matchReason = null) {
     card.appendChild(reason);
   }
 
+  const vote = document.createElement('div');
+  vote.className = 'vote';
+  vote.innerHTML = `
+    <button class="like-btn" aria-label="Like">
+      👍 <span class="like-count">0</span>
+    </button>
+    <button class="dislike-btn" aria-label="Dislike">
+      👎 <span class="dislike-count">0</span>
+    </button>
+  `;
+
   card.appendChild(btn);
   card.appendChild(summary);
+  card.appendChild(vote);
+  initVoteUI(vote, grant.grant_id);
 
   return card;
 }
@@ -211,6 +227,93 @@ function parseDueDate(raw) {
     [dd, mm, yyyy] = datePart.split('-');
   }
   return new Date(`${yyyy}-${mm}-${dd}T${timePart}Z`);
+}
+
+async function initVoteUI(container, grantId) {
+  const likeBtn = container.querySelector('.like-btn');
+  const dislikeBtn = container.querySelector('.dislike-btn');
+  const likeCount = container.querySelector('.like-count');
+  const dislikeCount = container.querySelector('.dislike-count');
+
+  async function refresh() {
+    try {
+      const res = await fetch(`${API_BASE}/votes/${grantId}`);
+      if (res.ok) {
+        const data = await res.json();
+        likeCount.textContent = data.likes ?? 0;
+        dislikeCount.textContent = data.dislikes ?? 0;
+      }
+      if (currentResearcherId) {
+        const ures = await fetch(
+          `${API_BASE}/vote/${grantId}/${encodeURIComponent(currentResearcherId)}`
+        );
+        if (ures.ok) {
+          const { action } = await ures.json();
+          likeBtn.classList.toggle('active', action === 'like');
+          dislikeBtn.classList.toggle('active', action === 'dislike');
+        } else {
+          likeBtn.classList.remove('active');
+          dislikeBtn.classList.remove('active');
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  likeBtn.addEventListener('click', async () => {
+    if (!currentResearcherId) return;
+    const active = likeBtn.classList.contains('active');
+    try {
+      if (active) {
+        await fetch(
+          `${API_BASE}/vote/${grantId}/${encodeURIComponent(currentResearcherId)}`,
+          { method: 'DELETE' }
+        );
+      } else {
+        await fetch(`${API_BASE}/vote`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            grant_id: grantId,
+            researcher_id: currentResearcherId,
+            action: 'like'
+          })
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    refresh();
+  });
+
+  dislikeBtn.addEventListener('click', async () => {
+    if (!currentResearcherId) return;
+    const active = dislikeBtn.classList.contains('active');
+    try {
+      if (active) {
+        await fetch(
+          `${API_BASE}/vote/${grantId}/${encodeURIComponent(currentResearcherId)}`,
+          { method: 'DELETE' }
+        );
+      } else {
+        await fetch(`${API_BASE}/vote`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            grant_id: grantId,
+            researcher_id: currentResearcherId,
+            action: 'dislike'
+          })
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    refresh();
+  });
+
+  refresh();
 }
 
 function animateNumber(el, value, duration = 800) {
