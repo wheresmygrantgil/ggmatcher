@@ -279,6 +279,36 @@ main {
   line-height: 1.45;
 }
 
+/* === Voting controls === */
+.vote-controls {
+  margin-top: 0.6rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.vote-controls button {
+  background: none;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.vote-controls button.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.vote-controls .count {
+  font-weight: 600;
+}
+
 /* ========== Footer with LinkedIn ========== */
 footer {
   display: flex;

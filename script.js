@@ -3,6 +3,8 @@ let grantsData = [];
 let rerankedLoaded = false;
 let grantsMap;
 let researcherNames = [];
+let currentResearcherId = '';
+const API_BASE = 'https://ggm-backend.onrender.com';
 let providerChart;
 let deadlineChart;
 let grantsTable;
@@ -16,6 +18,39 @@ function track(eventName, params = {}) {
   } catch (err) {
     /* no-op */
   }
+}
+
+// ---------- Voting API helpers ----------
+async function apiGet(path) {
+  const res = await fetch(`${API_BASE}${path}`);
+  if (!res.ok) throw new Error('API request failed');
+  return res.json();
+}
+
+async function getVoteCounts(grantId) {
+  return apiGet(`/votes/${grantId}`);
+}
+
+async function getUserVote(grantId, researcherId) {
+  return apiGet(`/vote/${grantId}/${encodeURIComponent(researcherId)}`);
+}
+
+async function postVote(grantId, researcherId, action) {
+  const res = await fetch(`${API_BASE}/vote`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ grant_id: String(grantId), researcher_id: researcherId, action })
+  });
+  if (!res.ok) throw new Error('API request failed');
+  return res.json();
+}
+
+async function deleteVoteApi(grantId, researcherId) {
+  const res = await fetch(`${API_BASE}/vote/${grantId}/${encodeURIComponent(researcherId)}`, {
+    method: 'DELETE'
+  });
+  if (!res.ok) throw new Error('API request failed');
+  return res.json();
 }
 
 function showLandingWizard() {
@@ -85,6 +120,7 @@ function updateSuggestions(value) {
 function selectResearcher(name) {
   document.getElementById('researcher-input').value = name;
   document.getElementById('suggestions').style.display = 'none';
+  currentResearcherId = name;
   showGrants(name);
   track('select_researcher', { researcher_name: name });
 }
@@ -130,7 +166,7 @@ function moneyFmt(m) {
   return m.toLocaleString();
 }
 
-function createGrantCard(grant, matchReason = null) {
+function createGrantCard(grant, matchReason = null, researcherId = '') {
   const card = document.createElement('div');
   card.className = 'grant';
 
@@ -186,6 +222,67 @@ function createGrantCard(grant, matchReason = null) {
 
   card.appendChild(btn);
   card.appendChild(summary);
+
+  const votes = document.createElement('div');
+  votes.className = 'vote-controls';
+  votes.innerHTML = `
+    <button class="like-btn" aria-label="Like grant">👍 <span class="count">0</span></button>
+    <button class="dislike-btn" aria-label="Dislike grant">👎 <span class="count">0</span></button>
+  `;
+  const likeBtn = votes.querySelector('.like-btn');
+  const dislikeBtn = votes.querySelector('.dislike-btn');
+  const likeCountEl = likeBtn.querySelector('.count');
+  const dislikeCountEl = dislikeBtn.querySelector('.count');
+  let currentVote = null;
+
+  function updateActive() {
+    likeBtn.classList.toggle('active', currentVote === 'like');
+    dislikeBtn.classList.toggle('active', currentVote === 'dislike');
+  }
+
+  async function refreshVotes() {
+    try {
+      const [counts, uv] = await Promise.all([
+        getVoteCounts(grant.grant_id),
+        researcherId ? getUserVote(grant.grant_id, researcherId) : Promise.resolve(null)
+      ]);
+      if (counts) {
+        likeCountEl.textContent = counts.likes;
+        dislikeCountEl.textContent = counts.dislikes;
+      }
+      currentVote = uv && uv.action ? uv.action : null;
+      updateActive();
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
+  likeBtn.addEventListener('click', async () => {
+    if (!researcherId) return;
+    try {
+      if (currentVote === 'like') {
+        await deleteVoteApi(grant.grant_id, researcherId);
+      } else {
+        await postVote(grant.grant_id, researcherId, 'like');
+      }
+      await refreshVotes();
+    } catch(err) { console.error(err); }
+  });
+
+  dislikeBtn.addEventListener('click', async () => {
+    if (!researcherId) return;
+    try {
+      if (currentVote === 'dislike') {
+        await deleteVoteApi(grant.grant_id, researcherId);
+      } else {
+        await postVote(grant.grant_id, researcherId, 'dislike');
+      }
+      await refreshVotes();
+    } catch(err) { console.error(err); }
+  });
+
+  card.appendChild(votes);
+  refreshVotes();
 
   return card;
 }
@@ -382,7 +479,7 @@ function showGrants(name) {
     const reason = typeof g === 'object' ? g.match_reason : null;
     const grant = grantsMap.get(String(id));
     if (!grant) return;
-    grantsContainer.appendChild(createGrantCard(grant, reason));
+    grantsContainer.appendChild(createGrantCard(grant, reason, currentResearcherId));
   });
 
   grantsContainer.dispatchEvent(
