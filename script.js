@@ -3,12 +3,11 @@ let grantsData = [];
 let rerankedLoaded = false;
 let grantsMap;
 let researcherNames = [];
+let currentResearcherName = null;
 let providerChart;
 let deadlineChart;
 let grantsTable;
 
-// TODO: replace 'anon' with real user id from auth cookie when available
-const CURRENT_USER = 'anon';
 
 // ---------- Google Analytics event helper ----------
 function track(eventName, params = {}) {
@@ -88,6 +87,7 @@ function updateSuggestions(value) {
 function selectResearcher(name) {
   document.getElementById('researcher-input').value = name;
   document.getElementById('suggestions').style.display = 'none';
+  currentResearcherName = name;
   showGrants(name);
   track('select_researcher', { researcher_name: name });
 }
@@ -503,21 +503,21 @@ const api = {
     const text = await res.text();
     return text ? JSON.parse(text) : null;
   },
-  userVote(id, user) {
-    return this.fetch(`/vote/${id}/${user}`);
+  userVote(id) {
+    return this.fetch(`/vote/${id}/${currentResearcherName}`);
   },
   post(id, type) {
     return this.fetch('/vote', {
       method: 'POST',
       body: JSON.stringify({
         grant_id: id,
-        researcher_id: CURRENT_USER,
+        researcher_id: currentResearcherName,
         action: type
       })
     });
   },
   remove(id) {
-    return this.fetch(`/vote/${id}/${CURRENT_USER}`, { method: 'DELETE' });
+    return this.fetch(`/vote/${id}/${currentResearcherName}`, { method: 'DELETE' });
   }
 };
 
@@ -573,7 +573,7 @@ function renderVoteBar(cardEl, grantId) {
   likeBtn.addEventListener('keydown', keyHandler);
   dislikeBtn.addEventListener('keydown', keyHandler);
 
-  api.userVote(grantId, CURRENT_USER)
+  api.userVote(grantId)
     .then(d => setState(bar, d ? d.action : null))
     .catch(() => {});
 }
@@ -581,6 +581,10 @@ function renderVoteBar(cardEl, grantId) {
 async function handleVoteClick(e) {
   const btn = e.currentTarget;
   const bar = btn.parentElement;
+  if (!currentResearcherName) {
+    alert('Please select your name before voting.');
+    return;
+  }
   if (bar.dataset.busy) return;
   bar.dataset.busy = '1';
   setTimeout(() => delete bar.dataset.busy, 300);
