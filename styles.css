@@ -141,6 +141,14 @@ main {
 }
 #researcher-input:focus { border-color: var(--accent); }
 
+/* Display currently selected researcher */
+.current-researcher {
+  grid-column: 1 / -1;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
 /* Suggestions dropdown */
 .suggestions {
   position: absolute;
