@@ -3,12 +3,13 @@ let grantsData = [];
 let rerankedLoaded = false;
 let grantsMap;
 let researcherNames = [];
+let currentResearcherName = null;
 let providerChart;
 let deadlineChart;
 let grantsTable;
 
 // TODO: replace 'anon' with real user id from auth cookie when available
-const CURRENT_USER = 'anon';
+const VOTER_ID = 'anon';
 
 // ---------- Google Analytics event helper ----------
 function track(eventName, params = {}) {
@@ -86,8 +87,14 @@ function updateSuggestions(value) {
 }
 
 function selectResearcher(name) {
+  currentResearcherName = name;
   document.getElementById('researcher-input').value = name;
   document.getElementById('suggestions').style.display = 'none';
+  const display = document.getElementById('current-researcher');
+  if (display) {
+    display.textContent = `Viewing grants for: ${name}`;
+    display.classList.remove('hidden');
+  }
   showGrants(name);
   track('select_researcher', { researcher_name: name });
 }
@@ -511,13 +518,14 @@ const api = {
       method: 'POST',
       body: JSON.stringify({
         grant_id: id,
-        researcher_id: CURRENT_USER,
+        researcher_id: currentResearcherName,
+        voter_id: VOTER_ID,
         action: type
       })
     });
   },
   remove(id) {
-    return this.fetch(`/vote/${id}/${CURRENT_USER}`, { method: 'DELETE' });
+    return this.fetch(`/vote/${id}/${currentResearcherName}`, { method: 'DELETE' });
   }
 };
 
@@ -573,9 +581,11 @@ function renderVoteBar(cardEl, grantId) {
   likeBtn.addEventListener('keydown', keyHandler);
   dislikeBtn.addEventListener('keydown', keyHandler);
 
-  api.userVote(grantId, CURRENT_USER)
-    .then(d => setState(bar, d ? d.action : null))
-    .catch(() => {});
+  if (currentResearcherName) {
+    api.userVote(grantId, currentResearcherName)
+      .then(d => setState(bar, d ? d.action : null))
+      .catch(() => {});
+  }
 }
 
 async function handleVoteClick(e) {
@@ -584,6 +594,11 @@ async function handleVoteClick(e) {
   if (bar.dataset.busy) return;
   bar.dataset.busy = '1';
   setTimeout(() => delete bar.dataset.busy, 300);
+
+  if (!currentResearcherName) {
+    alert('Please select your name before voting.');
+    return;
+  }
 
   const isLike = btn.classList.contains('like-btn');
   const grantId = btn.dataset.id;

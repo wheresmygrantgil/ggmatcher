@@ -129,6 +129,11 @@ main {
   max-width: 450px;
   margin: 0 auto;
 }
+#current-researcher {
+  text-align: center;
+  font-weight: 600;
+  margin: 0.5rem 0 1rem;
+}
 #researcher-input {
   width: 100%;
   padding: 0.8rem 1rem;
