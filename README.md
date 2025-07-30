@@ -15,7 +15,7 @@ Then open [http://localhost:8000/](http://localhost:8000/) in a browser.
 
 ## Deployment
 
-No build step is required; the site consists only of HTML, CSS and JavaScript files. It can be hosted on any static hosting service, for example:
+Run `node build.js` to generate the minified `main.min.js` and `styles.min.css` files before deploying. The site can then be hosted on any static hosting service, for example:
 
 - **GitHub Pages** – push the repository to GitHub and enable Pages on the `main` branch.
 - **Netlify** – create a site from this repository and set the publish directory to the repository root.
