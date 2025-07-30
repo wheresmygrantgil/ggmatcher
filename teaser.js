@@ -9,7 +9,7 @@ function showTeaser() {
   const card = document.createElement('div');
   card.className = 'teaser-card';
   card.innerHTML = `
-    <img src="assets/wizardoc.png" alt="Cartoon robot scanning grant proposals">
+    <img src="assets/wizardoc.png" alt="Cartoon robot scanning grant proposals" width="1536" height="1024" loading="lazy">
     <p>Didn\u2019t spot the perfect call?<br>
     \u26A1 Let our AI scout the web for fresh opportunities tailored to <em>${selectedName}</em>!</p>
     <button class="teaser-cta">Engage the Robot \ud83e\udd16</button>
