@@ -7,8 +7,8 @@ let providerChart;
 let deadlineChart;
 let grantsTable;
 
-// TODO: replace 'anon' with real user id from auth cookie when available
-const CURRENT_USER = 'anon';
+// The researcher currently selected in the autocomplete box
+let currentResearcherName = null;
 
 // ---------- Google Analytics event helper ----------
 function track(eventName, params = {}) {
@@ -86,9 +86,13 @@ function updateSuggestions(value) {
 }
 
 function selectResearcher(name) {
+  currentResearcherName = name;
   document.getElementById('researcher-input').value = name;
   document.getElementById('suggestions').style.display = 'none';
+  document.getElementById('selected-researcher').textContent =
+    `Voting for: ${name}`;
   showGrants(name);
+  updateVoteBarState();
   track('select_researcher', { researcher_name: name });
 }
 
@@ -484,6 +488,7 @@ async function init() {
   });
 
   showTab('recommendations');
+  updateVoteBarState();
 }
 
 document.addEventListener('DOMContentLoaded', init);
@@ -503,21 +508,24 @@ const api = {
     const text = await res.text();
     return text ? JSON.parse(text) : null;
   },
-  userVote(id, user) {
-    return this.fetch(`/vote/${id}/${user}`);
+  userVote(id) {
+    if (!currentResearcherName) return Promise.resolve(null);
+    return this.fetch(`/vote/${id}/${currentResearcherName}`);
   },
   post(id, type) {
+    if (!currentResearcherName) return Promise.reject(new Error('no researcher'));
     return this.fetch('/vote', {
       method: 'POST',
       body: JSON.stringify({
         grant_id: id,
-        researcher_id: CURRENT_USER,
+        researcher_id: currentResearcherName,
         action: type
       })
     });
   },
   remove(id) {
-    return this.fetch(`/vote/${id}/${CURRENT_USER}`, { method: 'DELETE' });
+    if (!currentResearcherName) return Promise.reject(new Error('no researcher'));
+    return this.fetch(`/vote/${id}/${currentResearcherName}`, { method: 'DELETE' });
   }
 };
 
@@ -529,6 +537,12 @@ function setState(bar, vote) {
   likeBtn.setAttribute('aria-pressed', vote === 'like');
   dislikeBtn.setAttribute('aria-pressed', vote === 'dislike');
   bar.dataset.vote = vote || '';
+}
+
+function updateVoteBarState() {
+  document.querySelectorAll('.vote-btn').forEach(btn => {
+    btn.disabled = !currentResearcherName;
+  });
 }
 
 function renderVoteBar(cardEl, grantId) {
@@ -573,7 +587,7 @@ function renderVoteBar(cardEl, grantId) {
   likeBtn.addEventListener('keydown', keyHandler);
   dislikeBtn.addEventListener('keydown', keyHandler);
 
-  api.userVote(grantId, CURRENT_USER)
+  api.userVote(grantId)
     .then(d => setState(bar, d ? d.action : null))
     .catch(() => {});
 }
@@ -584,6 +598,11 @@ async function handleVoteClick(e) {
   if (bar.dataset.busy) return;
   bar.dataset.busy = '1';
   setTimeout(() => delete bar.dataset.busy, 300);
+
+  if (!currentResearcherName) {
+    alert('Please select your name before voting.');
+    return;
+  }
 
   const isLike = btn.classList.contains('like-btn');
   const grantId = btn.dataset.id;

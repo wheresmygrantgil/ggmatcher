@@ -169,6 +169,12 @@ main {
 .suggestion-item:hover,
 .suggestion-item:focus  { background: var(--accent); color: #ffffff; }
 
+.current-researcher {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
 /* ========== Dataset stats dashboard ========== */
 .dashboard {
   margin: 2rem auto;
