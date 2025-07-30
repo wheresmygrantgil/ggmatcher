@@ -158,32 +158,42 @@ function createGrantCard(grant, matchReason = null) {
   // Summary toggle
   const btn = document.createElement('button');
   btn.className = 'summary-toggle';
+  const summaryId = `summary-${grant.grant_id}`;
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', summaryId);
   btn.textContent = '▶ Summary';
 
   const summary = document.createElement('div');
+  summary.id = summaryId;
   summary.className = 'summary';
   summary.textContent = grant.summary_text;
   summary.hidden = true;
 
   btn.addEventListener('click', () => {
-    const open = !summary.hidden;
-    summary.hidden = open; // toggle visibility
-    btn.textContent = open ? '▶ Summary' : '▼ Summary';
-    track(open ? 'collapse_summary' : 'expand_summary', { grant_id: grant.grant_id });
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    summary.hidden = expanded;
+    btn.textContent = expanded ? '▶ Summary' : '▼ Summary';
+    track(expanded ? 'collapse_summary' : 'expand_summary', { grant_id: grant.grant_id });
   });
 
   if (matchReason) {
     const whyBtn = document.createElement('button');
     whyBtn.className = 'summary-toggle';
+    const reasonId = `reason-${grant.grant_id}`;
+    whyBtn.setAttribute('aria-expanded', 'false');
+    whyBtn.setAttribute('aria-controls', reasonId);
     whyBtn.textContent = '▶ Ask AI Why';
     const reason = document.createElement('div');
+    reason.id = reasonId;
     reason.className = 'ai-reason';
     reason.textContent = matchReason;
     reason.hidden = true;
     whyBtn.addEventListener('click', () => {
-      const open = !reason.hidden;
-      reason.hidden = open;
-      whyBtn.textContent = open ? '▶ Ask AI Why' : '▼ Ask AI Why';
+      const expanded = whyBtn.getAttribute('aria-expanded') === 'true';
+      whyBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      reason.hidden = expanded;
+      whyBtn.textContent = expanded ? '▶ Ask AI Why' : '▼ Ask AI Why';
     });
     card.appendChild(whyBtn);
     card.appendChild(reason);
