@@ -129,26 +129,6 @@ function selectResearcher(name) {
   track('select_researcher', { researcher_name: name });
 }
 
-function handleSuggestionKeys(event) {
-  const items = document.querySelectorAll('#suggestions .suggestion-item');
-  const active = document.activeElement;
-  const index = Array.from(items).indexOf(active);
-  if (event.key === 'ArrowDown') {
-    event.preventDefault();
-    const next = items[index + 1] || items[0];
-    if (next) next.focus();
-  } else if (event.key === 'ArrowUp') {
-    event.preventDefault();
-    const prev = items[index - 1] || items[items.length - 1];
-    if (prev) prev.focus();
-  } else if (event.key === 'Enter' && active.classList.contains('suggestion-item')) {
-    selectResearcher(active.textContent);
-  } else if (event.key === 'Escape') {
-    document.getElementById('suggestions').style.display = 'none';
-    document.getElementById('researcher-input').focus();
-  }
-}
-
 function formatDate(raw) {
   if (!raw) return '';
   let arr;
@@ -199,7 +179,7 @@ function createGrantCard(grant, matchReason = null) {
       <p><strong>Provider:</strong> ${grant.provider}</p>
       <p><strong>Due Date:</strong> ${formatDate(grant.due_date)}</p>
       <p><strong>Proposed Money:</strong> ${moneyFmt(grant.proposed_money)}</p>
-      <p><a href="${grant.submission_link}" target="_blank" rel="noopener noreferrer">Submission Link ↗</a></p>
+      <p><a href="${grant.submission_link}" target="_blank" rel="noopener">Submission Link ↗</a></p>
     `;
 
   renderVoteBar(card, grant.grant_id);
@@ -504,9 +484,9 @@ function initGrantsTable() {
       { data: 'provider', title: 'Provider' },
       { data: 'title', title: 'Title' },
       { data: 'due_date', title: 'Due Date' },
-      { data: 'money', title: 'Money', render: d => moneyFmt(d) },
+      { data: 'money', title: 'Money' },
       { data: 'suggested_collaborators', title: 'Suggested Collaborators' },
-      { data: 'link', title: 'Link', orderable: false, render: d => `<a href="${d}" target="_blank" rel="noopener noreferrer">Open ↗</a>` },
+      { data: 'link', title: 'Link', orderable: false, render: d => `<a href="${d}" target="_blank" rel="noopener">Open</a>` },
     ]
   });
 
@@ -534,8 +514,6 @@ async function init() {
   const input = document.getElementById('researcher-input');
   input.addEventListener('input', (e) => updateSuggestions(e.target.value));
   input.addEventListener('focus', (e) => updateSuggestions(e.target.value));
-  input.addEventListener('keydown', handleSuggestionKeys);
-  document.getElementById('suggestions').addEventListener('keydown', handleSuggestionKeys);
   document.addEventListener('click', (e) => {
     if (!document.querySelector('.selector').contains(e.target)) {
       document.getElementById('suggestions').style.display = 'none';
