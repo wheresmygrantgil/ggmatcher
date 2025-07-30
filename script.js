@@ -483,6 +483,12 @@ async function init() {
   const input = document.getElementById('researcher-input');
   input.addEventListener('input', (e) => updateSuggestions(e.target.value));
   input.addEventListener('focus', (e) => updateSuggestions(e.target.value));
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const first = document.querySelector('#suggestions .suggestion-item');
+      if (first) selectResearcher(first.textContent);
+    }
+  });
   document.addEventListener('click', (e) => {
     if (!document.querySelector('.selector').contains(e.target)) {
       document.getElementById('suggestions').style.display = 'none';
