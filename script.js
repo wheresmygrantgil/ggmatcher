@@ -6,6 +6,43 @@ let researcherNames = [];
 let providerChart;
 let deadlineChart;
 let grantsTable;
+let dataTablesReady;
+let chartReady;
+
+function loadScript(src) {
+  if (document.querySelector(`script[src="${src}"]`)) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = () => resolve();
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+function ensureDataTables() {
+  if (dataTablesReady) return dataTablesReady;
+  const libs = [
+    'https://code.jquery.com/jquery-3.7.0.min.js',
+    'https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js',
+    'https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js',
+    'https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js',
+    'https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js',
+    'https://cdn.datatables.net/colreorder/1.6.2/js/dataTables.colReorder.min.js',
+    'https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js',
+    'https://cdn.datatables.net/plug-ins/1.13.6/features/mark.js/datatables.mark.js'
+  ];
+  dataTablesReady = libs.reduce((p, src) => p.then(() => loadScript(src)), Promise.resolve());
+  return dataTablesReady;
+}
+
+function ensureChart() {
+  if (chartReady) return chartReady;
+  chartReady = loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js');
+  return chartReady;
+}
 
 // TODO: replace 'anon' with real user id from auth cookie when available
 const CURRENT_USER = 'anon';
@@ -25,7 +62,7 @@ function showLandingWizard() {
   const container = document.getElementById('grants');
   container.innerHTML = `
     <div class="landing-wizard">
-      <img src="assets/wizardoc.png" alt="Cartoon robot scanning grant proposals">
+      <img src="assets/wizardoc.png" alt="Cartoon robot scanning grant proposals" loading="lazy">
     </div>`;
 }
 
@@ -379,13 +416,13 @@ function showTab(name) {
     dash.classList.remove('hidden');
     statTab.classList.add('active');
     statTab.setAttribute('aria-selected', 'true');
-    requestAnimationFrame(showDashboard);
+    ensureChart().then(() => requestAnimationFrame(showDashboard));
     track('view_stats_tab');
   } else if (name === 'grants') {
     grantsSec.classList.remove('hidden');
     grantsTab.classList.add('active');
     grantsTab.setAttribute('aria-selected', 'true');
-    if (!grantsTable) initGrantsTable();
+    ensureDataTables().then(() => { if (!grantsTable) initGrantsTable(); });
     track('view_grants_tab');
   } else {
     rec.classList.remove('hidden');
@@ -509,6 +546,12 @@ async function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js');
+  });
+}
 
 // ===== Voting module =====
 const API_BASE = 'https://ggm-backend.onrender.com';
