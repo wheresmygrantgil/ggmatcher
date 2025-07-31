@@ -7,8 +7,18 @@ let providerChart;
 let deadlineChart;
 let grantsTable;
 
-// TODO: replace 'anon' with real user id from auth cookie when available
-const CURRENT_USER = 'anon';
+// Use a persistent random ID for anonymous users until real auth is provided
+function getAnonId() {
+  let id = localStorage.getItem('ggm_uid');
+  if (!id) {
+    id = 'u_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+    localStorage.setItem('ggm_uid', id);
+  }
+  return id;
+}
+
+// TODO: replace getAnonId() with real user id from auth cookie when available
+const CURRENT_USER = getAnonId();
 
 // ---------- Google Analytics event helper ----------
 function track(eventName, params = {}) {

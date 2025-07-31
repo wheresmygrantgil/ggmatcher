@@ -23,3 +23,10 @@ No build step is required; the site consists only of HTML, CSS and JavaScript fi
 ## Colors
 
 The design uses a white background with deep navy (`#213646`) and vivid cyan (`#1DBEE6`) accents.
+
+## Voting
+
+To prevent vote leakage between anonymous visitors, the client stores a random
+identifier in `localStorage` under the key `ggm_uid`. This identifier is used as
+the user ID when sending voting requests. Clearing browser storage will reset it
+and start a fresh voting session.
