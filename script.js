@@ -7,8 +7,8 @@ let providerChart;
 let deadlineChart;
 let grantsTable;
 
-// TODO: replace 'anon' with real user id from auth cookie when available
-const CURRENT_USER = 'anon';
+// Track the currently selected researcher. Initially 'anon' until a user selects themselves.
+let CURRENT_USER = 'anon';
 
 // ---------- Google Analytics event helper ----------
 function track(eventName, params = {}) {
@@ -88,6 +88,8 @@ function updateSuggestions(value) {
 function selectResearcher(name) {
   document.getElementById('researcher-input').value = name;
   document.getElementById('suggestions').style.display = 'none';
+  // When a researcher is selected, update CURRENT_USER so votes are recorded under their name.
+  CURRENT_USER = name;
   showGrants(name);
   track('select_researcher', { researcher_name: name });
 }
@@ -504,7 +506,8 @@ const api = {
     return text ? JSON.parse(text) : null;
   },
   userVote(id, user) {
-    return this.fetch(`/vote/${id}/${user}`);
+    // Encode path components to handle spaces/commas safely.
+    return this.fetch(`/vote/${encodeURIComponent(id)}/${encodeURIComponent(user)}`);
   },
   post(id, type) {
     return this.fetch('/vote', {
@@ -517,7 +520,8 @@ const api = {
     });
   },
   remove(id) {
-    return this.fetch(`/vote/${id}/${CURRENT_USER}`, { method: 'DELETE' });
+    // Encode grant and researcher IDs to avoid issues with spaces.
+    return this.fetch(`/vote/${encodeURIComponent(id)}/${encodeURIComponent(CURRENT_USER)}`, { method: 'DELETE' });
   }
 };
 
