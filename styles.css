@@ -290,14 +290,14 @@ footer {
   font-size: 0.85rem;
   color: #7a8b99;
 }
-footer .linkedin {
+footer .social-icon {
   display: inline-flex;
   width: 20px;
   height: 20px;
   transition: transform 0.15s ease;
 }
-footer .linkedin svg { fill: var(--accent); }
-footer .linkedin:hover { transform: scale(1.15); }
+footer .social-icon svg { fill: var(--accent); }
+footer .social-icon:hover { transform: scale(1.15); }
 
 /* === Grant-Scouting teaser === */
 .landing-wizard {                 /* the wrapper div injected by script.js  */
