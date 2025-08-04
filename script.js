@@ -484,6 +484,16 @@ async function init() {
     linkedInLink.addEventListener('click', () => track('click_linkedin'));
   }
 
+  const gmailLink = document.querySelector('footer .gmail');
+  if (gmailLink) {
+    gmailLink.addEventListener('click', () => track('click_gmail'));
+  }
+
+  const githubLink = document.querySelector('footer .github');
+  if (githubLink) {
+    githubLink.addEventListener('click', () => track('click_github'));
+  }
+
   const input = document.getElementById('researcher-input');
   input.addEventListener('input', (e) => updateSuggestions(e.target.value));
   input.addEventListener('focus', (e) => updateSuggestions(e.target.value));
