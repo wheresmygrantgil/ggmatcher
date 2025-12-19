@@ -69498,5 +69498,2190 @@
         "match_reason": "Understanding neighborhood experiences to enhance health and well-being, relevant to built environment."
       }
     ]
+  },
+  {
+    "name": "Edrey, Yoseph",
+    "grants": [
+      {
+        "grant_id": 50149001,
+        "rank": 1,
+        "match_reason": "Focus on income distribution and vulnerable populations aligns with tax policy and constitutional implications."
+      },
+      {
+        "grant_id": 50149693,
+        "rank": 2,
+        "match_reason": "Investigates corporate influence on democracy, relevant to tax legislation and constitutional principles."
+      },
+      {
+        "grant_id": 358930,
+        "rank": 3,
+        "match_reason": "Tobacco regulatory research intersects with tax law and public health implications of taxation."
+      },
+      {
+        "grant_id": 50137203,
+        "rank": 4,
+        "match_reason": "Focus on healthcare access and integration relates to economic effects of taxation and public policy."
+      },
+      {
+        "grant_id": 356907,
+        "rank": 5,
+        "match_reason": "Research on implementation strategies can inform tax policy effectiveness and compliance."
+      }
+    ]
+  },
+  {
+    "name": "Sapir, Shimon",
+    "grants": [
+      {
+        "grant_id": 45812,
+        "rank": 1,
+        "match_reason": "Focuses on psychological processes of language, aligning with emotional recognition and memory studies."
+      },
+      {
+        "grant_id": 350561,
+        "rank": 2,
+        "match_reason": "Advances understanding of cognition and behavior, relevant to emotional perception and language structure."
+      },
+      {
+        "grant_id": 344634,
+        "rank": 3,
+        "match_reason": "Explores emotion and social dynamics, pertinent to the interplay of language and psychology."
+      },
+      {
+        "grant_id": 357742,
+        "rank": 4,
+        "match_reason": "Supports translational research in communication disorders, relevant to emotional recognition in language."
+      },
+      {
+        "grant_id": 320753,
+        "rank": 5,
+        "match_reason": "Investigates learning mechanisms, applicable to cognitive processes in language and emotional recognition."
+      }
+    ]
+  },
+  {
+    "name": "Kristal, Tali",
+    "grants": [
+      {
+        "grant_id": 50149025,
+        "rank": 1,
+        "match_reason": "Focuses on labor market inclusion for persons with disabilities, addressing barriers and social protection, relevant to gender inequality and economic disparities."
+      },
+      {
+        "grant_id": 50218801,
+        "rank": 2,
+        "match_reason": "Explores basic skills' impact on economic outcomes, addressing gender disparities in skill acquisition, aligning with labor economics focus."
+      },
+      {
+        "grant_id": 50218710,
+        "rank": 3,
+        "match_reason": "Identifies competences for the green transition, emphasizing gender and disability dimensions in labor market responses."
+      },
+      {
+        "grant_id": 50219587,
+        "rank": 4,
+        "match_reason": "Addresses social transformations and labor dynamics in response to macro drivers, relevant to economic disparities and the future of work."
+      },
+      {
+        "grant_id": 50133657,
+        "rank": 5,
+        "match_reason": "Enhances sustainable competitiveness in rural areas, promoting entrepreneurship and addressing gender considerations in project design."
+      }
+    ]
+  },
+  {
+    "name": "Saltman, Michael",
+    "grants": [
+      {
+        "grant_id": 50149693,
+        "rank": 1,
+        "match_reason": "Explores corporate influence on democracy, aligning with Saltman's focus on law, culture, and societal norms."
+      },
+      {
+        "grant_id": 50219003,
+        "rank": 2,
+        "match_reason": "Investigates local democracy and governance, relevant to Saltman's research on judicial decision-making and cultural contexts."
+      },
+      {
+        "grant_id": 50149084,
+        "rank": 3,
+        "match_reason": "Addresses societal polarization and extremism, linking to Saltman's interest in cultural influences on legal standards."
+      },
+      {
+        "grant_id": 50140817,
+        "rank": 4,
+        "match_reason": "Focuses on democratic engagement and inclusivity, relevant to Saltman's examination of consensus in judicial outcomes."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 5,
+        "match_reason": "Promotes inclusive democratic societies, connecting to Saltman's research on cultural contexts and legal interpretations."
+      }
+    ]
+  },
+  {
+    "name": "Ben Sasson, Ayelet",
+    "grants": [
+      {
+        "grant_id": 357811,
+        "rank": 1,
+        "match_reason": "Supports innovative research on ASD and sensory processing, aligning with early detection and intervention strategies."
+      },
+      {
+        "grant_id": 357742,
+        "rank": 2,
+        "match_reason": "Focuses on translational research in communication disorders, relevant to sensory processing issues in ASD."
+      },
+      {
+        "grant_id": 357378,
+        "rank": 3,
+        "match_reason": "Emphasizes measuring brain changes across the lifespan, relevant for understanding developmental aspects of ASD."
+      },
+      {
+        "grant_id": 357377,
+        "rank": 4,
+        "match_reason": "Innovative approaches to measure brain activity and connectivity, applicable to sensory processing and ASD research."
+      },
+      {
+        "grant_id": 50140426,
+        "rank": 5,
+        "match_reason": "Focuses on innovative interventions, relevant for developing ASD treatments and understanding sensory processing."
+      }
+    ]
+  },
+  {
+    "name": "Shalev, Eran",
+    "grants": [
+      {
+        "grant_id": 50149561,
+        "rank": 1,
+        "match_reason": "Focus on cultural heritage's societal impact aligns with examining cultural narratives in American identity."
+      },
+      {
+        "grant_id": 50218883,
+        "rank": 2,
+        "match_reason": "Explores historical narratives and cultural sensibilities in post-conflict democracy, relevant to American political thought."
+      },
+      {
+        "grant_id": 50149084,
+        "rank": 3,
+        "match_reason": "Addresses societal polarization and cultural narratives, pertinent to American political discourse."
+      },
+      {
+        "grant_id": 50149121,
+        "rank": 4,
+        "match_reason": "Investigates the impact of geopolitical shifts on minority rights, relevant to historical American contexts."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 5,
+        "match_reason": "Promotes inclusive democratic societies, relevant to the intersections of American history and political ideologies."
+      },
+      {
+        "grant_id": 50140854,
+        "rank": 6,
+        "match_reason": "Focus on cultural heritage and arts as catalysts for identity, relevant to American cultural studies."
+      }
+    ]
+  },
+  {
+    "name": "Shahar, Ido",
+    "grants": [
+      {
+        "grant_id": 50149121,
+        "rank": 1,
+        "match_reason": "Focus on minority rights, legal frameworks, and intersectionality in contexts of conflict and autocracy."
+      },
+      {
+        "grant_id": 50149891,
+        "rank": 2,
+        "match_reason": "Emphasizes human rights and gender equality for marginalized groups, relevant to legal pluralism."
+      },
+      {
+        "grant_id": 50218883,
+        "rank": 3,
+        "match_reason": "Explores post-conflict democracy and governance, relevant to legal frameworks and minority communities."
+      },
+      {
+        "grant_id": 50149084,
+        "rank": 4,
+        "match_reason": "Addresses extremism and hate speech, relevant to legal pluralism and societal impacts on minorities."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 5,
+        "match_reason": "Promotes inclusive democratic societies, relevant to legal pluralism and minority rights."
+      }
+    ]
+  },
+  {
+    "name": "Livio, Oren",
+    "grants": [
+      {
+        "grant_id": 50219259,
+        "rank": 1,
+        "match_reason": "Focus on media literacy and disinformation aligns with research on media psychology and audience engagement."
+      },
+      {
+        "grant_id": 50149084,
+        "rank": 2,
+        "match_reason": "Addresses extremism and hate speech, relevant to media representations and societal structures in marginalized communities."
+      },
+      {
+        "grant_id": 50218848,
+        "rank": 3,
+        "match_reason": "Supports independent journalism and user engagement, crucial for understanding media's role in urban and political contexts."
+      },
+      {
+        "grant_id": 50149169,
+        "rank": 4,
+        "match_reason": "Explores AI's impact on democracy and media trust, relevant to Livio's focus on technology and societal values."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 5,
+        "match_reason": "Promotes inclusive democratic societies, aligning with Livio's interest in marginalized communities and civic engagement."
+      },
+      {
+        "grant_id": 50218883,
+        "rank": 6,
+        "match_reason": "Focus on post-conflict democracy and governance relates to media's role in shaping societal narratives and values."
+      },
+      {
+        "grant_id": 50140817,
+        "rank": 7,
+        "match_reason": "Enhances democratic engagement and trust, relevant to Livio's research on communication contexts and audience participation."
+      }
+    ]
+  },
+  {
+    "name": "Taha, Ibrahim",
+    "grants": [
+      {
+        "grant_id": 50140854,
+        "rank": 1,
+        "match_reason": "Focus on cultural heritage and its impact on meaning-making aligns with literary theory and cognitive processes."
+      },
+      {
+        "grant_id": 50149561,
+        "rank": 2,
+        "match_reason": "Explores societal impact of cultural heritage, relevant to narrative structures and ideologies in literature."
+      },
+      {
+        "grant_id": 50218594,
+        "rank": 3,
+        "match_reason": "Investigates socio-economic impacts of generative AI on creative content, relevant to narrative and character construction."
+      },
+      {
+        "grant_id": 50143142,
+        "rank": 4,
+        "match_reason": "Promotes public engagement with research, relevant for disseminating findings in literary and cognitive studies."
+      },
+      {
+        "grant_id": 50219297,
+        "rank": 5,
+        "match_reason": "Focus on linguistic diversity and semiotic analysis, relevant to cognitive processes in literature."
+      }
+    ]
+  },
+  {
+    "name": "Gilad, Dvorith",
+    "grants": [
+      {
+        "grant_id": 50140083,
+        "rank": 1,
+        "match_reason": "Focus on independent living and inclusion for persons with disabilities aligns with end-of-life care communication."
+      },
+      {
+        "grant_id": 50149121,
+        "rank": 2,
+        "match_reason": "Research on the impact of conflict on vulnerable groups, including psychological effects relevant to couple relationships."
+      },
+      {
+        "grant_id": 357198,
+        "rank": 3,
+        "match_reason": "Explores social disconnection and suicide risk in older adults, relevant to end-of-life care communication."
+      },
+      {
+        "grant_id": 357197,
+        "rank": 4,
+        "match_reason": "Similar focus on social disconnection and suicide risk, emphasizing older adults' mental health."
+      },
+      {
+        "grant_id": 50218968,
+        "rank": 5,
+        "match_reason": "Addresses gender-based violence in political contexts, relevant to psychological effects of war on relationships."
+      }
+    ]
+  },
+  {
+    "name": "Raufman, Ravit",
+    "grants": [
+      {
+        "grant_id": 50149561,
+        "rank": 1,
+        "match_reason": "Focus on cultural narratives, gender roles, and societal cohesion aligns with Ravit's research on identity and conflict."
+      },
+      {
+        "grant_id": 50149084,
+        "rank": 2,
+        "match_reason": "Addresses extremism and societal polarization, relevant to Ravit's focus on identity and conflict in multicultural contexts."
+      },
+      {
+        "grant_id": 50219297,
+        "rank": 3,
+        "match_reason": "Emphasizes linguistic diversity and community engagement, relevant to Ravit's exploration of cultural narratives and identity."
+      },
+      {
+        "grant_id": 50218883,
+        "rank": 4,
+        "match_reason": "Focus on post-conflict democracy and social cohesion aligns with Ravit's interest in identity and community dynamics."
+      },
+      {
+        "grant_id": 50149211,
+        "rank": 5,
+        "match_reason": "Explores cultural experiences' impact on well-being, relevant to Ravit's focus on trauma and community identity."
+      }
+    ]
+  },
+  {
+    "name": "Vulcan, Maya",
+    "grants": [
+      {
+        "grant_id": 359155,
+        "rank": 1,
+        "match_reason": "Focus on mind-body interventions aligns with DMT and emotional well-being."
+      },
+      {
+        "grant_id": 357427,
+        "rank": 2,
+        "match_reason": "Development of psychosocial interventions relevant to enhancing emotional connections in therapy."
+      },
+      {
+        "grant_id": 357426,
+        "rank": 3,
+        "match_reason": "Emphasis on psychosocial interventions for mental disorders, applicable to ASD and relational dynamics."
+      },
+      {
+        "grant_id": 50140083,
+        "rank": 4,
+        "match_reason": "Supports independent living and inclusion, relevant for individuals with ASD."
+      },
+      {
+        "grant_id": 357301,
+        "rank": 5,
+        "match_reason": "Focus on feasibility of mind-body interventions, relevant for DMT and therapeutic practices."
+      }
+    ]
+  },
+  {
+    "name": "Ore, Liora",
+    "grants": [
+      {
+        "grant_id": 357421,
+        "rank": 1,
+        "match_reason": "Focuses on mental health interventions, enhancing access and equity, relevant to vulnerable populations."
+      },
+      {
+        "grant_id": 357434,
+        "rank": 2,
+        "match_reason": "Targets system interventions to improve mental health services, aligning with public health and vulnerable populations."
+      },
+      {
+        "grant_id": 357427,
+        "rank": 3,
+        "match_reason": "Develops psychosocial interventions for mental disorders, applicable to vulnerable groups like elderly patients."
+      },
+      {
+        "grant_id": 357426,
+        "rank": 4,
+        "match_reason": "Focuses on psychosocial interventions for mental disorders, relevant to mental health care in vulnerable populations."
+      },
+      {
+        "grant_id": 356924,
+        "rank": 5,
+        "match_reason": "Evaluates therapeutic interventions for mental health conditions, applicable to diverse age groups and vulnerable populations."
+      },
+      {
+        "grant_id": 357422,
+        "rank": 6,
+        "match_reason": "Pilot studies on preventive and therapeutic interventions, relevant for broader community settings and vulnerable populations."
+      }
+    ]
+  },
+  {
+    "name": "Fares, Fuad",
+    "grants": [
+      {
+        "grant_id": 357274,
+        "rank": 1,
+        "match_reason": "Focus on nanotechnology in cancer biology aligns with anticancer properties research."
+      },
+      {
+        "grant_id": 357570,
+        "rank": 2,
+        "match_reason": "Preclinical studies for rare diseases support therapeutic agent evaluation relevant to cancer."
+      },
+      {
+        "grant_id": 357014,
+        "rank": 3,
+        "match_reason": "Assay development for small molecules directly relates to cancer therapeutic targets."
+      },
+      {
+        "grant_id": 357490,
+        "rank": 4,
+        "match_reason": "Explores natural products and their mechanisms, relevant to Fuad's focus on bioactive compounds."
+      },
+      {
+        "grant_id": 357492,
+        "rank": 5,
+        "match_reason": "Early phase clinical trials of natural products align with Fuad's research on anticancer properties."
+      },
+      {
+        "grant_id": 357203,
+        "rank": 6,
+        "match_reason": "Investigates incretin mimetics' long-term effects on cancer risk, relevant to Fuad's cancer biology focus."
+      },
+      {
+        "grant_id": 357748,
+        "rank": 7,
+        "match_reason": "Development of nanotechnology-based cancer therapeutics aligns with Fuad's research interests."
+      }
+    ]
+  },
+  {
+    "name": "Amir, Dana",
+    "grants": [
+      {
+        "grant_id": 50149084,
+        "rank": 1,
+        "match_reason": "Focus on understanding and combating extremism, radicalization, and hate speech, relevant to trauma and identity."
+      },
+      {
+        "grant_id": 357427,
+        "rank": 2,
+        "match_reason": "Development of psychosocial interventions aligns with trauma and identity research."
+      },
+      {
+        "grant_id": 357426,
+        "rank": 3,
+        "match_reason": "Testing psychosocial interventions connects with themes of trauma and identity."
+      },
+      {
+        "grant_id": 357181,
+        "rank": 4,
+        "match_reason": "Research on schizophrenia and related disorders can intersect with trauma and identity."
+      },
+      {
+        "grant_id": 357183,
+        "rank": 5,
+        "match_reason": "Focus on mid- to late-life disorders relates to identity and trauma experiences."
+      }
+    ]
+  },
+  {
+    "name": "Bar Ilan, Avner",
+    "grants": [
+      {
+        "grant_id": 353353,
+        "rank": 1,
+        "match_reason": "Focus on stochastic processes aligns with research on investment decisions under uncertainty."
+      },
+      {
+        "grant_id": 348058,
+        "rank": 2,
+        "match_reason": "Relevant to decision-making processes, particularly in investment strategies and risk analysis."
+      },
+      {
+        "grant_id": 50127146,
+        "rank": 3,
+        "match_reason": "Emphasizes resource optimization and sustainability, relevant to production costs and investment decisions."
+      },
+      {
+        "grant_id": 50128065,
+        "rank": 4,
+        "match_reason": "Targets breakthrough innovations in industrial technologies, relevant to investment and production strategies."
+      },
+      {
+        "grant_id": 50128116,
+        "rank": 5,
+        "match_reason": "Focus on commercialization of research results, relevant for strategic decision-making in FDI."
+      }
+    ]
+  },
+  {
+    "name": "Hussein, Ali",
+    "grants": [
+      {
+        "grant_id": 45812,
+        "rank": 1,
+        "match_reason": "Focus on linguistics aligns with computational techniques in poetry analysis."
+      },
+      {
+        "grant_id": 50219297,
+        "rank": 2,
+        "match_reason": "Supports linguistic diversity, relevant to Arabic poetry and cultural heritage."
+      },
+      {
+        "grant_id": 50140854,
+        "rank": 3,
+        "match_reason": "Emphasizes cultural heritage and innovative research methods applicable to poetry."
+      },
+      {
+        "grant_id": 50149211,
+        "rank": 4,
+        "match_reason": "Explores cultural experiences' impact on well-being, relevant to humor in poetry."
+      },
+      {
+        "grant_id": 50218389,
+        "rank": 5,
+        "match_reason": "Focus on arts and innovation, relevant to integrating poetry with technology."
+      }
+    ]
+  },
+  {
+    "name": "Avni, Guy",
+    "grants": [
+      {
+        "grant_id": 302273,
+        "rank": 1,
+        "match_reason": "Focus on graph theory aligns with research in graph games and network formation."
+      },
+      {
+        "grant_id": 348260,
+        "rank": 2,
+        "match_reason": "Emphasizes network science and human behavior, relevant to decision-making in complex environments."
+      },
+      {
+        "grant_id": 278447,
+        "rank": 3,
+        "match_reason": "Supports development of efficient algorithms, applicable to optimization in bidding games."
+      },
+      {
+        "grant_id": 50129970,
+        "rank": 4,
+        "match_reason": "Focus on AI tools for resource allocation and decision-making in energy systems."
+      },
+      {
+        "grant_id": 353353,
+        "rank": 5,
+        "match_reason": "Encourages applications of probability theory, relevant to game dynamics and bidding mechanisms."
+      }
+    ]
+  },
+  {
+    "name": "Bram, Shachar",
+    "grants": [
+      {
+        "grant_id": 50149211,
+        "rank": 1,
+        "match_reason": "Focus on cultural heritage and creative industries, aligning with themes of memory and identity."
+      },
+      {
+        "grant_id": 50149561,
+        "rank": 2,
+        "match_reason": "Explores societal impact of cultural heritage, relevant to identity and collective experiences."
+      },
+      {
+        "grant_id": 50149768,
+        "rank": 3,
+        "match_reason": "Focus on safeguarding intangible cultural heritage, relevant to memory and community narratives."
+      },
+      {
+        "grant_id": 50219156,
+        "rank": 4,
+        "match_reason": "Enhances cultural policies and creative industries, fostering global partnerships in cultural narratives."
+      },
+      {
+        "grant_id": 50149419,
+        "rank": 5,
+        "match_reason": "Interplay between cultural sectors and social economy, relevant to identity and community engagement."
+      }
+    ]
+  },
+  {
+    "name": "Evron, Yoram",
+    "grants": [
+      {
+        "grant_id": 50149799,
+        "rank": 1,
+        "match_reason": "Focus on development aid and governance, relevant to military technology's impact on democratic institutions."
+      },
+      {
+        "grant_id": 50140817,
+        "rank": 2,
+        "match_reason": "Addresses democratic engagement and trust, pertinent to geopolitical dynamics and military influences."
+      },
+      {
+        "grant_id": 50147617,
+        "rank": 3,
+        "match_reason": "Develops tools for crime prevention, relevant to security implications of military technology."
+      },
+      {
+        "grant_id": 50219003,
+        "rank": 4,
+        "match_reason": "Promotes democratic values in low-income countries, relevant to military and diplomatic relationships."
+      },
+      {
+        "grant_id": 50219105,
+        "rank": 5,
+        "match_reason": "Focus on governance of global commons, relevant to international relations and military resource management."
+      }
+    ]
+  },
+  {
+    "name": "First, Uriya",
+    "grants": [
+      {
+        "grant_id": 329325,
+        "rank": 1,
+        "match_reason": "Focus on algebra, algebraic geometry, and representation theory aligns with research interests."
+      },
+      {
+        "grant_id": 340544,
+        "rank": 2,
+        "match_reason": "Covers algebraic topology, crucial for exploring connections between algebra and topology."
+      },
+      {
+        "grant_id": 302270,
+        "rank": 3,
+        "match_reason": "Supports foundational research in mathematical logic, relevant to algebraic structures."
+      },
+      {
+        "grant_id": 340545,
+        "rank": 4,
+        "match_reason": "Focus on differential geometry and its applications, relevant to algebraic topology."
+      }
+    ]
+  },
+  {
+    "name": "Lazar, Michael",
+    "grants": [
+      {
+        "grant_id": 50134406,
+        "rank": 1,
+        "match_reason": "Focus on sustainable ocean management aligns with research on marine ecosystems and human impacts."
+      },
+      {
+        "grant_id": 50146083,
+        "rank": 2,
+        "match_reason": "Explores climate change impacts in the Arctic, relevant to geological processes and human adaptation."
+      },
+      {
+        "grant_id": 50145488,
+        "rank": 3,
+        "match_reason": "Investigates anthropogenic noise impacts on marine ecosystems, relevant to sediment dynamics and human settlements."
+      },
+      {
+        "grant_id": 50146687,
+        "rank": 4,
+        "match_reason": "Enhances understanding of deep-sea ecosystems, relevant to geological processes and ancient human societies."
+      },
+      {
+        "grant_id": 50146287,
+        "rank": 5,
+        "match_reason": "Focus on Antarctic ecosystems and climate interactions, relevant to paleoclimatology and human impacts."
+      }
+    ]
+  },
+  {
+    "name": "Navot, Doron",
+    "grants": [
+      {
+        "grant_id": 50149084,
+        "rank": 1,
+        "match_reason": "Focuses on societal polarization and extremism, relevant to political corruption and governance dynamics."
+      },
+      {
+        "grant_id": 50219003,
+        "rank": 2,
+        "match_reason": "Promotes democratic values in low-income contexts, aligning with governance and political engagement themes."
+      },
+      {
+        "grant_id": 50149693,
+        "rank": 3,
+        "match_reason": "Investigates corporate influence on democracy, relevant to political corruption and governance issues."
+      },
+      {
+        "grant_id": 50218968,
+        "rank": 4,
+        "match_reason": "Addresses violence against politically active individuals, linking to identity formation and public perceptions."
+      },
+      {
+        "grant_id": 50219259,
+        "rank": 5,
+        "match_reason": "Enhances civic resilience through media literacy, relevant to public perceptions in a polarized landscape."
+      },
+      {
+        "grant_id": 50149121,
+        "rank": 6,
+        "match_reason": "Explores impacts of autocracy on marginalized groups, relevant to governance and political dynamics."
+      }
+    ]
+  },
+  {
+    "name": "Ron, Pnina (Pitzy) ",
+    "grants": [
+      {
+        "grant_id": 357198,
+        "rank": 1,
+        "match_reason": "Focus on social disconnection and suicide risk in older adults aligns with research on mental health outcomes."
+      },
+      {
+        "grant_id": 357197,
+        "rank": 2,
+        "match_reason": "Similar to R21, this R01 grant emphasizes social disconnection and its impact on suicide risk in older adults."
+      },
+      {
+        "grant_id": 357427,
+        "rank": 3,
+        "match_reason": "Development of psychosocial interventions for mental disorders aligns with the focus on trauma and caregiving."
+      },
+      {
+        "grant_id": 50140083,
+        "rank": 4,
+        "match_reason": "Supports independent living and inclusion for persons with disabilities, relevant to caregiving dynamics."
+      },
+      {
+        "grant_id": 50218038,
+        "rank": 5,
+        "match_reason": "Explores neighborhood experiences and health, relevant to social support and well-being among older adults."
+      }
+    ]
+  },
+  {
+    "name": "Arie, Eran",
+    "grants": [
+      {
+        "grant_id": 50148703,
+        "rank": 1,
+        "match_reason": "Focus on cultural practices and community engagement in urban design aligns with archaeological interests in settlement patterns."
+      },
+      {
+        "grant_id": 50149768,
+        "rank": 2,
+        "match_reason": "Emphasizes safeguarding intangible cultural heritage, relevant to archaeological studies of ancient societies and their practices."
+      },
+      {
+        "grant_id": 50149561,
+        "rank": 3,
+        "match_reason": "Explores societal impact of cultural heritage, directly related to understanding ancient cultures and their modern implications."
+      },
+      {
+        "grant_id": 50143487,
+        "rank": 4,
+        "match_reason": "Focus on bioeconomy places can relate to ancient agricultural practices and sustainability in archaeological contexts."
+      },
+      {
+        "grant_id": 50149329,
+        "rank": 5,
+        "match_reason": "Integrates cultural sectors into sustainability, relevant for studying ancient material culture and practices."
+      }
+    ]
+  },
+  {
+    "name": "Tobi, Yosef",
+    "grants": [
+      {
+        "grant_id": 50149768,
+        "rank": 1,
+        "match_reason": "Focus on safeguarding intangible cultural heritage, relevant to Jewish community practices and historical documentation."
+      },
+      {
+        "grant_id": 50149561,
+        "rank": 2,
+        "match_reason": "Explores societal impact of cultural heritage, emphasizing community cohesion and cultural practices, aligning with Tobi's research focus."
+      },
+      {
+        "grant_id": 50218883,
+        "rank": 3,
+        "match_reason": "Investigates post-conflict democracy and social cohesion, relevant to historical and political dynamics in Jewish communities."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 4,
+        "match_reason": "Promotes inclusive societies and intersectional perspectives, relevant to community unity and cultural practices in Jewish contexts."
+      }
+    ]
+  },
+  {
+    "name": "Simon, Elliott M.",
+    "grants": [
+      {
+        "grant_id": 50140854,
+        "rank": 1,
+        "match_reason": "Focus on cultural heritage and innovative research aligns with historiography and religious polemics."
+      },
+      {
+        "grant_id": 50149419,
+        "rank": 2,
+        "match_reason": "Explores cultural and creative sectors' intersection with social economy, relevant to historical narratives."
+      },
+      {
+        "grant_id": 50149211,
+        "rank": 3,
+        "match_reason": "Researching cultural experiences' impact on health and well-being connects to historical and theological debates."
+      },
+      {
+        "grant_id": 50218389,
+        "rank": 4,
+        "match_reason": "Enhances understanding of art's role in addressing societal challenges, relevant to historical narratives."
+      },
+      {
+        "grant_id": 50219156,
+        "rank": 5,
+        "match_reason": "Focus on cultural policies and creative industries aligns with historical and cultural studies."
+      }
+    ]
+  },
+  {
+    "name": "Boas, Adrian",
+    "grants": [
+      {
+        "grant_id": 50149768,
+        "rank": 1,
+        "match_reason": "Focus on safeguarding intangible cultural heritage aligns with archaeological and historical studies of the Crusader period."
+      },
+      {
+        "grant_id": 50140854,
+        "rank": 2,
+        "match_reason": "Emphasizes cultural heritage and creative industries, relevant to the historical context of the Crusader period."
+      },
+      {
+        "grant_id": 50218237,
+        "rank": 3,
+        "match_reason": "Addresses reuse of historical spaces, relevant to archaeological findings and urban studies in the Latin East."
+      },
+      {
+        "grant_id": 50218038,
+        "rank": 4,
+        "match_reason": "Focus on neighborhood experiences can inform studies of medieval urban life and community interactions."
+      },
+      {
+        "grant_id": 50148548,
+        "rank": 5,
+        "match_reason": "Developing intergenerational communities can relate to historical social structures in medieval societies."
+      }
+    ]
+  },
+  {
+    "name": "Mahla, Daniel",
+    "grants": [
+      {
+        "grant_id": 50149084,
+        "rank": 1,
+        "match_reason": "Focus on combating extremism and hate speech, relevant to Orthodox Judaism's political dynamics."
+      },
+      {
+        "grant_id": 50149121,
+        "rank": 2,
+        "match_reason": "Investigates the impact of geopolitical shifts on minority rights, relevant to Jewish identity and community dynamics."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 3,
+        "match_reason": "Promotes inclusive governance and intersectional perspectives, aligning with Jewish cultural representation."
+      },
+      {
+        "grant_id": 50149561,
+        "rank": 4,
+        "match_reason": "Explores cultural heritage's role in social cohesion, relevant to Jewish identity and community resilience."
+      },
+      {
+        "grant_id": 50218968,
+        "rank": 5,
+        "match_reason": "Addresses gender-based violence in political contexts, relevant to Orthodox Jewish women's experiences."
+      }
+    ]
+  },
+  {
+    "name": "Sapir, Adi",
+    "grants": [
+      {
+        "grant_id": 50219065,
+        "rank": 1,
+        "match_reason": "Focus on inclusive democratic societies aligns with research on marginalized student populations and educational practices."
+      },
+      {
+        "grant_id": 50219225,
+        "rank": 2,
+        "match_reason": "Enhances lifelong civic education, relevant to professional identity formation and democratic engagement in higher education."
+      },
+      {
+        "grant_id": 50149659,
+        "rank": 3,
+        "match_reason": "Examines family and community engagement in civic identity, relevant to educational policies and practices."
+      },
+      {
+        "grant_id": 50218820,
+        "rank": 4,
+        "match_reason": "Innovative governance and public service strategies relate to institutional governance and educational policy dynamics."
+      },
+      {
+        "grant_id": 50218758,
+        "rank": 5,
+        "match_reason": "Integration of SSH and STEM research supports understanding of educational practices and technology transfer."
+      },
+      {
+        "grant_id": 50140083,
+        "rank": 6,
+        "match_reason": "Focus on independent living and inclusion relates to marginalized populations and educational equity."
+      }
+    ]
+  },
+  {
+    "name": "Elias, Taiseer",
+    "grants": [
+      {
+        "grant_id": 50140854,
+        "rank": 1,
+        "match_reason": "Focus on cultural heritage and creative industries, relevant to Arab music and identity."
+      },
+      {
+        "grant_id": 50149211,
+        "rank": 2,
+        "match_reason": "Researching cultural experiences' impact on health and well-being, applicable to music's role in identity."
+      },
+      {
+        "grant_id": 50149419,
+        "rank": 3,
+        "match_reason": "Explores cultural and creative sectors' intersection with social economy, relevant to Palestinian musicians."
+      },
+      {
+        "grant_id": 50219156,
+        "rank": 4,
+        "match_reason": "Enhances cultural policies through international partnerships, relevant for Arab music and cultural exchange."
+      },
+      {
+        "grant_id": 50218594,
+        "rank": 5,
+        "match_reason": "Focus on socio-economic impacts of generative AI, relevant for music creators' rights and identity."
+      }
+    ]
+  },
+  {
+    "name": "Nouman, Hani",
+    "grants": [
+      {
+        "grant_id": 50149891,
+        "rank": 1,
+        "match_reason": "Focus on human rights and gender equality for marginalized groups aligns with social justice and policy engagement."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 2,
+        "match_reason": "Promotes inclusive democratic societies and addresses intersectional inequalities, relevant to social work and policy."
+      },
+      {
+        "grant_id": 50218883,
+        "rank": 3,
+        "match_reason": "Emphasizes post-conflict governance and social cohesion, relevant to social work in crisis situations."
+      },
+      {
+        "grant_id": 50219587,
+        "rank": 4,
+        "match_reason": "Addresses social transformations and resilience, relevant to social work practice and community dynamics."
+      },
+      {
+        "grant_id": 50149486,
+        "rank": 5,
+        "match_reason": "Focus on sustainable cultural tourism and community engagement aligns with multiculturalism and social justice."
+      },
+      {
+        "grant_id": 50148180,
+        "rank": 6,
+        "match_reason": "Enhances public participation in green transitions, relevant to social work and marginalized community empowerment."
+      },
+      {
+        "grant_id": 50148234,
+        "rank": 7,
+        "match_reason": "Addresses social issues impacting green transitions, relevant to social work and community resilience."
+      }
+    ]
+  },
+  {
+    "name": "Davidi, Einat",
+    "grants": [
+      {
+        "grant_id": 50149561,
+        "rank": 1,
+        "match_reason": "Focus on societal impact of cultural heritage, relevant to Jewish literature and interreligious dialogue."
+      },
+      {
+        "grant_id": 50149768,
+        "rank": 2,
+        "match_reason": "Emphasizes safeguarding intangible cultural heritage, aligning with themes of Jewish identity and cultural transmission."
+      },
+      {
+        "grant_id": 50219297,
+        "rank": 3,
+        "match_reason": "Focus on linguistic diversity, relevant to Jewish literature and cultural narratives."
+      },
+      {
+        "grant_id": 50149419,
+        "rank": 4,
+        "match_reason": "Explores intersection of cultural sectors and social economy, relevant to Jewish cultural practices."
+      }
+    ]
+  },
+  {
+    "name": "Aran, Yifat",
+    "grants": [
+      {
+        "grant_id": 50126689,
+        "rank": 1,
+        "match_reason": "Supports academic startups and spinoffs, aligning with corporate governance and founder-CEO dynamics."
+      },
+      {
+        "grant_id": 50217187,
+        "rank": 2,
+        "match_reason": "Focuses on technology transfer and commercialization, relevant to governance and equity-based compensation in startups."
+      },
+      {
+        "grant_id": 50147875,
+        "rank": 3,
+        "match_reason": "Explores procurement of innovative technologies, relevant to corporate governance and regulatory frameworks."
+      },
+      {
+        "grant_id": 50147893,
+        "rank": 4,
+        "match_reason": "Enhances civil security technology solutions, relevant to governance and employee mobility in tech firms."
+      },
+      {
+        "grant_id": 50127184,
+        "rank": 5,
+        "match_reason": "Enhances industry-academia knowledge exchange, relevant to corporate governance and employee rights."
+      }
+    ]
+  },
+  {
+    "name": "Deutsch, David Sands",
+    "grants": [
+      {
+        "grant_id": 359068,
+        "rank": 1,
+        "match_reason": "Focus on computational tools for understanding brain circuits aligns with neural mechanisms and decision-making."
+      },
+      {
+        "grant_id": 356511,
+        "rank": 2,
+        "match_reason": "Development of innovative technologies for neural recording and modulation supports research on adaptive behaviors."
+      },
+      {
+        "grant_id": 357137,
+        "rank": 3,
+        "match_reason": "Emphasis on tools for analyzing neural circuits and cell-specific processes aligns with behavioral neuroscience."
+      },
+      {
+        "grant_id": 357601,
+        "rank": 4,
+        "match_reason": "Focus on innovative technologies for neural activity manipulation supports understanding of sensory processing."
+      },
+      {
+        "grant_id": 357378,
+        "rank": 5,
+        "match_reason": "Longitudinal studies on brain changes support research on decision-making and adaptive behaviors."
+      },
+      {
+        "grant_id": 357182,
+        "rank": 6,
+        "match_reason": "Research on risk factors for brain disorders relates to understanding neural mechanisms in adaptive behaviors."
+      },
+      {
+        "grant_id": 357017,
+        "rank": 7,
+        "match_reason": "Development of microphysiological systems enhances understanding of nervous system function relevant to model organisms."
+      },
+      {
+        "grant_id": 357346,
+        "rank": 8,
+        "match_reason": "Invasive studies on neural circuitry related to mental health disorders can inform understanding of decision-making."
+      }
+    ]
+  },
+  {
+    "name": "Sadeh, Yaara",
+    "grants": [
+      {
+        "grant_id": 356924,
+        "rank": 1,
+        "match_reason": "Focus on mental health interventions for youth, aligning with trauma effects on children."
+      },
+      {
+        "grant_id": 357434,
+        "rank": 2,
+        "match_reason": "Development of mental health system interventions, relevant to improving pediatric care access."
+      },
+      {
+        "grant_id": 357524,
+        "rank": 3,
+        "match_reason": "Improving access to youth mental health interventions, relevant to underserved populations."
+      },
+      {
+        "grant_id": 357386,
+        "rank": 4,
+        "match_reason": "Focus on family navigation models for mental health, enhancing pediatric care engagement."
+      },
+      {
+        "grant_id": 357421,
+        "rank": 5,
+        "match_reason": "Clinical trials for mental health interventions, relevant to improving outcomes in pediatric rehabilitation."
+      }
+    ]
+  },
+  {
+    "name": "Nachum, Ido",
+    "grants": [
+      {
+        "grant_id": 278447,
+        "rank": 1,
+        "match_reason": "Focus on computational mathematics aligns with algorithm development in machine learning."
+      },
+      {
+        "grant_id": 340545,
+        "rank": 2,
+        "match_reason": "Geometric analysis relates to geometric properties of neural networks and their training."
+      },
+      {
+        "grant_id": 353353,
+        "rank": 3,
+        "match_reason": "Probability theory is essential for understanding stochastic processes in machine learning."
+      },
+      {
+        "grant_id": 358569,
+        "rank": 4,
+        "match_reason": "Applied mathematics supports innovative approaches in machine learning applications."
+      },
+      {
+        "grant_id": 357195,
+        "rank": 5,
+        "match_reason": "Focus on computational genomics and data science aligns with data analysis in machine learning."
+      },
+      {
+        "grant_id": 357194,
+        "rank": 6,
+        "match_reason": "Similar to R21, emphasizes innovative methodologies in data science relevant to machine learning."
+      }
+    ]
+  },
+  {
+    "name": "Margalith, Dana",
+    "grants": [
+      {
+        "grant_id": 50149768,
+        "rank": 1,
+        "match_reason": "Focus on safeguarding intangible cultural heritage aligns with Kahn's emphasis on tradition and memory in architecture."
+      },
+      {
+        "grant_id": 50140854,
+        "rank": 2,
+        "match_reason": "Explores cultural heritage and creative industries, relevant to Kahn's architectural legacy and its societal impact."
+      },
+      {
+        "grant_id": 50149211,
+        "rank": 3,
+        "match_reason": "Investigates cultural experiences' effects on well-being, linking to memory and tradition in architectural contexts."
+      },
+      {
+        "grant_id": 50149329,
+        "rank": 4,
+        "match_reason": "Integrates cultural dimensions into sustainability, relevant to Kahn's architectural philosophy and historical influences."
+      },
+      {
+        "grant_id": 50218088,
+        "rank": 5,
+        "match_reason": "Focus on vernacular principles and bioclimatic design connects to Kahn's architectural approach and tradition."
+      },
+      {
+        "grant_id": 50217990,
+        "rank": 6,
+        "match_reason": "Emphasizes spatial design and user perspectives, relevant to Kahn's focus on human experiences in architecture."
+      }
+    ]
+  },
+  {
+    "name": "Deutsch, Dan",
+    "grants": [
+      {
+        "grant_id": 50140854,
+        "rank": 1,
+        "match_reason": "Focus on cultural heritage and arts as catalysts for social change aligns with research on cultural identity in music."
+      },
+      {
+        "grant_id": 50149561,
+        "rank": 2,
+        "match_reason": "Explores societal impact of cultural heritage, relevant to music's role in social cohesion and political communication."
+      },
+      {
+        "grant_id": 50218389,
+        "rank": 3,
+        "match_reason": "Addresses arts' role in societal challenges, enhancing soft skills and innovation, relevant to music education."
+      },
+      {
+        "grant_id": 50149211,
+        "rank": 4,
+        "match_reason": "Researches cultural experiences' effects on well-being, relevant to music's impact on health and social change."
+      },
+      {
+        "grant_id": 50149419,
+        "rank": 5,
+        "match_reason": "Focus on cultural and creative sectors' intersection with social economy, relevant to music's role in community engagement."
+      },
+      {
+        "grant_id": 50149084,
+        "rank": 6,
+        "match_reason": "Research on combating extremism and hate speech aligns with music's potential for dialogue and conflict resolution."
+      }
+    ]
+  },
+  {
+    "name": "Luzon, Danny Yehuda",
+    "grants": [
+      {
+        "grant_id": 50219297,
+        "rank": 1,
+        "match_reason": "Focus on safeguarding linguistic diversity aligns with Yiddish literature and cultural representation."
+      },
+      {
+        "grant_id": 50149561,
+        "rank": 2,
+        "match_reason": "Explores cultural heritage's societal impact, relevant to Jewish identity and community engagement."
+      },
+      {
+        "grant_id": 50149211,
+        "rank": 3,
+        "match_reason": "Investigates cultural experiences' effects on well-being, relevant to identity and representation themes."
+      },
+      {
+        "grant_id": 50149768,
+        "rank": 4,
+        "match_reason": "Focus on intangible cultural heritage transmission, relevant to Jewish cultural practices and identity."
+      },
+      {
+        "grant_id": 50149419,
+        "rank": 5,
+        "match_reason": "Examines cultural and creative sectors' intersection with social economy, relevant to diaspora and privilege."
+      },
+      {
+        "grant_id": 50219156,
+        "rank": 6,
+        "match_reason": "Enhances cultural policies through global partnerships, relevant to Jewish cultural representation and identity."
+      }
+    ]
+  },
+  {
+    "name": "Shley Zondiner, Sarit",
+    "grants": [
+      {
+        "grant_id": 50149211,
+        "rank": 1,
+        "match_reason": "Focus on cultural experiences' impact on health and well-being aligns with emotional expression in opera."
+      },
+      {
+        "grant_id": 359155,
+        "rank": 2,
+        "match_reason": "Explores mind-body interventions related to emotional well-being, relevant to somatic aspects of sound."
+      },
+      {
+        "grant_id": 50140854,
+        "rank": 3,
+        "match_reason": "Emphasizes cultural heritage and arts as catalysts for innovation, relevant to opera's emotional and spatial dynamics."
+      },
+      {
+        "grant_id": 356763,
+        "rank": 4,
+        "match_reason": "Supports research in voice and speech, directly related to vocal ensembles in opera."
+      },
+      {
+        "grant_id": 344634,
+        "rank": 5,
+        "match_reason": "Investigates social dynamics and emotional processes, relevant to the embodiment of emotions in contemporary opera."
+      }
+    ]
+  },
+  {
+    "name": "Tamin, Marina",
+    "grants": [
+      {
+        "grant_id": 50147035,
+        "rank": 1,
+        "match_reason": "Focus on ecosystem restoration aligns with lichen ecology and biodiversity."
+      },
+      {
+        "grant_id": 50138999,
+        "rank": 2,
+        "match_reason": "Explores soil degradation, relevant to lichen habitats and ecological interactions."
+      },
+      {
+        "grant_id": 50146941,
+        "rank": 3,
+        "match_reason": "Bioremediation techniques can enhance lichen and microfungal community recovery."
+      },
+      {
+        "grant_id": 50138880,
+        "rank": 4,
+        "match_reason": "Agroforestry practices can improve soil health, benefiting lichen diversity."
+      },
+      {
+        "grant_id": 50135633,
+        "rank": 5,
+        "match_reason": "Investigates soil biodiversity, relevant to lichen and microfungal interactions."
+      }
+    ]
+  },
+  {
+    "name": "Shahvar, Soli",
+    "grants": [
+      {
+        "grant_id": 50218883,
+        "rank": 1,
+        "match_reason": "Focus on post-conflict democracy aligns with Iranian political history and grassroots diplomacy."
+      },
+      {
+        "grant_id": 50149121,
+        "rank": 2,
+        "match_reason": "Examines impacts of autocracy and geopolitical shifts on minorities, relevant to Iranian context."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 3,
+        "match_reason": "Promotes inclusive governance and intersectional perspectives, relevant to socio-political transformations."
+      },
+      {
+        "grant_id": 50218968,
+        "rank": 4,
+        "match_reason": "Addresses gender-based violence in political contexts, pertinent to Iranian women's rights."
+      },
+      {
+        "grant_id": 50149084,
+        "rank": 5,
+        "match_reason": "Focus on radicalization and hate speech, relevant to political movements in Iran."
+      }
+    ]
+  },
+  {
+    "name": "Enosh, Guy",
+    "grants": [
+      {
+        "grant_id": 357434,
+        "rank": 1,
+        "match_reason": "Focus on mental health system interventions aligns with social work and decision-making in challenging environments."
+      },
+      {
+        "grant_id": 50137304,
+        "rank": 2,
+        "match_reason": "Emphasizes multisectoral approaches to health, relevant for marginalized populations and social work contexts."
+      },
+      {
+        "grant_id": 356893,
+        "rank": 3,
+        "match_reason": "Targets adoption of evidence-based health interventions, relevant for improving decision-making in social work."
+      },
+      {
+        "grant_id": 356907,
+        "rank": 4,
+        "match_reason": "Focus on decision-making processes aligns with research interests in workplace dynamics and organizational frameworks."
+      },
+      {
+        "grant_id": 358373,
+        "rank": 5,
+        "match_reason": "Addresses health improvement in Native American populations, relevant to marginalized groups and cultural influences."
+      },
+      {
+        "grant_id": 358179,
+        "rank": 6,
+        "match_reason": "Explores ethical implications in research, aligning with the researcher’s focus on ethical considerations."
+      },
+      {
+        "grant_id": 50217298,
+        "rank": 7,
+        "match_reason": "Focus on vulnerable populations and culturally sensitive approaches, relevant to social work and victimization."
+      }
+    ]
+  },
+  {
+    "name": "Gefen, Eran",
+    "grants": [
+      {
+        "grant_id": 50146403,
+        "rank": 1,
+        "match_reason": "Focus on insect diversity and population trends, aligning with research on arthropods and ecological adaptations."
+      },
+      {
+        "grant_id": 50147090,
+        "rank": 2,
+        "match_reason": "Investigates drivers of species decline, relevant to understanding ecological dynamics of insects and arachnids."
+      },
+      {
+        "grant_id": 50145632,
+        "rank": 3,
+        "match_reason": "Enhances protected areas' effectiveness, crucial for conserving habitats of insects and arachnids under environmental stress."
+      },
+      {
+        "grant_id": 50143298,
+        "rank": 4,
+        "match_reason": "One Health approach links ecosystem health and biodiversity loss, relevant to arthropod ecological interactions."
+      },
+      {
+        "grant_id": 50144033,
+        "rank": 5,
+        "match_reason": "Focus on invasive species management, important for preserving native insect populations and ecological balance."
+      }
+    ]
+  },
+  {
+    "name": "Talmud, Ilan",
+    "grants": [
+      {
+        "grant_id": 50137510,
+        "rank": 1,
+        "match_reason": "Focus on mental health impacts of digital technologies on youth, aligning with health decision-making and marginalized groups."
+      },
+      {
+        "grant_id": 50137547,
+        "rank": 2,
+        "match_reason": "Targets non-communicable diseases among youth, emphasizing health disparities and behavioral interventions."
+      },
+      {
+        "grant_id": 50218783,
+        "rank": 3,
+        "match_reason": "Examines digital tools' impact on youth mental health and educational outcomes, relevant to social determinants."
+      },
+      {
+        "grant_id": 50149084,
+        "rank": 4,
+        "match_reason": "Addresses societal polarization and hate speech, relevant to marginalized groups and public opinion."
+      },
+      {
+        "grant_id": 50219259,
+        "rank": 5,
+        "match_reason": "Focus on media literacy and democratic engagement, relevant to youth and marginalized communities."
+      },
+      {
+        "grant_id": 50218968,
+        "rank": 6,
+        "match_reason": "Explores violence against politically active LGBTIQ individuals, aligning with health inequalities and marginalized groups."
+      }
+    ]
+  },
+  {
+    "name": "Yaniv, Dan",
+    "grants": [
+      {
+        "grant_id": 50149211,
+        "rank": 1,
+        "match_reason": "Focus on cultural experiences and creative interventions for health and well-being aligns with art therapy applications."
+      },
+      {
+        "grant_id": 50218389,
+        "rank": 2,
+        "match_reason": "Emphasizes arts in addressing societal challenges, relevant to therapeutic applications of drama and art therapy."
+      },
+      {
+        "grant_id": 50140083,
+        "rank": 3,
+        "match_reason": "Supports independent living and inclusion, relevant for older adults and adolescents in therapeutic contexts."
+      },
+      {
+        "grant_id": 50137510,
+        "rank": 4,
+        "match_reason": "Focus on mental health impacts of digital technologies, relevant for adolescents facing bereavement."
+      },
+      {
+        "grant_id": 50147778,
+        "rank": 5,
+        "match_reason": "Engagement of younger generations in resilience strategies can incorporate creative interventions for emotional well-being."
+      }
+    ]
+  },
+  {
+    "name": "Yovell, Yoram",
+    "grants": [
+      {
+        "grant_id": 357198,
+        "rank": 1,
+        "match_reason": "Focuses on social disconnection and suicide risk, relevant to emotional development and mental health."
+      },
+      {
+        "grant_id": 357197,
+        "rank": 2,
+        "match_reason": "Explores social disconnection and suicide risk in older adults, linking to emotional systems and mental health."
+      },
+      {
+        "grant_id": 357427,
+        "rank": 3,
+        "match_reason": "Targets psychosocial interventions for mental disorders, aligning with emotional development and treatment."
+      },
+      {
+        "grant_id": 357426,
+        "rank": 4,
+        "match_reason": "Focuses on psychosocial interventions for mental disorders, relevant to emotional systems and treatment strategies."
+      },
+      {
+        "grant_id": 357341,
+        "rank": 5,
+        "match_reason": "Investigates mood and psychosis during menopause, linking neurobiology and emotional development."
+      },
+      {
+        "grant_id": 357342,
+        "rank": 6,
+        "match_reason": "Focuses on mood and psychosis during menopause, relevant to emotional systems and mental health."
+      },
+      {
+        "grant_id": 359155,
+        "rank": 7,
+        "match_reason": "Explores mind-body interventions for emotional well-being, relevant to diet and mental health."
+      },
+      {
+        "grant_id": 359068,
+        "rank": 8,
+        "match_reason": "Develops computational tools for brain circuits, relevant to understanding neuroprotection and mental health."
+      }
+    ]
+  },
+  {
+    "name": "Kali, Yael",
+    "grants": [
+      {
+        "grant_id": 50149659,
+        "rank": 1,
+        "match_reason": "Focus on enhancing citizenship education through collaboration, aligning with research on active citizenship and community engagement."
+      },
+      {
+        "grant_id": 50219225,
+        "rank": 2,
+        "match_reason": "Emphasizes lifelong civic education and innovative teaching methods, relevant to Kali's focus on equitable learning experiences."
+      },
+      {
+        "grant_id": 50126748,
+        "rank": 3,
+        "match_reason": "Promotes citizen engagement in R&I, aligning with Kali's interest in collaborative learning and democratic governance."
+      },
+      {
+        "grant_id": 50143142,
+        "rank": 4,
+        "match_reason": "Enhances public engagement and science communication, relevant to Kali's focus on technology in education and outreach."
+      },
+      {
+        "grant_id": 50126660,
+        "rank": 5,
+        "match_reason": "Focuses on citizen engagement and co-creation, aligning with Kali's interest in innovative pedagogical approaches."
+      },
+      {
+        "grant_id": 50147778,
+        "rank": 6,
+        "match_reason": "Engages younger generations in disaster resilience, relevant to Kali's focus on active citizenship and educational innovation."
+      }
+    ]
+  },
+  {
+    "name": "Gerson, Gal",
+    "grants": [
+      {
+        "grant_id": 50149084,
+        "rank": 1,
+        "match_reason": "Focus on combating extremism and polarisation aligns with Gerson's interest in political ideologies and civic engagement."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 2,
+        "match_reason": "Promotes inclusive governance and addresses intersectional inequalities, relevant to Gerson's research on individual freedoms and societal structures."
+      },
+      {
+        "grant_id": 50218883,
+        "rank": 3,
+        "match_reason": "Explores democratic governance and social cohesion in post-conflict settings, relevant to Gerson's focus on liberalism and civic engagement."
+      },
+      {
+        "grant_id": 50219259,
+        "rank": 4,
+        "match_reason": "Enhances democratic resilience through media literacy, addressing disinformation, which is pertinent to Gerson's research on political discourse."
+      },
+      {
+        "grant_id": 50140817,
+        "rank": 5,
+        "match_reason": "Focuses on democratic engagement and trust, relevant to Gerson's examination of democratic principles and civic participation."
+      },
+      {
+        "grant_id": 50219003,
+        "rank": 6,
+        "match_reason": "Promotes democratic values in low-income countries, aligning with Gerson's interest in the implications of societal structures on freedoms."
+      },
+      {
+        "grant_id": 50218968,
+        "rank": 7,
+        "match_reason": "Investigates violence against politically active individuals, relevant to Gerson's focus on the moral complexities of political discourse."
+      }
+    ]
+  },
+  {
+    "name": "Dagan, Efrat",
+    "grants": [
+      {
+        "grant_id": 358181,
+        "rank": 1,
+        "match_reason": "Focus on ethical, legal, and social implications of genetics, aligning with research on genetic testing and patient care."
+      },
+      {
+        "grant_id": 358179,
+        "rank": 2,
+        "match_reason": "Investigates ELSI of human genetics, relevant to genetic testing and its implications for healthcare delivery."
+      },
+      {
+        "grant_id": 357030,
+        "rank": 3,
+        "match_reason": "Advances cancer research, including genetic aspects, relevant to oncology and patient-centered care."
+      },
+      {
+        "grant_id": 356690,
+        "rank": 4,
+        "match_reason": "Focus on cancer screening in health disparity populations, relevant to patient-centered care and health outcomes."
+      },
+      {
+        "grant_id": 357744,
+        "rank": 5,
+        "match_reason": "Supports early career researchers in genomics, aligning with interests in genetics and innovative research methods."
+      },
+      {
+        "grant_id": 50136668,
+        "rank": 6,
+        "match_reason": "Advances research in rare diseases, relevant to genetic conditions and improving healthcare access."
+      }
+    ]
+  },
+  {
+    "name": "Tomer, Rachel",
+    "grants": [
+      {
+        "grant_id": 350561,
+        "rank": 1,
+        "match_reason": "Focus on cognitive neuroscience, linking behavior and physiology, relevant to MPH's impact on cognition."
+      },
+      {
+        "grant_id": 356437,
+        "rank": 2,
+        "match_reason": "Advances brain imaging research, applicable to MPH studies and neuroimaging tools."
+      },
+      {
+        "grant_id": 357346,
+        "rank": 3,
+        "match_reason": "Investigates neural circuitry related to mental health, relevant to impulsivity and cognitive functions."
+      },
+      {
+        "grant_id": 357345,
+        "rank": 4,
+        "match_reason": "Focus on neural circuitry and cognitive functions, applicable to MPH's effects on behavior."
+      },
+      {
+        "grant_id": 358075,
+        "rank": 5,
+        "match_reason": "Exploratory neuroscience research, relevant to understanding cognitive and mental health disorders."
+      }
+    ]
+  },
+  {
+    "name": "Saar, Amalia",
+    "grants": [
+      {
+        "grant_id": 50218968,
+        "rank": 1,
+        "match_reason": "Focus on gender-based violence against politically active women and LGBTIQ individuals aligns with research on gender roles and marginalized groups."
+      },
+      {
+        "grant_id": 50149121,
+        "rank": 2,
+        "match_reason": "Explores intersectionality of gender and minority status in contexts of conflict, relevant to Palestinian citizens and socio-economic dynamics."
+      },
+      {
+        "grant_id": 50149561,
+        "rank": 3,
+        "match_reason": "Investigates gender roles within cultural narratives, relevant to cultural perception and community dynamics in Amalia's research."
+      },
+      {
+        "grant_id": 50219003,
+        "rank": 4,
+        "match_reason": "Promotes democratic values and human rights in low-income countries, relevant to citizenship and socio-economic dynamics."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 5,
+        "match_reason": "Focus on intersectional perspectives and civic participation, aligning with themes of identity and agency in Amalia's work."
+      }
+    ]
+  },
+  {
+    "name": "Somer, Eli",
+    "grants": [
+      {
+        "grant_id": 357427,
+        "rank": 1,
+        "match_reason": "Focuses on psychosocial interventions for mental disorders, aligning with MD's psychological implications."
+      },
+      {
+        "grant_id": 357426,
+        "rank": 2,
+        "match_reason": "Similar to R61/R33, emphasizes testing psychosocial interventions relevant to MD and mental health."
+      },
+      {
+        "grant_id": 359155,
+        "rank": 3,
+        "match_reason": "Explores mind-body interventions impacting emotional well-being, relevant to MD's psychological aspects."
+      },
+      {
+        "grant_id": 357301,
+        "rank": 4,
+        "match_reason": "Supports clinical trials of mind-body interventions, applicable to MD treatment strategies."
+      },
+      {
+        "grant_id": 357305,
+        "rank": 5,
+        "match_reason": "Focuses on feasibility trials of mind-body interventions, relevant for MD's psychosocial impacts."
+      },
+      {
+        "grant_id": 357346,
+        "rank": 6,
+        "match_reason": "Investigates neural circuitry related to mental health disorders, relevant to MD's psychological mechanisms."
+      }
+    ]
+  },
+  {
+    "name": "Sapir, Amir",
+    "grants": [
+      {
+        "grant_id": 50136100,
+        "rank": 1,
+        "match_reason": "Focus on microbiome tools for early cancer prediction aligns with neurodegeneration and metabolic processes."
+      },
+      {
+        "grant_id": 50134050,
+        "rank": 2,
+        "match_reason": "Integrates microbiome research with health and environmental systems, relevant to lipid metabolism and stress responses."
+      },
+      {
+        "grant_id": 50146905,
+        "rank": 3,
+        "match_reason": "AI tool for foodomics data could enhance understanding of metabolic processes related to cholesterol."
+      },
+      {
+        "grant_id": 50146228,
+        "rank": 4,
+        "match_reason": "Advances biotechnology and biomanufacturing, relevant to metabolic engineering and environmental adaptations."
+      },
+      {
+        "grant_id": 50146852,
+        "rank": 5,
+        "match_reason": "Develops microbiome solutions for sustainable food systems, linking ecological success and metabolic health."
+      }
+    ]
+  },
+  {
+    "name": "Mart, Joseph",
+    "grants": [
+      {
+        "grant_id": 50134406,
+        "rank": 1,
+        "match_reason": "Focus on sustainable ocean management aligns with marine environment evolution and sediment transport."
+      },
+      {
+        "grant_id": 50145488,
+        "rank": 2,
+        "match_reason": "Investigates anthropogenic impacts on marine ecosystems, relevant to sedimentation and historical sea level changes."
+      },
+      {
+        "grant_id": 50146287,
+        "rank": 3,
+        "match_reason": "Explores climate impacts on marine environments, relevant to tectonics and sediment transport in the Mediterranean."
+      },
+      {
+        "grant_id": 50146687,
+        "rank": 4,
+        "match_reason": "Enhances understanding of deep-sea ecosystems, relevant to sediment transport and marine environment evolution."
+      },
+      {
+        "grant_id": 50130488,
+        "rank": 5,
+        "match_reason": "Focus on mitigating environmental impacts in marine ecosystems, relevant to sediment transport and marine archaeology."
+      }
+    ]
+  },
+  {
+    "name": "Angel, Dror",
+    "grants": [
+      {
+        "grant_id": 50146803,
+        "rank": 1,
+        "match_reason": "Focus on sustainable aquatic food production aligns with aquaculture sustainability and community empowerment."
+      },
+      {
+        "grant_id": 50145488,
+        "rank": 2,
+        "match_reason": "Investigates impacts of underwater noise on marine ecosystems, relevant to jellyfish dynamics and ecological interactions."
+      },
+      {
+        "grant_id": 50134406,
+        "rank": 3,
+        "match_reason": "Addresses ecological dynamics of migratory fish, relevant to marine ecology and impacts of climate change."
+      },
+      {
+        "grant_id": 50134478,
+        "rank": 4,
+        "match_reason": "Enhances marine research and innovation, promoting sustainable management of ocean resources, relevant to marine ecosystems."
+      },
+      {
+        "grant_id": 50146083,
+        "rank": 5,
+        "match_reason": "Focus on climate change impacts in the Arctic, relevant to broader marine ecosystem dynamics and sustainability."
+      },
+      {
+        "grant_id": 50147090,
+        "rank": 6,
+        "match_reason": "Explores causes of species decline, relevant to jellyfish and marine biodiversity conservation efforts."
+      },
+      {
+        "grant_id": 50146287,
+        "rank": 7,
+        "match_reason": "Enhances understanding of Southern Ocean ecosystems, relevant to climate change impacts on marine biodiversity."
+      },
+      {
+        "grant_id": 50134559,
+        "rank": 8,
+        "match_reason": "Supports sustainable blue economy initiatives, relevant to marine ecology and aquaculture sustainability."
+      }
+    ]
+  },
+  {
+    "name": "Antony, Michael",
+    "grants": [
+      {
+        "grant_id": 50218883,
+        "rank": 1,
+        "match_reason": "Focus on post-conflict reconstruction and sustainable peace aligns with historical and philosophical dimensions of peace."
+      },
+      {
+        "grant_id": 50149084,
+        "rank": 2,
+        "match_reason": "Research on combating extremism and societal polarization relates to peace theories and conflict-inducing factors."
+      },
+      {
+        "grant_id": 50149169,
+        "rank": 3,
+        "match_reason": "Explores societal impacts of AI on democracy and equality, relevant to understanding peace dynamics."
+      },
+      {
+        "grant_id": 50149799,
+        "rank": 4,
+        "match_reason": "Investigates development aid's impact on democratic governance, relevant to peace and conflict relationships."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 5,
+        "match_reason": "Promotes inclusive democratic societies, addressing intersectional inequalities that affect peace."
+      },
+      {
+        "grant_id": 50147617,
+        "rank": 6,
+        "match_reason": "Focus on societal issues related to crime and radicalization, relevant to peace and conflict studies."
+      }
+    ]
+  },
+  {
+    "name": "Yeshurun, Yaffa",
+    "grants": [
+      {
+        "grant_id": 350561,
+        "rank": 1,
+        "match_reason": "Focus on neural mechanisms of attention and perception, aligning with cognitive psychology research."
+      },
+      {
+        "grant_id": 45817,
+        "rank": 2,
+        "match_reason": "Emphasizes human perceptual and cognitive processes, relevant to visual perception and attention dynamics."
+      },
+      {
+        "grant_id": 357601,
+        "rank": 3,
+        "match_reason": "Supports innovative technologies for understanding neural circuits, applicable to attention and perception studies."
+      },
+      {
+        "grant_id": 357378,
+        "rank": 4,
+        "match_reason": "Focuses on measuring brain activity and cognition across lifespan, relevant to attention and perceptual load."
+      },
+      {
+        "grant_id": 359068,
+        "rank": 5,
+        "match_reason": "Develops computational tools for analyzing brain circuits, applicable to understanding attentional dynamics."
+      },
+      {
+        "grant_id": 357811,
+        "rank": 6,
+        "match_reason": "Supports innovative behavioral research with human participants, relevant to cognitive psychology."
+      }
+    ]
+  },
+  {
+    "name": "Gal, Iddo",
+    "grants": [
+      {
+        "grant_id": 50219225,
+        "rank": 1,
+        "match_reason": "Focus on lifelong civic education and democratic engagement, aligning with research on statistical literacy and civic participation."
+      },
+      {
+        "grant_id": 50149659,
+        "rank": 2,
+        "match_reason": "Enhances citizenship education through family and community collaboration, relevant to civic engagement and statistical analysis."
+      },
+      {
+        "grant_id": 50219259,
+        "rank": 3,
+        "match_reason": "Addresses media literacy and critical thinking, essential for empowering individuals to analyze statistical information."
+      },
+      {
+        "grant_id": 50149265,
+        "rank": 4,
+        "match_reason": "Investigates educational methodologies and factors affecting youth skills in mathematics, relevant to improving statistical literacy."
+      },
+      {
+        "grant_id": 50143142,
+        "rank": 5,
+        "match_reason": "Promotes public engagement with research, enhancing understanding of civic issues and statistical literacy among students."
+      }
+    ]
+  },
+  {
+    "name": "Lev, Efraim",
+    "grants": [
+      {
+        "grant_id": 357492,
+        "rank": 1,
+        "match_reason": "Focus on early phase clinical trials of natural products, aligning with research on herbal remedies in cancer care."
+      },
+      {
+        "grant_id": 357490,
+        "rank": 2,
+        "match_reason": "Supports early phase clinical trials of botanicals and dietary supplements, relevant to complementary and alternative medicine in oncology."
+      },
+      {
+        "grant_id": 358373,
+        "rank": 3,
+        "match_reason": "Targets health improvement in Native American populations, relevant for exploring historical and cultural dimensions of health practices."
+      },
+      {
+        "grant_id": 50149768,
+        "rank": 4,
+        "match_reason": "Focuses on safeguarding intangible cultural heritage, relevant for historical roles of Jewish physicians and cultural health practices."
+      },
+      {
+        "grant_id": 50149561,
+        "rank": 5,
+        "match_reason": "Explores societal impact of cultural heritage, relevant for understanding historical medical practices and community health."
+      }
+    ]
+  },
+  {
+    "name": "Ziv, Yair",
+    "grants": [
+      {
+        "grant_id": 50149659,
+        "rank": 1,
+        "match_reason": "Focus on family engagement and socio-emotional learning in educational settings."
+      },
+      {
+        "grant_id": 357187,
+        "rank": 2,
+        "match_reason": "Community-engaged research on environmental factors supporting language development in children."
+      },
+      {
+        "grant_id": 357186,
+        "rank": 3,
+        "match_reason": "Emphasis on understanding predictors of language development, relevant to early childhood."
+      },
+      {
+        "grant_id": 50140083,
+        "rank": 4,
+        "match_reason": "Research on supporting independent living and inclusion for children with disabilities."
+      },
+      {
+        "grant_id": 50137510,
+        "rank": 5,
+        "match_reason": "Focus on mental health impacts of digital technologies on children and young adults."
+      },
+      {
+        "grant_id": 357427,
+        "rank": 6,
+        "match_reason": "Development of psychosocial interventions relevant to children's mental health."
+      },
+      {
+        "grant_id": 357426,
+        "rank": 7,
+        "match_reason": "Testing psychosocial interventions for mental disorders, applicable to childhood experiences."
+      },
+      {
+        "grant_id": 357157,
+        "rank": 8,
+        "match_reason": "Supports clinical trials related to child health and human development."
+      }
+    ]
+  },
+  {
+    "name": "Barak, Azriel",
+    "grants": [
+      {
+        "grant_id": 357034,
+        "rank": 1,
+        "match_reason": "Focuses on enhancing digital mental health interventions, aligning with research on online therapeutic methods."
+      },
+      {
+        "grant_id": 357421,
+        "rank": 2,
+        "match_reason": "Targets effectiveness trials for mental health interventions, relevant to evaluating therapeutic methods for ADHD."
+      },
+      {
+        "grant_id": 357422,
+        "rank": 3,
+        "match_reason": "Supports pilot studies for optimizing mental health interventions, applicable to ADHD and parental support."
+      },
+      {
+        "grant_id": 356893,
+        "rank": 4,
+        "match_reason": "Focuses on enhancing adoption of evidence-based interventions, relevant for ADHD support strategies."
+      },
+      {
+        "grant_id": 50135695,
+        "rank": 5,
+        "match_reason": "Develops online mental health support tools for young cancer survivors, relevant to digital communication in mental health."
+      }
+    ]
+  },
+  {
+    "name": "Joels, Tirtsa",
+    "grants": [
+      {
+        "grant_id": 357187,
+        "rank": 1,
+        "match_reason": "Focuses on language development in children, relevant to attachment theory and cognitive outcomes."
+      },
+      {
+        "grant_id": 357186,
+        "rank": 2,
+        "match_reason": "Emphasizes environmental factors affecting language development, aligning with attachment quality and parental behavior."
+      },
+      {
+        "grant_id": 357157,
+        "rank": 3,
+        "match_reason": "Supports clinical trials related to child health and development, relevant to attachment theory in children."
+      },
+      {
+        "grant_id": 357423,
+        "rank": 4,
+        "match_reason": "Focuses on non-pharmacological interventions for mental disorders in children, relevant to attachment and behavioral outcomes."
+      },
+      {
+        "grant_id": 357713,
+        "rank": 5,
+        "match_reason": "Advances family health research, relevant to attachment theory and parental behavior in children's development."
+      }
+    ]
+  },
+  {
+    "name": "Alexander, Hanan",
+    "grants": [
+      {
+        "grant_id": 50149659,
+        "rank": 1,
+        "match_reason": "Focus on civic identity and family involvement aligns with multiculturalism and identity formation in education."
+      },
+      {
+        "grant_id": 50219065,
+        "rank": 2,
+        "match_reason": "Promotes inclusive democratic societies, addressing intersectional perspectives relevant to cultural identities in education."
+      },
+      {
+        "grant_id": 50149561,
+        "rank": 3,
+        "match_reason": "Explores societal impact of cultural heritage, fostering civic engagement and resilience in diverse communities."
+      },
+      {
+        "grant_id": 50219225,
+        "rank": 4,
+        "match_reason": "Enhances lifelong citizenship education, relevant to moral agency and democratic participation across diverse backgrounds."
+      },
+      {
+        "grant_id": 50147778,
+        "rank": 5,
+        "match_reason": "Engages younger generations in disaster resilience, emphasizing participatory approaches and community involvement."
+      }
+    ]
+  },
+  {
+    "name": "Alfred M. Bruckstein⋆",
+    "grants": [
+      {
+        "grant_id": 50135468,
+        "rank": 1,
+        "match_reason": "Focus on AI-powered robotics, dynamic environments, and human-robot interaction aligns with swarm robotics and multi-agent systems."
+      },
+      {
+        "grant_id": 50127801,
+        "rank": 2,
+        "match_reason": "Emphasizes autonomous operation and intelligent perception, relevant to swarm robotics and adaptive learning."
+      },
+      {
+        "grant_id": 50135491,
+        "rank": 3,
+        "match_reason": "Advances multi-agent frameworks and reasoning capabilities, directly applicable to Bruckstein's research in cooperative strategies."
+      },
+      {
+        "grant_id": 50131748,
+        "rank": 4,
+        "match_reason": "Focus on AI-driven decision-making and interdisciplinary collaboration, relevant for robotic teams in scientific experimentation."
+      },
+      {
+        "grant_id": 50217435,
+        "rank": 5,
+        "match_reason": "Development of autonomous drones and robotics for emergency response, applicable to dynamic environments and task allocation."
+      },
+      {
+        "grant_id": 48346295,
+        "rank": 6,
+        "match_reason": "Innovative robotic solutions for construction, emphasizing automation and efficiency, relevant to cooperative strategies in robotics."
+      }
+    ]
+  },
+  {
+    "name": "Shlomo Bekhor",
+    "grants": [
+      {
+        "grant_id": 50135603,
+        "rank": 1,
+        "match_reason": "Focus on energy-efficient urban transport and shared mobility, aligning with machine learning applications for traffic management."
+      },
+      {
+        "grant_id": 50130600,
+        "rank": 2,
+        "match_reason": "Advances Connected, Cooperative, and Automated Mobility (CCAM) with emphasis on AI integration, relevant to traffic management and decision-making."
+      },
+      {
+        "grant_id": 50130622,
+        "rank": 3,
+        "match_reason": "Development of AI systems for CCAM, enhancing perception and decision-making, directly applicable to traffic management and safety."
+      },
+      {
+        "grant_id": 50148353,
+        "rank": 4,
+        "match_reason": "Focus on revitalizing neighborhoods around transport corridors, relevant to urban mobility and infrastructure management."
+      },
+      {
+        "grant_id": 48347084,
+        "rank": 5,
+        "match_reason": "Enhancing safety for cyclists and pedestrians, relevant to traffic management and urban mobility dynamics."
+      },
+      {
+        "grant_id": 50130730,
+        "rank": 6,
+        "match_reason": "Innovative multimodal transport solutions for vulnerable populations, relevant to urban mobility and accessibility."
+      }
+    ]
   }
 ]
