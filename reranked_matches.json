@@ -69502,5 +69502,57 @@
       }
     ],
     "researcher_id": "OA35443811353"
+  },
+  {
+    "name": "Chaim Baskin",
+    "grants": [
+      {
+        "grant_id": 50161195,
+        "rank": 1,
+        "match_reason": "Focus on AI models in healthcare, integrating multimodal data aligns with deep learning and computer vision interests."
+      },
+      {
+        "grant_id": 357380,
+        "rank": 2,
+        "match_reason": "Supports innovative research in biomedical informatics and data science, relevant to model interpretability and data-driven health."
+      },
+      {
+        "grant_id": 343957,
+        "rank": 3,
+        "match_reason": "Similar to 357380, emphasizes data management and integration, crucial for robust AI applications in health."
+      },
+      {
+        "grant_id": 50135061,
+        "rank": 4,
+        "match_reason": "Advances Generative AI in prioritized sectors, relevant to efficiency and robustness in AI applications."
+      },
+      {
+        "grant_id": 48347107,
+        "rank": 5,
+        "match_reason": "Focus on AI and big data for traffic safety, relevant to predictive modeling and real-time applications."
+      }
+    ],
+    "researcher_id": "OA61822340022"
+  },
+  {
+    "name": "Kathrin Steinbrenner",
+    "grants": [
+      {
+        "grant_id": 344634,
+        "rank": 1,
+        "match_reason": "Focus on social forces influencing behavior aligns with emotional factors in media success."
+      },
+      {
+        "grant_id": 348058,
+        "rank": 2,
+        "match_reason": "Encourages interdisciplinary research, relevant for understanding consumer behavior in media."
+      },
+      {
+        "grant_id": 356920,
+        "rank": 3,
+        "match_reason": "Research on dissemination of evidence-based practices can apply to media marketing strategies."
+      }
+    ],
+    "researcher_id": "OA64496686648"
   }
 ]
