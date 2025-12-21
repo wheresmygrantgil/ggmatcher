@@ -69554,5 +69554,36 @@
       }
     ],
     "researcher_id": "OA64496686648"
+  },
+  {
+    "name": "Ofir Lindenbaum",
+    "grants": [
+      {
+        "grant_id": 359068,
+        "rank": 1,
+        "match_reason": "Focus on computational tools for analyzing complex brain data, aligning with advanced machine learning and data analysis interests."
+      },
+      {
+        "grant_id": 357601,
+        "rank": 2,
+        "match_reason": "Supports innovative technologies for neural activity analysis, relevant to generative models and high-dimensional data."
+      },
+      {
+        "grant_id": 348260,
+        "rank": 3,
+        "match_reason": "Emphasizes data science and network analysis, applicable to multi-modal datasets in behavioral research."
+      },
+      {
+        "grant_id": 278447,
+        "rank": 4,
+        "match_reason": "Focus on computational mathematics and efficient algorithms, relevant to developing robust machine learning methods."
+      },
+      {
+        "grant_id": 358569,
+        "rank": 5,
+        "match_reason": "Addresses practical applications of mathematics in science and engineering, aligning with AI and data analysis goals."
+      }
+    ],
+    "researcher_id": "OA39759809801"
   }
 ]
