@@ -29,7 +29,10 @@ function openModal() {
     <div class="modal" role="dialog" aria-modal="true">
       <button class="close-btn" aria-label="Close">\u00d7</button>
       <h2>Grant-Scouting Agent</h2>
-      <p>Coming Soon \u2013 we\u2019re wiring the circuits! Check back shortly.</p>
+      <p>
+        Want your own personalized Grant-Matching wizard 🧙‍♂️ working for you?
+        Lets talk!
+      </p>
     </div>`;
   document.body.appendChild(overlay);
 
