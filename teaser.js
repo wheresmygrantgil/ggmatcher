@@ -31,7 +31,7 @@ function openModal() {
       <h2>Grant-Scouting Agent</h2>
       <p>
         Want your own personalized Grant-Matching wizard 🧙‍♂️ working for you?
-        Lets talk!.
+        Lets talk!
       </p>
     </div>`;
   document.body.appendChild(overlay);
