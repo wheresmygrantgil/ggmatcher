@@ -39,26 +39,35 @@ function showLandingWizard() {
 }
 
 async function loadData() {
-  const [matchesResp, grantsResp] = await Promise.all([
-    fetch('reranked_matches.json').catch(() => null),
-    fetch('grants.json'),
-  ]);
+  try {
+    const [matchesResp, grantsResp] = await Promise.all([
+      fetch('reranked_matches.json').catch(() => null),
+      fetch('grants.json'),
+    ]);
 
-  let matchesText;
-  if (matchesResp && matchesResp.ok) {
-    rerankedLoaded = true;
-    matchesText = await matchesResp.text();
-  } else {
-    const fallback = await fetch('matches.json');
-    matchesText = await fallback.text();
+    let matchesText;
+    if (matchesResp && matchesResp.ok) {
+      rerankedLoaded = true;
+      matchesText = await matchesResp.text();
+      track('data_load', { status: 'success', dataset: 'reranked_matches' });
+    } else {
+      const fallback = await fetch('matches.json');
+      matchesText = await fallback.text();
+      track('data_load', { status: 'success', dataset: 'matches_fallback' });
+    }
+
+    const grantsText = await grantsResp.text();
+    track('data_load', { status: 'success', dataset: 'grants' });
+
+    matchesData = JSON.parse(matchesText);
+    grantsData = JSON.parse(grantsText);
+    grantsMap = new Map(grantsData.map(g => [String(g.grant_id), g]));
+
+    researcherNames = matchesData.map((m) => m.name);
+  } catch (err) {
+    track('data_load', { status: 'error', error_message: err.message });
+    throw err;
   }
-  const grantsText = await grantsResp.text();
-
-  matchesData = JSON.parse(matchesText);
-  grantsData = JSON.parse(grantsText);
-  grantsMap = new Map(grantsData.map(g => [String(g.grant_id), g]));
-
-  researcherNames = matchesData.map((m) => m.name);
 }
 
 function createSuggestion(name) {
@@ -98,6 +107,12 @@ function selectResearcher(name) {
   document.getElementById('researcher-input').value = name;
   document.getElementById('suggestions').style.display = 'none';
   setCurrentUser(name);             // <-- STORE researcher ID
+
+  // Set User ID in GA4 for cohort analysis
+  if (typeof gtag === 'function') {
+    gtag('config', 'G-FKE4HL7881', { user_id: name });
+  }
+
   showGrants(name);
   track('select_researcher', { researcher_name: name });
 }
@@ -194,6 +209,10 @@ function createGrantCard(grant, matchReason = null) {
       const open = !reason.hidden;
       reason.hidden = open;
       whyBtn.textContent = open ? '▶ Ask AI Why' : '▼ Ask AI Why';
+      // Track AI explanation views
+      if (!open) {
+        track('view_ai_explanation', { grant_id: grant.grant_id, provider: grant.provider });
+      }
     });
     card.appendChild(whyBtn);
     card.appendChild(reason);
@@ -438,12 +457,19 @@ function showGrants(name) {
   const match = matchesData.find((m) => m.name === name);
   if (!match) return;
 
-  match.grants.forEach((g) => {
+  match.grants.forEach((g, index) => {
     const id = typeof g === 'object' ? g.grant_id : g;
     const reason = typeof g === 'object' ? g.match_reason : null;
     const grant = grantsMap.get(String(id));
     if (!grant) return;
     grantsContainer.appendChild(createGrantCard(grant, reason));
+
+    // Track grant impression with position
+    track('view_grant', {
+      grant_id: grant.grant_id,
+      provider: grant.provider,
+      position: index + 1
+    });
   });
 
   grantsContainer.dispatchEvent(
@@ -511,12 +537,23 @@ function initGrantsTable() {
 
   $('#grant-global-search').on('input', function(){
     grantsTable.search(this.value).draw();
-    track('search_grants', { query: this.value });
+    const resultsCount = grantsTable.rows({ search: 'applied' }).count();
+    track('search_grants', {
+      query: this.value,
+      results_count: resultsCount,
+      has_results: resultsCount > 0
+    });
   });
 
 }
 
 async function init() {
+  // Track session start with returning user context
+  track('session_start', {
+    is_returning_user: !!localStorage.getItem('researcher_id'),
+    entry_point: document.referrer ? 'referral' : 'direct'
+  });
+
   await loadData();
 
   showLandingWizard();
@@ -553,6 +590,49 @@ async function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+// ===== Scroll depth tracking =====
+(function() {
+  const trackedDepths = new Set();
+
+  function trackScrollDepth() {
+    const container = document.getElementById('grants');
+    if (!container || container.children.length === 0) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const containerTop = containerRect.top + scrollTop;
+    const containerHeight = container.scrollHeight;
+
+    if (containerHeight === 0) return;
+
+    const scrolledIntoContainer = Math.max(0, scrollTop + viewportHeight - containerTop);
+    const depthPercent = Math.min(100, Math.round((scrolledIntoContainer / containerHeight) * 100));
+
+    [25, 50, 75, 100].forEach(milestone => {
+      if (depthPercent >= milestone && !trackedDepths.has(milestone)) {
+        trackedDepths.add(milestone);
+        track('scroll_depth', {
+          depth_percent: milestone,
+          tab: 'recommendations',
+          grants_visible: container.children.length
+        });
+      }
+    });
+  }
+
+  // Reset tracked depths when grants are updated
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('grants');
+    if (container) {
+      container.addEventListener('grantsUpdated', () => {
+        trackedDepths.clear();
+      });
+    }
+    window.addEventListener('scroll', trackScrollDepth, { passive: true });
+  });
+})();
 
 // ===== Voting module =====
 const API_BASE = 'https://ggm-backend.onrender.com';
