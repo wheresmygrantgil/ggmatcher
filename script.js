@@ -245,9 +245,12 @@ function showDashboard() {
   const researcherTotal = matchesData.length;
   const matchTotal = matchesData.reduce((s, r) => s + (r.grants ? r.grants.length : 0), 0);
 
+  const avgMatchesPerResearcher = researcherTotal > 0 ? (matchTotal / researcherTotal).toFixed(1) : 0;
+
   animateNumber(document.getElementById('grant-count'), grantTotal);
   animateNumber(document.getElementById('researcher-count'), researcherTotal);
   animateNumber(document.getElementById('match-count'), matchTotal);
+  document.getElementById('avg-match-count').textContent = avgMatchesPerResearcher;
 
   const styles = getComputedStyle(document.documentElement);
   const accent = styles.getPropertyValue('--accent').trim();
@@ -258,24 +261,40 @@ function showDashboard() {
     const label = g.provider.startsWith('HORIZON') ? 'EU Horizon' : g.provider;
     providerCounts[label] = (providerCounts[label] || 0) + 1;
   });
-  const providerLabels = Object.keys(providerCounts);
-  const providerValues = providerLabels.map(l => providerCounts[l]);
+  // Sort providers by count (descending) for better readability
+  const sortedProviders = Object.entries(providerCounts).sort((a, b) => b[1] - a[1]);
+  const providerLabels = sortedProviders.map(([label]) => label);
+  const providerValues = sortedProviders.map(([, count]) => count);
+  // Distinct color palette for chart segments
+  const chartColors = [
+    '#00bcd4', '#ff6384', '#36a2eb', '#ffce56',
+    '#4bc0c0', '#9966ff', '#ff9f40', '#c9cbcf',
+    '#e7e9ed', '#7cb342', '#d32f2f', '#1976d2'
+  ];
 
   if (providerChart) providerChart.destroy();
   providerChart = new Chart(document.getElementById('providerChart'), {
-    type: 'doughnut',
+    type: 'bar',
     data: {
       labels: providerLabels,
       datasets: [{
         data: providerValues,
-        backgroundColor: providerLabels.map((_, i) => i % 2 ? primary : accent),
-        borderColor: '#ffffff',
+        backgroundColor: chartColors[0],
+        borderColor: chartColors[0],
         borderWidth: 1
       }]
     },
+    plugins: [ChartDataLabels],
     options: {
+      indexAxis: 'y',
       plugins: {
           legend: { display: false },
+          datalabels: {
+            anchor: 'end',
+            align: 'end',
+            color: '#213646',
+            font: { weight: 'bold' }
+          },
           title: {
             display: true,
             text: 'Grants by Provider',
@@ -290,8 +309,11 @@ function showDashboard() {
             }
           }
         },
-      animation: { duration: 800 },
-      aspectRatio: 2
+      scales: {
+        x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
+        y: { grid: { display: false } }
+      },
+      animation: { duration: 800 }
     }
   });
 
@@ -302,7 +324,7 @@ function showDashboard() {
 
   for (let i = 0; i < 6; i++) {
     const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
-    months.push(d.toLocaleString('default', { month: 'short' }));
+    months.push(d.toLocaleString('en-US', { month: 'short' }));
   }
 
   grantsData.forEach(g => {
@@ -347,6 +369,30 @@ function showDashboard() {
       aspectRatio: 2
     }
   });
+
+  // Calculate and render most matched grants
+  const grantMatchCounts = {};
+  matchesData.forEach(researcher => {
+    researcher.grants?.forEach(g => {
+      grantMatchCounts[g.grant_id] = (grantMatchCounts[g.grant_id] || 0) + 1;
+    });
+  });
+  const topGrants = Object.entries(grantMatchCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([id, count]) => {
+      const grant = grantsData.find(g => g.grant_id == id);
+      return { ...grant, matchCount: count };
+    });
+
+  const listEl = document.getElementById('most-matched-list');
+  listEl.innerHTML = topGrants.map(g => `
+    <li class="most-matched-item">
+      <span class="match-count-badge">${g.matchCount} researchers</span>
+      <a href="${g.submission_link}" target="_blank">${g.title}</a>
+      <span class="provider-tag">${g.provider}</span>
+    </li>
+  `).join('');
 }
 
 function showTab(name) {

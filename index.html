@@ -48,10 +48,19 @@
           <span id="match-count" class="stat-number"></span>
           <span class="stat-label">Matches</span>
         </div>
+        <div class="stat">
+          <span id="avg-match-count" class="stat-number"></span>
+          <span class="stat-label">Grants per Researcher</span>
+        </div>
       </div>
       <div class="chart-grid">
         <canvas id="providerChart" aria-label="Grants by provider" role="img"></canvas>
         <canvas id="deadlineChart" aria-label="Upcoming deadlines" role="img"></canvas>
+      </div>
+      <div class="most-matched-section">
+        <h3>Most Matched Grants</h3>
+        <p class="section-subtitle">Grants matched to the most researchers</p>
+        <ul id="most-matched-list" class="most-matched-list"></ul>
       </div>
     </section>
 
@@ -130,6 +139,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.13.6/features/mark.js/datatables.mark.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script src="script.js"></script>
     <script src="teaser.js"></script>
   </body>

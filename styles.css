@@ -223,6 +223,76 @@ main {
   color: var(--primary);
 }
 
+/* ========== Most Matched Grants Section ========== */
+.most-matched-section {
+  margin-top: 2rem;
+  background: #ffffff;
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.most-matched-section h3 {
+  margin: 0 0 0.5rem;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.section-subtitle {
+  color: #666;
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+}
+
+.most-matched-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.most-matched-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.most-matched-item:last-child {
+  border-bottom: none;
+}
+
+.most-matched-item a {
+  flex: 1;
+  min-width: 200px;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.most-matched-item a:hover {
+  text-decoration: underline;
+}
+
+.match-count-badge {
+  background: var(--accent);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.provider-tag {
+  background: #f0f0f0;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #666;
+  white-space: nowrap;
+}
+
 /* ========== Grant cards ========== */
 .grants {
   display: grid;
