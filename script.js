@@ -40,8 +40,8 @@ function showLandingWizard() {
 
 async function loadData() {
   const [matchesResp, grantsResp] = await Promise.all([
-    fetch('reranked_matches.json').catch(() => null),
-    fetch('grants.json'),
+    fetch('data/reranked_matches.json').catch(() => null),
+    fetch('data/grants.json'),
   ]);
 
   let matchesText;
@@ -49,7 +49,7 @@ async function loadData() {
     rerankedLoaded = true;
     matchesText = await matchesResp.text();
   } else {
-    const fallback = await fetch('matches.json');
+    const fallback = await fetch('data/matches.json');
     matchesText = await fallback.text();
   }
   const grantsText = await grantsResp.text();
