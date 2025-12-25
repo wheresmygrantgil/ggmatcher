@@ -8,6 +8,10 @@ let providerChart;
 let deadlineChart;
 let grantsTable;
 
+// Collaborations data
+let collaborationsData = [];
+let collabResearcherNames = [];
+
 // --- Voting identity helpers ----------------------------------------------
 let currentUser = localStorage.getItem('researcher_id') || null;
 
@@ -41,10 +45,11 @@ function showLandingWizard() {
 
 async function loadData() {
   try {
-    const [matchesResp, grantsResp, affiliationResp] = await Promise.all([
+    const [matchesResp, grantsResp, affiliationResp, collabResp] = await Promise.all([
       fetch('data/reranked_matches.json').catch(() => null),
       fetch('data/grants.json'),
       fetch('data/affiliation_dict.json').catch(() => null),
+      fetch('data/collaborations.json').catch(() => null),
     ]);
 
     let matchesText;
@@ -64,6 +69,12 @@ async function loadData() {
     if (affiliationResp && affiliationResp.ok) {
       affiliationData = await affiliationResp.json();
       track('data_load', { status: 'success', dataset: 'affiliation_dict' });
+    }
+
+    if (collabResp && collabResp.ok) {
+      collaborationsData = await collabResp.json();
+      collabResearcherNames = collaborationsData.map(r => r.name);
+      track('data_load', { status: 'success', dataset: 'collaborations' });
     }
 
     matchesData = JSON.parse(matchesText);
@@ -136,6 +147,189 @@ function selectResearcher(name) {
   showGrants(name);
   track('select_researcher', { researcher_name: name });
 }
+
+// ========== Collaborations Tab Functions ==========
+
+function showCollabLandingWizard() {
+  const container = document.getElementById('collaborators-list');
+  container.innerHTML = `
+    <div class="landing-wizard">
+      <img src="assets/wizardscolab.png" alt="Two wizards collaborating on grant proposals">
+    </div>`;
+}
+
+function createCollabSuggestion(name) {
+  const div = document.createElement('div');
+  div.className = 'suggestion-item';
+  div.tabIndex = 0;
+
+  const nameSpan = document.createElement('span');
+  nameSpan.className = 'suggestion-name';
+  nameSpan.textContent = name;
+  div.appendChild(nameSpan);
+
+  const affiliation = affiliationData[name];
+  if (affiliation) {
+    const affSpan = document.createElement('span');
+    affSpan.className = 'suggestion-affiliation';
+    affSpan.textContent = affiliation;
+    div.appendChild(affSpan);
+  }
+
+  div.addEventListener('click', () => {
+    selectCollabResearcher(name);
+  });
+  return div;
+}
+
+function updateCollabSuggestions(value) {
+  const suggBox = document.getElementById('collab-suggestions');
+  suggBox.innerHTML = '';
+
+  if (!value) {
+    suggBox.style.display = 'none';
+    return;
+  }
+
+  const filtered = collabResearcherNames
+    .filter((n) => n.toLowerCase().includes(value.toLowerCase()))
+    .slice(0, 8);
+
+  if (filtered.length === 0) {
+    suggBox.style.display = 'none';
+    return;
+  }
+
+  filtered.forEach((name) => suggBox.appendChild(createCollabSuggestion(name)));
+  suggBox.style.display = 'block';
+}
+
+function selectCollabResearcher(name) {
+  document.getElementById('collab-researcher-input').value = name;
+  document.getElementById('collab-suggestions').style.display = 'none';
+
+  showCollaborators(name);
+  track('select_collab_researcher', { researcher_name: name });
+}
+
+function truncateText(text, maxLength) {
+  if (!text) return '';
+  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+}
+
+function createCollaboratorCard(collaborator) {
+  const card = document.createElement('div');
+  card.className = 'collaborator-card';
+
+  // Header with name and affiliation
+  const header = document.createElement('div');
+  header.className = 'collaborator-header';
+
+  const nameEl = document.createElement('h3');
+  nameEl.className = 'collaborator-name';
+  nameEl.textContent = truncateText(collaborator.name, 40);
+  nameEl.title = collaborator.name; // Full name on hover
+  header.appendChild(nameEl);
+
+  // Add affiliation
+  const affiliation = affiliationData[collaborator.name];
+  if (affiliation) {
+    const affEl = document.createElement('p');
+    affEl.className = 'collaborator-affiliation';
+    affEl.textContent = affiliation;
+    affEl.title = affiliation;
+    header.appendChild(affEl);
+  }
+
+  card.appendChild(header);
+
+  // Shared grants section
+  if (collaborator.shared_grants && collaborator.shared_grants.length > 0) {
+    const grantsSection = document.createElement('div');
+    grantsSection.className = 'shared-grants-section';
+
+    const grantsTitle = document.createElement('h4');
+    grantsTitle.textContent = 'Shared Grants:';
+    grantsSection.appendChild(grantsTitle);
+
+    const grantsList = document.createElement('ul');
+    grantsList.className = 'shared-grants-list';
+
+    collaborator.shared_grants.forEach((grantId) => {
+      const grant = grantsMap.get(String(grantId));
+      if (!grant) return;
+
+      const grantItem = document.createElement('li');
+      grantItem.className = 'shared-grant-item';
+
+      // Grant title link
+      const titleLink = document.createElement('a');
+      titleLink.className = 'grant-title-link';
+      titleLink.href = grant.submission_link;
+      titleLink.target = '_blank';
+      titleLink.rel = 'noopener';
+      titleLink.textContent = grant.title;
+      titleLink.addEventListener('click', () => {
+        track('click_collab_submission_link', {
+          grant_id: grant.grant_id,
+          collaborator_name: collaborator.name
+        });
+      });
+      grantItem.appendChild(titleLink);
+
+      // Details toggle button
+      const toggleBtn = document.createElement('button');
+      toggleBtn.className = 'collab-summary-toggle';
+      toggleBtn.textContent = '▶ Details';
+
+      const detailsDiv = document.createElement('div');
+      detailsDiv.className = 'grant-details';
+      detailsDiv.hidden = true;
+      detailsDiv.innerHTML = `
+        <p><span class="detail-label">Provider:</span> ${grant.provider}</p>
+        <p><span class="detail-label">Due Date:</span> ${formatDate(grant.due_date)}</p>
+        <p><span class="detail-label">Proposed Money:</span> ${moneyFmt(grant.proposed_money)}</p>
+        <p><span class="detail-label">Summary:</span> ${grant.summary_text || 'N/A'}</p>
+      `;
+
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = !detailsDiv.hidden;
+        detailsDiv.hidden = isOpen;
+        toggleBtn.textContent = isOpen ? '▶ Details' : '▼ Details';
+        track(isOpen ? 'collapse_collab_grant' : 'expand_collab_grant', {
+          grant_id: grant.grant_id,
+          collaborator_name: collaborator.name
+        });
+      });
+
+      grantItem.appendChild(toggleBtn);
+      grantItem.appendChild(detailsDiv);
+      grantsList.appendChild(grantItem);
+    });
+
+    grantsSection.appendChild(grantsList);
+    card.appendChild(grantsSection);
+  }
+
+  return card;
+}
+
+function showCollaborators(name) {
+  const container = document.getElementById('collaborators-list');
+  container.innerHTML = '';
+
+  const researcher = collaborationsData.find((r) => r.name === name);
+  if (!researcher || !researcher.collaborators || researcher.collaborators.length === 0) {
+    container.innerHTML = '<p class="no-results">No collaborators found for this researcher.</p>';
+    return;
+  }
+
+  researcher.collaborators.forEach((collaborator) => {
+    container.appendChild(createCollaboratorCard(collaborator));
+  });
+}
+
+// ========== End Collaborations Tab Functions ==========
 
 function formatDate(raw) {
   if (!raw) return '';
@@ -438,12 +632,14 @@ function showTab(name) {
   const rec = document.getElementById('recommendations');
   const dash = document.getElementById('dashboard');
   const grantsSec = document.getElementById('tab-grants');
+  const collabSec = document.getElementById('collaborations');
   const recTab = document.getElementById('tab-recommendations');
   const grantsTab = document.getElementById('tab-grants-btn');
   const statTab = document.getElementById('tab-stats');
+  const collabTab = document.getElementById('tab-collaborations');
 
-  const allSecs = [rec, dash, grantsSec];
-  const allTabs = [recTab, grantsTab, statTab];
+  const allSecs = [rec, dash, grantsSec, collabSec];
+  const allTabs = [recTab, grantsTab, statTab, collabTab];
   allSecs.forEach(sec => sec.classList.add('hidden'));
   allTabs.forEach(btn => {
     btn.classList.remove('active');
@@ -462,6 +658,12 @@ function showTab(name) {
     grantsTab.setAttribute('aria-selected', 'true');
     if (!grantsTable) initGrantsTable();
     track('view_grants_tab');
+  } else if (name === 'collaborations') {
+    collabSec.classList.remove('hidden');
+    collabTab.classList.add('active');
+    collabTab.setAttribute('aria-selected', 'true');
+    showCollabLandingWizard();
+    track('view_collaborations_tab');
   } else {
     rec.classList.remove('hidden');
     recTab.classList.add('active');
@@ -591,6 +793,7 @@ async function init() {
   document.getElementById('tab-recommendations').addEventListener('click', () => showTab('recommendations'));
   document.getElementById('tab-grants-btn').addEventListener('click', () => showTab('grants'));
   document.getElementById('tab-stats').addEventListener('click', () => showTab('stats'));
+  document.getElementById('tab-collaborations').addEventListener('click', () => showTab('collaborations'));
 
   const linkedInLink = document.querySelector('footer .linkedin');
   if (linkedInLink) {
@@ -607,12 +810,26 @@ async function init() {
     githubLink.addEventListener('click', () => track('click_github'));
   }
 
+  // Recommendations tab search input
   const input = document.getElementById('researcher-input');
   input.addEventListener('input', (e) => updateSuggestions(e.target.value));
   input.addEventListener('focus', (e) => updateSuggestions(e.target.value));
+
+  // Collaborations tab search input
+  const collabInput = document.getElementById('collab-researcher-input');
+  collabInput.addEventListener('input', (e) => updateCollabSuggestions(e.target.value));
+  collabInput.addEventListener('focus', (e) => updateCollabSuggestions(e.target.value));
+
+  // Close suggestions when clicking outside
   document.addEventListener('click', (e) => {
-    if (!document.querySelector('.selector').contains(e.target)) {
+    const recSelector = document.querySelector('#recommendations .selector');
+    const collabSelector = document.querySelector('#collaborations .selector');
+
+    if (recSelector && !recSelector.contains(e.target)) {
       document.getElementById('suggestions').style.display = 'none';
+    }
+    if (collabSelector && !collabSelector.contains(e.target)) {
+      document.getElementById('collab-suggestions').style.display = 'none';
     }
   });
 

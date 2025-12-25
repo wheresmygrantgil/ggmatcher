@@ -30,6 +30,7 @@
       <h1>Grand Grant Matcher 🧙</h1>
       <nav class="tabs" role="tablist">
         <button id="tab-recommendations" class="tab active" role="tab" aria-selected="true" aria-controls="recommendations">Recommendations</button>
+        <button id="tab-collaborations" class="tab" role="tab" aria-selected="false" aria-controls="collaborations">Collaborations</button>
         <button id="tab-grants-btn" class="tab" role="tab" aria-selected="false" aria-controls="tab-grants">Grants</button>
         <button id="tab-stats" class="tab" role="tab" aria-selected="false" aria-controls="dashboard">Statistics</button>
       </nav>
@@ -87,6 +88,18 @@
 
       <section id="grants" class="grants"></section>
     </main>
+
+    <section id="collaborations" class="hidden" role="tabpanel" aria-labelledby="tab-collaborations">
+      <div class="selector">
+        <label for="collab-researcher-input">Find your name</label>
+        <p class="collab-description">Discover potential collaborators from different disciplines who match your grant opportunities</p>
+        <div class="input-wrapper">
+          <input id="collab-researcher-input" type="text" placeholder="Start typing..." autocomplete="off" />
+          <div id="collab-suggestions" class="suggestions"></div>
+        </div>
+      </div>
+      <section id="collaborators-list" class="collaborators"></section>
+    </section>
 
     <footer>
       <small>Powered by Gil Zeevi</small>
