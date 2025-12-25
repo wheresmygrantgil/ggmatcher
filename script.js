@@ -8,9 +8,93 @@ let providerChart;
 let deadlineChart;
 let grantsTable;
 
+// Library loading state
+let dataTablesLoaded = false;
+let dataTablesLoading = false;
+let chartJsLoaded = false;
+let chartJsLoading = false;
+
+// Debounce helper for smoother search input
+function debounce(fn, delay = 150) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
+}
+
+// Helper to load scripts dynamically
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) { resolve(); return; }
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+// Load DataTables and dependencies on demand
+async function loadDataTablesIfNeeded() {
+  if (dataTablesLoaded) return;
+  if (dataTablesLoading) {
+    // Wait for loading to complete
+    while (dataTablesLoading) await new Promise(r => setTimeout(r, 50));
+    return;
+  }
+  dataTablesLoading = true;
+
+  try {
+    // jQuery first (required by DataTables)
+    await loadScript('https://code.jquery.com/jquery-3.7.0.min.js');
+    // DataTables core
+    await loadScript('https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js');
+    // DataTables plugins in parallel
+    await Promise.all([
+      loadScript('https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js'),
+      loadScript('https://cdn.datatables.net/colreorder/1.6.2/js/dataTables.colReorder.min.js'),
+      loadScript('https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js'),
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'),
+    ]);
+    // These depend on previous ones
+    await Promise.all([
+      loadScript('https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js'),
+      loadScript('https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js'),
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'),
+    ]);
+    await loadScript('https://cdn.datatables.net/plug-ins/1.13.6/features/mark.js/datatables.mark.js');
+
+    dataTablesLoaded = true;
+  } finally {
+    dataTablesLoading = false;
+  }
+}
+
+// Load Chart.js on demand
+async function loadChartJsIfNeeded() {
+  if (chartJsLoaded) return;
+  if (chartJsLoading) {
+    while (chartJsLoading) await new Promise(r => setTimeout(r, 50));
+    return;
+  }
+  chartJsLoading = true;
+
+  try {
+    await loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js');
+    await loadScript('https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js');
+    chartJsLoaded = true;
+  } finally {
+    chartJsLoading = false;
+  }
+}
+
 // Collaborations data
 let collaborationsData = [];
 let collabResearcherNames = [];
+let collaborationsLoaded = false;
+let collaborationsLoading = false;
 
 // --- Voting identity helpers ----------------------------------------------
 let currentUser = localStorage.getItem('researcher_id') || null;
@@ -39,17 +123,17 @@ function showLandingWizard() {
   const container = document.getElementById('grants');
   container.innerHTML = `
     <div class="landing-wizard">
-      <img src="assets/wizardoc.png" alt="Cartoon robot scanning grant proposals">
+      <img src="assets/wizardoc.jpg" alt="Cartoon robot scanning grant proposals" loading="lazy" decoding="async">
     </div>`;
 }
 
 async function loadData() {
   try {
-    const [matchesResp, grantsResp, affiliationResp, collabResp] = await Promise.all([
+    // Note: collaborations.json is loaded lazily when user visits Collaborations tab
+    const [matchesResp, grantsResp, affiliationResp] = await Promise.all([
       fetch('data/reranked_matches.json').catch(() => null),
       fetch('data/grants.json'),
       fetch('data/affiliation_dict.json').catch(() => null),
-      fetch('data/collaborations.json').catch(() => null),
     ]);
 
     let matchesText;
@@ -71,12 +155,6 @@ async function loadData() {
       track('data_load', { status: 'success', dataset: 'affiliation_dict' });
     }
 
-    if (collabResp && collabResp.ok) {
-      collaborationsData = await collabResp.json();
-      collabResearcherNames = collaborationsData.map(r => r.name);
-      track('data_load', { status: 'success', dataset: 'collaborations' });
-    }
-
     matchesData = JSON.parse(matchesText);
     grantsData = JSON.parse(grantsText);
     grantsMap = new Map(grantsData.map(g => [String(g.grant_id), g]));
@@ -85,6 +163,29 @@ async function loadData() {
   } catch (err) {
     track('data_load', { status: 'error', error_message: err.message });
     throw err;
+  }
+}
+
+// Lazy load collaborations data only when needed
+async function loadCollaborationsIfNeeded() {
+  if (collaborationsLoaded || collaborationsLoading) return;
+  collaborationsLoading = true;
+
+  const container = document.getElementById('collaborators-list');
+  container.innerHTML = '<div class="loading-spinner">Loading collaborations...</div>';
+
+  try {
+    const resp = await fetch('data/collaborations.json');
+    if (resp.ok) {
+      collaborationsData = await resp.json();
+      collabResearcherNames = collaborationsData.map(r => r.name);
+      collaborationsLoaded = true;
+      track('data_load', { status: 'success', dataset: 'collaborations' });
+    }
+  } catch (err) {
+    track('data_load', { status: 'error', dataset: 'collaborations', error_message: err.message });
+  } finally {
+    collaborationsLoading = false;
   }
 }
 
@@ -154,7 +255,7 @@ function showCollabLandingWizard() {
   const container = document.getElementById('collaborators-list');
   container.innerHTML = `
     <div class="landing-wizard">
-      <img src="assets/wizardscolab.png" alt="Two wizards collaborating on grant proposals">
+      <img src="assets/wizardscolab.jpg" alt="Two wizards collaborating on grant proposals" loading="lazy" decoding="async">
     </div>`;
 }
 
@@ -473,82 +574,43 @@ function animateNumber(el, value, duration = 800) {
   requestAnimationFrame(step);
 }
 
-function showDashboard() {
+let dashboardInitialized = false;
+
+async function showDashboard() {
   const grantTotal = grantsData.length;
   const researcherTotal = matchesData.length;
   const matchTotal = matchesData.reduce((s, r) => s + (r.grants ? r.grants.length : 0), 0);
 
   const avgMatchesPerResearcher = researcherTotal > 0 ? (matchTotal / researcherTotal).toFixed(1) : 0;
 
-  animateNumber(document.getElementById('grant-count'), grantTotal);
-  animateNumber(document.getElementById('researcher-count'), researcherTotal);
-  animateNumber(document.getElementById('match-count'), matchTotal);
+  // Animate numbers only on first visit
+  if (!dashboardInitialized) {
+    animateNumber(document.getElementById('grant-count'), grantTotal);
+    animateNumber(document.getElementById('researcher-count'), researcherTotal);
+    animateNumber(document.getElementById('match-count'), matchTotal);
+  } else {
+    document.getElementById('grant-count').textContent = grantTotal.toLocaleString();
+    document.getElementById('researcher-count').textContent = researcherTotal.toLocaleString();
+    document.getElementById('match-count').textContent = matchTotal.toLocaleString();
+  }
   document.getElementById('avg-match-count').textContent = avgMatchesPerResearcher;
 
   const styles = getComputedStyle(document.documentElement);
   const accent = styles.getPropertyValue('--accent').trim();
-  const primary = styles.getPropertyValue('--primary').trim();
 
   const providerCounts = {};
   grantsData.forEach(g => {
     const label = g.provider.startsWith('HORIZON') ? 'EU Horizon' : g.provider;
     providerCounts[label] = (providerCounts[label] || 0) + 1;
   });
-  // Sort providers by count (descending) for better readability
   const sortedProviders = Object.entries(providerCounts).sort((a, b) => b[1] - a[1]);
   const providerLabels = sortedProviders.map(([label]) => label);
   const providerValues = sortedProviders.map(([, count]) => count);
-  // Distinct color palette for chart segments
   const chartColors = [
     '#00bcd4', '#ff6384', '#36a2eb', '#ffce56',
     '#4bc0c0', '#9966ff', '#ff9f40', '#c9cbcf',
     '#e7e9ed', '#7cb342', '#d32f2f', '#1976d2'
   ];
-
-  if (providerChart) providerChart.destroy();
-  providerChart = new Chart(document.getElementById('providerChart'), {
-    type: 'bar',
-    data: {
-      labels: providerLabels,
-      datasets: [{
-        data: providerValues,
-        backgroundColor: chartColors[0],
-        borderColor: chartColors[0],
-        borderWidth: 1
-      }]
-    },
-    plugins: [ChartDataLabels],
-    options: {
-      indexAxis: 'y',
-      plugins: {
-          legend: { display: false },
-          datalabels: {
-            anchor: 'end',
-            align: 'end',
-            color: '#213646',
-            font: { weight: 'bold' }
-          },
-          title: {
-            display: true,
-            text: 'Grants by Provider',
-            color: '#213646',
-            font: {
-              size: 18,
-              weight: 'bold'
-            },
-            padding: {
-              top: 10,
-              bottom: 10
-            }
-          }
-        },
-      scales: {
-        x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
-        y: { grid: { display: false } }
-      },
-      animation: { duration: 800 }
-    }
-  });
 
   const now = new Date();
   const baseIndex = now.getFullYear() * 12 + now.getMonth();
@@ -567,41 +629,97 @@ function showDashboard() {
     if (idx >= 0 && idx < 6) monthCounts[idx]++;
   });
 
-  if (deadlineChart) deadlineChart.destroy();
-  deadlineChart = new Chart(document.getElementById('deadlineChart'), {
-    type: 'bar',
-    data: {
-      labels: months,
-      datasets: [{
-        data: monthCounts,
-        backgroundColor: accent
-      }]
-    },
-    options: {
-      plugins: {
-          legend: { display: false },
-          title: {
-            display: true,
-            text: 'Upcoming Deadlines (Next 6 Months)',
-            color: '#213646',
-            font: {
-              size: 18,
-              weight: 'bold'
+  // Load Chart.js on demand (first visit only)
+  if (!chartJsLoaded) {
+    const dashEl = document.getElementById('dashboard');
+    const loadingEl = document.createElement('div');
+    loadingEl.className = 'loading-spinner';
+    loadingEl.textContent = 'Loading charts...';
+    dashEl.insertBefore(loadingEl, dashEl.firstChild);
+    await loadChartJsIfNeeded();
+    loadingEl.remove();
+  }
+
+  // Memoize charts - create once, update data on subsequent visits
+  if (!providerChart) {
+    providerChart = new Chart(document.getElementById('providerChart'), {
+      type: 'bar',
+      data: {
+        labels: providerLabels,
+        datasets: [{
+          data: providerValues,
+          backgroundColor: chartColors[0],
+          borderColor: chartColors[0],
+          borderWidth: 1
+        }]
+      },
+      plugins: [ChartDataLabels],
+      options: {
+        indexAxis: 'y',
+        plugins: {
+            legend: { display: false },
+            datalabels: {
+              anchor: 'end',
+              align: 'end',
+              color: '#213646',
+              font: { weight: 'bold' }
             },
-            padding: {
-              top: 10,
-              bottom: 10
+            title: {
+              display: true,
+              text: 'Grants by Provider',
+              color: '#213646',
+              font: { size: 18, weight: 'bold' },
+              padding: { top: 10, bottom: 10 }
             }
-          }
+          },
+        scales: {
+          x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
+          y: { grid: { display: false } }
+        },
+        animation: { duration: 800 }
+      }
+    });
+  } else {
+    // Update existing chart data without recreating
+    providerChart.data.labels = providerLabels;
+    providerChart.data.datasets[0].data = providerValues;
+    providerChart.update('none'); // Skip animation on repeat views
+  }
+
+  if (!deadlineChart) {
+    deadlineChart = new Chart(document.getElementById('deadlineChart'), {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: [{
+          data: monthCounts,
+          backgroundColor: accent
+        }]
       },
-      scales: {
-        y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
-        x: { grid: { display: false } }
-      },
-      animation: { duration: 800 },
-      aspectRatio: 2
-    }
-  });
+      options: {
+        plugins: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: 'Upcoming Deadlines (Next 6 Months)',
+              color: '#213646',
+              font: { size: 18, weight: 'bold' },
+              padding: { top: 10, bottom: 10 }
+            }
+        },
+        scales: {
+          y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
+          x: { grid: { display: false } }
+        },
+        animation: { duration: 800 },
+        aspectRatio: 2
+      }
+    });
+  } else {
+    deadlineChart.data.labels = months;
+    deadlineChart.data.datasets[0].data = monthCounts;
+    deadlineChart.update('none');
+  }
 
   // Calculate and render most matched grants
   const grantMatchCounts = {};
@@ -626,9 +744,11 @@ function showDashboard() {
       <span class="provider-tag">${g.provider}</span>
     </li>
   `).join('');
+
+  dashboardInitialized = true;
 }
 
-function showTab(name) {
+async function showTab(name) {
   const rec = document.getElementById('recommendations');
   const dash = document.getElementById('dashboard');
   const grantsSec = document.getElementById('tab-grants');
@@ -650,18 +770,20 @@ function showTab(name) {
     dash.classList.remove('hidden');
     statTab.classList.add('active');
     statTab.setAttribute('aria-selected', 'true');
-    requestAnimationFrame(showDashboard);
+    await showDashboard();
     track('view_stats_tab');
   } else if (name === 'grants') {
     grantsSec.classList.remove('hidden');
     grantsTab.classList.add('active');
     grantsTab.setAttribute('aria-selected', 'true');
-    if (!grantsTable) initGrantsTable();
+    if (!grantsTable) await initGrantsTable();
     track('view_grants_tab');
   } else if (name === 'collaborations') {
     collabSec.classList.remove('hidden');
     collabTab.classList.add('active');
     collabTab.setAttribute('aria-selected', 'true');
+    // Lazy load collaborations data on first visit
+    await loadCollaborationsIfNeeded();
     showCollabLandingWizard();
     track('view_collaborations_tab');
   } else {
@@ -709,7 +831,18 @@ function showGrants(name) {
   );
 }
 
-function initGrantsTable() {
+async function initGrantsTable() {
+  // Show loading indicator
+  const tableContainer = document.getElementById('tab-grants');
+  const loadingEl = document.createElement('div');
+  loadingEl.className = 'loading-spinner';
+  loadingEl.textContent = 'Loading table...';
+  tableContainer.insertBefore(loadingEl, tableContainer.firstChild);
+
+  // Load DataTables libraries on demand
+  await loadDataTablesIfNeeded();
+  loadingEl.remove();
+
   const idToNames = {};
   matchesData.forEach(m => {
     if (!Array.isArray(m.grants)) return;
@@ -810,14 +943,16 @@ async function init() {
     githubLink.addEventListener('click', () => track('click_github'));
   }
 
-  // Recommendations tab search input
+  // Recommendations tab search input (debounced for smoother typing)
   const input = document.getElementById('researcher-input');
-  input.addEventListener('input', (e) => updateSuggestions(e.target.value));
+  const debouncedUpdateSuggestions = debounce((value) => updateSuggestions(value), 100);
+  input.addEventListener('input', (e) => debouncedUpdateSuggestions(e.target.value));
   input.addEventListener('focus', (e) => updateSuggestions(e.target.value));
 
-  // Collaborations tab search input
+  // Collaborations tab search input (debounced)
   const collabInput = document.getElementById('collab-researcher-input');
-  collabInput.addEventListener('input', (e) => updateCollabSuggestions(e.target.value));
+  const debouncedCollabSuggestions = debounce((value) => updateCollabSuggestions(value), 100);
+  collabInput.addEventListener('input', (e) => debouncedCollabSuggestions(e.target.value));
   collabInput.addEventListener('focus', (e) => updateCollabSuggestions(e.target.value));
 
   // Close suggestions when clicking outside
