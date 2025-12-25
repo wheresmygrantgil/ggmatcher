@@ -160,14 +160,24 @@ main {
   padding: 0.9rem 1.1rem;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
   transition: background 0.15s ease;
   border-bottom: 1px solid #f0f0f0;
+}
+.suggestion-name {
+  font-weight: 500;
+}
+.suggestion-affiliation {
+  font-size: 0.8rem;
+  color: #6b7280;
 }
 .suggestion-item:last-child { border-bottom: none; }
 .suggestion-item:hover,
 .suggestion-item:focus  { background: var(--accent); color: #ffffff; }
+.suggestion-item:hover .suggestion-affiliation,
+.suggestion-item:focus .suggestion-affiliation { color: #e0e0e0; }
 
 /* ========== Dataset stats dashboard ========== */
 .dashboard {
@@ -291,6 +301,23 @@ main {
   font-size: 0.75rem;
   color: #666;
   white-space: nowrap;
+}
+
+/* ========== Researcher header ========== */
+.researcher-header {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.researcher-name {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+.researcher-affiliation {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin: 0;
 }
 
 /* ========== Grant cards ========== */

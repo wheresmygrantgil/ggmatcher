@@ -1,5 +1,6 @@
 let matchesData = [];
 let grantsData = [];
+let affiliationData = {};
 let rerankedLoaded = false;
 let grantsMap;
 let researcherNames = [];
@@ -40,9 +41,10 @@ function showLandingWizard() {
 
 async function loadData() {
   try {
-    const [matchesResp, grantsResp] = await Promise.all([
+    const [matchesResp, grantsResp, affiliationResp] = await Promise.all([
       fetch('data/reranked_matches.json').catch(() => null),
       fetch('data/grants.json'),
+      fetch('data/affiliation_dict.json').catch(() => null),
     ]);
 
     let matchesText;
@@ -59,6 +61,11 @@ async function loadData() {
     const grantsText = await grantsResp.text();
     track('data_load', { status: 'success', dataset: 'grants' });
 
+    if (affiliationResp && affiliationResp.ok) {
+      affiliationData = await affiliationResp.json();
+      track('data_load', { status: 'success', dataset: 'affiliation_dict' });
+    }
+
     matchesData = JSON.parse(matchesText);
     grantsData = JSON.parse(grantsText);
     grantsMap = new Map(grantsData.map(g => [String(g.grant_id), g]));
@@ -74,7 +81,20 @@ function createSuggestion(name) {
   const div = document.createElement('div');
   div.className = 'suggestion-item';
   div.tabIndex = 0;
-  div.textContent = name;
+
+  const nameSpan = document.createElement('span');
+  nameSpan.className = 'suggestion-name';
+  nameSpan.textContent = name;
+  div.appendChild(nameSpan);
+
+  const affiliation = affiliationData[name];
+  if (affiliation) {
+    const affSpan = document.createElement('span');
+    affSpan.className = 'suggestion-affiliation';
+    affSpan.textContent = affiliation;
+    div.appendChild(affSpan);
+  }
+
   div.addEventListener('click', () => {
     selectResearcher(name);
   });
@@ -456,6 +476,16 @@ function showGrants(name) {
 
   const match = matchesData.find((m) => m.name === name);
   if (!match) return;
+
+  // Add researcher header with affiliation
+  const header = document.createElement('div');
+  header.className = 'researcher-header';
+  header.innerHTML = `<h2 class="researcher-name">${name}</h2>`;
+  const affiliation = affiliationData[name];
+  if (affiliation) {
+    header.innerHTML += `<p class="researcher-affiliation">${affiliation}</p>`;
+  }
+  grantsContainer.appendChild(header);
 
   match.grants.forEach((g, index) => {
     const id = typeof g === 'object' ? g.grant_id : g;
