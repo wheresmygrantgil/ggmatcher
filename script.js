@@ -41,8 +41,8 @@ function showLandingWizard() {
 async function loadData() {
   try {
     const [matchesResp, grantsResp] = await Promise.all([
-      fetch('reranked_matches.json').catch(() => null),
-      fetch('grants.json'),
+      fetch('data/reranked_matches.json').catch(() => null),
+      fetch('data/grants.json'),
     ]);
 
     let matchesText;
@@ -51,7 +51,7 @@ async function loadData() {
       matchesText = await matchesResp.text();
       track('data_load', { status: 'success', dataset: 'reranked_matches' });
     } else {
-      const fallback = await fetch('matches.json');
+      const fallback = await fetch('data/matches.json');
       matchesText = await fallback.text();
       track('data_load', { status: 'success', dataset: 'matches_fallback' });
     }
