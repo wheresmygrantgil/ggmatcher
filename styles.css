@@ -81,6 +81,7 @@ h1 {
 .tabs {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 1rem;
 }
@@ -188,6 +189,7 @@ main {
 .stats-dashboard {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -781,4 +783,37 @@ footer .social-icon:hover { transform: scale(1.15); }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* ========== Mobile Responsiveness ========== */
+@media (max-width: 600px) {
+  .stat {
+    min-width: 100px;
+    padding: 0.75rem 1rem;
+  }
+
+  .stat-number {
+    font-size: 1.3rem;
+  }
+
+  .chart-grid canvas {
+    max-width: 100%;
+  }
+
+  .tab {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .stats-dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .stat {
+    min-width: unset;
+  }
 }
