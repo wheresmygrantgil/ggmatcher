@@ -23,6 +23,13 @@ function debounce(fn, delay = 150) {
   };
 }
 
+// HTML escape helper to prevent XSS
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 // Helper to load scripts dynamically
 function loadScript(src) {
   return new Promise((resolve, reject) => {
@@ -869,6 +876,7 @@ async function initGrantsTable() {
     suggested_collaborators: idToNames[g.grant_id]
       ? idToNames[g.grant_id]
           .slice(0, 10)
+          .map(name => `<span class="collab-link" data-researcher="${escapeHtml(name)}">${escapeHtml(name)}</span>`)
           .join(' <strong>·</strong> ')
       : '',
     link: g.submission_link,
@@ -908,6 +916,20 @@ async function initGrantsTable() {
       results_count: resultsCount,
       has_results: resultsCount > 0
     });
+  });
+
+  // Handle clicks on collaborator names in the table
+  $('#grants-table').on('click', '.collab-link', function(e) {
+    e.preventDefault();
+    const researcherName = this.dataset.researcher;
+
+    track('click_suggested_collaborator', {
+      researcher_name: researcherName,
+      source: 'grants_table'
+    });
+
+    showTab('recommendations');
+    selectResearcher(researcherName);
   });
 
 }

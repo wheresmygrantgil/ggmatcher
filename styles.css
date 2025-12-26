@@ -524,6 +524,24 @@ footer .social-icon:hover { transform: scale(1.15); }
   display: none; /* hide default search */
 }
 
+/* === Clickable collaborator links in Grants table === */
+.collab-link {
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+
+.collab-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.collab-link:focus {
+  outline: 2px dashed var(--accent);
+  outline-offset: 2px;
+}
+
 /* === Voting === */
 .vote-bar {
   display: flex;
