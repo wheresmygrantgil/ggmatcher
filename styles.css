@@ -497,6 +497,19 @@ footer .social-icon:hover { transform: scale(1.15); }
   display: none; /* hide default search */
 }
 
+/* Researcher links in Suggested Collaborators column */
+.researcher-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.researcher-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 /* === Voting === */
 .vote-bar {
   display: flex;

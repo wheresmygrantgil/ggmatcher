@@ -501,11 +501,7 @@ function initGrantsTable() {
     title: g.title,
     due_date: formatDate(g.due_date),
     money: g.proposed_money,
-    suggested_collaborators: idToNames[g.grant_id]
-      ? idToNames[g.grant_id]
-          .slice(0, 10)
-          .join(' <strong>·</strong> ')
-      : '',
+    suggested_collaborators: idToNames[g.grant_id] || [],
     link: g.submission_link,
   }));
 
@@ -530,7 +526,18 @@ function initGrantsTable() {
       { data: 'title', title: 'Title' },
       { data: 'due_date', title: 'Due Date' },
       { data: 'money', title: 'Money' },
-      { data: 'suggested_collaborators', title: 'Suggested Collaborators' },
+      {
+        data: 'suggested_collaborators',
+        title: 'Suggested Collaborators',
+        render: (data, type, row) => {
+          if (type === 'display' && Array.isArray(data) && data.length > 0) {
+            return data.slice(0, 10).map(name =>
+              `<a href="#" class="researcher-link" data-researcher="${name}" data-grant-id="${row.grant_id}">${name}</a>`
+            ).join(' <strong>·</strong> ');
+          }
+          return Array.isArray(data) ? data.slice(0, 10).join(', ') : '';
+        }
+      },
       { data: 'link', title: 'Link', orderable: false, render: d => `<a href="${d}" target="_blank" rel="noopener">Open</a>` },
     ]
   });
@@ -543,6 +550,24 @@ function initGrantsTable() {
       results_count: resultsCount,
       has_results: resultsCount > 0
     });
+  });
+
+  // Handle researcher link clicks in Suggested Collaborators column
+  $('#grants-table').on('click', '.researcher-link', function(e) {
+    e.preventDefault();
+    const researcherName = $(this).data('researcher');
+    const grantId = $(this).data('grant-id');
+
+    // Track the click with Google Analytics
+    track('click_suggested_collaborator', {
+      researcher_name: researcherName,
+      grant_id: grantId,
+      source: 'grants_table'
+    });
+
+    // Select the researcher and switch to Recommendations tab
+    selectResearcher(researcherName);
+    showTab('recommendations');
   });
 
 }
