@@ -1,7 +1,7 @@
 # Grand grant Matcher
 
 This project is a small static website that presents matching funding opportunities for researchers at the University of Haifa.  
-Researchers can type their name into a search box and view grants that are relevant to them. The matching data is stored in the `grants.json` and `matches.json` files included in this repository.
+Researchers can type their name into a search box and view grants that are relevant to them. The matching data is stored in the `data/` directory (`grants.json`, `matches.json`, etc.).
 
 ## Running Locally
 

@@ -1,11 +1,107 @@
 let matchesData = [];
 let grantsData = [];
+let affiliationData = {};
 let rerankedLoaded = false;
 let grantsMap;
 let researcherNames = [];
 let providerChart;
 let deadlineChart;
 let grantsTable;
+
+// Library loading state
+let dataTablesLoaded = false;
+let dataTablesLoading = false;
+let chartJsLoaded = false;
+let chartJsLoading = false;
+
+// Debounce helper for smoother search input
+function debounce(fn, delay = 150) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
+}
+
+// HTML escape helper to prevent XSS
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Helper to load scripts dynamically
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[src="${src}"]`);
+    if (existing) { resolve(); return; }
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+// Load DataTables and dependencies on demand
+async function loadDataTablesIfNeeded() {
+  if (dataTablesLoaded) return;
+  if (dataTablesLoading) {
+    // Wait for loading to complete
+    while (dataTablesLoading) await new Promise(r => setTimeout(r, 50));
+    return;
+  }
+  dataTablesLoading = true;
+
+  try {
+    // jQuery first (required by DataTables)
+    await loadScript('https://code.jquery.com/jquery-3.7.0.min.js');
+    // DataTables core
+    await loadScript('https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js');
+    // DataTables plugins in parallel
+    await Promise.all([
+      loadScript('https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js'),
+      loadScript('https://cdn.datatables.net/colreorder/1.6.2/js/dataTables.colReorder.min.js'),
+      loadScript('https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js'),
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'),
+    ]);
+    // These depend on previous ones
+    await Promise.all([
+      loadScript('https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js'),
+      loadScript('https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js'),
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'),
+    ]);
+    await loadScript('https://cdn.datatables.net/plug-ins/1.13.6/features/mark.js/datatables.mark.js');
+
+    dataTablesLoaded = true;
+  } finally {
+    dataTablesLoading = false;
+  }
+}
+
+// Load Chart.js on demand
+async function loadChartJsIfNeeded() {
+  if (chartJsLoaded) return;
+  if (chartJsLoading) {
+    while (chartJsLoading) await new Promise(r => setTimeout(r, 50));
+    return;
+  }
+  chartJsLoading = true;
+
+  try {
+    await loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js');
+    await loadScript('https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js');
+    chartJsLoaded = true;
+  } finally {
+    chartJsLoading = false;
+  }
+}
+
+// Collaborations data
+let collaborationsData = [];
+let collabResearcherNames = [];
+let collaborationsLoaded = false;
+let collaborationsLoading = false;
 
 // --- Voting identity helpers ----------------------------------------------
 let currentUser = localStorage.getItem('researcher_id') || null;
@@ -34,15 +130,17 @@ function showLandingWizard() {
   const container = document.getElementById('grants');
   container.innerHTML = `
     <div class="landing-wizard">
-      <img src="assets/wizardoc.png" alt="Cartoon robot scanning grant proposals">
+      <img src="assets/wizardoc.jpg" alt="Cartoon robot scanning grant proposals" loading="lazy" decoding="async">
     </div>`;
 }
 
 async function loadData() {
   try {
-    const [matchesResp, grantsResp] = await Promise.all([
-      fetch('reranked_matches.json').catch(() => null),
-      fetch('grants.json'),
+    // Note: collaborations.json is loaded lazily when user visits Collaborations tab
+    const [matchesResp, grantsResp, affiliationResp] = await Promise.all([
+      fetch('data/reranked_matches.json').catch(() => null),
+      fetch('data/grants.json'),
+      fetch('data/affiliation_dict.json').catch(() => null),
     ]);
 
     let matchesText;
@@ -51,13 +149,18 @@ async function loadData() {
       matchesText = await matchesResp.text();
       track('data_load', { status: 'success', dataset: 'reranked_matches' });
     } else {
-      const fallback = await fetch('matches.json');
+      const fallback = await fetch('data/matches.json');
       matchesText = await fallback.text();
       track('data_load', { status: 'success', dataset: 'matches_fallback' });
     }
 
     const grantsText = await grantsResp.text();
     track('data_load', { status: 'success', dataset: 'grants' });
+
+    if (affiliationResp && affiliationResp.ok) {
+      affiliationData = await affiliationResp.json();
+      track('data_load', { status: 'success', dataset: 'affiliation_dict' });
+    }
 
     matchesData = JSON.parse(matchesText);
     grantsData = JSON.parse(grantsText);
@@ -70,11 +173,47 @@ async function loadData() {
   }
 }
 
+// Lazy load collaborations data only when needed
+async function loadCollaborationsIfNeeded() {
+  if (collaborationsLoaded || collaborationsLoading) return;
+  collaborationsLoading = true;
+
+  const container = document.getElementById('collaborators-list');
+  container.innerHTML = '<div class="loading-spinner">Loading collaborations...</div>';
+
+  try {
+    const resp = await fetch('data/collaborations.json');
+    if (resp.ok) {
+      collaborationsData = await resp.json();
+      collabResearcherNames = collaborationsData.map(r => r.name);
+      collaborationsLoaded = true;
+      track('data_load', { status: 'success', dataset: 'collaborations' });
+    }
+  } catch (err) {
+    track('data_load', { status: 'error', dataset: 'collaborations', error_message: err.message });
+  } finally {
+    collaborationsLoading = false;
+  }
+}
+
 function createSuggestion(name) {
   const div = document.createElement('div');
   div.className = 'suggestion-item';
   div.tabIndex = 0;
-  div.textContent = name;
+
+  const nameSpan = document.createElement('span');
+  nameSpan.className = 'suggestion-name';
+  nameSpan.textContent = name;
+  div.appendChild(nameSpan);
+
+  const affiliation = affiliationData[name];
+  if (affiliation) {
+    const affSpan = document.createElement('span');
+    affSpan.className = 'suggestion-affiliation';
+    affSpan.textContent = affiliation;
+    div.appendChild(affSpan);
+  }
+
   div.addEventListener('click', () => {
     selectResearcher(name);
   });
@@ -116,6 +255,189 @@ function selectResearcher(name) {
   showGrants(name);
   track('select_researcher', { researcher_name: name });
 }
+
+// ========== Collaborations Tab Functions ==========
+
+function showCollabLandingWizard() {
+  const container = document.getElementById('collaborators-list');
+  container.innerHTML = `
+    <div class="landing-wizard">
+      <img src="assets/wizardscolab.jpg" alt="Two wizards collaborating on grant proposals" loading="lazy" decoding="async">
+    </div>`;
+}
+
+function createCollabSuggestion(name) {
+  const div = document.createElement('div');
+  div.className = 'suggestion-item';
+  div.tabIndex = 0;
+
+  const nameSpan = document.createElement('span');
+  nameSpan.className = 'suggestion-name';
+  nameSpan.textContent = name;
+  div.appendChild(nameSpan);
+
+  const affiliation = affiliationData[name];
+  if (affiliation) {
+    const affSpan = document.createElement('span');
+    affSpan.className = 'suggestion-affiliation';
+    affSpan.textContent = affiliation;
+    div.appendChild(affSpan);
+  }
+
+  div.addEventListener('click', () => {
+    selectCollabResearcher(name);
+  });
+  return div;
+}
+
+function updateCollabSuggestions(value) {
+  const suggBox = document.getElementById('collab-suggestions');
+  suggBox.innerHTML = '';
+
+  if (!value) {
+    suggBox.style.display = 'none';
+    return;
+  }
+
+  const filtered = collabResearcherNames
+    .filter((n) => n.toLowerCase().includes(value.toLowerCase()))
+    .slice(0, 8);
+
+  if (filtered.length === 0) {
+    suggBox.style.display = 'none';
+    return;
+  }
+
+  filtered.forEach((name) => suggBox.appendChild(createCollabSuggestion(name)));
+  suggBox.style.display = 'block';
+}
+
+function selectCollabResearcher(name) {
+  document.getElementById('collab-researcher-input').value = name;
+  document.getElementById('collab-suggestions').style.display = 'none';
+
+  showCollaborators(name);
+  track('select_collab_researcher', { researcher_name: name });
+}
+
+function truncateText(text, maxLength) {
+  if (!text) return '';
+  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+}
+
+function createCollaboratorCard(collaborator) {
+  const card = document.createElement('div');
+  card.className = 'collaborator-card';
+
+  // Header with name and affiliation
+  const header = document.createElement('div');
+  header.className = 'collaborator-header';
+
+  const nameEl = document.createElement('h3');
+  nameEl.className = 'collaborator-name';
+  nameEl.textContent = truncateText(collaborator.name, 40);
+  nameEl.title = collaborator.name; // Full name on hover
+  header.appendChild(nameEl);
+
+  // Add affiliation
+  const affiliation = affiliationData[collaborator.name];
+  if (affiliation) {
+    const affEl = document.createElement('p');
+    affEl.className = 'collaborator-affiliation';
+    affEl.textContent = affiliation;
+    affEl.title = affiliation;
+    header.appendChild(affEl);
+  }
+
+  card.appendChild(header);
+
+  // Shared grants section
+  if (collaborator.shared_grants && collaborator.shared_grants.length > 0) {
+    const grantsSection = document.createElement('div');
+    grantsSection.className = 'shared-grants-section';
+
+    const grantsTitle = document.createElement('h4');
+    grantsTitle.textContent = 'Shared Grants:';
+    grantsSection.appendChild(grantsTitle);
+
+    const grantsList = document.createElement('ul');
+    grantsList.className = 'shared-grants-list';
+
+    collaborator.shared_grants.forEach((grantId) => {
+      const grant = grantsMap.get(String(grantId));
+      if (!grant) return;
+
+      const grantItem = document.createElement('li');
+      grantItem.className = 'shared-grant-item';
+
+      // Grant title link
+      const titleLink = document.createElement('a');
+      titleLink.className = 'grant-title-link';
+      titleLink.href = grant.submission_link;
+      titleLink.target = '_blank';
+      titleLink.rel = 'noopener';
+      titleLink.textContent = grant.title;
+      titleLink.addEventListener('click', () => {
+        track('click_collab_submission_link', {
+          grant_id: grant.grant_id,
+          collaborator_name: collaborator.name
+        });
+      });
+      grantItem.appendChild(titleLink);
+
+      // Details toggle button
+      const toggleBtn = document.createElement('button');
+      toggleBtn.className = 'collab-summary-toggle';
+      toggleBtn.textContent = '▶ Details';
+
+      const detailsDiv = document.createElement('div');
+      detailsDiv.className = 'grant-details';
+      detailsDiv.hidden = true;
+      detailsDiv.innerHTML = `
+        <p><span class="detail-label">Provider:</span> ${grant.provider}</p>
+        <p><span class="detail-label">Due Date:</span> ${formatDate(grant.due_date)}</p>
+        <p><span class="detail-label">Proposed Money:</span> ${moneyFmt(grant.proposed_money)}</p>
+        <p><span class="detail-label">Summary:</span> ${grant.summary_text || 'N/A'}</p>
+      `;
+
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = !detailsDiv.hidden;
+        detailsDiv.hidden = isOpen;
+        toggleBtn.textContent = isOpen ? '▶ Details' : '▼ Details';
+        track(isOpen ? 'collapse_collab_grant' : 'expand_collab_grant', {
+          grant_id: grant.grant_id,
+          collaborator_name: collaborator.name
+        });
+      });
+
+      grantItem.appendChild(toggleBtn);
+      grantItem.appendChild(detailsDiv);
+      grantsList.appendChild(grantItem);
+    });
+
+    grantsSection.appendChild(grantsList);
+    card.appendChild(grantsSection);
+  }
+
+  return card;
+}
+
+function showCollaborators(name) {
+  const container = document.getElementById('collaborators-list');
+  container.innerHTML = '';
+
+  const researcher = collaborationsData.find((r) => r.name === name);
+  if (!researcher || !researcher.collaborators || researcher.collaborators.length === 0) {
+    container.innerHTML = '<p class="no-results">No collaborators found for this researcher.</p>';
+    return;
+  }
+
+  researcher.collaborators.forEach((collaborator) => {
+    container.appendChild(createCollaboratorCard(collaborator));
+  });
+}
+
+// ========== End Collaborations Tab Functions ==========
 
 function formatDate(raw) {
   if (!raw) return '';
@@ -259,82 +581,43 @@ function animateNumber(el, value, duration = 800) {
   requestAnimationFrame(step);
 }
 
-function showDashboard() {
+let dashboardInitialized = false;
+
+async function showDashboard() {
   const grantTotal = grantsData.length;
   const researcherTotal = matchesData.length;
   const matchTotal = matchesData.reduce((s, r) => s + (r.grants ? r.grants.length : 0), 0);
 
   const avgMatchesPerResearcher = researcherTotal > 0 ? (matchTotal / researcherTotal).toFixed(1) : 0;
 
-  animateNumber(document.getElementById('grant-count'), grantTotal);
-  animateNumber(document.getElementById('researcher-count'), researcherTotal);
-  animateNumber(document.getElementById('match-count'), matchTotal);
+  // Animate numbers only on first visit
+  if (!dashboardInitialized) {
+    animateNumber(document.getElementById('grant-count'), grantTotal);
+    animateNumber(document.getElementById('researcher-count'), researcherTotal);
+    animateNumber(document.getElementById('match-count'), matchTotal);
+  } else {
+    document.getElementById('grant-count').textContent = grantTotal.toLocaleString();
+    document.getElementById('researcher-count').textContent = researcherTotal.toLocaleString();
+    document.getElementById('match-count').textContent = matchTotal.toLocaleString();
+  }
   document.getElementById('avg-match-count').textContent = avgMatchesPerResearcher;
 
   const styles = getComputedStyle(document.documentElement);
   const accent = styles.getPropertyValue('--accent').trim();
-  const primary = styles.getPropertyValue('--primary').trim();
 
   const providerCounts = {};
   grantsData.forEach(g => {
     const label = g.provider.startsWith('HORIZON') ? 'EU Horizon' : g.provider;
     providerCounts[label] = (providerCounts[label] || 0) + 1;
   });
-  // Sort providers by count (descending) for better readability
   const sortedProviders = Object.entries(providerCounts).sort((a, b) => b[1] - a[1]);
   const providerLabels = sortedProviders.map(([label]) => label);
   const providerValues = sortedProviders.map(([, count]) => count);
-  // Distinct color palette for chart segments
   const chartColors = [
     '#00bcd4', '#ff6384', '#36a2eb', '#ffce56',
     '#4bc0c0', '#9966ff', '#ff9f40', '#c9cbcf',
     '#e7e9ed', '#7cb342', '#d32f2f', '#1976d2'
   ];
-
-  if (providerChart) providerChart.destroy();
-  providerChart = new Chart(document.getElementById('providerChart'), {
-    type: 'bar',
-    data: {
-      labels: providerLabels,
-      datasets: [{
-        data: providerValues,
-        backgroundColor: chartColors[0],
-        borderColor: chartColors[0],
-        borderWidth: 1
-      }]
-    },
-    plugins: [ChartDataLabels],
-    options: {
-      indexAxis: 'y',
-      plugins: {
-          legend: { display: false },
-          datalabels: {
-            anchor: 'end',
-            align: 'end',
-            color: '#213646',
-            font: { weight: 'bold' }
-          },
-          title: {
-            display: true,
-            text: 'Grants by Provider',
-            color: '#213646',
-            font: {
-              size: 18,
-              weight: 'bold'
-            },
-            padding: {
-              top: 10,
-              bottom: 10
-            }
-          }
-        },
-      scales: {
-        x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
-        y: { grid: { display: false } }
-      },
-      animation: { duration: 800 }
-    }
-  });
 
   const now = new Date();
   const baseIndex = now.getFullYear() * 12 + now.getMonth();
@@ -353,41 +636,97 @@ function showDashboard() {
     if (idx >= 0 && idx < 6) monthCounts[idx]++;
   });
 
-  if (deadlineChart) deadlineChart.destroy();
-  deadlineChart = new Chart(document.getElementById('deadlineChart'), {
-    type: 'bar',
-    data: {
-      labels: months,
-      datasets: [{
-        data: monthCounts,
-        backgroundColor: accent
-      }]
-    },
-    options: {
-      plugins: {
-          legend: { display: false },
-          title: {
-            display: true,
-            text: 'Upcoming Deadlines (Next 6 Months)',
-            color: '#213646',
-            font: {
-              size: 18,
-              weight: 'bold'
+  // Load Chart.js on demand (first visit only)
+  if (!chartJsLoaded) {
+    const dashEl = document.getElementById('dashboard');
+    const loadingEl = document.createElement('div');
+    loadingEl.className = 'loading-spinner';
+    loadingEl.textContent = 'Loading charts...';
+    dashEl.insertBefore(loadingEl, dashEl.firstChild);
+    await loadChartJsIfNeeded();
+    loadingEl.remove();
+  }
+
+  // Memoize charts - create once, update data on subsequent visits
+  if (!providerChart) {
+    providerChart = new Chart(document.getElementById('providerChart'), {
+      type: 'bar',
+      data: {
+        labels: providerLabels,
+        datasets: [{
+          data: providerValues,
+          backgroundColor: chartColors[0],
+          borderColor: chartColors[0],
+          borderWidth: 1
+        }]
+      },
+      plugins: [ChartDataLabels],
+      options: {
+        indexAxis: 'y',
+        plugins: {
+            legend: { display: false },
+            datalabels: {
+              anchor: 'end',
+              align: 'end',
+              color: '#213646',
+              font: { weight: 'bold' }
             },
-            padding: {
-              top: 10,
-              bottom: 10
+            title: {
+              display: true,
+              text: 'Grants by Provider',
+              color: '#213646',
+              font: { size: 18, weight: 'bold' },
+              padding: { top: 10, bottom: 10 }
             }
-          }
+          },
+        scales: {
+          x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
+          y: { grid: { display: false } }
+        },
+        animation: { duration: 800 }
+      }
+    });
+  } else {
+    // Update existing chart data without recreating
+    providerChart.data.labels = providerLabels;
+    providerChart.data.datasets[0].data = providerValues;
+    providerChart.update('none'); // Skip animation on repeat views
+  }
+
+  if (!deadlineChart) {
+    deadlineChart = new Chart(document.getElementById('deadlineChart'), {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: [{
+          data: monthCounts,
+          backgroundColor: accent
+        }]
       },
-      scales: {
-        y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
-        x: { grid: { display: false } }
-      },
-      animation: { duration: 800 },
-      aspectRatio: 2
-    }
-  });
+      options: {
+        plugins: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: 'Upcoming Deadlines (Next 6 Months)',
+              color: '#213646',
+              font: { size: 18, weight: 'bold' },
+              padding: { top: 10, bottom: 10 }
+            }
+        },
+        scales: {
+          y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
+          x: { grid: { display: false } }
+        },
+        animation: { duration: 800 },
+        aspectRatio: 2
+      }
+    });
+  } else {
+    deadlineChart.data.labels = months;
+    deadlineChart.data.datasets[0].data = monthCounts;
+    deadlineChart.update('none');
+  }
 
   // Calculate and render most matched grants
   const grantMatchCounts = {};
@@ -412,18 +751,22 @@ function showDashboard() {
       <span class="provider-tag">${g.provider}</span>
     </li>
   `).join('');
+
+  dashboardInitialized = true;
 }
 
-function showTab(name) {
+async function showTab(name) {
   const rec = document.getElementById('recommendations');
   const dash = document.getElementById('dashboard');
   const grantsSec = document.getElementById('tab-grants');
+  const collabSec = document.getElementById('collaborations');
   const recTab = document.getElementById('tab-recommendations');
   const grantsTab = document.getElementById('tab-grants-btn');
   const statTab = document.getElementById('tab-stats');
+  const collabTab = document.getElementById('tab-collaborations');
 
-  const allSecs = [rec, dash, grantsSec];
-  const allTabs = [recTab, grantsTab, statTab];
+  const allSecs = [rec, dash, grantsSec, collabSec];
+  const allTabs = [recTab, grantsTab, statTab, collabTab];
   allSecs.forEach(sec => sec.classList.add('hidden'));
   allTabs.forEach(btn => {
     btn.classList.remove('active');
@@ -434,14 +777,22 @@ function showTab(name) {
     dash.classList.remove('hidden');
     statTab.classList.add('active');
     statTab.setAttribute('aria-selected', 'true');
-    requestAnimationFrame(showDashboard);
+    await showDashboard();
     track('view_stats_tab');
   } else if (name === 'grants') {
     grantsSec.classList.remove('hidden');
     grantsTab.classList.add('active');
     grantsTab.setAttribute('aria-selected', 'true');
-    if (!grantsTable) initGrantsTable();
+    if (!grantsTable) await initGrantsTable();
     track('view_grants_tab');
+  } else if (name === 'collaborations') {
+    collabSec.classList.remove('hidden');
+    collabTab.classList.add('active');
+    collabTab.setAttribute('aria-selected', 'true');
+    // Lazy load collaborations data on first visit
+    await loadCollaborationsIfNeeded();
+    showCollabLandingWizard();
+    track('view_collaborations_tab');
   } else {
     rec.classList.remove('hidden');
     recTab.classList.add('active');
@@ -456,6 +807,16 @@ function showGrants(name) {
 
   const match = matchesData.find((m) => m.name === name);
   if (!match) return;
+
+  // Add researcher header with affiliation
+  const header = document.createElement('div');
+  header.className = 'researcher-header';
+  header.innerHTML = `<h2 class="researcher-name">${name}</h2>`;
+  const affiliation = affiliationData[name];
+  if (affiliation) {
+    header.innerHTML += `<p class="researcher-affiliation">${affiliation}</p>`;
+  }
+  grantsContainer.appendChild(header);
 
   match.grants.forEach((g, index) => {
     const id = typeof g === 'object' ? g.grant_id : g;
@@ -477,7 +838,18 @@ function showGrants(name) {
   );
 }
 
-function initGrantsTable() {
+async function initGrantsTable() {
+  // Show loading indicator
+  const tableContainer = document.getElementById('tab-grants');
+  const loadingEl = document.createElement('div');
+  loadingEl.className = 'loading-spinner';
+  loadingEl.textContent = 'Loading table...';
+  tableContainer.insertBefore(loadingEl, tableContainer.firstChild);
+
+  // Load DataTables libraries on demand
+  await loadDataTablesIfNeeded();
+  loadingEl.remove();
+
   const idToNames = {};
   matchesData.forEach(m => {
     if (!Array.isArray(m.grants)) return;
@@ -504,6 +876,7 @@ function initGrantsTable() {
     suggested_collaborators: idToNames[g.grant_id]
       ? idToNames[g.grant_id]
           .slice(0, 10)
+          .map(name => `<span class="collab-link" data-researcher="${escapeHtml(name)}">${escapeHtml(name)}</span>`)
           .join(' <strong>·</strong> ')
       : '',
     link: g.submission_link,
@@ -545,6 +918,20 @@ function initGrantsTable() {
     });
   });
 
+  // Handle clicks on collaborator names in the table
+  $('#grants-table').on('click', '.collab-link', function(e) {
+    e.preventDefault();
+    const researcherName = this.dataset.researcher;
+
+    track('click_suggested_collaborator', {
+      researcher_name: researcherName,
+      source: 'grants_table'
+    });
+
+    showTab('recommendations');
+    selectResearcher(researcherName);
+  });
+
 }
 
 async function init() {
@@ -561,6 +948,7 @@ async function init() {
   document.getElementById('tab-recommendations').addEventListener('click', () => showTab('recommendations'));
   document.getElementById('tab-grants-btn').addEventListener('click', () => showTab('grants'));
   document.getElementById('tab-stats').addEventListener('click', () => showTab('stats'));
+  document.getElementById('tab-collaborations').addEventListener('click', () => showTab('collaborations'));
 
   const linkedInLink = document.querySelector('footer .linkedin');
   if (linkedInLink) {
@@ -577,12 +965,28 @@ async function init() {
     githubLink.addEventListener('click', () => track('click_github'));
   }
 
+  // Recommendations tab search input (debounced for smoother typing)
   const input = document.getElementById('researcher-input');
-  input.addEventListener('input', (e) => updateSuggestions(e.target.value));
+  const debouncedUpdateSuggestions = debounce((value) => updateSuggestions(value), 100);
+  input.addEventListener('input', (e) => debouncedUpdateSuggestions(e.target.value));
   input.addEventListener('focus', (e) => updateSuggestions(e.target.value));
+
+  // Collaborations tab search input (debounced)
+  const collabInput = document.getElementById('collab-researcher-input');
+  const debouncedCollabSuggestions = debounce((value) => updateCollabSuggestions(value), 100);
+  collabInput.addEventListener('input', (e) => debouncedCollabSuggestions(e.target.value));
+  collabInput.addEventListener('focus', (e) => updateCollabSuggestions(e.target.value));
+
+  // Close suggestions when clicking outside
   document.addEventListener('click', (e) => {
-    if (!document.querySelector('.selector').contains(e.target)) {
+    const recSelector = document.querySelector('#recommendations .selector');
+    const collabSelector = document.querySelector('#collaborations .selector');
+
+    if (recSelector && !recSelector.contains(e.target)) {
       document.getElementById('suggestions').style.display = 'none';
+    }
+    if (collabSelector && !collabSelector.contains(e.target)) {
+      document.getElementById('collab-suggestions').style.display = 'none';
     }
   });
 

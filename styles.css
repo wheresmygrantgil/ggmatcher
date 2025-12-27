@@ -81,6 +81,7 @@ h1 {
 .tabs {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 1rem;
 }
@@ -160,14 +161,24 @@ main {
   padding: 0.9rem 1.1rem;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
   transition: background 0.15s ease;
   border-bottom: 1px solid #f0f0f0;
+}
+.suggestion-name {
+  font-weight: 500;
+}
+.suggestion-affiliation {
+  font-size: 0.8rem;
+  color: #6b7280;
 }
 .suggestion-item:last-child { border-bottom: none; }
 .suggestion-item:hover,
 .suggestion-item:focus  { background: var(--accent); color: #ffffff; }
+.suggestion-item:hover .suggestion-affiliation,
+.suggestion-item:focus .suggestion-affiliation { color: #e0e0e0; }
 
 /* ========== Dataset stats dashboard ========== */
 .dashboard {
@@ -178,6 +189,7 @@ main {
 .stats-dashboard {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -291,6 +303,23 @@ main {
   font-size: 0.75rem;
   color: #666;
   white-space: nowrap;
+}
+
+/* ========== Researcher header ========== */
+.researcher-header {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.researcher-name {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+.researcher-affiliation {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin: 0;
 }
 
 /* ========== Grant cards ========== */
@@ -497,6 +526,24 @@ footer .social-icon:hover { transform: scale(1.15); }
   display: none; /* hide default search */
 }
 
+/* === Clickable collaborator links in Grants table === */
+.collab-link {
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+
+.collab-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.collab-link:focus {
+  outline: 2px dashed var(--accent);
+  outline-offset: 2px;
+}
+
 /* === Voting === */
 .vote-bar {
   display: flex;
@@ -553,5 +600,220 @@ footer .social-icon:hover { transform: scale(1.15); }
   }
   .grant h3 + .vote-bar {
     margin-top: 0;
+  }
+}
+
+/* ========== Collaborations Tab ========== */
+#collaborations {
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.collab-description {
+  color: #6b7280;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+#collab-researcher-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+}
+#collab-researcher-input:focus { border-color: var(--accent); }
+
+/* Collaborators grid - responsive 2-column layout */
+.collaborators {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Collaborator card - same style as grant cards */
+.collaborator-card {
+  background: #ffffff;
+  border: 2px solid var(--primary);
+  border-left: 6px solid var(--accent);
+  border-radius: 14px;
+  padding: 1.25rem 1.25rem 1.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.collaborator-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.collaborator-header {
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.75rem;
+}
+
+.collaborator-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.collaborator-affiliation {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0.25rem 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Shared grants section */
+.shared-grants-section h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 0.5rem;
+}
+
+.shared-grants-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.shared-grant-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.shared-grant-item:last-child {
+  border-bottom: none;
+}
+
+.grant-title-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.grant-title-link:hover {
+  text-decoration: underline;
+  color: var(--accent);
+}
+
+.grant-details {
+  background: #f9f9f9;
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.grant-details p {
+  margin: 0.25rem 0;
+}
+
+.grant-details .detail-label {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.collab-summary-toggle {
+  background: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  user-select: none;
+  font-size: 0.85rem;
+  padding: 0;
+}
+
+.collab-summary-toggle:hover {
+  color: var(--accent);
+}
+
+/* No results message */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #6b7280;
+  padding: 2rem;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  text-align: center;
+  padding: 3rem;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.loading-spinner::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 1rem;
+  border: 3px solid #e5e7eb;
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ========== Mobile Responsiveness ========== */
+@media (max-width: 600px) {
+  .stat {
+    min-width: 100px;
+    padding: 0.75rem 1rem;
+  }
+
+  .stat-number {
+    font-size: 1.3rem;
+  }
+
+  .chart-grid canvas {
+    max-width: 100%;
+  }
+
+  .tab {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .stats-dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .stat {
+    min-width: unset;
   }
 }
