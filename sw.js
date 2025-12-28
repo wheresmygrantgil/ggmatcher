@@ -1,7 +1,7 @@
 // Service Worker for Grand Grant Matcher
 // Provides caching for faster repeat visits
 
-const CACHE_NAME = 'ggm-cache-v1';
+const CACHE_NAME = 'ggm-cache-v4';
 
 // Assets to cache on install
 const STATIC_ASSETS = [
