@@ -1209,6 +1209,17 @@ async function subscribe(researcherName, email) {
   return resp.json();
 }
 
+async function unsubscribe(researcherName, email) {
+  const resp = await fetch(
+    `${API_BASE}/unsubscribe?email=${encodeURIComponent(email)}&researcher=${encodeURIComponent(researcherName)}`
+  );
+  if (!resp.ok) throw new Error('Unsubscribe failed');
+  return { status: 'success' };
+}
+
+// Track current subscription status
+let currentSubscriptionStatus = { subscribed: false, email_hint: null };
+
 async function updateSubscribeButton(researcherName) {
   const btn = document.getElementById('subscribe-btn');
   if (!btn) return;
@@ -1217,6 +1228,7 @@ async function updateSubscribeButton(researcherName) {
   btn.classList.remove('hidden');
 
   const status = await checkSubscriptionStatus(researcherName);
+  currentSubscriptionStatus = status;
 
   if (status.subscribed) {
     btn.classList.add('subscribed');
@@ -1231,17 +1243,34 @@ function openSubscribeModal() {
   const modal = document.getElementById('subscribe-modal');
   const statusEl = document.getElementById('subscribe-status');
   const formEl = document.getElementById('subscribe-form');
+  const titleEl = document.getElementById('subscribe-modal-title');
+  const subtitleEl = document.getElementById('subscribe-modal-subtitle');
+  const submitBtn = document.getElementById('submit-subscribe-btn');
+  const emailInput = document.getElementById('subscribe-email');
 
   if (!modal) return;
 
   // Reset modal state
   statusEl.textContent = '';
   statusEl.className = 'subscribe-status';
-  document.getElementById('subscribe-email').value = '';
+  emailInput.value = '';
   formEl.classList.remove('hidden');
 
+  // Configure modal based on subscription status
+  if (currentSubscriptionStatus.subscribed) {
+    titleEl.textContent = 'Unsubscribe';
+    subtitleEl.textContent = `You are subscribed as ${currentSubscriptionStatus.email_hint}. Enter your email to confirm unsubscribe.`;
+    submitBtn.textContent = 'Unsubscribe';
+    submitBtn.classList.add('unsubscribe-mode');
+  } else {
+    titleEl.textContent = 'Subscribe for Updates';
+    subtitleEl.textContent = 'Get notified when new grants match your research';
+    submitBtn.textContent = 'Subscribe';
+    submitBtn.classList.remove('unsubscribe-mode');
+  }
+
   modal.classList.remove('hidden');
-  document.getElementById('subscribe-email').focus();
+  emailInput.focus();
 }
 
 function closeSubscribeModal() {
@@ -1255,6 +1284,7 @@ async function handleSubscribeSubmit() {
   const btn = document.getElementById('submit-subscribe-btn');
   const statusEl = document.getElementById('subscribe-status');
   const formEl = document.getElementById('subscribe-form');
+  const isUnsubscribeMode = currentSubscriptionStatus.subscribed;
 
   if (!email || !researcher) {
     statusEl.textContent = 'Please enter a valid email address';
@@ -1263,29 +1293,50 @@ async function handleSubscribeSubmit() {
   }
 
   btn.disabled = true;
-  btn.textContent = 'Subscribing...';
+  btn.textContent = isUnsubscribeMode ? 'Unsubscribing...' : 'Subscribing...';
 
   try {
-    await subscribe(researcher, email);
-    statusEl.textContent = 'Subscribed successfully!';
-    statusEl.className = 'subscribe-status success';
-    formEl.classList.add('hidden');
+    if (isUnsubscribeMode) {
+      await unsubscribe(researcher, email);
+      statusEl.textContent = 'Unsubscribed successfully!';
+      statusEl.className = 'subscribe-status success';
+      formEl.classList.add('hidden');
 
-    // Update button appearance
-    const subscribeBtn = document.getElementById('subscribe-btn');
-    subscribeBtn.classList.add('subscribed');
-    subscribeBtn.title = 'Subscribed';
+      // Update button appearance
+      const subscribeBtn = document.getElementById('subscribe-btn');
+      subscribeBtn.classList.remove('subscribed');
+      subscribeBtn.title = 'Subscribe for email updates';
 
-    track('subscribe', { researcher_name: researcher });
+      // Update local status
+      currentSubscriptionStatus = { subscribed: false, email_hint: null };
+
+      track('unsubscribe', { researcher_name: researcher });
+    } else {
+      await subscribe(researcher, email);
+      statusEl.textContent = 'Subscribed successfully!';
+      statusEl.className = 'subscribe-status success';
+      formEl.classList.add('hidden');
+
+      // Update button appearance
+      const subscribeBtn = document.getElementById('subscribe-btn');
+      subscribeBtn.classList.add('subscribed');
+      subscribeBtn.title = 'Subscribed';
+
+      track('subscribe', { researcher_name: researcher });
+    }
 
     // Close modal after delay
     setTimeout(closeSubscribeModal, 1500);
   } catch (err) {
-    statusEl.textContent = 'Failed to subscribe. Please try again.';
+    if (isUnsubscribeMode) {
+      statusEl.textContent = 'Email not found. Please enter the exact email you subscribed with.';
+    } else {
+      statusEl.textContent = 'Failed to subscribe. Please try again.';
+    }
     statusEl.className = 'subscribe-status error';
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Subscribe';
+    btn.textContent = isUnsubscribeMode ? 'Unsubscribe' : 'Subscribe';
   }
 }
 

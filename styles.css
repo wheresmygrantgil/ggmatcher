@@ -904,6 +904,14 @@ footer .social-icon:hover { transform: scale(1.15); }
 .submit-subscribe-btn:hover { opacity: 0.9; }
 .submit-subscribe-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+.submit-subscribe-btn.unsubscribe-mode {
+  background: #dc3545;
+}
+
+.submit-subscribe-btn.unsubscribe-mode:hover {
+  background: #c82333;
+}
+
 /* ========== Request to be Added Button ========== */
 .request-to-add {
   margin-top: 1rem;
