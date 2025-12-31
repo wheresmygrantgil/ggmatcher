@@ -2,7 +2,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GGmatcher</title>
+    <title>Grand Grant Matcher - AI-Powered Grant Discovery</title>
+    <meta name="description" content="Stop searching 800+ grant calls. Get personalized AI-matched funding opportunities based on your research publications." />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%200%20100%20100%22><text y=%22.9em%22 font-size=%2290%22>🧙</text></svg>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,7 +34,8 @@
   </head>
   <body>
     <header>
-      <h1>Grand Grant Matcher 🧙</h1>
+      <h1>Grand Grant Matcher <span class="wizard-icon">🧙</span></h1>
+      <p class="hero-tagline">We analyze 800+ grant calls so you can focus on research</p>
       <nav class="tabs" role="tablist">
         <button id="tab-recommendations" class="tab active" role="tab" aria-selected="true" aria-controls="recommendations">Recommendations</button>
         <button id="tab-collaborations" class="tab" role="tab" aria-selected="false" aria-controls="collaborations">Collaborations</button>
@@ -79,8 +81,17 @@
       </section>
 
     <main id="recommendations" role="tabpanel" aria-labelledby="tab-recommendations">
+      <!-- Social proof stats bar -->
+      <div class="landing-stats-bar">
+        <span class="landing-stat"><strong id="landing-researcher-count">4,500+</strong> researchers</span>
+        <span class="landing-stat-divider">|</span>
+        <span class="landing-stat"><strong id="landing-grant-count">800+</strong> active grants</span>
+        <span class="landing-stat-divider">|</span>
+        <span class="landing-stat">Updated weekly</span>
+      </div>
+
       <div class="selector">
-        <label for="researcher-input">Find your name</label>
+        <label for="researcher-input">See grants matched to YOUR research</label>
         <div class="search-row">
           <div class="input-wrapper">
             <input
@@ -103,6 +114,15 @@
         <!-- Request to be added button - always visible -->
         <div class="request-to-add">
           <button id="request-add-btn" class="request-add-btn">Not in the list? Request to be added</button>
+        </div>
+
+        <!-- How It Works section -->
+        <div class="how-it-works">
+          <span class="step"><span class="step-num">1</span> Type your name</span>
+          <span class="step-arrow">→</span>
+          <span class="step"><span class="step-num">2</span> See matched grants</span>
+          <span class="step-arrow">→</span>
+          <span class="step"><span class="step-num">3</span> Learn WHY each fits</span>
         </div>
       </div>
 

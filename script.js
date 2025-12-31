@@ -126,11 +126,20 @@ function track(eventName, params = {}) {
   }
 }
 
-function showLandingWizard() {
+function showLandingState() {
   const container = document.getElementById('grants');
   container.innerHTML = `
-    <div class="landing-wizard">
-      <img src="assets/wizardoc.jpg" alt="Cartoon robot scanning grant proposals" loading="lazy" decoding="async">
+    <div class="landing-welcome">
+      <div class="welcome-card">
+        <img src="assets/wizardoc.jpg" alt="Grant Matching Wizard" class="welcome-wizard">
+        <h2>Your Grant-Finding Wizard</h2>
+        <p>Type your name above to see grants matched to your publications using AI.</p>
+        <p class="welcome-features">
+          <span>✓ Personalized recommendations</span>
+          <span>✓ AI explains why each grant fits</span>
+          <span>✓ Covers EU Horizon, NIH, NSF & more</span>
+        </p>
+      </div>
     </div>`;
 }
 
@@ -222,10 +231,12 @@ function createSuggestion(name) {
 
 function updateSuggestions(value) {
   const suggBox = document.getElementById('suggestions');
+  const requestAddSection = document.querySelector('.request-to-add');
   suggBox.innerHTML = '';
 
   if (!value) {
     suggBox.style.display = 'none';
+    if (requestAddSection) requestAddSection.classList.remove('highlighted');
     return;
   }
 
@@ -234,10 +245,22 @@ function updateSuggestions(value) {
     .slice(0, 8);
 
   if (filtered.length === 0) {
-    suggBox.style.display = 'none';
+    // Show empty state with clear CTA
+    const emptyDiv = document.createElement('div');
+    emptyDiv.className = 'suggestion-empty';
+    emptyDiv.innerHTML = `
+      <p><strong>No matches found</strong></p>
+      <p class="empty-hint">Not in our database yet? Click below to request access.</p>
+    `;
+    suggBox.appendChild(emptyDiv);
+    suggBox.style.display = 'block';
+
+    // Highlight the request button
+    if (requestAddSection) requestAddSection.classList.add('highlighted');
     return;
   }
 
+  if (requestAddSection) requestAddSection.classList.remove('highlighted');
   filtered.forEach((name) => suggBox.appendChild(createSuggestion(name)));
   suggBox.style.display = 'block';
 }
@@ -265,11 +288,20 @@ function selectResearcher(name) {
 
 // ========== Collaborations Tab Functions ==========
 
-function showCollabLandingWizard() {
+function showCollabLandingState() {
   const container = document.getElementById('collaborators-list');
   container.innerHTML = `
-    <div class="landing-wizard">
-      <img src="assets/wizardscolab.jpg" alt="Two wizards collaborating on grant proposals" loading="lazy" decoding="async">
+    <div class="landing-welcome">
+      <div class="welcome-card">
+        <img src="assets/wizardscolab.jpg" alt="Collaboration Wizards" class="welcome-wizard">
+        <h2>Find Research Collaborators</h2>
+        <p>Type your name above to discover researchers who match your grant opportunities.</p>
+        <p class="welcome-features">
+          <span>✓ Cross-disciplinary matches</span>
+          <span>✓ Shared grant opportunities</span>
+          <span>✓ Build stronger proposals</span>
+        </p>
+      </div>
     </div>`;
 }
 
@@ -798,7 +830,7 @@ async function showTab(name) {
     collabTab.setAttribute('aria-selected', 'true');
     // Lazy load collaborations data on first visit
     await loadCollaborationsIfNeeded();
-    showCollabLandingWizard();
+    showCollabLandingState();
     track('view_collaborations_tab');
   } else {
     rec.classList.remove('hidden');
@@ -950,7 +982,13 @@ async function init() {
 
   await loadData();
 
-  showLandingWizard();
+  // Update landing stats with real data
+  const researcherCountEl = document.getElementById('landing-researcher-count');
+  const grantCountEl = document.getElementById('landing-grant-count');
+  if (researcherCountEl) researcherCountEl.textContent = matchesData.length.toLocaleString();
+  if (grantCountEl) grantCountEl.textContent = grantsData.length.toLocaleString();
+
+  showLandingState();
 
   document.getElementById('tab-recommendations').addEventListener('click', () => showTab('recommendations'));
   document.getElementById('tab-grants-btn').addEventListener('click', () => showTab('grants'));
