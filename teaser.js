@@ -9,10 +9,10 @@ function showTeaser() {
   const card = document.createElement('div');
   card.className = 'teaser-card';
   card.innerHTML = `
-    <img src="assets/wizardoc.jpg" alt="Cartoon robot scanning grant proposals">
-    <p>Didn\u2019t spot the perfect call?<br>
-    \u26A1 Let our AI scout the web for fresh opportunities tailored to <em>${selectedName}</em>!</p>
-    <button class="teaser-cta">Engage the Robot \ud83e\udd16</button>
+    <img src="assets/wizardoc.jpg" alt="Grant Matching Wizard">
+    <p>Didn't spot the perfect call?<br>
+    ⚡ Let our AI wizard scout the web for fresh opportunities tailored to <em>${selectedName}</em>!</p>
+    <button class="teaser-cta">Engage the Wizard 🧙</button>
   `;
   document.getElementById('grants').appendChild(card);
   const teaserBtn = card.querySelector('button');
@@ -28,10 +28,11 @@ function openModal() {
   overlay.innerHTML = `
     <div class="modal" role="dialog" aria-modal="true">
       <button class="close-btn" aria-label="Close">\u00d7</button>
-      <h2>Grant-Scouting Agent</h2>
+      <h2>Your Personal Grant Wizard 🧙</h2>
       <p>
-        Want your own personalized Grant-Matching wizard 🧙‍♂️ working for you?
-        Lets talk!
+        Interested in an AI wizard that continuously monitors new grant opportunities tailored to your research?
+        <br><br>
+        <a href="mailto:gzeevi25@gmail.com" style="color: var(--accent); text-decoration: underline;">Get in touch</a> to learn more.
       </p>
     </div>`;
   document.body.appendChild(overlay);
