@@ -33,6 +33,46 @@
     </script>
   </head>
   <body>
+    <!-- Privacy Notice Modal -->
+    <div id="privacy-modal" class="privacy-modal hidden" role="dialog" aria-labelledby="privacy-title" aria-modal="true">
+      <div class="privacy-content">
+        <h2 id="privacy-title">Privacy & Data Collection Notice</h2>
+        <div class="privacy-body">
+          <p>Welcome to Grand Grant Matcher! We want to be transparent about how we handle your data:</p>
+
+          <h3>What We Collect:</h3>
+          <ul>
+            <li><strong>Researcher Name:</strong> Stored locally in your browser to identify you and personalize grant recommendations</li>
+            <li><strong>Grant Preferences:</strong> Your likes/dislikes on grants are saved to improve recommendations</li>
+            <li><strong>Usage Analytics:</strong> We use Google Analytics to understand how the app is used and improve the experience</li>
+          </ul>
+
+          <h3>How We Use Your Data:</h3>
+          <ul>
+            <li>To match you with relevant grant opportunities</li>
+            <li>To suggest potential collaborators in your field</li>
+            <li>To improve the matching algorithm and user experience</li>
+          </ul>
+
+          <h3>Data Storage:</h3>
+          <ul>
+            <li><strong>In Your Browser:</strong> Your name is stored locally on your device</li>
+            <li><strong>Our Backend:</strong> Vote preferences are stored securely on our server</li>
+            <li><strong>Third-Party:</strong> Google Analytics collects anonymized usage data</li>
+          </ul>
+
+          <p class="privacy-note">
+            We do not collect email addresses, phone numbers, or any other personally identifiable information beyond your researcher name.
+            You can clear your data at any time by clearing your browser's local storage.
+          </p>
+        </div>
+
+        <div class="privacy-actions">
+          <button id="accept-privacy" class="btn-primary">I Understand & Accept</button>
+        </div>
+      </div>
+    </div>
+
     <header>
       <h1>Grand Grant Matcher <span class="wizard-icon">🧙</span></h1>
       <p class="hero-tagline">We analyze 800+ grant calls so you can focus on research</p>

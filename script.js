@@ -1038,7 +1038,43 @@ async function init() {
   showTab('recommendations');
 }
 
-document.addEventListener('DOMContentLoaded', init);
+// ===== Privacy Notice Modal =====
+function initPrivacyNotice() {
+  const modal = document.getElementById('privacy-modal');
+  const acceptBtn = document.getElementById('accept-privacy');
+  const PRIVACY_KEY = 'privacy_accepted';
+
+  // Check if user has already accepted the privacy notice
+  const hasAccepted = localStorage.getItem(PRIVACY_KEY);
+
+  if (!hasAccepted) {
+    // Show the modal by removing the hidden class
+    modal.classList.remove('hidden');
+
+    // Track that privacy modal was shown
+    track('privacy_modal_shown');
+
+    // Handle accept button click
+    acceptBtn.addEventListener('click', () => {
+      // Store acceptance in localStorage
+      localStorage.setItem(PRIVACY_KEY, 'true');
+
+      // Track acceptance
+      track('privacy_accepted');
+
+      // Hide the modal
+      modal.classList.add('hidden');
+    });
+  } else {
+    // User has already accepted, hide the modal
+    modal.classList.add('hidden');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initPrivacyNotice();
+  init();
+});
 
 // ===== Scroll depth tracking =====
 (function() {
