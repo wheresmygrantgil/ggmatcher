@@ -126,11 +126,20 @@ function track(eventName, params = {}) {
   }
 }
 
-function showLandingWizard() {
+function showLandingState() {
   const container = document.getElementById('grants');
   container.innerHTML = `
-    <div class="landing-wizard">
-      <img src="assets/wizardoc.jpg" alt="Cartoon robot scanning grant proposals" loading="lazy" decoding="async">
+    <div class="landing-welcome">
+      <div class="welcome-card">
+        <img src="assets/wizardoc.jpg" alt="Grant Matching Wizard" class="welcome-wizard">
+        <h2>Your Grant-Finding Wizard</h2>
+        <p>Type your name above to see grants matched to your publications using AI.</p>
+        <p class="welcome-features">
+          <span>✓ Personalized recommendations</span>
+          <span>✓ AI explains why each grant fits</span>
+          <span>✓ Covers EU Horizon, NIH, NSF & more</span>
+        </p>
+      </div>
     </div>`;
 }
 
@@ -222,10 +231,12 @@ function createSuggestion(name) {
 
 function updateSuggestions(value) {
   const suggBox = document.getElementById('suggestions');
+  const requestAddSection = document.querySelector('.request-to-add');
   suggBox.innerHTML = '';
 
   if (!value) {
     suggBox.style.display = 'none';
+    if (requestAddSection) requestAddSection.classList.remove('highlighted');
     return;
   }
 
@@ -234,10 +245,22 @@ function updateSuggestions(value) {
     .slice(0, 8);
 
   if (filtered.length === 0) {
-    suggBox.style.display = 'none';
+    // Show empty state with clear CTA
+    const emptyDiv = document.createElement('div');
+    emptyDiv.className = 'suggestion-empty';
+    emptyDiv.innerHTML = `
+      <p><strong>No matches found</strong></p>
+      <p class="empty-hint">Not in our database yet? Click below to request access.</p>
+    `;
+    suggBox.appendChild(emptyDiv);
+    suggBox.style.display = 'block';
+
+    // Highlight the request button
+    if (requestAddSection) requestAddSection.classList.add('highlighted');
     return;
   }
 
+  if (requestAddSection) requestAddSection.classList.remove('highlighted');
   filtered.forEach((name) => suggBox.appendChild(createSuggestion(name)));
   suggBox.style.display = 'block';
 }
@@ -252,17 +275,33 @@ function selectResearcher(name) {
     gtag('config', 'G-FKE4HL7881', { user_id: name });
   }
 
+  // Show subscribe button and check status
+  updateSubscribeButton(name);
+
+  // Hide "Request to be added" button since researcher was found
+  const requestAddSection = document.querySelector('.request-to-add');
+  if (requestAddSection) requestAddSection.classList.add('hidden');
+
   showGrants(name);
   track('select_researcher', { researcher_name: name });
 }
 
 // ========== Collaborations Tab Functions ==========
 
-function showCollabLandingWizard() {
+function showCollabLandingState() {
   const container = document.getElementById('collaborators-list');
   container.innerHTML = `
-    <div class="landing-wizard">
-      <img src="assets/wizardscolab.jpg" alt="Two wizards collaborating on grant proposals" loading="lazy" decoding="async">
+    <div class="landing-welcome">
+      <div class="welcome-card">
+        <img src="assets/wizardscolab.jpg" alt="Collaboration Wizards" class="welcome-wizard">
+        <h2>Find Research Collaborators</h2>
+        <p>Type your name above to discover researchers who match your grant opportunities.</p>
+        <p class="welcome-features">
+          <span>✓ Cross-disciplinary matches</span>
+          <span>✓ Shared grant opportunities</span>
+          <span>✓ Build stronger proposals</span>
+        </p>
+      </div>
     </div>`;
 }
 
@@ -791,7 +830,7 @@ async function showTab(name) {
     collabTab.setAttribute('aria-selected', 'true');
     // Lazy load collaborations data on first visit
     await loadCollaborationsIfNeeded();
-    showCollabLandingWizard();
+    showCollabLandingState();
     track('view_collaborations_tab');
   } else {
     rec.classList.remove('hidden');
@@ -943,7 +982,13 @@ async function init() {
 
   await loadData();
 
-  showLandingWizard();
+  // Update landing stats with real data
+  const researcherCountEl = document.getElementById('landing-researcher-count');
+  const grantCountEl = document.getElementById('landing-grant-count');
+  if (researcherCountEl) researcherCountEl.textContent = matchesData.length.toLocaleString();
+  if (grantCountEl) grantCountEl.textContent = grantsData.length.toLocaleString();
+
+  showLandingState();
 
   document.getElementById('tab-recommendations').addEventListener('click', () => showTab('recommendations'));
   document.getElementById('tab-grants-btn').addEventListener('click', () => showTab('grants'));
@@ -993,7 +1038,48 @@ async function init() {
   showTab('recommendations');
 }
 
-document.addEventListener('DOMContentLoaded', init);
+// ===== Privacy Notice Modal =====
+function initPrivacyNotice() {
+  const modal = document.getElementById('privacy-modal');
+  const acceptBtn = document.getElementById('accept-privacy');
+
+  if (!modal || !acceptBtn) {
+    return;
+  }
+
+  const PRIVACY_KEY = 'privacy_accepted';
+
+  // Check if user has already accepted the privacy notice
+  const hasAccepted = localStorage.getItem(PRIVACY_KEY);
+
+  if (!hasAccepted) {
+    // Show the modal by removing the hidden class
+    modal.classList.remove('hidden');
+
+    // Track that privacy modal was shown
+    track('privacy_modal_shown');
+
+    // Handle accept button click
+    acceptBtn.addEventListener('click', () => {
+      // Store acceptance in localStorage
+      localStorage.setItem(PRIVACY_KEY, 'true');
+
+      // Track acceptance
+      track('privacy_accepted');
+
+      // Hide the modal
+      modal.classList.add('hidden');
+    });
+  } else {
+    // User has already accepted, hide the modal
+    modal.classList.add('hidden');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initPrivacyNotice();
+  init();
+});
 
 // ===== Scroll depth tracking =====
 (function() {
@@ -1179,3 +1265,388 @@ async function handleVoteClick(e) {
     alert("Couldn't register vote – please try again.");
   }
 }
+
+// ========== Subscription Functions ==========
+
+async function checkSubscriptionStatus(researcherName) {
+  try {
+    const resp = await fetch(`${API_BASE}/subscriptions/${encodeURIComponent(researcherName)}`);
+    if (!resp.ok) return { subscribed: false };
+    return await resp.json();
+  } catch (err) {
+    return { subscribed: false };
+  }
+}
+
+async function subscribe(researcherName, email) {
+  const resp = await fetch(`${API_BASE}/subscriptions`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ researcher_name: researcherName, email: email })
+  });
+  if (!resp.ok) throw new Error('Subscription failed');
+  return resp.json();
+}
+
+async function unsubscribe(researcherName, email) {
+  const resp = await fetch(
+    `${API_BASE}/unsubscribe?email=${encodeURIComponent(email)}&researcher=${encodeURIComponent(researcherName)}`
+  );
+  if (!resp.ok) throw new Error('Unsubscribe failed');
+  return { status: 'success' };
+}
+
+// Track current subscription status
+let currentSubscriptionStatus = { subscribed: false, email_hint: null };
+
+async function updateSubscribeButton(researcherName) {
+  const btn = document.getElementById('subscribe-btn');
+  if (!btn) return;
+
+  // Show the button
+  btn.classList.remove('hidden');
+
+  const status = await checkSubscriptionStatus(researcherName);
+  currentSubscriptionStatus = status;
+
+  if (status.subscribed) {
+    btn.classList.add('subscribed');
+    btn.title = `Subscribed (${status.email_hint})`;
+  } else {
+    btn.classList.remove('subscribed');
+    btn.title = 'Subscribe for email updates';
+  }
+}
+
+function openSubscribeModal() {
+  const modal = document.getElementById('subscribe-modal');
+  const statusEl = document.getElementById('subscribe-status');
+  const formEl = document.getElementById('subscribe-form');
+  const titleEl = document.getElementById('subscribe-modal-title');
+  const subtitleEl = document.getElementById('subscribe-modal-subtitle');
+  const submitBtn = document.getElementById('submit-subscribe-btn');
+  const emailInput = document.getElementById('subscribe-email');
+
+  if (!modal) return;
+
+  // Reset modal state
+  statusEl.textContent = '';
+  statusEl.className = 'subscribe-status';
+  emailInput.value = '';
+  formEl.classList.remove('hidden');
+
+  // Configure modal based on subscription status
+  if (currentSubscriptionStatus.subscribed) {
+    titleEl.textContent = 'Unsubscribe';
+    subtitleEl.textContent = `You are subscribed as ${currentSubscriptionStatus.email_hint}. Enter your email to confirm unsubscribe.`;
+    submitBtn.textContent = 'Unsubscribe';
+    submitBtn.classList.add('unsubscribe-mode');
+  } else {
+    titleEl.textContent = 'Subscribe for Updates';
+    subtitleEl.textContent = 'Get notified when new grants match your research';
+    submitBtn.textContent = 'Subscribe';
+    submitBtn.classList.remove('unsubscribe-mode');
+  }
+
+  modal.classList.remove('hidden');
+  emailInput.focus();
+}
+
+function closeSubscribeModal() {
+  const modal = document.getElementById('subscribe-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+async function handleSubscribeSubmit() {
+  const email = document.getElementById('subscribe-email').value;
+  const researcher = getCurrentUser();
+  const btn = document.getElementById('submit-subscribe-btn');
+  const statusEl = document.getElementById('subscribe-status');
+  const formEl = document.getElementById('subscribe-form');
+  const isUnsubscribeMode = currentSubscriptionStatus.subscribed;
+
+  if (!email || !researcher) {
+    statusEl.textContent = 'Please enter a valid email address';
+    statusEl.className = 'subscribe-status error';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = isUnsubscribeMode ? 'Unsubscribing...' : 'Subscribing...';
+
+  try {
+    if (isUnsubscribeMode) {
+      await unsubscribe(researcher, email);
+      statusEl.textContent = 'Unsubscribed successfully!';
+      statusEl.className = 'subscribe-status success';
+      formEl.classList.add('hidden');
+
+      // Update button appearance
+      const subscribeBtn = document.getElementById('subscribe-btn');
+      subscribeBtn.classList.remove('subscribed');
+      subscribeBtn.title = 'Subscribe for email updates';
+
+      // Update local status
+      currentSubscriptionStatus = { subscribed: false, email_hint: null };
+
+      track('unsubscribe', { researcher_name: researcher });
+    } else {
+      await subscribe(researcher, email);
+      statusEl.textContent = 'Subscribed successfully!';
+      statusEl.className = 'subscribe-status success';
+      formEl.classList.add('hidden');
+
+      // Update button appearance
+      const subscribeBtn = document.getElementById('subscribe-btn');
+      subscribeBtn.classList.add('subscribed');
+      subscribeBtn.title = 'Subscribed';
+
+      track('subscribe', { researcher_name: researcher });
+    }
+
+    // Close modal after delay
+    setTimeout(closeSubscribeModal, 1500);
+  } catch (err) {
+    if (isUnsubscribeMode) {
+      statusEl.textContent = 'Email not found. Please enter the exact email you subscribed with.';
+    } else {
+      statusEl.textContent = 'Failed to subscribe. Please try again.';
+    }
+    statusEl.className = 'subscribe-status error';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = isUnsubscribeMode ? 'Unsubscribe' : 'Subscribe';
+  }
+}
+
+// ========== OpenAlex Search for Add Researcher ==========
+
+let selectedOpenAlexAuthor = null;
+let openalexSearchTimeout = null;
+
+async function searchOpenAlex(query) {
+  if (!query || query.length < 2) return [];
+
+  const url = `https://api.openalex.org/authors?search=${encodeURIComponent(query)}&per_page=10`;
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) return [];
+    const data = await resp.json();
+    return data.results || [];
+  } catch (err) {
+    return [];
+  }
+}
+
+function getAuthorInstitution(author) {
+  const affiliations = author.affiliations || [];
+  if (!affiliations.length) return 'Unknown institution';
+
+  // Get most recent affiliation
+  let bestAff = affiliations[0];
+  let bestYear = 0;
+
+  for (const aff of affiliations) {
+    const years = aff.years || [];
+    if (years.length && Math.max(...years) > bestYear) {
+      bestYear = Math.max(...years);
+      bestAff = aff;
+    }
+  }
+
+  return bestAff?.institution?.display_name || 'Unknown institution';
+}
+
+function renderOpenAlexSuggestions(authors) {
+  const container = document.getElementById('openalex-suggestions');
+  container.innerHTML = '';
+
+  if (!authors.length) {
+    container.style.display = 'none';
+    return;
+  }
+
+  for (const author of authors) {
+    const div = document.createElement('div');
+    div.className = 'openalex-suggestion-item';
+
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'openalex-name';
+    nameSpan.textContent = author.display_name;
+    div.appendChild(nameSpan);
+
+    const instSpan = document.createElement('span');
+    instSpan.className = 'openalex-institution';
+    instSpan.textContent = getAuthorInstitution(author);
+    div.appendChild(instSpan);
+
+    const worksSpan = document.createElement('span');
+    worksSpan.className = 'openalex-works';
+    worksSpan.textContent = `${(author.works_count || 0).toLocaleString()} works`;
+    div.appendChild(worksSpan);
+
+    div.addEventListener('click', () => selectOpenAlexAuthor(author));
+    container.appendChild(div);
+  }
+
+  container.style.display = 'block';
+}
+
+function selectOpenAlexAuthor(author) {
+  selectedOpenAlexAuthor = author;
+
+  // Update UI
+  document.getElementById('openalex-suggestions').style.display = 'none';
+  document.getElementById('openalex-search-input').value = author.display_name;
+
+  const profileSection = document.getElementById('selected-profile');
+  profileSection.classList.remove('hidden');
+  document.getElementById('profile-name').textContent = author.display_name;
+  document.getElementById('profile-institution').textContent = getAuthorInstitution(author);
+  document.getElementById('profile-works').textContent = `${(author.works_count || 0).toLocaleString()} works`;
+
+  // Show email input and submit button
+  document.getElementById('request-email-section').classList.remove('hidden');
+  document.getElementById('submit-request-btn').classList.remove('hidden');
+}
+
+async function submitResearcherRequest() {
+  if (!selectedOpenAlexAuthor) return;
+
+  const btn = document.getElementById('submit-request-btn');
+  const statusEl = document.getElementById('request-status');
+  const email = document.getElementById('request-email').value || null;
+
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+  statusEl.className = 'request-status';
+  statusEl.textContent = '';
+
+  try {
+    const resp = await fetch(`${API_BASE}/researcher-requests`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        openalex_id: selectedOpenAlexAuthor.id,
+        display_name: selectedOpenAlexAuthor.display_name,
+        institution: getAuthorInstitution(selectedOpenAlexAuthor),
+        works_count: selectedOpenAlexAuthor.works_count || 0,
+        requester_email: email
+      })
+    });
+
+    const data = await resp.json();
+
+    if (data.status === 'success') {
+      statusEl.className = 'request-status success';
+      statusEl.textContent = 'Request submitted! You will be added in the next update.';
+      track('researcher_request_submitted', { openalex_id: selectedOpenAlexAuthor.id });
+
+      // Reset form after delay
+      setTimeout(() => {
+        closeRequestModal();
+      }, 3000);
+    } else if (data.status === 'existing') {
+      statusEl.className = 'request-status';
+      statusEl.textContent = data.message;
+    } else {
+      throw new Error('Request failed');
+    }
+  } catch (err) {
+    statusEl.className = 'request-status error';
+    statusEl.textContent = 'Failed to submit request. Please try again.';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Submit Request';
+  }
+}
+
+function openRequestModal() {
+  document.getElementById('request-modal').classList.remove('hidden');
+  document.getElementById('openalex-search-input').focus();
+}
+
+function closeRequestModal() {
+  document.getElementById('request-modal').classList.add('hidden');
+  // Reset state
+  selectedOpenAlexAuthor = null;
+  document.getElementById('openalex-search-input').value = '';
+  document.getElementById('openalex-suggestions').style.display = 'none';
+  document.getElementById('selected-profile').classList.add('hidden');
+  document.getElementById('request-email-section').classList.add('hidden');
+  document.getElementById('submit-request-btn').classList.add('hidden');
+  document.getElementById('request-email').value = '';
+  document.getElementById('request-status').textContent = '';
+}
+
+// Event listeners for modals - wrapped in DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Request modal elements
+  const requestAddBtn = document.getElementById('request-add-btn');
+  const closeRequestBtn = document.getElementById('close-request-modal');
+  const submitRequestBtn = document.getElementById('submit-request-btn');
+  const openalexInput = document.getElementById('openalex-search-input');
+  const requestModal = document.getElementById('request-modal');
+
+  // Subscribe modal elements
+  const subscribeBtn = document.getElementById('subscribe-btn');
+  const closeSubscribeBtn = document.getElementById('close-subscribe-modal');
+  const submitSubscribeBtn = document.getElementById('submit-subscribe-btn');
+  const subscribeModal = document.getElementById('subscribe-modal');
+
+  // Request modal event listeners
+  if (requestAddBtn) {
+    requestAddBtn.addEventListener('click', openRequestModal);
+  }
+
+  if (closeRequestBtn) {
+    closeRequestBtn.addEventListener('click', closeRequestModal);
+  }
+
+  if (submitRequestBtn) {
+    submitRequestBtn.addEventListener('click', submitResearcherRequest);
+  }
+
+  if (openalexInput) {
+    openalexInput.addEventListener('input', (e) => {
+      clearTimeout(openalexSearchTimeout);
+      const query = e.target.value;
+
+      openalexSearchTimeout = setTimeout(async () => {
+        const results = await searchOpenAlex(query);
+        renderOpenAlexSuggestions(results);
+      }, 300);
+    });
+  }
+
+  // Close request modal on overlay click
+  if (requestModal) {
+    requestModal.addEventListener('click', (e) => {
+      if (e.target.id === 'request-modal') {
+        closeRequestModal();
+      }
+    });
+  }
+
+  // Subscribe modal event listeners
+  if (subscribeBtn) {
+    subscribeBtn.addEventListener('click', openSubscribeModal);
+  }
+
+  if (closeSubscribeBtn) {
+    closeSubscribeBtn.addEventListener('click', closeSubscribeModal);
+  }
+
+  if (submitSubscribeBtn) {
+    submitSubscribeBtn.addEventListener('click', handleSubscribeSubmit);
+  }
+
+  // Close subscribe modal on overlay click
+  if (subscribeModal) {
+    subscribeModal.addEventListener('click', (e) => {
+      if (e.target.id === 'subscribe-modal') {
+        closeSubscribeModal();
+      }
+    });
+  }
+});
