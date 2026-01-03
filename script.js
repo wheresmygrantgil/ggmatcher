@@ -1042,6 +1042,11 @@ async function init() {
 function initPrivacyNotice() {
   const modal = document.getElementById('privacy-modal');
   const acceptBtn = document.getElementById('accept-privacy');
+
+  if (!modal || !acceptBtn) {
+    return;
+  }
+
   const PRIVACY_KEY = 'privacy_accepted';
 
   // Check if user has already accepted the privacy notice
