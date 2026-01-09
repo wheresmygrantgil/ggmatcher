@@ -8,6 +8,9 @@ let researcherNamesLower = [];  // Pre-computed lowercase for faster search
 let providerChart;
 let deadlineChart;
 let grantsTable;
+let topicStatsData = null;
+let euTopicChart = null;
+let usTopicChart = null;
 
 // Library loading state - Promise-based to avoid race conditions
 let dataTablesLoaded = false;
@@ -320,6 +323,13 @@ async function loadData() {
     if (affiliationResp && affiliationResp.ok) {
       affiliationData = await affiliationResp.json();
       track('data_load', { status: 'success', dataset: 'affiliation_dict' });
+    }
+
+    // Load topic stats by agency (for split charts in dashboard)
+    const topicStatsResp = await fetch('data/topic_stats_by_agency.json').catch(() => null);
+    if (topicStatsResp && topicStatsResp.ok) {
+      topicStatsData = await topicStatsResp.json();
+      track('data_load', { status: 'success', dataset: 'topic_stats_by_agency' });
     }
 
     matchesData = JSON.parse(matchesText);
@@ -789,6 +799,55 @@ function animateNumber(el, value, duration = 800) {
 
 let dashboardInitialized = false;
 
+// Helper function to create or update topic charts (reduces duplication)
+const TOPIC_LABELS_TO_SHOW = 8;
+const TOPIC_KEYWORDS_TO_SHOW = 3;
+
+function createOrUpdateTopicChart(chartId, chartInstance, chartData, backgroundColor, title) {
+  if (!chartData || !chartData.topics) return chartInstance;
+
+  const labels = chartData.topics.slice(0, TOPIC_LABELS_TO_SHOW).map(t => t.name || t.label);
+  const counts = chartData.topics.slice(0, TOPIC_LABELS_TO_SHOW).map(t => t.count || t.grant_count);
+  const totalGrants = chartData.total_grants || chartData.grant_count || 0;
+
+  if (!chartInstance) {
+    return new Chart(document.getElementById(chartId), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: counts,
+          backgroundColor: backgroundColor,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: `${title} (${totalGrants} grants)`,
+            color: '#213646',
+            font: { size: 16, weight: 'bold' }
+          }
+        },
+        scales: {
+          x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  } else {
+    chartInstance.data.labels = labels;
+    chartInstance.data.datasets[0].data = counts;
+    chartInstance.update('none');
+    return chartInstance;
+  }
+}
+
 async function showDashboard() {
   const grantTotal = grantsData.length;
   const researcherTotal = matchesData.length;
@@ -932,6 +991,12 @@ async function showDashboard() {
     deadlineChart.data.labels = months;
     deadlineChart.data.datasets[0].data = monthCounts;
     deadlineChart.update('none');
+  }
+
+  // Topic charts by agency (split view)
+  if (topicStatsData && topicStatsData.agencies) {
+    euTopicChart = createOrUpdateTopicChart('euTopicChart', euTopicChart, topicStatsData.agencies.eu_horizon, '#00bcd4', 'EU Horizon Topics');
+    usTopicChart = createOrUpdateTopicChart('usTopicChart', usTopicChart, topicStatsData.agencies.us_federal, '#ff6384', 'US Federal Topics');
   }
 
   // Calculate and render most matched grants
