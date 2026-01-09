@@ -4,15 +4,16 @@ let affiliationData = {};
 let rerankedLoaded = false;
 let grantsMap;
 let researcherNames = [];
+let researcherNamesLower = [];  // Pre-computed lowercase for faster search
 let providerChart;
 let deadlineChart;
 let grantsTable;
 
-// Library loading state
+// Library loading state - Promise-based to avoid race conditions
 let dataTablesLoaded = false;
-let dataTablesLoading = false;
+let dataTablesLoadPromise = null;
 let chartJsLoaded = false;
-let chartJsLoading = false;
+let chartJsLoadPromise = null;
 
 // Debounce helper for smoother search input
 function debounce(fn, delay = 150) {
@@ -30,76 +31,170 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// Helper to load scripts dynamically
+// Safe date array parser with validation
+function safeParseDateArray(raw) {
+  if (!raw) return [];
+  if (Array.isArray(raw)) return raw;
+  try {
+    const parsed = JSON.parse(raw.replace(/'/g, '"'));
+    return Array.isArray(parsed) ? parsed : [parsed];
+  } catch {
+    return typeof raw === 'string' ? [raw] : [];
+  }
+}
+
+// Email validation helper
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Subscription cache with TTL (5 minutes)
+const subscriptionCache = {
+  get(key) {
+    try {
+      const item = localStorage.getItem(`sub_${key}`);
+      if (!item) return null;
+      const { data, expiry } = JSON.parse(item);
+      if (Date.now() > expiry) {
+        localStorage.removeItem(`sub_${key}`);
+        return null;
+      }
+      return data;
+    } catch {
+      return null;
+    }
+  },
+  set(key, data, ttlMs = 300000) {
+    try {
+      localStorage.setItem(`sub_${key}`, JSON.stringify({
+        data,
+        expiry: Date.now() + ttlMs
+      }));
+    } catch {
+      // localStorage might be full or unavailable
+    }
+  },
+  clear(key) {
+    localStorage.removeItem(`sub_${key}`);
+  }
+};
+
+// Modal focus trap and keyboard handling
+function setupModalAccessibility(modal, closeCallback) {
+  const focusable = modal.querySelectorAll(
+    'button, input, [tabindex]:not([tabindex="-1"]), a[href]'
+  );
+  const firstFocusable = focusable[0];
+  const lastFocusable = focusable[focusable.length - 1];
+
+  function handleKeydown(e) {
+    if (e.key === 'Escape') {
+      closeCallback();
+      return;
+    }
+
+    if (e.key === 'Tab') {
+      if (e.shiftKey && document.activeElement === firstFocusable) {
+        e.preventDefault();
+        lastFocusable.focus();
+      } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+        e.preventDefault();
+        firstFocusable.focus();
+      }
+    }
+  }
+
+  modal.addEventListener('keydown', handleKeydown);
+
+  // Focus first element
+  if (firstFocusable) firstFocusable.focus();
+
+  // Return cleanup function
+  return () => modal.removeEventListener('keydown', handleKeydown);
+}
+
+// Helper to load scripts dynamically (crossorigin for CORS/SRI support)
 function loadScript(src) {
   return new Promise((resolve, reject) => {
     const existing = document.querySelector(`script[src="${src}"]`);
     if (existing) { resolve(); return; }
     const script = document.createElement('script');
     script.src = src;
+    script.crossOrigin = 'anonymous';
     script.onload = resolve;
     script.onerror = reject;
     document.head.appendChild(script);
   });
 }
 
-// Load DataTables and dependencies on demand
+// Load DataTables and dependencies on demand (Promise-based to prevent race conditions)
 async function loadDataTablesIfNeeded() {
   if (dataTablesLoaded) return;
-  if (dataTablesLoading) {
-    // Wait for loading to complete
-    while (dataTablesLoading) await new Promise(r => setTimeout(r, 50));
-    return;
-  }
-  dataTablesLoading = true;
 
-  try {
-    // jQuery first (required by DataTables)
-    await loadScript('https://code.jquery.com/jquery-3.7.0.min.js');
-    // DataTables core
-    await loadScript('https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js');
-    // DataTables plugins in parallel
-    await Promise.all([
-      loadScript('https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js'),
-      loadScript('https://cdn.datatables.net/colreorder/1.6.2/js/dataTables.colReorder.min.js'),
-      loadScript('https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js'),
-      loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'),
-    ]);
-    // These depend on previous ones
-    await Promise.all([
-      loadScript('https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js'),
-      loadScript('https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js'),
-      loadScript('https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'),
-    ]);
-    await loadScript('https://cdn.datatables.net/plug-ins/1.13.6/features/mark.js/datatables.mark.js');
-
-    dataTablesLoaded = true;
-  } finally {
-    dataTablesLoading = false;
+  // If already loading, wait for existing promise
+  if (dataTablesLoadPromise) {
+    return dataTablesLoadPromise;
   }
+
+  dataTablesLoadPromise = (async () => {
+    try {
+      // jQuery first (required by DataTables)
+      await loadScript('https://code.jquery.com/jquery-3.7.0.min.js');
+      // DataTables core
+      await loadScript('https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js');
+      // DataTables plugins in parallel
+      await Promise.all([
+        loadScript('https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js'),
+        loadScript('https://cdn.datatables.net/colreorder/1.6.2/js/dataTables.colReorder.min.js'),
+        loadScript('https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js'),
+        loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'),
+      ]);
+      // These depend on previous ones
+      await Promise.all([
+        loadScript('https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js'),
+        loadScript('https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js'),
+        loadScript('https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'),
+      ]);
+      await loadScript('https://cdn.datatables.net/plug-ins/1.13.6/features/mark.js/datatables.mark.js');
+
+      dataTablesLoaded = true;
+    } catch (err) {
+      dataTablesLoadPromise = null; // Allow retry on failure
+      throw err;
+    }
+  })();
+
+  return dataTablesLoadPromise;
 }
 
-// Load Chart.js on demand
+// Load Chart.js on demand (Promise-based to prevent race conditions)
 async function loadChartJsIfNeeded() {
   if (chartJsLoaded) return;
-  if (chartJsLoading) {
-    while (chartJsLoading) await new Promise(r => setTimeout(r, 50));
-    return;
-  }
-  chartJsLoading = true;
 
-  try {
-    await loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js');
-    await loadScript('https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js');
-    chartJsLoaded = true;
-  } finally {
-    chartJsLoading = false;
+  // If already loading, wait for existing promise
+  if (chartJsLoadPromise) {
+    return chartJsLoadPromise;
   }
+
+  chartJsLoadPromise = (async () => {
+    try {
+      await loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js');
+      await loadScript('https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js');
+      chartJsLoaded = true;
+    } catch (err) {
+      chartJsLoadPromise = null; // Allow retry on failure
+      throw err;
+    }
+  })();
+
+  return chartJsLoadPromise;
 }
 
 // Collaborations data
 let collaborationsData = [];
 let collabResearcherNames = [];
+let collabResearcherNamesLower = [];  // Pre-computed lowercase for faster search
+let collaborationsMap = null; // Map for O(1) lookup
 let collaborationsLoaded = false;
 let collaborationsLoading = false;
 
@@ -126,12 +221,48 @@ function track(eventName, params = {}) {
   }
 }
 
+// ---------- Accessibility: Announce status to screen readers ----------
+function announceToScreenReader(message) {
+  const announcer = document.getElementById('status-announcer');
+  if (announcer) {
+    announcer.textContent = message;
+    // Clear after brief delay to allow re-announcement of same message
+    setTimeout(() => { announcer.textContent = ''; }, 1000);
+  }
+}
+
+// ---------- Toast notification system for user feedback ----------
+function showToast(message, type = 'info', duration = 3000) {
+  // Remove any existing toast
+  const existing = document.querySelector('.toast-notification');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.className = `toast-notification toast-${type}`;
+  toast.setAttribute('role', 'alert');
+  toast.setAttribute('aria-live', 'polite');
+  toast.textContent = message;
+
+  document.body.appendChild(toast);
+
+  // Trigger animation
+  requestAnimationFrame(() => {
+    toast.classList.add('show');
+  });
+
+  // Auto-remove
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+  }, duration);
+}
+
 function showLandingState() {
   const container = document.getElementById('grants');
   container.innerHTML = `
     <div class="landing-welcome">
       <div class="welcome-card">
-        <img src="assets/wizardoc.jpg" alt="Grant Matching Wizard" class="welcome-wizard">
+        <img src="assets/wizardoc.jpg" alt="Grant Matching Wizard" class="welcome-wizard" loading="lazy">
         <h2>Your Grant-Finding Wizard</h2>
         <p>Type your name above to see grants matched to your publications using AI.</p>
         <p class="welcome-features">
@@ -176,6 +307,7 @@ async function loadData() {
     grantsMap = new Map(grantsData.map(g => [String(g.grant_id), g]));
 
     researcherNames = matchesData.map((m) => m.name);
+    researcherNamesLower = researcherNames.map(n => n.toLowerCase());
   } catch (err) {
     track('data_load', { status: 'error', error_message: err.message });
     throw err;
@@ -195,6 +327,9 @@ async function loadCollaborationsIfNeeded() {
     if (resp.ok) {
       collaborationsData = await resp.json();
       collabResearcherNames = collaborationsData.map(r => r.name);
+      collabResearcherNamesLower = collabResearcherNames.map(n => n.toLowerCase());
+      // Create Map for O(1) lookups
+      collaborationsMap = new Map(collaborationsData.map(r => [r.name, r]));
       collaborationsLoaded = true;
       track('data_load', { status: 'success', dataset: 'collaborations' });
     }
@@ -240,8 +375,10 @@ function updateSuggestions(value) {
     return;
   }
 
+  // Use pre-computed lowercase names for faster search
+  const valueLower = value.toLowerCase();
   const filtered = researcherNames
-    .filter((n) => n.toLowerCase().includes(value.toLowerCase()))
+    .filter((_, i) => researcherNamesLower[i].includes(valueLower))
     .slice(0, 8);
 
   if (filtered.length === 0) {
@@ -261,7 +398,11 @@ function updateSuggestions(value) {
   }
 
   if (requestAddSection) requestAddSection.classList.remove('highlighted');
-  filtered.forEach((name) => suggBox.appendChild(createSuggestion(name)));
+
+  // Use DocumentFragment for batch DOM insertion (performance)
+  const fragment = document.createDocumentFragment();
+  filtered.forEach((name) => fragment.appendChild(createSuggestion(name)));
+  suggBox.appendChild(fragment);
   suggBox.style.display = 'block';
 }
 
@@ -293,7 +434,7 @@ function showCollabLandingState() {
   container.innerHTML = `
     <div class="landing-welcome">
       <div class="welcome-card">
-        <img src="assets/wizardscolab.jpg" alt="Collaboration Wizards" class="welcome-wizard">
+        <img src="assets/wizardscolab.jpg" alt="Collaboration Wizards" class="welcome-wizard" loading="lazy">
         <h2>Find Research Collaborators</h2>
         <p>Type your name above to discover researchers who match your grant opportunities.</p>
         <p class="welcome-features">
@@ -338,8 +479,10 @@ function updateCollabSuggestions(value) {
     return;
   }
 
+  // Use pre-computed lowercase names for faster search
+  const valueLower = value.toLowerCase();
   const filtered = collabResearcherNames
-    .filter((n) => n.toLowerCase().includes(value.toLowerCase()))
+    .filter((_, i) => collabResearcherNamesLower[i].includes(valueLower))
     .slice(0, 8);
 
   if (filtered.length === 0) {
@@ -347,7 +490,10 @@ function updateCollabSuggestions(value) {
     return;
   }
 
-  filtered.forEach((name) => suggBox.appendChild(createCollabSuggestion(name)));
+  // Use DocumentFragment for batch DOM insertion (performance)
+  const fragment = document.createDocumentFragment();
+  filtered.forEach((name) => fragment.appendChild(createCollabSuggestion(name)));
+  suggBox.appendChild(fragment);
   suggBox.style.display = 'block';
 }
 
@@ -432,11 +578,12 @@ function createCollaboratorCard(collaborator) {
       const detailsDiv = document.createElement('div');
       detailsDiv.className = 'grant-details';
       detailsDiv.hidden = true;
+      // Use escapeHtml to prevent XSS from potentially malicious grant data
       detailsDiv.innerHTML = `
-        <p><span class="detail-label">Provider:</span> ${grant.provider}</p>
-        <p><span class="detail-label">Due Date:</span> ${formatDate(grant.due_date)}</p>
-        <p><span class="detail-label">Proposed Money:</span> ${moneyFmt(grant.proposed_money)}</p>
-        <p><span class="detail-label">Summary:</span> ${grant.summary_text || 'N/A'}</p>
+        <p><span class="detail-label">Provider:</span> ${escapeHtml(grant.provider)}</p>
+        <p><span class="detail-label">Due Date:</span> ${escapeHtml(formatDate(grant.due_date))}</p>
+        <p><span class="detail-label">Proposed Money:</span> ${escapeHtml(moneyFmt(grant.proposed_money))}</p>
+        <p><span class="detail-label">Summary:</span> ${escapeHtml(grant.summary_text || 'N/A')}</p>
       `;
 
       toggleBtn.addEventListener('click', () => {
@@ -465,7 +612,8 @@ function showCollaborators(name) {
   const container = document.getElementById('collaborators-list');
   container.innerHTML = '';
 
-  const researcher = collaborationsData.find((r) => r.name === name);
+  // Use Map for O(1) lookup instead of O(n) find
+  const researcher = collaborationsMap ? collaborationsMap.get(name) : collaborationsData.find((r) => r.name === name);
   if (!researcher || !researcher.collaborators || researcher.collaborators.length === 0) {
     container.innerHTML = '<p class="no-results">No collaborators found for this researcher.</p>';
     return;
@@ -480,38 +628,36 @@ function showCollaborators(name) {
 
 function formatDate(raw) {
   if (!raw) return '';
-  let arr;
-  if (Array.isArray(raw)) {
-    arr = raw;
-  } else {
-    try {
-      // Python-style string "['…','…']" -> JSON parse
-      arr = JSON.parse(raw.replace(/'/g, '"'));
-    } catch {
-      // simple "YYYY-MM-DD HH:MM:SS" string
-      arr = [raw];
-    }
-  }
+  // Use safe parser to handle various date formats
+  const arr = safeParseDateArray(raw);
+  if (arr.length === 0) return '';
+
   const MONTHS = [
     'Jan','Feb','Mar','Apr','May','Jun',
     'Jul','Aug','Sep','Oct','Nov','Dec'
   ];
 
   const pretty = (ts) => {
-    const [datePart, timePart] = ts.split(' ');
+    if (!ts || typeof ts !== 'string') return '';
+    const [datePart, timePart = '00:00'] = ts.split(' ');
+    if (!datePart) return '';
+
     let dd, mm, yyyy;
-    if (/^\d{4}-\d{2}-\d{2}$/.test(datePart)) {
-      // got YYYY-MM-DD -> flip order
+    if (/^\d{4}-\d{2}-\d{2}/.test(datePart)) {
       [yyyy, mm, dd] = datePart.split('-');
-    } else {
+    } else if (/^\d{2}-\d{2}-\d{4}/.test(datePart)) {
       [dd, mm, yyyy] = datePart.split('-');
+    } else {
+      return ts; // Return as-is if format not recognized
     }
-    const [hh, min] = timePart.split(':');
-    return `${dd} ${MONTHS[Number(mm) - 1]} ${yyyy} ${hh}:${min}`;
+
+    const [hh, min] = (timePart || '00:00').split(':');
+    const monthIndex = Number(mm) - 1;
+    const monthName = MONTHS[monthIndex] || mm;
+    return `${dd} ${monthName} ${yyyy} ${hh}:${min}`;
   };
 
-  /* 3 ▸ format one or many dates */
-  return arr.map(pretty).join(' / ');
+  return arr.map(pretty).filter(Boolean).join(' / ');
 }
 
 function moneyFmt(m) {
@@ -523,12 +669,13 @@ function createGrantCard(grant, matchReason = null) {
   const card = document.createElement('div');
   card.className = 'grant';
 
+  // Use escapeHtml to prevent XSS from potentially malicious grant data
   card.innerHTML = `
-      <h3>${grant.title}</h3>
-      <p><strong>Provider:</strong> ${grant.provider}</p>
-      <p><strong>Due Date:</strong> ${formatDate(grant.due_date)}</p>
-      <p><strong>Proposed Money:</strong> ${moneyFmt(grant.proposed_money)}</p>
-      <p><a href="${grant.submission_link}" target="_blank" rel="noopener">Submission Link ↗</a></p>
+      <h3>${escapeHtml(grant.title)}</h3>
+      <p><strong>Provider:</strong> ${escapeHtml(grant.provider)}</p>
+      <p><strong>Due Date:</strong> ${escapeHtml(formatDate(grant.due_date))}</p>
+      <p><strong>Proposed Money:</strong> ${escapeHtml(moneyFmt(grant.proposed_money))}</p>
+      <p><a href="${escapeHtml(grant.submission_link)}" target="_blank" rel="noopener">Submission Link ↗</a></p>
     `;
 
   renderVoteBar(card, grant.grant_id);
@@ -587,25 +734,25 @@ function createGrantCard(grant, matchReason = null) {
 
 function parseDueDate(raw) {
   if (!raw) return null;
-  let str = '';
-  if (Array.isArray(raw)) {
-    str = raw[0];
-  } else {
-    try {
-      const arr = JSON.parse(raw.replace(/'/g, '"'));
-      str = Array.isArray(arr) ? arr[0] : arr;
-    } catch {
-      str = raw;
-    }
-  }
+  // Use safe parser
+  const arr = safeParseDateArray(raw);
+  const str = arr[0] || '';
+  if (!str) return null;
+
   const [datePart, timePart = '00:00:00'] = str.split(' ');
+  if (!datePart) return null;
+
   let dd, mm, yyyy;
   if (/^\d{4}-\d{2}-\d{2}/.test(datePart)) {
     [yyyy, mm, dd] = datePart.split('-');
-  } else {
+  } else if (/^\d{2}-\d{2}-\d{4}/.test(datePart)) {
     [dd, mm, yyyy] = datePart.split('-');
+  } else {
+    return null; // Unrecognized format
   }
-  return new Date(`${yyyy}-${mm}-${dd}T${timePart}Z`);
+
+  const date = new Date(`${yyyy}-${mm}-${dd}T${timePart}Z`);
+  return isNaN(date.getTime()) ? null : date;
 }
 
 function animateNumber(el, value, duration = 800) {
@@ -778,16 +925,19 @@ async function showDashboard() {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5)
     .map(([id, count]) => {
-      const grant = grantsData.find(g => g.grant_id == id);
-      return { ...grant, matchCount: count };
-    });
+      // Use grantsMap for O(1) lookup instead of O(n) find
+      const grant = grantsMap.get(String(id));
+      return grant ? { ...grant, matchCount: count } : null;
+    })
+    .filter(g => g !== null);
 
   const listEl = document.getElementById('most-matched-list');
+  // Use escapeHtml to prevent XSS
   listEl.innerHTML = topGrants.map(g => `
     <li class="most-matched-item">
       <span class="match-count-badge">${g.matchCount} researchers</span>
-      <a href="${g.submission_link}" target="_blank">${g.title}</a>
-      <span class="provider-tag">${g.provider}</span>
+      <a href="${escapeHtml(g.submission_link)}" target="_blank">${escapeHtml(g.title)}</a>
+      <span class="provider-tag">${escapeHtml(g.provider)}</span>
     </li>
   `).join('');
 
@@ -845,16 +995,19 @@ function showGrants(name) {
   grantsContainer.innerHTML = '';
 
   const match = matchesData.find((m) => m.name === name);
-  if (!match) return;
+  if (!match) {
+    announceToScreenReader('No grants found for this researcher.');
+    return;
+  }
 
-  // Add researcher header with affiliation
+  // Add researcher header with affiliation (build once to avoid reflow)
   const header = document.createElement('div');
   header.className = 'researcher-header';
-  header.innerHTML = `<h2 class="researcher-name">${name}</h2>`;
   const affiliation = affiliationData[name];
-  if (affiliation) {
-    header.innerHTML += `<p class="researcher-affiliation">${affiliation}</p>`;
-  }
+  header.innerHTML = `
+    <h2 class="researcher-name">${escapeHtml(name)}</h2>
+    ${affiliation ? `<p class="researcher-affiliation">${escapeHtml(affiliation)}</p>` : ''}
+  `;
   grantsContainer.appendChild(header);
 
   match.grants.forEach((g, index) => {
@@ -875,6 +1028,10 @@ function showGrants(name) {
   grantsContainer.dispatchEvent(
     new CustomEvent('grantsUpdated', { detail: { name } })
   );
+
+  // Announce to screen readers
+  const grantCount = match.grants ? match.grants.length : 0;
+  announceToScreenReader(`Loaded ${grantCount} grants for ${name}.`);
 }
 
 async function initGrantsTable() {
@@ -943,7 +1100,7 @@ async function initGrantsTable() {
       { data: 'due_date', title: 'Due Date' },
       { data: 'money', title: 'Money' },
       { data: 'suggested_collaborators', title: 'Suggested Collaborators' },
-      { data: 'link', title: 'Link', orderable: false, render: d => `<a href="${d}" target="_blank" rel="noopener">Open</a>` },
+      { data: 'link', title: 'Link', orderable: false, render: d => d ? `<a href="${escapeHtml(d)}" target="_blank" rel="noopener">Open</a>` : '' },
     ]
   });
 
@@ -1040,11 +1197,19 @@ async function init() {
 
 document.addEventListener('DOMContentLoaded', init);
 
-// ===== Scroll depth tracking =====
-(function() {
-  const trackedDepths = new Set();
+// ===== Scroll depth tracking (with throttling for performance) =====
+const scrollTracker = {
+  trackedDepths: new Set(),
+  scrollHandler: null,
+  isActive: false,
+  lastScrollTime: 0,
+  throttleMs: 100,
 
-  function trackScrollDepth() {
+  trackScrollDepth() {
+    const now = Date.now();
+    if (now - scrollTracker.lastScrollTime < scrollTracker.throttleMs) return;
+    scrollTracker.lastScrollTime = now;
+
     const container = document.getElementById('grants');
     if (!container || container.children.length === 0) return;
 
@@ -1060,8 +1225,8 @@ document.addEventListener('DOMContentLoaded', init);
     const depthPercent = Math.min(100, Math.round((scrolledIntoContainer / containerHeight) * 100));
 
     [25, 50, 75, 100].forEach(milestone => {
-      if (depthPercent >= milestone && !trackedDepths.has(milestone)) {
-        trackedDepths.add(milestone);
+      if (depthPercent >= milestone && !scrollTracker.trackedDepths.has(milestone)) {
+        scrollTracker.trackedDepths.add(milestone);
         track('scroll_depth', {
           depth_percent: milestone,
           tab: 'recommendations',
@@ -1069,19 +1234,36 @@ document.addEventListener('DOMContentLoaded', init);
         });
       }
     });
-  }
+  },
 
-  // Reset tracked depths when grants are updated
-  document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('grants');
-    if (container) {
-      container.addEventListener('grantsUpdated', () => {
-        trackedDepths.clear();
-      });
-    }
-    window.addEventListener('scroll', trackScrollDepth, { passive: true });
-  });
-})();
+  start() {
+    if (this.isActive) return;
+    this.scrollHandler = this.trackScrollDepth.bind(this);
+    window.addEventListener('scroll', this.scrollHandler, { passive: true });
+    this.isActive = true;
+  },
+
+  stop() {
+    if (!this.isActive) return;
+    window.removeEventListener('scroll', this.scrollHandler);
+    this.isActive = false;
+  },
+
+  reset() {
+    this.trackedDepths.clear();
+  }
+};
+
+// Initialize scroll tracking
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('grants');
+  if (container) {
+    container.addEventListener('grantsUpdated', () => {
+      scrollTracker.reset();
+    });
+  }
+  scrollTracker.start();
+});
 
 // ===== Voting module =====
 const API_BASE = 'https://ggm-backend.onrender.com';
@@ -1173,7 +1355,10 @@ function renderVoteBar(cardEl, grantId) {
   if (getCurrentUser()) {            // only query once researcher is chosen
     api.userVote(grantId, getCurrentUser())
       .then(d => setState(bar, d ? d.action : null))
-      .catch(() => {});
+      .catch(err => {
+        // Log error but don't show toast for initial vote state fetch
+        console.warn('Failed to fetch vote state:', err.message);
+      });
   }
 }
 
@@ -1221,17 +1406,28 @@ async function handleVoteClick(e) {
     bar.dataset.likes = prev.likes;
     bar.dataset.dislikes = prev.dislikes;
     setState(bar, prev.vote);
-    alert("Couldn't register vote – please try again.");
+    showToast("Couldn't register vote – please try again.", 'error');
+    track('vote_error', { grant_id: grantId, error: err.message });
   }
 }
 
 // ========== Subscription Functions ==========
 
 async function checkSubscriptionStatus(researcherName) {
+  // Check cache first
+  const cached = subscriptionCache.get(researcherName);
+  if (cached !== null) return cached;
+
   try {
     const resp = await fetch(`${API_BASE}/subscriptions/${encodeURIComponent(researcherName)}`);
-    if (!resp.ok) return { subscribed: false };
-    return await resp.json();
+    if (!resp.ok) {
+      const result = { subscribed: false };
+      subscriptionCache.set(researcherName, result);
+      return result;
+    }
+    const result = await resp.json();
+    subscriptionCache.set(researcherName, result);
+    return result;
   } catch (err) {
     return { subscribed: false };
   }
@@ -1257,6 +1453,8 @@ async function unsubscribe(researcherName, email) {
 
 // Track current subscription status
 let currentSubscriptionStatus = { subscribed: false, email_hint: null };
+let previousFocusElement = null;  // For focus restoration after modal close
+let modalCleanup = null;  // For cleaning up modal accessibility handlers
 
 async function updateSubscribeButton(researcherName) {
   const btn = document.getElementById('subscribe-btn');
@@ -1288,6 +1486,9 @@ function openSubscribeModal() {
 
   if (!modal) return;
 
+  // Store current focus for restoration on close
+  previousFocusElement = document.activeElement;
+
   // Reset modal state
   statusEl.textContent = '';
   statusEl.className = 'subscribe-status';
@@ -1308,12 +1509,26 @@ function openSubscribeModal() {
   }
 
   modal.classList.remove('hidden');
-  emailInput.focus();
+
+  // Setup focus trap and keyboard handling
+  modalCleanup = setupModalAccessibility(modal, closeSubscribeModal);
 }
 
 function closeSubscribeModal() {
   const modal = document.getElementById('subscribe-modal');
   if (modal) modal.classList.add('hidden');
+
+  // Cleanup focus trap handler
+  if (modalCleanup) {
+    modalCleanup();
+    modalCleanup = null;
+  }
+
+  // Restore focus to trigger element
+  if (previousFocusElement) {
+    previousFocusElement.focus();
+    previousFocusElement = null;
+  }
 }
 
 async function handleSubscribeSubmit() {
@@ -1324,7 +1539,13 @@ async function handleSubscribeSubmit() {
   const formEl = document.getElementById('subscribe-form');
   const isUnsubscribeMode = currentSubscriptionStatus.subscribed;
 
-  if (!email || !researcher) {
+  if (!researcher) {
+    statusEl.textContent = 'Please select a researcher first';
+    statusEl.className = 'subscribe-status error';
+    return;
+  }
+
+  if (!email || !isValidEmail(email)) {
     statusEl.textContent = 'Please enter a valid email address';
     statusEl.className = 'subscribe-status error';
     return;
@@ -1345,8 +1566,9 @@ async function handleSubscribeSubmit() {
       subscribeBtn.classList.remove('subscribed');
       subscribeBtn.title = 'Subscribe for email updates';
 
-      // Update local status
+      // Update local status and clear cache
       currentSubscriptionStatus = { subscribed: false, email_hint: null };
+      subscriptionCache.clear(researcher);
 
       track('unsubscribe', { researcher_name: researcher });
     } else {
@@ -1359,6 +1581,9 @@ async function handleSubscribeSubmit() {
       const subscribeBtn = document.getElementById('subscribe-btn');
       subscribeBtn.classList.add('subscribed');
       subscribeBtn.title = 'Subscribed';
+
+      // Clear cache so next check gets fresh data
+      subscriptionCache.clear(researcher);
 
       track('subscribe', { researcher_name: researcher });
     }
@@ -1382,17 +1607,26 @@ async function handleSubscribeSubmit() {
 
 let selectedOpenAlexAuthor = null;
 let openalexSearchTimeout = null;
+let openalexAbortController = null;
 
 async function searchOpenAlex(query) {
   if (!query || query.length < 2) return [];
 
+  // Cancel any in-flight request
+  if (openalexAbortController) {
+    openalexAbortController.abort();
+  }
+  openalexAbortController = new AbortController();
+
   const url = `https://api.openalex.org/authors?search=${encodeURIComponent(query)}&per_page=10`;
   try {
-    const resp = await fetch(url);
+    const resp = await fetch(url, { signal: openalexAbortController.signal });
     if (!resp.ok) return [];
     const data = await resp.json();
     return data.results || [];
   } catch (err) {
+    // Ignore abort errors
+    if (err.name === 'AbortError') return [];
     return [];
   }
 }
@@ -1425,6 +1659,9 @@ function renderOpenAlexSuggestions(authors) {
     return;
   }
 
+  // Use DocumentFragment for batch DOM insertion (performance)
+  const fragment = document.createDocumentFragment();
+
   for (const author of authors) {
     const div = document.createElement('div');
     div.className = 'openalex-suggestion-item';
@@ -1445,9 +1682,10 @@ function renderOpenAlexSuggestions(authors) {
     div.appendChild(worksSpan);
 
     div.addEventListener('click', () => selectOpenAlexAuthor(author));
-    container.appendChild(div);
+    fragment.appendChild(div);
   }
 
+  container.appendChild(fragment);
   container.style.display = 'block';
 }
 
@@ -1521,12 +1759,36 @@ async function submitResearcherRequest() {
 }
 
 function openRequestModal() {
-  document.getElementById('request-modal').classList.remove('hidden');
-  document.getElementById('openalex-search-input').focus();
+  const modal = document.getElementById('request-modal');
+
+  // Store current focus for restoration on close
+  previousFocusElement = document.activeElement;
+
+  modal.classList.remove('hidden');
+
+  // Setup focus trap and keyboard handling
+  modalCleanup = setupModalAccessibility(modal, closeRequestModal);
 }
 
 function closeRequestModal() {
   document.getElementById('request-modal').classList.add('hidden');
+
+  // Abort any pending OpenAlex search
+  if (openalexAbortController) {
+    openalexAbortController.abort();
+    openalexAbortController = null;
+  }
+  if (openalexSearchTimeout) {
+    clearTimeout(openalexSearchTimeout);
+    openalexSearchTimeout = null;
+  }
+
+  // Cleanup focus trap handler
+  if (modalCleanup) {
+    modalCleanup();
+    modalCleanup = null;
+  }
+
   // Reset state
   selectedOpenAlexAuthor = null;
   document.getElementById('openalex-search-input').value = '';
@@ -1536,6 +1798,12 @@ function closeRequestModal() {
   document.getElementById('submit-request-btn').classList.add('hidden');
   document.getElementById('request-email').value = '';
   document.getElementById('request-status').textContent = '';
+
+  // Restore focus to trigger element
+  if (previousFocusElement) {
+    previousFocusElement.focus();
+    previousFocusElement = null;
+  }
 }
 
 // Event listeners for modals - wrapped in DOMContentLoaded

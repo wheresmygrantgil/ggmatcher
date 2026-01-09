@@ -18,10 +18,11 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <!-- DataTables CSS - loaded but hidden until needed -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.6.2/css/colReorder.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
+    <!-- Note: Generate SRI hashes at https://www.srihash.org/ for production security -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.6.2/css/colReorder.dataTables.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" crossorigin="anonymous" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FKE4HL7881"></script>
@@ -59,6 +60,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Aria-live region for status announcements (screen readers) -->
+    <div id="status-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
     <header>
       <h1>Grand Grant Matcher <span class="wizard-icon">🧙</span></h1>
