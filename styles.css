@@ -318,6 +318,31 @@ main {
   max-height: 250px;
 }
 
+.section-title {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--primary);
+}
+
+.topic-charts-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.topic-chart-container {
+  background: #ffffff;
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  width: 400px;
+  height: 280px;
+}
+
+
 .stat {
   background: #ffffff;
   border: 2px solid var(--primary);
