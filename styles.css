@@ -109,6 +109,15 @@ h1 {
   color: #ffffff;
 }
 
+.tab:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.tab.active:focus {
+  outline-color: #ffffff;
+}
+
 .hidden { display: none; }
 
 /* ================= Main layout ================ */
@@ -494,6 +503,11 @@ footer .social-icon {
 }
 footer .social-icon svg { fill: var(--accent); }
 footer .social-icon:hover { transform: scale(1.15); }
+footer .social-icon:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  transform: scale(1.15);
+}
 
 /* === Landing Welcome Card === */
 .landing-welcome {
@@ -725,9 +739,13 @@ footer .social-icon:hover { transform: scale(1.15); }
   border: 2px solid var(--primary);
   background: #fff;
   border-radius: 999px;
-  padding: 0.1rem 0.5rem;
+  /* Increased padding for minimum 44x44px touch target (WCAG) */
+  padding: 0.5rem 0.75rem;
+  min-width: 44px;
+  min-height: 44px;
   cursor: pointer;
   font: inherit;
+  font-size: 1.1rem;
   line-height: 1.2;
   color: var(--primary);
   display: inline-flex;
@@ -1305,4 +1323,85 @@ footer .social-icon:hover { transform: scale(1.15); }
 
 .privacy-actions .btn-primary:hover {
   background: #18a8cc;
+}
+
+/* ========== Toast Notifications ========== */
+.toast-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--primary);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 2000;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast-notification.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.toast-notification.toast-success {
+  background: #28a745;
+}
+
+.toast-notification.toast-error {
+  background: #dc3545;
+}
+
+.toast-notification.toast-info {
+  background: var(--accent);
+}
+
+/* ========== Screen Reader Only (Accessibility) ========== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ========== Reduced Motion Support ========== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  header {
+    animation: none;
+    background-position: 0% 50%;
+  }
+
+  header::before,
+  header::after {
+    animation: none;
+  }
+
+  .grant:hover,
+  .collaborator-card:hover {
+    transform: none;
+  }
+
+  .loading-spinner::before {
+    animation: none;
+    border-color: var(--accent);
+  }
+
+  .toast-notification {
+    transition: none;
+  }
 }
