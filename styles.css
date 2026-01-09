@@ -1231,3 +1231,78 @@ footer .social-icon:hover { transform: scale(1.15); }
 
 .request-status.success { color: #28a745; }
 .request-status.error { color: #dc3545; }
+
+/* Privacy Modal */
+.privacy-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(33, 54, 70, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.privacy-modal.hidden { display: none; }
+
+.privacy-content {
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.privacy-content h2 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.privacy-content h3 {
+  color: var(--primary);
+  margin: 1rem 0 0.5rem;
+  font-size: 1rem;
+}
+
+.privacy-body ul {
+  margin-left: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.privacy-body li {
+  margin-bottom: 0.4rem;
+}
+
+.privacy-note {
+  background: #e3f6fc;
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  border-radius: 4px;
+}
+
+.privacy-actions {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.privacy-actions .btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.privacy-actions .btn-primary:hover {
+  background: #18a8cc;
+}

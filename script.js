@@ -1608,4 +1608,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Privacy modal - show on first visit
+  const privacyModal = document.getElementById('privacy-modal');
+  const acceptPrivacyBtn = document.getElementById('accept-privacy');
+
+  if (privacyModal && !localStorage.getItem('privacy_accepted')) {
+    privacyModal.classList.remove('hidden');
+  }
+
+  if (acceptPrivacyBtn) {
+    acceptPrivacyBtn.addEventListener('click', () => {
+      localStorage.setItem('privacy_accepted', 'true');
+      if (privacyModal) privacyModal.classList.add('hidden');
+    });
+  }
 });
