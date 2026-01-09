@@ -2,6 +2,13 @@ let selectedName = '';
 let observer;
 let teaserShown = false;
 
+// Local escape helper (same as in script.js) to prevent XSS
+function escapeHtmlTeaser(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
 function showTeaser() {
   if (teaserShown) return;
   teaserShown = true;
@@ -11,7 +18,7 @@ function showTeaser() {
   card.innerHTML = `
     <img src="assets/wizardoc.jpg" alt="Grant Matching Wizard">
     <p>Didn't spot the perfect call?<br>
-    ⚡ Let our AI wizard scout the web for fresh opportunities tailored to <em>${selectedName}</em>!</p>
+    ⚡ Let our AI wizard scout the web for fresh opportunities tailored to <em>${escapeHtmlTeaser(selectedName)}</em>!</p>
     <button class="teaser-cta">Engage the Wizard 🧙</button>
   `;
   document.getElementById('grants').appendChild(card);
@@ -37,32 +44,46 @@ function openModal() {
     </div>`;
   document.body.appendChild(overlay);
 
+  // Define handler before close() so it can be removed
+  const handleEscape = (e) => {
+    if (e.key === 'Escape') close();
+  };
+
   const close = () => {
+    document.removeEventListener('keydown', handleEscape);
     overlay.remove();
   };
+
   overlay.querySelector('.close-btn').addEventListener('click', close);
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) close();
   });
   overlay.querySelector('.close-btn').focus();
-  document.addEventListener('keydown', function esc(e) {
-    if (e.key === 'Escape') {
-      close();
-      document.removeEventListener('keydown', esc);
-    }
-  });
+  document.addEventListener('keydown', handleEscape);
 }
 
 document.getElementById('grants').addEventListener('grantsUpdated', (e) => {
   selectedName = e.detail.name;
   teaserShown = false;
-  if (observer) observer.disconnect();
+
+  // Clean up previous observer
+  if (observer) {
+    observer.disconnect();
+    observer = null;
+  }
+
+  // Remove any existing teaser card when switching researchers
+  const existingTeaser = document.querySelector('.teaser-card');
+  if (existingTeaser) existingTeaser.remove();
+
   const last = document.querySelector('#grants .grant:last-child');
   if (!last) return;
+
   observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         observer.disconnect();
+        observer = null;
         showTeaser();
       }
     });

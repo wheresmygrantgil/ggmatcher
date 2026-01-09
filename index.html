@@ -18,10 +18,10 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <!-- DataTables CSS - loaded but hidden until needed -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.6.2/css/colReorder.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" crossorigin="anonymous" integrity="sha384-w9ufcIOKS67vY4KePhJtmWDp4+Ai5DMaHvqqF85VvjaGYSW2AhIbqorgKYqIJopv" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" crossorigin="anonymous" integrity="sha384-dQZQS3OJyqbS/bx7sHpCjzRa7/roDU1cGuIKAqfNCjHGMG/jUFKCdaFsIwwKQFEJ" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.6.2/css/colReorder.dataTables.min.css" crossorigin="anonymous" integrity="sha384-LFPyhBHWePyFBkS6Kg3KZZX/XMsZG/c63KSiqh6vhDJTCMchcsjt/0edYvoF349b" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" crossorigin="anonymous" integrity="sha384-crw3yzw9NT5xNc1wlaGFA94mdcyVR3ZXsA0ltSK0p57d7uvxpp7b0ZnBwfmjj31S" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FKE4HL7881"></script>
@@ -59,6 +59,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Aria-live region for status announcements (screen readers) -->
+    <div id="status-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
     <header>
       <h1>Grand Grant Matcher <span class="wizard-icon">🧙</span></h1>
