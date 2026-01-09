@@ -91,6 +91,7 @@ h1 {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
 .tab {
@@ -102,11 +103,38 @@ h1 {
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-size: 1rem;
+  white-space: nowrap;
 }
 
 .tab.active {
   background: var(--accent);
   color: #ffffff;
+}
+
+/* Mobile responsive tabs */
+@media (max-width: 480px) {
+  .tabs {
+    gap: 0.35rem;
+    margin-top: 0.75rem;
+  }
+
+  .tab {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 360px) {
+  .tabs {
+    gap: 0.25rem;
+  }
+
+  .tab {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.8rem;
+  }
 }
 
 .hidden { display: none; }
