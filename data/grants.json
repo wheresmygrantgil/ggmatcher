@@ -8078,5 +8078,345 @@
     "proposed_money": "From 1$ to 75000000$",
     "submission_link": "https://netl-exchange.energy.gov/Default.aspx#FoaId20492c21-8c53-495c-9861-0899cd72c79e",
     "summary_text": "The key research topics of this NOFO focus on the extraction and production of critical material byproducts from existing industrial processes in sectors such as mining, mineral processing, power generation, and fossil fuels. The initiative aims to enhance the domestic supply of essential minerals and address vulnerabilities in the U.S. mineral supply chain."
+  },
+  {
+    "grant_id": 47347605,
+    "provider": "HORIZON-EUROHPC-JU-2024-BENCHMARK-05",
+    "title": "A European HPC-centric Benchmark Framework",
+    "due_date": "['24-03-2026 02:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-eurohpc-ju-2024-benchmark-05",
+    "summary_text": "The grant call focuses on developing a comprehensive benchmarking framework for exascale and post-exascale high-performance computing (HPC) systems, including those with dedicated AI capabilities. Key research topics include the establishment of standardized performance metrics, the creation of a diverse benchmarking suite encompassing microbenchmarks, application benchmarks, and system benchmarks, and the integration of energy efficiency considerations. The initiative aims to enhance decision-making in system procurement and optimization while ensuring the sustainability and community-driven evolution of the benchmarking suite."
+  },
+  {
+    "grant_id": 49783365,
+    "provider": "HORIZON-EUROHPC-JU-2024-BENCHMARK-05-03",
+    "title": "A European Benchmarking Framework for hybrid quantum-classical computing",
+    "due_date": "['24-03-2026 02:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-eurohpc-ju-2024-benchmark-05-03",
+    "summary_text": "The grant call focuses on the development of a comprehensive benchmarking framework and suite for quantum-accelerated supercomputers (hybrid HPC-QC). Key research topics include establishing standardized performance metrics for assessing throughput, latency, and energy efficiency of QC and hybrid HPC-QC systems, as well as creating a transparent and reproducible methodology for benchmarking across different systems. The initiative aims to enhance decision-making in system procurement, improve the competitiveness of EU quantum suppliers, and contribute to the standardization of QC benchmarking practices."
+  },
+  {
+    "grant_id": 50143245,
+    "provider": "HORIZON-MSCA-2027-PF-01-01",
+    "title": "MSCA Postdoctoral Fellowships 2027",
+    "due_date": "['08-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-msca-2027-pf-01-01",
+    "summary_text": "The grant call focuses on enhancing research and innovation (R&I) skills for postdoctoral fellows through international mobility, interdisciplinary collaboration, and secondments in both academic and non-academic sectors. Key research topics include the development of transferable skills, fostering a culture of Open Science, and promoting knowledge valorization, particularly in the context of nuclear research under the Euratom Research and Training Programme. Additionally, the initiative aims to improve career prospects for researchers and strengthen the R&I capacity of participating organizations."
+  },
+  {
+    "grant_id": 50133283,
+    "provider": "HORIZON-WIDERA-2026-02-WIDENING-01",
+    "title": "Twinning",
+    "due_date": "['09-04-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-widera-2026-02-widening-01",
+    "summary_text": "The grant call focuses on enhancing research excellence and innovation capacity in Widening countries through twinning actions that connect these institutions with internationally leading research organizations. Key research topics include the development of joint research and innovation activities, strengthening research management capacities, and fostering strategic collaborations that promote mobility and inclusiveness among researchers. Proposals should also emphasize the creation of novel approaches in research and innovation, with a commitment to gender equality and the advancement of scientific knowledge."
+  },
+  {
+    "grant_id": 50128955,
+    "provider": "HORIZON-CL5-2026-08-Two-Stage-D1-06",
+    "title": "Closing knowledge gaps on Earth system science in support of global and regional assessments and climate policy",
+    "due_date": "['15-04-2026 03:00:00', '08-10-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-08-two-stage-d1-06",
+    "summary_text": "The grant call focuses on advancing Earth system science to improve the quality and reduce uncertainty in climate change projections, addressing critical knowledge gaps identified in the IPCC Sixth Assessment Report. Proposals should aim to generate new climate science evidence relevant for policy-making and climate action, while encouraging international collaboration and the use of satellite remote sensing data. Researchers are invited to define specific research areas that contribute to a comprehensive understanding of the Earth's climate system and inform future climate assessments."
+  },
+  {
+    "grant_id": 50129099,
+    "provider": "HORIZON-CL5-2026-07-D1-03",
+    "title": "Economics of climate change and cost of inaction",
+    "due_date": "['15-04-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-07-d1-03",
+    "summary_text": "The grant call focuses on enhancing understanding of the socio-economic impacts of climate change and the costs of climate inaction, emphasizing the need for improved models and methodologies. Key research topics include assessing the implications of climate change on economic performance, competitiveness, and public health, as well as exploring the co-benefits of climate action. The call encourages interdisciplinary collaboration and stakeholder engagement to develop regionally differentiated assessments and tools that inform strategic climate decisions, with a focus on both global and EU-specific contexts."
+  },
+  {
+    "grant_id": 50129061,
+    "provider": "HORIZON-CL5-2026-07-D1-02",
+    "title": "Advancing European climate risk assessments",
+    "due_date": "['15-04-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-07-d1-02",
+    "summary_text": "The grant call focuses on enhancing climate adaptation strategies in the EU by addressing knowledge gaps identified in the EU Climate Risk Assessments (EUCRA) and the latest IPCC assessments. Key research topics include improving the understanding and quantification of climate risks, assessing transboundary and cascading risks, and integrating diverse data sources and digital technologies to support decision-making. The initiative aims to develop tailored decision-support tools and methodologies for various systems and sectors, while fostering collaboration with local authorities and civil society to ensure effective climate risk management and adaptation efforts."
+  },
+  {
+    "grant_id": 50129124,
+    "provider": "HORIZON-CL5-2026-07-D1-04",
+    "title": "Fighting disinformation and effectively communicating on climate change",
+    "due_date": "['15-04-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-07-d1-04",
+    "summary_text": "The key research topics focus on understanding the dynamics of disinformation related to climate policy and developing effective communication strategies to enhance public engagement and trust in climate science. This includes creating tools for detecting and combating misinformation, fostering behavioral change through tailored communication techniques, and promoting climate literacy among diverse audiences. The research aims to bridge the gap between climate knowledge and action, utilizing interdisciplinary approaches and innovative methods to improve climate communication and resilience in society."
+  },
+  {
+    "grant_id": 50129148,
+    "provider": "HORIZON-CL5-2026-07-D1-05",
+    "title": "Improving climate and weather models for Africa",
+    "due_date": "['15-04-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-07-d1-05",
+    "summary_text": "The key research topics focus on improving weather and climate models specifically for Africa, enhancing predictive capabilities related to rainfall and extreme weather events, and addressing critical knowledge gaps in climate dynamics. The initiative aims to bolster African climate research, reduce reliance on external expertise, and promote local capacity-building through collaboration between African and European teams. Additionally, it emphasizes the integration of digital technologies and high-performance computing to advance climate science and support the development of the next generation of African climate scientists."
+  },
+  {
+    "grant_id": 50128997,
+    "provider": "HORIZON-CL5-2026-07-D1-01",
+    "title": "Next generation climate monitoring and related capabilities",
+    "due_date": "['15-04-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-07-d1-01",
+    "summary_text": "The grant call focuses on advancing climate monitoring and data management through three priority areas: enhancing climate data records, developing next-generation Earth system reanalyses, and improving climate forcing and emission data sets. Key research topics include innovative methods for data assimilation, harmonization of climate data, and the use of AI and digital tools to transform climate data into actionable knowledge for policy-making. Additionally, the call emphasizes the importance of international cooperation and the development of new data mining capabilities to identify climate trends and support various applications, including biodiversity monitoring and ecosystem management."
+  },
+  {
+    "grant_id": 50148650,
+    "provider": "HORIZON-WIDERA-2026-05-WIDENING-01",
+    "title": "ERA Fellowships",
+    "due_date": "['09-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-widera-2026-05-widening-01",
+    "summary_text": "The grant call focuses on enhancing research and innovation (R&I) capabilities in Widening countries by supporting excellent researchers through ERA Fellowships. Key research topics include cross-border mobility, interdisciplinary collaboration, and the development of transferable skills, with an emphasis on fostering innovation, entrepreneurship, and public engagement in science. Additionally, the initiative aims to improve working conditions for researchers, promote knowledge transfer between academic and non-academic sectors, and increase the global attractiveness of research environments in Widening countries."
+  },
+  {
+    "grant_id": 50222141,
+    "provider": "HORIZON-WIDERA-2027-03-WIDENING-01",
+    "title": "ERA Fellowships",
+    "due_date": "['08-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-widera-2027-03-widening-01",
+    "summary_text": "The grant call focuses on enhancing research and innovation (R&I) capabilities in Widening countries by supporting excellent researchers through ERA Fellowships. Key research topics include fostering interdisciplinary and international collaboration, promoting innovation and entrepreneurship, and developing transferable skills among researchers. The initiative aims to improve the employability of fellows, strengthen the quality of research training, and facilitate knowledge transfer between academic and non-academic sectors."
+  },
+  {
+    "grant_id": 50130230,
+    "provider": "HORIZON-CL5-2027-05-D4-07",
+    "title": "Integrating circularity in LCA-based modelling frameworks for renovation of buildings (Built4People Partnership)",
+    "due_date": "['15-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2027-05-d4-07",
+    "summary_text": "The key research topics focus on developing comprehensive modeling frameworks that integrate circularity assessment with life cycle assessment for building renovations, aiming to achieve net-zero whole-life carbon buildings. This includes evaluating the effectiveness of circularity strategies such as material reuse, recycling, and other methods like reducing, repairing, refurbishing, remanufacturing, and repurposing, while assessing both embodied and operational emissions throughout the life cycle of buildings in various climatic regions."
+  },
+  {
+    "grant_id": 50130167,
+    "provider": "HORIZON-CL5-2027-05-D4-05",
+    "title": "On-site robotic and automated techniques for building renovation and new construction",
+    "due_date": "['15-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2027-05-d4-05",
+    "summary_text": "The grant call focuses on advancing the construction sector through innovative on-site robotic and automated systems to enhance building renovation and construction processes. Key research topics include the development of techniques that improve resource efficiency, accuracy, and safety while reducing time and greenhouse gas emissions on construction sites, with an emphasis on incorporating 3D printing and adapting to various building typologies. Proposals should demonstrate these techniques in real-world applications across different building types and climates, ensuring they meet energy performance standards."
+  },
+  {
+    "grant_id": 50130209,
+    "provider": "HORIZON-CL5-2027-05-D4-06",
+    "title": "Thermal energy optimisation and waste heat recovery of high energy demand IT rooms in buildings or small edge data centres",
+    "due_date": "['15-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2027-05-d4-06",
+    "summary_text": "The grant call focuses on improving energy efficiency and sustainability in the ICT sector, particularly through innovative thermal management and waste heat recovery solutions in small IT rooms and edge data centers. Key research topics include the development of cost-effective approaches for excess heat recovery, integration with building automation systems, and creating business cases for reusing recovered heat in local applications. The initiative aims to align with climate neutrality goals and enhance the overall energy performance of ICT infrastructure."
+  },
+  {
+    "grant_id": 50129330,
+    "provider": "HORIZON-CL5-2027-05-D2-08",
+    "title": "Demonstration for Long-duration Battery Energy Storage Systems (BATT4EU Partnership)",
+    "due_date": "['15-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2027-05-d2-08",
+    "summary_text": "The grant call focuses on the development and demonstration of innovative long-duration energy storage (LDES) technologies, particularly those exceeding 8 hours, to enhance grid stability and resilience in Europe. Key research topics include the exploration of advanced battery technologies such as redox flow batteries, high-temperature systems, and metal-air systems, as well as the integration of sustainable materials and digital technologies for improved performance and safety. Additionally, proposals should address techno-economic analyses, hybridization potential with other storage technologies, and strategies for scalability and commercialization."
+  },
+  {
+    "grant_id": 50130277,
+    "provider": "HORIZON-CL5-2027-05-D4-09",
+    "title": "Demonstration of industrial excess/waste heat conversion to mechanical or electrical power",
+    "due_date": "['15-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2027-05-d4-09",
+    "summary_text": "The key research topics focus on the development and validation of novel systems for recovering and converting industrial excess/waste heat into mechanical or electrical power, with an emphasis on energy efficiency and flexibility in electricity production. Projects should also explore the integration of energy storage solutions, optimize common components for replicability across the EU industrial sector, and create guidelines for incorporating these systems into existing energy management infrastructures. Additionally, there is a strong emphasis on disseminating results to relevant communities to promote innovative business models for heat valorization and grid stabilization."
+  },
+  {
+    "grant_id": 50130188,
+    "provider": "HORIZON-CL5-2026-09-D4-04",
+    "title": "Validating policies and business models for affordable and sustainable housing (Built4People Partnership)",
+    "due_date": "['15-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-09-d4-04",
+    "summary_text": "The key research topics focus on understanding the factors influencing the renovation of rental properties in the affordable housing sector, particularly for medium and lower-income households. Proposals should investigate the effectiveness of existing policies and regulations, develop methodologies for comparing property affordability across different markets, and design innovative solutions that enhance affordability while achieving decarbonization goals. Additionally, projects should quantify the impacts of these solutions on the costs of deep renovations in various housing contexts."
+  },
+  {
+    "grant_id": 50129354,
+    "provider": "HORIZON-CL5-2026-09-D2-04",
+    "title": "Coordinated topic with India on recycling of EV batteries",
+    "due_date": "['15-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-09-d2-04",
+    "summary_text": "The grant call focuses on advancing battery recycling technologies through collaborative projects between the EU and India. Key research topics include the development of innovative recycling processes for lithium-ion batteries, enhancing recycling efficiency and environmental impact, and creating digitalized waste collection and sorting systems. Additionally, projects should address the safe discharging of end-of-life batteries, assess environmental impacts via Life Cycle Analysis, and ensure alignment with regulatory frameworks in both regions."
+  },
+  {
+    "grant_id": 50129378,
+    "provider": "HORIZON-CL5-2026-09-D3-03",
+    "title": "Innovative technologies and solutions to improve wind energy systems supporting the Strategic Energy Technology (SET) Plan on wind",
+    "due_date": "['15-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-09-d3-03",
+    "summary_text": "The grant call focuses on advancing research and innovation in wind energy, specifically targeting areas such as industrialization and competitiveness, optimization of operation and maintenance through digitalization and AI, wind energy system integration, sustainability and circularity, and the development of floating offshore wind technologies. It emphasizes the need for innovative solutions that enhance efficiency, reduce costs, and minimize environmental impacts while ensuring robust performance throughout the lifecycle of wind energy systems. Additionally, the call encourages collaboration among various stakeholders to avoid fragmentation and promote effective implementation of research outcomes."
+  },
+  {
+    "grant_id": 50130146,
+    "provider": "HORIZON-CL5-2026-09-D4-02",
+    "title": "Low disturbance prefabrication approaches for deep renovation of multi-storey buildings (Built4People Partnership)",
+    "due_date": "['15-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-09-d4-02",
+    "summary_text": "The key research topics focus on innovative approaches for the deep renovation of multi-storey buildings to achieve nearly zero energy building (NZEB) performance. This includes developing cost-effective design and construction techniques that utilize prefabricated solutions, minimize disruption to occupants, and enhance energy efficiency while reducing environmental impacts such as dust, noise, and emissions during the renovation process. Proposals should demonstrate these approaches across different building categories in various European Member States or Associated Countries."
+  },
+  {
+    "grant_id": 50129264,
+    "provider": "HORIZON-CL5-2026-09-D2-01",
+    "title": "Producing battery-grade materials for electrodes through sustainable processing and refining of raw materials or developing bio-based materials (BATT4EU Partnership)",
+    "due_date": "['15-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-09-d2-01",
+    "summary_text": "The grant call focuses on advancing sustainable processing and refining technologies for next-generation battery materials, specifically targeting the development of environmentally friendly methods for producing battery-grade metals and materials, including sodium-ion and advanced lithium-ion batteries. Additionally, it emphasizes the utilization of bio-based raw materials for battery electrode components, aiming to create synthetic graphite and alternative carbon materials from European feedstocks, while ensuring performance validation and economic viability through pilot-scale production pathways."
+  },
+  {
+    "grant_id": 50130123,
+    "provider": "HORIZON-CL5-2026-09-D4-01",
+    "title": "Researching the technical, social & economic factors impacting the energy performance of Smart Buildings (Built4People Partnership)",
+    "due_date": "['15-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-09-d4-01",
+    "summary_text": "The key research topics focus on understanding the physiological, behavioral, social, environmental, and cultural factors that influence how diverse user and demographic groups interact with smart, integrated energy-efficient building systems. The research aims to assess the impact of these systems on energy performance, occupant satisfaction, and overall well-being throughout the building's life cycle. Additionally, it seeks to identify barriers and enablers for the adoption of smart building solutions across different socio-demographic groups and develop actionable recommendations for stakeholders to enhance user-centric design and operation of smart buildings."
+  },
+  {
+    "grant_id": 50130830,
+    "provider": "HORIZON-CL5-2026-09-D4-03",
+    "title": "Advanced data platforms to integrate whole life carbon in building information tools, assessments, and certification (Built4People Partnership)",
+    "due_date": "['15-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-09-d4-03",
+    "summary_text": "The grant call focuses on enhancing building sustainability through the development of digital data exchange platforms that integrate whole life carbon assessments, operational and embodied carbon data, and various building information tools such as Energy Performance Certificates and Digital Product Passports. Key research topics include improving life cycle inventories of construction materials, validating data interoperability across different building lifecycle stages, and demonstrating the effectiveness of these platforms through large-scale pilot projects across diverse building types. The initiative aligns with the European Partnership on 'People-centric sustainable built environment' (Built4People) to support national decarbonization strategies."
+  },
+  {
+    "grant_id": 50130252,
+    "provider": "HORIZON-CL5-2026-09-D4-08",
+    "title": "Full-scale demonstration of heat upgrade solutions in industrial processes",
+    "due_date": "['15-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-cl5-2026-09-d4-08",
+    "summary_text": "The grant call focuses on enhancing the recovery and upgrading of excess and waste heat in industrial sectors within the EU and Associated Countries, aiming to reduce fossil fuel dependency and improve energy efficiency. Key research topics include the integration of local renewable heat sources, the use of thermal and electrical energy storage, and the development of standardized solutions and guidelines for heat upgrade technologies. The initiative seeks to optimize processes in various industrial settings, ensuring replicability and adaptability across different factories while promoting environmental sustainability and competitiveness."
+  },
+  {
+    "grant_id": 50220812,
+    "provider": "HORIZON-MSCA-2026-DN-01-01",
+    "title": "MSCA Doctoral Networks 2026",
+    "due_date": "['24-11-2026 02:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-msca-2026-dn-01-01",
+    "summary_text": "The MSCA Doctoral Networks focus on enhancing doctoral training through partnerships among universities, research institutions, and businesses, emphasizing the development of research and transferable skills for improved employability. Key research topics include the integration of academic and non-academic sectors, innovation and entrepreneurship, and the application of AI in science. The networks also promote inter-sectoral collaboration, knowledge valorization, and the culture of Open Science, while ensuring high-quality supervision and career development for doctoral candidates."
+  },
+  {
+    "grant_id": 50220831,
+    "provider": "HORIZON-RAISE-2026-01-03",
+    "title": "RAISE Doctoral Networks for AI in Science (RAISE pilot)",
+    "due_date": "['24-11-2026 02:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-raise-2026-01-03",
+    "summary_text": "The key research topics for the RAISE Doctoral Networks focus on the application of artificial intelligence (AI) in scientific research. Proposals should aim to develop innovative AI systems, models, tools, or methodologies that significantly enhance the analysis of scientific information and contribute to advancements in specific scientific disciplines. Additionally, the initiative emphasizes the importance of integrating AI training into doctoral programs to improve research outcomes and employability in both academic and non-academic sectors."
+  },
+  {
+    "grant_id": 50553080,
+    "provider": "HORIZON-JU-SNS-2026-STREAM-CSA-01",
+    "title": "SNS Operations and Output optimisation",
+    "due_date": "['29-04-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-sns-2026-stream-csa-01",
+    "summary_text": "The key research topics and scientific focus areas of this grant call include the facilitation of collaboration and coherence across different phases of the SNS Joint Undertaking (JU) program, with an emphasis on 6G research and innovation. The project aims to support the structured collection and analysis of data to assess progress against performance indicators, promote dissemination and visibility of SNS JU results, and enhance standardization efforts in alignment with European and global initiatives. Additionally, it seeks to foster international cooperation and community engagement among stakeholders in the telecommunications sector."
+  },
+  {
+    "grant_id": 50553159,
+    "provider": "HORIZON-JU-SNS-2026-STREAM-B-01",
+    "title": "Collection, Generation and Validation of Datasets  suitable for training AI Models for 6G Networks and for AIaaS",
+    "due_date": "['29-04-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-sns-2026-stream-b-01",
+    "summary_text": "The research topics focus on the development and curation of high-quality real-world and synthetic datasets for training AI models in 6G networks. Key areas include the creation of an open-source simulator for generating realistic data reflecting user density, mobility patterns, and network conditions, as well as the establishment of a modular framework for dataset processing and management. Additionally, the initiative emphasizes the importance of validation, quality assessment, and collaboration with standardization bodies to ensure the datasets' usability and compliance with industry standards."
+  },
+  {
+    "grant_id": 50553185,
+    "provider": "HORIZON-JU-SNS-2026-STREAM-C-01",
+    "title": "SNS experimental infrastructure",
+    "due_date": "['29-04-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-sns-2026-stream-c-01",
+    "summary_text": "The grant call focuses on the development and validation of 6G technologies through an experimental infrastructure that supports end-to-end (E2E) setups. Key research topics include AI-driven architecture, radio and signal processing, optical networking, ubiquitous computing, network security, and non-terrestrial networks (NTN). The initiative aims to facilitate experimentation, integration, and benchmarking of various connectivity technologies while promoting collaboration and technology diffusion across the European ecosystem."
+  },
+  {
+    "grant_id": 50553106,
+    "provider": "HORIZON-JU-SNS-2026-STREAM-CSA-02",
+    "title": "6G Devices",
+    "due_date": "['29-04-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-sns-2026-stream-csa-02",
+    "summary_text": "The grant call focuses on developing a European roadmap for 5G/6G device capabilities, emphasizing the creation of simplified devices for specific vertical markets and the revitalization of the European microelectronics industry. Key research topics include identifying priority use cases for early adoption, analyzing technological competitiveness, mapping essential technologies and industrial know-how, and fostering collaboration among telecom, microelectronics, and vertical industry stakeholders. Additionally, the initiative aims to explore eco-friendly device design and the integration of AI at the edge, while establishing a software development ecosystem to support diverse applications."
+  },
+  {
+    "grant_id": 50553132,
+    "provider": "HORIZON-JU-SNS-2026-STREAM-CSA-03",
+    "title": "EU-India International Collaboration",
+    "due_date": "['29-04-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-sns-2026-stream-csa-03",
+    "summary_text": "The grant call focuses on fostering cooperation between EU and Indian stakeholders in the field of 6G technology. Key research topics include the analysis of industrial ecosystems and policies related to 6G, identification of cooperation opportunities in technological development and supply chains, and the exploration of societal and economic aspects of 6G. Additionally, it emphasizes the need for joint research initiatives, standardization efforts, and the establishment of experimental platforms and testbeds to support future collaboration in 6G advancements."
+  },
+  {
+    "grant_id": 302271,
+    "provider": "U.S. National Science Foundation",
+    "title": "Statistics",
+    "due_date": "2026-12-15 00:00:00",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "http://www.nsf.gov/funding/pgm_summ.jsp?pims_id=5556",
+    "summary_text": "The Statistics Program focuses on advancing statistical theory and methods applicable across various scientific and engineering domains. Key research topics include stochastic modeling, data collection, analysis, interpretation, and characterizing uncertainty in data to enhance scientific and engineering advancements. Proposals can range from individual projects to interdisciplinary collaborations."
+  },
+  {
+    "grant_id": 349929,
+    "provider": "U.S. National Science Foundation",
+    "title": "WINDOWS ON THE UNIVERSE: THE ERA OF MULTI-MESSENGER ASTROPHYSICS",
+    "due_date": "2026-09-30 00:00:00",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "http://www.nsf.gov/funding/pgm_summ.jsp?pims_id=505593",
+    "summary_text": "The \"Windows on the Universe\" Multi-Messenger Astrophysics (WoU-MMA) program focuses on the integration of observations and theories related to three categories of astrophysical messengers: electromagnetic waves, high-energy particles (including neutrinos and cosmic rays), and gravitational waves. Key research topics include coordinating multi-messenger observations, studying astrophysical sources that emit multiple types of messengers, and developing theoretical frameworks and simulations to interpret these observations. The program aims to enhance collaboration across research communities and foster a skilled workforce in multi-messenger astrophysics."
   }
 ]

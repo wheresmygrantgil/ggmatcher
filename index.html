@@ -2,7 +2,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GGmatcher</title>
+    <title>Grand Grant Matcher - AI-Powered Grant Discovery</title>
+    <meta name="description" content="Stop searching 800+ grant calls. Get personalized AI-matched funding opportunities based on your research publications." />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%200%20100%20100%22><text y=%22.9em%22 font-size=%2290%22>🧙</text></svg>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,8 +33,36 @@
     </script>
   </head>
   <body>
+    <!-- Privacy Notice Modal -->
+    <div id="privacy-modal" class="privacy-modal hidden" role="dialog" aria-labelledby="privacy-title" aria-modal="true">
+      <div class="privacy-content">
+        <h2 id="privacy-title">Privacy & Data Collection Notice</h2>
+        <div class="privacy-body">
+          <p>Welcome to Grand Grant Matcher 🧙! I want to be transparent about how I handle your data:</p>
+
+          <h3>What I Collect & Store:</h3>
+          <ul>
+            <li><strong>Researcher Name:</strong> Stored in your browser to personalize recommendations</li>
+            <li><strong>Grant Preferences:</strong> Stored on my server to improve matching</li>
+            <li><strong>Email (Optional):</strong> Only if you subscribe for notifications</li>
+            <li><strong>Analytics:</strong> Google Analytics (anonymized) to improve the app</li>
+          </ul>
+
+          <p class="privacy-note">
+            Your email is only stored if you subscribe - you can unsubscribe anytime.
+            Clear your browser's local storage to reset local data.
+          </p>
+        </div>
+
+        <div class="privacy-actions">
+          <button id="accept-privacy" class="btn-primary">I Understand & Accept</button>
+        </div>
+      </div>
+    </div>
+
     <header>
-      <h1>Grand Grant Matcher 🧙</h1>
+      <h1>Grand Grant Matcher <span class="wizard-icon">🧙</span></h1>
+      <p class="hero-tagline">We analyze 800+ grant calls so you can focus on research</p>
       <nav class="tabs" role="tablist">
         <button id="tab-recommendations" class="tab active" role="tab" aria-selected="true" aria-controls="recommendations">Recommendations</button>
         <button id="tab-collaborations" class="tab" role="tab" aria-selected="false" aria-controls="collaborations">Collaborations</button>
@@ -79,16 +108,48 @@
       </section>
 
     <main id="recommendations" role="tabpanel" aria-labelledby="tab-recommendations">
+      <!-- Social proof stats bar -->
+      <div class="landing-stats-bar">
+        <span class="landing-stat"><strong id="landing-researcher-count">4,500+</strong> researchers</span>
+        <span class="landing-stat-divider">|</span>
+        <span class="landing-stat"><strong id="landing-grant-count">800+</strong> active grants</span>
+        <span class="landing-stat-divider">|</span>
+        <span class="landing-stat">Updated weekly</span>
+      </div>
+
       <div class="selector">
-        <label for="researcher-input">Find your name</label>
-        <div class="input-wrapper">
-          <input
-            id="researcher-input"
-            type="text"
-            placeholder="Start typing…"
-            autocomplete="off"
-          />
-          <div id="suggestions" class="suggestions"></div>
+        <label for="researcher-input">See grants matched to YOUR research</label>
+        <div class="search-row">
+          <div class="input-wrapper">
+            <input
+              id="researcher-input"
+              type="text"
+              placeholder="Start typing…"
+              autocomplete="off"
+            />
+            <div id="suggestions" class="suggestions"></div>
+          </div>
+          <!-- Subscribe button - appears after researcher selected -->
+          <button id="subscribe-btn" class="subscribe-btn hidden" title="Subscribe for email updates">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Request to be added button - always visible -->
+        <div class="request-to-add">
+          <button id="request-add-btn" class="request-add-btn">Not in the list? Request to be added</button>
+        </div>
+
+        <!-- How It Works section -->
+        <div class="how-it-works">
+          <span class="step"><span class="step-num">1</span> Type your name</span>
+          <span class="step-arrow">→</span>
+          <span class="step"><span class="step-num">2</span> See matched grants</span>
+          <span class="step-arrow">→</span>
+          <span class="step"><span class="step-num">3</span> Learn WHY each fits</span>
         </div>
       </div>
 
@@ -146,6 +207,53 @@
         </svg>
       </a>
     </footer>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribe-modal" class="modal-overlay hidden">
+      <div class="modal subscribe-modal">
+        <button class="close-btn" id="close-subscribe-modal">&times;</button>
+        <h2 id="subscribe-modal-title">Subscribe for Updates</h2>
+        <p id="subscribe-modal-subtitle" class="modal-subtitle">Get notified when new grants match your research</p>
+
+        <div id="subscribe-status" class="subscribe-status"></div>
+
+        <div id="subscribe-form" class="subscribe-form-modal">
+          <input type="email" id="subscribe-email" placeholder="Enter your email" />
+          <button id="submit-subscribe-btn" class="submit-subscribe-btn">Subscribe</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Request Researcher Modal -->
+    <div id="request-modal" class="modal-overlay hidden">
+      <div class="modal request-modal">
+        <button class="close-btn" id="close-request-modal">&times;</button>
+        <h2>Request to be Added</h2>
+        <p class="modal-subtitle">Search for your profile on OpenAlex</p>
+
+        <div class="openalex-search">
+          <input type="text" id="openalex-search-input" placeholder="Type your name..." autocomplete="off" />
+          <div id="openalex-suggestions" class="openalex-suggestions"></div>
+        </div>
+
+        <div id="selected-profile" class="selected-profile hidden">
+          <h4>Selected Profile:</h4>
+          <div class="profile-card">
+            <span class="profile-name" id="profile-name"></span>
+            <span class="profile-institution" id="profile-institution"></span>
+            <span class="profile-works" id="profile-works"></span>
+          </div>
+        </div>
+
+        <div id="request-email-section" class="request-email-section hidden">
+          <label for="request-email">Email (optional - for notification when processed)</label>
+          <input type="email" id="request-email" placeholder="your@email.com" />
+        </div>
+
+        <button id="submit-request-btn" class="submit-request-btn hidden">Submit Request</button>
+        <div id="request-status" class="request-status"></div>
+      </div>
+    </div>
 
     <!-- Libraries loaded on-demand when their tabs are accessed -->
     <script src="script.js"></script>
