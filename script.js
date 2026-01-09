@@ -806,8 +806,9 @@ const TOPIC_KEYWORDS_TO_SHOW = 3;
 function createOrUpdateTopicChart(chartId, chartInstance, chartData, backgroundColor, title) {
   if (!chartData || !chartData.topics) return chartInstance;
 
-  const labels = chartData.topics.slice(0, TOPIC_LABELS_TO_SHOW).map(t => t.label);
-  const counts = chartData.topics.slice(0, TOPIC_LABELS_TO_SHOW).map(t => t.grant_count);
+  const labels = chartData.topics.slice(0, TOPIC_LABELS_TO_SHOW).map(t => t.name || t.label);
+  const counts = chartData.topics.slice(0, TOPIC_LABELS_TO_SHOW).map(t => t.count || t.grant_count);
+  const totalGrants = chartData.total_grants || chartData.grant_count || 0;
 
   if (!chartInstance) {
     return new Chart(document.getElementById(chartId), {
@@ -826,20 +827,16 @@ function createOrUpdateTopicChart(chartId, chartInstance, chartData, backgroundC
           legend: { display: false },
           title: {
             display: true,
-            text: `${title} (${chartData.grant_count} grants)`,
+            text: `${title} (${totalGrants} grants)`,
             color: '#213646',
             font: { size: 16, weight: 'bold' }
-          },
-          tooltip: {
-            callbacks: {
-              afterLabel: (ctx) => 'Keywords: ' + chartData.topics[ctx.dataIndex].keywords.slice(0, TOPIC_KEYWORDS_TO_SHOW).join(', ')
-            }
           }
         },
         scales: {
           x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
           y: { grid: { display: false }, ticks: { font: { size: 11 } } }
         },
+        responsive: true,
         maintainAspectRatio: false
       }
     });

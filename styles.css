@@ -325,26 +325,23 @@ main {
 }
 
 .topic-charts-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
   margin-top: 1rem;
 }
 
-.topic-charts-grid canvas {
+.topic-chart-container {
   background: #ffffff;
   border: 2px solid var(--primary);
   border-radius: 12px;
   padding: 1rem;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  height: 350px;
+  width: 400px;
+  height: 280px;
 }
 
-@media (max-width: 900px) {
-  .topic-charts-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 .stat {
   background: #ffffff;
