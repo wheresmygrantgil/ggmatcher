@@ -33,6 +33,33 @@
     </script>
   </head>
   <body>
+    <!-- Privacy Notice Modal -->
+    <div id="privacy-modal" class="privacy-modal hidden" role="dialog" aria-labelledby="privacy-title" aria-modal="true">
+      <div class="privacy-content">
+        <h2 id="privacy-title">Privacy & Data Collection Notice</h2>
+        <div class="privacy-body">
+          <p>Welcome to Grand Grant Matcher 🧙! I want to be transparent about how I handle your data:</p>
+
+          <h3>What I Collect & Store:</h3>
+          <ul>
+            <li><strong>Researcher Name:</strong> Stored in your browser to personalize recommendations</li>
+            <li><strong>Grant Preferences:</strong> Stored on my server to improve matching</li>
+            <li><strong>Email (Optional):</strong> Only if you subscribe for notifications</li>
+            <li><strong>Analytics:</strong> Google Analytics (anonymized) to improve the app</li>
+          </ul>
+
+          <p class="privacy-note">
+            Your email is only stored if you subscribe - you can unsubscribe anytime.
+            Clear your browser's local storage to reset local data.
+          </p>
+        </div>
+
+        <div class="privacy-actions">
+          <button id="accept-privacy" class="btn-primary">I Understand & Accept</button>
+        </div>
+      </div>
+    </div>
+
     <header>
       <h1>Grand Grant Matcher <span class="wizard-icon">🧙</span></h1>
       <p class="hero-tagline">We analyze 800+ grant calls so you can focus on research</p>
