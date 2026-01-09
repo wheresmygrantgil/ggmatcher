@@ -8,6 +8,9 @@ let researcherNamesLower = [];  // Pre-computed lowercase for faster search
 let providerChart;
 let deadlineChart;
 let grantsTable;
+let topicStatsData = null;
+let euTopicChart = null;
+let usTopicChart = null;
 
 // Library loading state - Promise-based to avoid race conditions
 let dataTablesLoaded = false;
@@ -320,6 +323,13 @@ async function loadData() {
     if (affiliationResp && affiliationResp.ok) {
       affiliationData = await affiliationResp.json();
       track('data_load', { status: 'success', dataset: 'affiliation_dict' });
+    }
+
+    // Load topic stats by agency (for split charts in dashboard)
+    const topicStatsResp = await fetch('data/topic_stats_by_agency.json').catch(() => null);
+    if (topicStatsResp && topicStatsResp.ok) {
+      topicStatsData = await topicStatsResp.json();
+      track('data_load', { status: 'success', dataset: 'topic_stats_by_agency' });
     }
 
     matchesData = JSON.parse(matchesText);
@@ -932,6 +942,104 @@ async function showDashboard() {
     deadlineChart.data.labels = months;
     deadlineChart.data.datasets[0].data = monthCounts;
     deadlineChart.update('none');
+  }
+
+  // Topic charts by agency (split view)
+  if (topicStatsData && topicStatsData.agencies) {
+    const euData = topicStatsData.agencies.eu_horizon;
+    const usData = topicStatsData.agencies.us_federal;
+
+    // EU Horizon Topic Chart
+    if (euData && euData.topics) {
+      const euLabels = euData.topics.slice(0, 8).map(t => t.label);
+      const euCounts = euData.topics.slice(0, 8).map(t => t.grant_count);
+
+      if (!euTopicChart) {
+        euTopicChart = new Chart(document.getElementById('euTopicChart'), {
+          type: 'bar',
+          data: {
+            labels: euLabels,
+            datasets: [{
+              data: euCounts,
+              backgroundColor: '#00bcd4',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            plugins: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: `EU Horizon Topics (${euData.grant_count} grants)`,
+                color: '#213646',
+                font: { size: 16, weight: 'bold' }
+              },
+              tooltip: {
+                callbacks: {
+                  afterLabel: (ctx) => 'Keywords: ' + euData.topics[ctx.dataIndex].keywords.slice(0, 3).join(', ')
+                }
+              }
+            },
+            scales: {
+              x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
+              y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            },
+            maintainAspectRatio: false
+          }
+        });
+      } else {
+        euTopicChart.data.labels = euLabels;
+        euTopicChart.data.datasets[0].data = euCounts;
+        euTopicChart.update('none');
+      }
+    }
+
+    // US Federal Topic Chart
+    if (usData && usData.topics) {
+      const usLabels = usData.topics.slice(0, 8).map(t => t.label);
+      const usCounts = usData.topics.slice(0, 8).map(t => t.grant_count);
+
+      if (!usTopicChart) {
+        usTopicChart = new Chart(document.getElementById('usTopicChart'), {
+          type: 'bar',
+          data: {
+            labels: usLabels,
+            datasets: [{
+              data: usCounts,
+              backgroundColor: '#ff6384',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            plugins: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: `US Federal Topics (${usData.grant_count} grants)`,
+                color: '#213646',
+                font: { size: 16, weight: 'bold' }
+              },
+              tooltip: {
+                callbacks: {
+                  afterLabel: (ctx) => 'Keywords: ' + usData.topics[ctx.dataIndex].keywords.slice(0, 3).join(', ')
+                }
+              }
+            },
+            scales: {
+              x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
+              y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            },
+            maintainAspectRatio: false
+          }
+        });
+      } else {
+        usTopicChart.data.labels = usLabels;
+        usTopicChart.data.datasets[0].data = usCounts;
+        usTopicChart.update('none');
+      }
+    }
   }
 
   // Calculate and render most matched grants

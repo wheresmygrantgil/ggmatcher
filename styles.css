@@ -318,6 +318,28 @@ main {
   max-height: 250px;
 }
 
+.topic-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.topic-charts-grid canvas {
+  background: #ffffff;
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  height: 350px;
+}
+
+@media (max-width: 900px) {
+  .topic-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .stat {
   background: #ffffff;
   border: 2px solid var(--primary);
