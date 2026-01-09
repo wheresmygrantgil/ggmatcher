@@ -799,6 +799,58 @@ function animateNumber(el, value, duration = 800) {
 
 let dashboardInitialized = false;
 
+// Helper function to create or update topic charts (reduces duplication)
+const TOPIC_LABELS_TO_SHOW = 8;
+const TOPIC_KEYWORDS_TO_SHOW = 3;
+
+function createOrUpdateTopicChart(chartId, chartInstance, chartData, backgroundColor, title) {
+  if (!chartData || !chartData.topics) return chartInstance;
+
+  const labels = chartData.topics.slice(0, TOPIC_LABELS_TO_SHOW).map(t => t.label);
+  const counts = chartData.topics.slice(0, TOPIC_LABELS_TO_SHOW).map(t => t.grant_count);
+
+  if (!chartInstance) {
+    return new Chart(document.getElementById(chartId), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: counts,
+          backgroundColor: backgroundColor,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: `${title} (${chartData.grant_count} grants)`,
+            color: '#213646',
+            font: { size: 16, weight: 'bold' }
+          },
+          tooltip: {
+            callbacks: {
+              afterLabel: (ctx) => 'Keywords: ' + chartData.topics[ctx.dataIndex].keywords.slice(0, TOPIC_KEYWORDS_TO_SHOW).join(', ')
+            }
+          }
+        },
+        scales: {
+          x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        },
+        maintainAspectRatio: false
+      }
+    });
+  } else {
+    chartInstance.data.labels = labels;
+    chartInstance.data.datasets[0].data = counts;
+    chartInstance.update('none');
+    return chartInstance;
+  }
+}
+
 async function showDashboard() {
   const grantTotal = grantsData.length;
   const researcherTotal = matchesData.length;
@@ -946,100 +998,8 @@ async function showDashboard() {
 
   // Topic charts by agency (split view)
   if (topicStatsData && topicStatsData.agencies) {
-    const euData = topicStatsData.agencies.eu_horizon;
-    const usData = topicStatsData.agencies.us_federal;
-
-    // EU Horizon Topic Chart
-    if (euData && euData.topics) {
-      const euLabels = euData.topics.slice(0, 8).map(t => t.label);
-      const euCounts = euData.topics.slice(0, 8).map(t => t.grant_count);
-
-      if (!euTopicChart) {
-        euTopicChart = new Chart(document.getElementById('euTopicChart'), {
-          type: 'bar',
-          data: {
-            labels: euLabels,
-            datasets: [{
-              data: euCounts,
-              backgroundColor: '#00bcd4',
-              borderWidth: 1
-            }]
-          },
-          options: {
-            indexAxis: 'y',
-            plugins: {
-              legend: { display: false },
-              title: {
-                display: true,
-                text: `EU Horizon Topics (${euData.grant_count} grants)`,
-                color: '#213646',
-                font: { size: 16, weight: 'bold' }
-              },
-              tooltip: {
-                callbacks: {
-                  afterLabel: (ctx) => 'Keywords: ' + euData.topics[ctx.dataIndex].keywords.slice(0, 3).join(', ')
-                }
-              }
-            },
-            scales: {
-              x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
-              y: { grid: { display: false }, ticks: { font: { size: 11 } } }
-            },
-            maintainAspectRatio: false
-          }
-        });
-      } else {
-        euTopicChart.data.labels = euLabels;
-        euTopicChart.data.datasets[0].data = euCounts;
-        euTopicChart.update('none');
-      }
-    }
-
-    // US Federal Topic Chart
-    if (usData && usData.topics) {
-      const usLabels = usData.topics.slice(0, 8).map(t => t.label);
-      const usCounts = usData.topics.slice(0, 8).map(t => t.grant_count);
-
-      if (!usTopicChart) {
-        usTopicChart = new Chart(document.getElementById('usTopicChart'), {
-          type: 'bar',
-          data: {
-            labels: usLabels,
-            datasets: [{
-              data: usCounts,
-              backgroundColor: '#ff6384',
-              borderWidth: 1
-            }]
-          },
-          options: {
-            indexAxis: 'y',
-            plugins: {
-              legend: { display: false },
-              title: {
-                display: true,
-                text: `US Federal Topics (${usData.grant_count} grants)`,
-                color: '#213646',
-                font: { size: 16, weight: 'bold' }
-              },
-              tooltip: {
-                callbacks: {
-                  afterLabel: (ctx) => 'Keywords: ' + usData.topics[ctx.dataIndex].keywords.slice(0, 3).join(', ')
-                }
-              }
-            },
-            scales: {
-              x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#eeeeee' } },
-              y: { grid: { display: false }, ticks: { font: { size: 11 } } }
-            },
-            maintainAspectRatio: false
-          }
-        });
-      } else {
-        usTopicChart.data.labels = usLabels;
-        usTopicChart.data.datasets[0].data = usCounts;
-        usTopicChart.update('none');
-      }
-    }
+    euTopicChart = createOrUpdateTopicChart('euTopicChart', euTopicChart, topicStatsData.agencies.eu_horizon, '#00bcd4', 'EU Horizon Topics');
+    usTopicChart = createOrUpdateTopicChart('usTopicChart', usTopicChart, topicStatsData.agencies.us_federal, '#ff6384', 'US Federal Topics');
   }
 
   // Calculate and render most matched grants

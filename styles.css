@@ -318,6 +318,12 @@ main {
   max-height: 250px;
 }
 
+.section-title {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--primary);
+}
+
 .topic-charts-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
