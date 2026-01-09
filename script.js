@@ -113,7 +113,23 @@ function setupModalAccessibility(modal, closeCallback) {
   return () => modal.removeEventListener('keydown', handleKeydown);
 }
 
-// Helper to load scripts dynamically (crossorigin for CORS/SRI support)
+// SRI hashes for CDN scripts (security: prevents CDN compromise attacks)
+const SRI_HASHES = {
+  'https://code.jquery.com/jquery-3.7.0.min.js': 'sha384-NXgwF8Kv9SSAr+jemKKcbvQsz+teULH/a5UNJvZc6kP47hZgl62M1vGnw6gHQhb1',
+  'https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js': 'sha384-k5vbMeKHbxEZ0AEBTSdR7UjAgWCcUfrS8c0c5b2AfIh7olfhNkyCZYwOfzOQhauK',
+  'https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js': 'sha384-BsCICKJ3PaoBhw3UZcWM2TVGBGWRXEUinsEWpM2z5ZReY3QjfTxR5xghRpJz7XFC',
+  'https://cdn.datatables.net/colreorder/1.6.2/js/dataTables.colReorder.min.js': 'sha384-ybQjFPoRhQXT6T4k7mf0OW3Ekpe6S+2uxceRFKnB286uo9JwTKpvOm2srAFezO0V',
+  'https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js': 'sha384-VUnyCeQcqiiTlSM4AISHjJWKgLSM5VSyOeipcD9S/ybCKR3OhChZrPPjjrLfVV0y',
+  'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js': 'sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG',
+  'https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js': 'sha384-On4D3nN2gGDU45v05twd+TTLH8PL+2gbsGVpnKEpSfv7pDd1pgEJxxc4k7iWeg9d',
+  'https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js': 'sha384-dyI79OT6UE9qWK4x3HAQSilUPj6TfmkE8pX6KeBTyrhOaNrk7cbvUZUDMuC8S7/k',
+  'https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js': 'sha384-iqnguDoMujGknA4B5Jk7pbSn7sb7M8Tc0zVsTNQXm629Xx00jGEpD9TsZXbfNjKO',
+  'https://cdn.datatables.net/plug-ins/1.13.6/features/mark.js/datatables.mark.js': 'sha384-KIoO9P2XB/ZBAZNRc6ng6Op6cPyf8cceHCnDXuq8h4AcnV/9/VuamnENit70NAEV',
+  'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js': 'sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4',
+  'https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js': 'sha384-y49Zu59jZHJL/PLKgZPv3k2WI9c0Yp3pWB76V8OBVCb0QBKS8l4Ff3YslzHVX76Y'
+};
+
+// Helper to load scripts dynamically with SRI support
 function loadScript(src) {
   return new Promise((resolve, reject) => {
     const existing = document.querySelector(`script[src="${src}"]`);
@@ -121,6 +137,10 @@ function loadScript(src) {
     const script = document.createElement('script');
     script.src = src;
     script.crossOrigin = 'anonymous';
+    // Add SRI hash if available
+    if (SRI_HASHES[src]) {
+      script.integrity = SRI_HASHES[src];
+    }
     script.onload = resolve;
     script.onerror = reject;
     document.head.appendChild(script);
