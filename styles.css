@@ -342,6 +342,15 @@ main {
   height: 280px;
 }
 
+.comparison-chart-container {
+  background: #ffffff;
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  margin-top: 1rem;
+  height: 550px;
+}
 
 .stat {
   background: #ffffff;
@@ -385,6 +394,10 @@ main {
   color: #666;
   margin: 0 0 1rem;
   font-size: 0.9rem;
+}
+
+.section-subtitle.centered {
+  text-align: center;
 }
 
 .most-matched-list {

@@ -11,6 +11,8 @@ let grantsTable;
 let topicStatsData = null;
 let euTopicChart = null;
 let usTopicChart = null;
+let sharedTopicsData = null;
+let euUsComparisonChart = null;
 
 // Library loading state - Promise-based to avoid race conditions
 let dataTablesLoaded = false;
@@ -330,6 +332,13 @@ async function loadData() {
     if (topicStatsResp && topicStatsResp.ok) {
       topicStatsData = await topicStatsResp.json();
       track('data_load', { status: 'success', dataset: 'topic_stats_by_agency' });
+    }
+
+    // Load shared topics comparison data (EU vs US)
+    const sharedTopicsResp = await fetch('data/shared_topics_comparison.json').catch(() => null);
+    if (sharedTopicsResp && sharedTopicsResp.ok) {
+      sharedTopicsData = await sharedTopicsResp.json();
+      track('data_load', { status: 'success', dataset: 'shared_topics_comparison' });
     }
 
     matchesData = JSON.parse(matchesText);
@@ -848,6 +857,110 @@ function createOrUpdateTopicChart(chartId, chartInstance, chartData, backgroundC
   }
 }
 
+function createOrUpdateComparisonChart(chartInstance, data) {
+  if (!data || !data.topics) return chartInstance;
+
+  // Sort by total combined percentage (descending)
+  const sortedTopics = [...data.topics].sort((a, b) =>
+    (b.eu_percent + b.us_percent) - (a.eu_percent + a.us_percent)
+  );
+
+  const labels = sortedTopics.map(t => t.topic);
+  const euPercent = sortedTopics.map(t => t.eu_percent);
+  const usPercent = sortedTopics.map(t => t.us_percent);
+
+  if (!chartInstance) {
+    return new Chart(document.getElementById('euUsComparisonChart'), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'EU Horizon Europe',
+            data: euPercent,
+            backgroundColor: '#00bcd4',
+            borderWidth: 0,
+            borderRadius: 4,
+            barPercentage: 0.8,
+            categoryPercentage: 0.85
+          },
+          {
+            label: 'US Federal (NIH, DOE, etc.)',
+            data: usPercent,
+            backgroundColor: '#ff6384',
+            borderWidth: 0,
+            borderRadius: 4,
+            barPercentage: 0.8,
+            categoryPercentage: 0.85
+          }
+        ]
+      },
+      plugins: [ChartDataLabels],
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              color: '#213646',
+              font: { size: 12 },
+              usePointStyle: true,
+              pointStyle: 'rectRounded'
+            }
+          },
+          datalabels: {
+            color: '#213646',
+            anchor: 'end',
+            align: 'top',
+            offset: 4,
+            font: { size: 11, weight: 'bold' },
+            rotation: 0,
+            formatter: function(value) {
+              return value > 0 ? value.toFixed(1) + '%' : '';
+            }
+          }
+        },
+        scales: {
+          y: {
+            max: 65,
+            beginAtZero: true,
+            grid: { color: '#eeeeee' },
+            ticks: {
+              color: '#666',
+              callback: function(value) {
+                return value + '%';
+              }
+            },
+            title: {
+              display: true,
+              text: '% of Grants',
+              color: '#666',
+              font: { size: 12 }
+            }
+          },
+          x: {
+            grid: { display: false },
+            ticks: {
+              color: '#213646',
+              font: { size: 10 },
+              maxRotation: 45,
+              minRotation: 45
+            }
+          }
+        }
+      }
+    });
+  } else {
+    chartInstance.data.labels = labels;
+    chartInstance.data.datasets[0].data = euPercent;
+    chartInstance.data.datasets[1].data = usPercent;
+    chartInstance.update('none');
+    return chartInstance;
+  }
+}
+
 async function showDashboard() {
   const grantTotal = grantsData.length;
   const researcherTotal = matchesData.length;
@@ -997,6 +1110,11 @@ async function showDashboard() {
   if (topicStatsData && topicStatsData.agencies) {
     euTopicChart = createOrUpdateTopicChart('euTopicChart', euTopicChart, topicStatsData.agencies.eu_horizon, '#00bcd4', 'EU Horizon Topics');
     usTopicChart = createOrUpdateTopicChart('usTopicChart', usTopicChart, topicStatsData.agencies.us_federal, '#ff6384', 'US Federal Topics');
+  }
+
+  // EU vs US comparison chart
+  if (sharedTopicsData) {
+    euUsComparisonChart = createOrUpdateComparisonChart(euUsComparisonChart, sharedTopicsData);
   }
 
   // Calculate and render most matched grants
