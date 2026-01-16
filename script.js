@@ -869,6 +869,12 @@ function createOrUpdateComparisonChart(chartInstance, data) {
   const euPercent = sortedTopics.map(t => t.eu_percent);
   const usPercent = sortedTopics.map(t => t.us_percent);
 
+  // Mobile detection - use smaller font and steeper rotation on mobile
+  const isMobile = window.innerWidth < 768;
+  const labelFontSize = isMobile ? 7 : 10;
+  const labelRotation = isMobile ? 60 : 45;
+  const dataLabelFontSize = isMobile ? 9 : 11;
+
   if (!chartInstance) {
     return new Chart(document.getElementById('euUsComparisonChart'), {
       type: 'bar',
@@ -905,7 +911,7 @@ function createOrUpdateComparisonChart(chartInstance, data) {
             position: 'top',
             labels: {
               color: '#213646',
-              font: { size: 12 },
+              font: { size: isMobile ? 10 : 12 },
               usePointStyle: true,
               pointStyle: 'rectRounded'
             }
@@ -915,7 +921,7 @@ function createOrUpdateComparisonChart(chartInstance, data) {
             anchor: 'end',
             align: 'top',
             offset: 4,
-            font: { size: 11, weight: 'bold' },
+            font: { size: dataLabelFontSize, weight: 'bold' },
             rotation: 0,
             formatter: function(value) {
               return value > 0 ? value.toFixed(1) + '%' : '';
@@ -929,6 +935,7 @@ function createOrUpdateComparisonChart(chartInstance, data) {
             grid: { color: '#eeeeee' },
             ticks: {
               color: '#666',
+              font: { size: isMobile ? 9 : 11 },
               callback: function(value) {
                 return value + '%';
               }
@@ -937,16 +944,18 @@ function createOrUpdateComparisonChart(chartInstance, data) {
               display: true,
               text: '% of Grants',
               color: '#666',
-              font: { size: 12 }
+              font: { size: isMobile ? 10 : 12 }
             }
           },
           x: {
             grid: { display: false },
             ticks: {
               color: '#213646',
-              font: { size: 10 },
-              maxRotation: 45,
-              minRotation: 45
+              font: { size: labelFontSize },
+              maxRotation: labelRotation,
+              minRotation: labelRotation,
+              autoSkip: false,
+              padding: isMobile ? 2 : 3
             }
           }
         }
