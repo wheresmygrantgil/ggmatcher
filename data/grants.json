@@ -9118,5 +9118,35 @@
     "proposed_money": "From 250000$",
     "submission_link": "http://www.nsf.gov/funding/pgm_summ.jsp?pims_id=12729",
     "summary_text": "The Physical Oceanography Program focuses on the study of ocean structure and movement, including the transport of various quantities within the ocean. It also examines the interactions between the ocean's physical properties and biological and chemical processes, as well as the relationships between the ocean and its surrounding atmosphere, solid earth, and ice."
+  },
+  {
+    "grant_id": 50074515,
+    "provider": "HORIZON-EIC-2026-PATHFINDEROPEN",
+    "title": "EIC 2026 Pathfinder Open",
+    "due_date": "['12-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-eic-2026-pathfinderopen",
+    "summary_text": "The EIC Pathfinder Open call focuses on supporting early-stage, high-risk research aimed at developing breakthrough technologies with transformative potential for society and the economy. It encourages interdisciplinary collaboration to validate scientific principles and explore innovative technological solutions, while emphasizing the importance of protecting intellectual property and planning for future market uptake. Key research topics include deep tech advancements, novel scientific breakthroughs, and addressing global challenges through radical new technologies."
+  },
+  {
+    "grant_id": 357123,
+    "provider": "Advanced Research Projects Agency Energy ",
+    "title": "CATALYTIC APPLICATION TESTING FOR ACCELERATED LEARNING CHEMISTRIES VIA HIGH-THROUGHPUT EXPERIMENTATION AND MODELING EFFICIENTLY (CATALCHEM-E)",
+    "due_date": "2026-02-25 00:00:00",
+    "eligibility_israel": true,
+    "proposed_money": "From 2500000$ to 3500000$",
+    "submission_link": "https://arpa-e-foa.energy.gov",
+    "summary_text": "The CATALCHEM-E program focuses on accelerating the design and development of heterogeneous catalysts through innovative workflows that integrate artificial intelligence (AI) and machine learning (ML) with high-throughput experimentation (HTE). Key research topics include the discovery and optimization of catalytic chemistries relevant to achieving net-zero carbon emissions by 2050, the development of novel workflow topologies to enhance efficiency, and the creation of robust databases for AI/ML applications in catalysis. The program aims to significantly reduce the traditional catalyst development cycle from 10-15 years to just 12-18 months."
+  },
+  {
+    "grant_id": 358258,
+    "provider": "Advanced Research Projects Agency Energy ",
+    "title": "Stimulate Utilization of Plentiful Energy in Rocks through High-temperature Original Technologies (SUPERHOT)",
+    "due_date": "2026-03-05 00:00:00",
+    "eligibility_israel": true,
+    "proposed_money": "From 250000$ to 10000000$",
+    "submission_link": "https://arpa-e-foa.energy.gov",
+    "summary_text": "The SUPERHOT program aims to enhance baseload power supply through the development of technologies for superhot geothermal resources, defined as temperatures exceeding 375 °C and pressures above 22 MPa. Key research topics include robust well construction and effective heat transfer from geological formations to wells, with a focus on overcoming technical challenges to enable scalable geothermal energy production. The program seeks to leverage advancements in Enhanced Geothermal Systems (EGS) and Advanced Geothermal Systems (AGS) to expand the geographic availability and efficiency of geothermal energy."
   }
 ]

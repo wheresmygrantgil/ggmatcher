@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-01-25T16:32:36.233359",
+  "generated_at": "2026-02-02T19:38:37.604074",
   "mode": "by-agency",
-  "total_grants": 912,
+  "total_grants": 915,
   "agencies": {
     "eu_horizon": {
       "agency": "EU Horizon Europe",
-      "total_grants": 647,
+      "total_grants": 648,
       "topics": [
         {
           "name": "Climate Change & Environment",
@@ -1627,7 +1627,7 @@
         },
         {
           "name": "Other/Uncategorized",
-          "count": 29,
+          "count": 30,
           "grant_ids": [
             47504108,
             47504079,
@@ -1657,7 +1657,8 @@
             50142844,
             50142819,
             50136176,
-            48939636
+            48939636,
+            50074515
           ]
         },
         {
@@ -4812,12 +4813,15 @@
           "Climate Change & Environment",
           "Renewable Energy",
           "Democracy & Governance"
+        ],
+        "50074515": [
+          "Other/Uncategorized"
         ]
       }
     },
     "us_federal": {
       "agency": "US Federal (NIH, DOE, etc.)",
-      "total_grants": 265,
+      "total_grants": 267,
       "topics": [
         {
           "name": "Drug Discovery & Development",
@@ -4884,7 +4888,7 @@
         },
         {
           "name": "Genomics & Genetics",
-          "count": 52,
+          "count": 53,
           "grant_ids": [
             356763,
             356879,
@@ -4937,7 +4941,8 @@
             344124,
             348260,
             358568,
-            360863
+            360863,
+            357123
           ]
         },
         {
@@ -5204,7 +5209,7 @@
         },
         {
           "name": "Data Science & Bioinformatics",
-          "count": 25,
+          "count": 26,
           "grant_ids": [
             343957,
             356888,
@@ -5230,7 +5235,8 @@
             350561,
             351715,
             358568,
-            302271
+            302271,
+            357123
           ]
         },
         {
@@ -5519,6 +5525,20 @@
           ]
         },
         {
+          "name": "Other/Uncategorized",
+          "count": 8,
+          "grant_ids": [
+            357112,
+            357170,
+            357206,
+            358375,
+            358879,
+            347026,
+            356444,
+            358258
+          ]
+        },
+        {
           "name": "Physics & Astronomy",
           "count": 8,
           "grant_ids": [
@@ -5530,19 +5550,6 @@
             351715,
             360678,
             349929
-          ]
-        },
-        {
-          "name": "Other/Uncategorized",
-          "count": 7,
-          "grant_ids": [
-            357112,
-            357170,
-            357206,
-            358375,
-            358879,
-            347026,
-            356444
           ]
         },
         {
@@ -6786,6 +6793,13 @@
         ],
         "361184": [
           "Oceanography & Marine Science"
+        ],
+        "357123": [
+          "Genomics & Genetics",
+          "Data Science & Bioinformatics"
+        ],
+        "358258": [
+          "Other/Uncategorized"
         ]
       }
     }
