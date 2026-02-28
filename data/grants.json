@@ -9148,5 +9148,395 @@
     "proposed_money": "From 250000$ to 10000000$",
     "submission_link": "https://arpa-e-foa.energy.gov",
     "summary_text": "The SUPERHOT program aims to enhance baseload power supply through the development of technologies for superhot geothermal resources, defined as temperatures exceeding 375 °C and pressures above 22 MPa. Key research topics include robust well construction and effective heat transfer from geological formations to wells, with a focus on overcoming technical challenges to enable scalable geothermal energy production. The program seeks to leverage advancements in Enhanced Geothermal Systems (EGS) and Advanced Geothermal Systems (AGS) to expand the geographic availability and efficiency of geothermal energy."
+  },
+  {
+    "grant_id": 50464627,
+    "provider": "HORIZON-JU-CHIPS-2026-1-RIA",
+    "title": "RIA Global call according to SRIA 2026",
+    "due_date": "['07-05-2026 03:00:00', '17-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-chips-2026-1-ria",
+    "summary_text": "The Chips JU Research and Innovation Action (RIA) focuses on establishing new knowledge and exploring the feasibility of innovative technologies, products, processes, and services, primarily at Technology Readiness Levels (TRL) 3-4. Key research topics include applied research, technology development, and the integration and validation of small-scale prototypes in laboratory or simulated environments, with an emphasis on addressing societal challenges and demonstrating value in relevant applications. The initiative aims to create a balanced portfolio of projects that develop and apply innovative technologies across various domains, aligning with the strategic objectives of the Chips JU ecosystem."
+  },
+  {
+    "grant_id": 50464635,
+    "provider": "HORIZON-JU-CHIPS-2026-FT4-IA",
+    "title": "AI-assisted Methods and Tools for Engineering Automation",
+    "due_date": "['03-03-2026 02:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-chips-2026-ft4-ia",
+    "summary_text": "The grant call focuses on advancing AI-assisted methods and tools for automating software engineering tasks, emphasizing generative AI to enhance efficiency, optimize resource utilization, and support intelligent decision-making across multiple domains. It aims to develop an open and extensible AI-integrated platform that facilitates collaboration among diverse engineering teams while addressing legacy integration challenges. Additionally, the project seeks to evaluate efficiency improvements in software-defined vehicles and explore best practices for applying these advancements in sectors like medical, pharmaceutical, and digital industries."
+  },
+  {
+    "grant_id": 50464643,
+    "provider": "HORIZON-JU-CHIPS-2026-1-IA",
+    "title": "IA Global call according to SRIA 2026",
+    "due_date": "['07-05-2026 03:00:00', '17-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-chips-2026-1-ia",
+    "summary_text": "The grant call focuses on innovative technology development within the semiconductor sector, specifically targeting projects that advance technologies at Technology Readiness Levels (TRL) 5-8. Key research topics include the establishment of pilot line facilities, full-scale testing zones, and the development of new processes or tools applicable across various domains, with an emphasis on creating economic value in Europe through a balanced portfolio of projects."
+  },
+  {
+    "grant_id": 50464147,
+    "provider": "HORIZON-JU-ER-2026-FA7-01",
+    "title": "Safety and certification guidelines and demonstration of safety components for hyperloop",
+    "due_date": "['07-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-er-2026-fa7-01",
+    "summary_text": "The grant call focuses on the development of safety guidelines and certification processes for hyperloop technology, an innovative high-speed transport system. Key research topics include establishing safety and performance requirements, validating critical safety components in laboratory settings, and creating a harmonized regulatory framework for hyperloop systems in Europe. The initiative aims to ensure that hyperloop technology meets or exceeds the safety standards of existing transport modes, such as rail and aviation, while supporting future European standardization activities."
+  },
+  {
+    "grant_id": 50464110,
+    "provider": "HORIZON-JU-ER-2026-FA6FA7-01",
+    "title": "Innovation for regional rail services and new guided transport systems",
+    "due_date": "['07-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-er-2026-fa6fa7-01",
+    "summary_text": "The grant call focuses on two main research topics: the development of lightweight, cost-efficient rolling stock for regional and suburban rail services, and the creation of an automated multi-modal mobility system incorporating \"moving infrastructures.\" The first workstream aims to design and validate regional railway vehicles that meet specific operational requirements while significantly reducing capital and operational costs. The second workstream emphasizes the design and integration of transport units and carriers for intermodal transport, ensuring safety, efficiency, and sustainability in the mobility management system."
+  },
+  {
+    "grant_id": 50136371,
+    "provider": "HORIZON-MISS-2026-06-CLIMA-SOIL",
+    "title": "Joint demonstration of solutions to build soil resilience to extreme weather events and support food security ",
+    "due_date": "['23-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2026-06-clima-soil",
+    "summary_text": "The key research topics focus on enhancing soil resilience to extreme weather events through the development and implementation of tailored soil management practices and solutions. This includes the adoption of agroecology and nature-based solutions, the establishment of a transdisciplinary framework for scaling these solutions, and the assessment of the impacts of extreme weather on soil ecosystem services. The overarching goal is to promote sustainable land management, improve food security, and strengthen agricultural systems against climate change challenges."
+  },
+  {
+    "grant_id": 50150122,
+    "provider": "HORIZON-MSCA-2027-DN-01-01",
+    "title": "MSCA Doctoral Networks 2027",
+    "due_date": "['23-11-2027 02:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-msca-2027-dn-01-01",
+    "summary_text": "The MSCA Doctoral Networks focus on enhancing doctoral training through partnerships among universities, research institutions, and businesses, fostering international collaboration and knowledge transfer. Key research topics include the development of innovative training programs that address specific research and innovation needs, the promotion of inter-sectoral and interdisciplinary collaboration, and the cultivation of transferable skills such as entrepreneurship and digital competencies. Additionally, the networks emphasize the importance of high-quality supervision, career development planning, and the integration of research with societal engagement and open science practices."
+  },
+  {
+    "grant_id": 50952500,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-TRA-01",
+    "title": "Demonstration and Validation of icing Certification Methodologies compatible with EIS2035 for the SMR and REG Aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-tra-01",
+    "summary_text": "The key research topics focus on the development and demonstration of standardized icing certification methodologies specifically for Supercooled Large Droplet (SLD) icing conditions. This includes validating numerical prediction tools with test results and creating a compliance framework in collaboration with aviation authorities to streamline the certification process, ultimately enhancing aviation safety and supporting the introduction of ultra-efficient aircraft by 2035."
+  },
+  {
+    "grant_id": 50952579,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-ACI-01",
+    "title": "Hydrogen powered aircraft concepts and key technologies integration and impact assessment",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-aci-01",
+    "summary_text": "The key research topics focus on the integration and performance assessment of fully electric hydrogen fuel cell powered aircraft and direct hydrogen combustion propulsion aircraft. The aim is to develop a comprehensive aircraft concept at Technology Readiness Level 4 (TRL4), demonstrating its viability through performance, emissions, and maturity evaluations."
+  },
+  {
+    "grant_id": 50952571,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-HPA-02",
+    "title": "Demonstration of an integrated hydrogen fuel system for a fully electric hydrogen fuel cell powered aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-hpa-02",
+    "summary_text": "The key research topics focus on the development and demonstration of an integrated hydrogen fuel system for fully electric hydrogen fuel cell powered aircraft. This includes the hydrogen tank pressure management system, hydrogen distribution, and conditioning components, aiming for technology readiness levels (TRL) 4 and 5 for on-ground demonstrations."
+  },
+  {
+    "grant_id": 50952513,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-REG-01",
+    "title": "Demonstration of advanced airframe for ultra-efficient regional aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-reg-01",
+    "summary_text": "The key research topics focus on the development and demonstration of advanced airframe components, including the wing, fuselage, and empennage, specifically for the Ultra-Efficient Regional Aircraft utilizing hybrid-electric propulsion. The scientific focus areas include achieving a 10% reduction in CO2 emissions compared to 2020 standards and advancing technologies to a Technology Readiness Level (TRL) of 6, with the goal of supporting entry into service by 2035."
+  },
+  {
+    "grant_id": 50952667,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-CSA-01",
+    "title": "Operational stakeholders’ group to support the deployment of Clean Aviation aircraft concepts and technologies",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-csa-01",
+    "summary_text": "The key research topics focus on assessing the operational implications of innovative aircraft concepts and disruptive technologies within the Clean Aviation programme. The aim is to identify operational gaps and risks, providing recommendations to facilitate the seamless deployment of these technologies in aviation operations by 2035."
+  },
+  {
+    "grant_id": 50952659,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-FTA-06",
+    "title": "Superconducting motor windings for a fully electric hydrogen fuel cell powered aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-fta-06",
+    "summary_text": "The key research topics focus on the development and demonstration of superconducting alternating current motor windings for fully electric hydrogen fuel cell powered aircraft. The scientific emphasis is on enhancing the reliability and performance of these systems to create more efficient, compact, and scalable cryogenic electric propulsion technologies."
+  },
+  {
+    "grant_id": 50952563,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-HPA-01",
+    "title": "Demonstration of advanced FC propulsion techno-bricks for a fully electric hydrogen fuel cell powered aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-hpa-01",
+    "summary_text": "The key research topics focus on the development and demonstration of critical components and sub-systems for a hydrogen fuel cell engine intended for fully electric aircraft. The project aims to achieve Technology Readiness Level (TRL) 5 for these components and TRL 4 for the overall fuel cell engine, emphasizing lightweight, compact, and efficient designs to support viable hydrogen-powered aviation."
+  },
+  {
+    "grant_id": 50952633,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-FTA-04",
+    "title": "Key Technologies for Loads Control Lidar for Ultra-efficient SMR aircraft ",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-fta-04",
+    "summary_text": "The key research topics focus on the development and demonstration of lidar technologies for a feed-forward Gust Load Alleviation (GLA) system in Ultra-Efficient SMR aircraft. The emphasis is on maturing critical lidar sub-systems, integrating them in airborne conditions, and demonstrating reliable turbulence detection and compatibility with flight control systems to achieve load reduction and structural weight benefits."
+  },
+  {
+    "grant_id": 50952589,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-HPA-03",
+    "title": "Demonstration of Advanced Low NOx H2C Propulsion System for a direct hydrogen combustion aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-hpa-03",
+    "summary_text": "The key research topics focus on the development and demonstration of an advanced low NOx hydrogen direct combustion propulsion system. This includes achieving a minimum 30% reduction in NOx emissions through a low NOx combustor at TRL5, and demonstrating an efficient hydrogen combustion engine architecture at TRL4 for a viable direct hydrogen combustion aircraft concept."
+  },
+  {
+    "grant_id": 50952624,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-FTA-03",
+    "title": "Advanced noise-reducing technologies for propulsion systems of next generation Ultra-efficient SMR aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-fta-03",
+    "summary_text": "The key research topics focus on the development of advanced noise-reducing and lightweight technologies for ultra-high bypass ratio (UHBR) propulsion systems in ultra-efficient small modular reactor (SMR) aircraft. The scientific focus areas include the maturation of distortion-tolerant fan and intake solutions, along with enhanced aero-acoustic modeling, aiming to achieve significant noise reduction and structural weight benefits."
+  },
+  {
+    "grant_id": 50952642,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-FTA-05",
+    "title": "Cryo-cooled power electronics for a fully electric hydrogen fuel cell powered aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-fta-05",
+    "summary_text": "The key research topics focus on the development and demonstration of cryo-cooled motor inverter power electronics for fully electric hydrogen fuel cell powered aircraft. The aim is to enhance the reliability and performance of these systems, contributing to the advancement of efficient, compact, and scalable cryogenic electric propulsion technologies."
+  },
+  {
+    "grant_id": 50952537,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-SMR-02",
+    "title": "Demonstration of an Ultra-Efficient Rear Fuselage and Empennage and Its Integrated Industrial System enabling EIS2035 for the SMR Aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-smr-02",
+    "summary_text": "The key research topics focus on the development and demonstration of an Ultra-Efficient Rear Fuselage and Empennage (RFE) for the Ultra-Efficient SMR Aircraft. This includes creating a full component assembly and an integrated industrial system that utilizes advanced manufacturing and assembly processes to enhance production efficiency, reduce component weight, and facilitate certification and industrialization by 2035."
+  },
+  {
+    "grant_id": 50952606,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-FTA-01",
+    "title": "Demonstration of low power Ice Protection System technology",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-fta-01",
+    "summary_text": "The key research topics focus on the development of a low power Ice Protection System specifically designed for the wing and empennage of an Ultra-Efficient Regional Aircraft utilizing hybrid-electric propulsion. The project aims to achieve ground demonstrations that meet EASA CS-25 icing conditions, emphasizing lightweight and low drag solutions suitable for regional aircraft's non-propulsive power requirements."
+  },
+  {
+    "grant_id": 50952597,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-HPA-04",
+    "title": "Demonstration of a hydrogen distribution system for a direct hydrogen combustion propulsion aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-hpa-04",
+    "summary_text": "The key research topics focus on the development and demonstration of a hydrogen distribution and conditioning system for direct hydrogen combustion in propulsion aircraft. This includes critical components such as a high-pressure hydrogen pump and the fuel distribution system, with an emphasis on achieving Technology Readiness Levels (TRL) 4 and 5 through scaled on-ground demonstrations of engine thrust control functions."
+  },
+  {
+    "grant_id": 50952651,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-FTA-07",
+    "title": "Innovative light weight and reliable liquid hydrogen tank",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-fta-07",
+    "summary_text": "The key research topics focus on the development of a lightweight and reliable liquid hydrogen tank for hydrogen-powered aircraft. The scientific emphasis is on achieving a gravimetric index of at least 40% and a dormancy period of no less than 12 hours, validated through ground-based cryogenic and tightness testing to reach Technology Readiness Level 4 (TRL4)."
+  },
+  {
+    "grant_id": 50952550,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-SMR-03",
+    "title": "Ground Demonstration of Hybrid-Electric Propulsion Architectures for the Ultra-efficient SMR aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-smr-03",
+    "summary_text": "The key research topics focus on the development and demonstration of hybrid-electric propulsion systems for Ultra-Efficient Small Modular Reactor (SMR) aircraft. This includes integrating hybrid-electric sub-systems into both ducted and unducted engines, aiming for a minimum of 5% reduction in CO2 emissions, and progressing to Technology Readiness Level 6 (TRL6) by 2030 to support future product launches by 2035."
+  },
+  {
+    "grant_id": 50952615,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-FTA-02",
+    "title": "Demonstration of cabin acoustic optimization technology",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-fta-02",
+    "summary_text": "The key research topics focus on the development of innovative acoustic treatment technologies aimed at mitigating cabin noise in hybrid-electric regional aircraft. The emphasis is on achieving ground demonstrations to Technology Readiness Level 5 (TRL5) in realistic noise and vibration environments, with a goal of creating lightweight and low-volume solutions suitable for integration into regional aircraft."
+  },
+  {
+    "grant_id": 50952524,
+    "provider": "HORIZON-JU-CLEAN-AVIATION-2026-04-SMR-01",
+    "title": "Demonstration of an Optimized System Platform for Ultra-efficient SMR Aircraft",
+    "due_date": "['19-05-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-ju-clean-aviation-2026-04-smr-01",
+    "summary_text": "The key research topics focus on the development of an optimized systems platform for next-generation Ultra-Efficient Small Modular Reactor (SMR) aircraft. This includes the integration of high-performance computing, electrical power, and data architectures to support advanced functions like active control, hybridization, and predictive maintenance, with an emphasis on validating performance, safety, and cybersecurity through ground demonstrations. The goal is to achieve technology readiness level (TRL) 6 and establish pathways for future aircraft integration by 2035."
+  },
+  {
+    "grant_id": 50134367,
+    "provider": "HORIZON-MSCA-2027-SE-01-01",
+    "title": "MSCA Staff Exchanges 2027",
+    "due_date": "['15-04-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-msca-2027-se-01-01",
+    "summary_text": "The MSCA Staff Exchanges focus on enhancing international, inter-sectoral, and interdisciplinary collaboration in research and innovation (R&I) through staff mobility between academic and non-academic organizations. Key research topics include knowledge transfer, skills development, and the creation of innovative products and services, with an emphasis on fostering entrepreneurial mindsets and expanding professional networks. The initiative encourages the exploration of complementary competencies among participating organizations to strengthen long-term collaborations and enhance R&I capacity."
+  },
+  {
+    "grant_id": 50132976,
+    "provider": "HORIZON-MSCA-2027-COFUND-01-01",
+    "title": "MSCA COFUND 2027",
+    "due_date": "['06-04-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-msca-2027-cofund-01-01",
+    "summary_text": "The grant call focuses on enhancing doctoral training programs that improve research and innovation (R&I) capabilities at various levels, emphasizing the development of transferable skills, employability, and interdisciplinary collaboration. It encourages proposals that align with regional or national Research and Innovation Strategies, while promoting open science, digital technologies, and knowledge valorization. Key areas of interest include international mobility, cross-sectoral partnerships, and effective supervision and mentoring to prepare candidates for diverse career paths in academia and beyond."
+  },
+  {
+    "grant_id": 50132993,
+    "provider": "HORIZON-MSCA-2027-COFUND-02-01",
+    "title": "MSCA Choose Europe for Science 2027",
+    "due_date": "['06-04-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-msca-2027-cofund-02-01",
+    "summary_text": "The grant call focuses on enhancing the attractiveness of research careers in Europe by supporting talent recruitment programs for researchers with doctoral degrees. Key research topics include the development of diverse research disciplines, fostering career stability and progression, and aligning institutional practices with European standards for researcher assessment and human resources. The initiative aims to provide excellent working conditions, including professional development and training, to ensure researchers can define their own research topics and contribute effectively to their institutions and broader socio-economic ecosystems."
+  },
+  {
+    "grant_id": 50139229,
+    "provider": "HORIZON-MISS-2027-01-CLIMA-01",
+    "title": "Demonstrating transformative solutions to increase cross-border climate resilience",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-01-clima-01",
+    "summary_text": "The grant call focuses on enhancing climate resilience in cross-border regions of the EU by developing and demonstrating innovative solutions to address shared climate risks such as flooding, water scarcity, wildfires, and sea level rise. It emphasizes the need for collaboration between regional and local authorities across borders to integrate governance and socio-economic aspects, while prioritizing nature-based and ecosystem-based adaptation strategies. Proposals should also include mechanisms for monitoring and replicating successful solutions in other regions, fostering a coordinated approach to climate adaptation across the EU."
+  },
+  {
+    "grant_id": 50139206,
+    "provider": "HORIZON-MISS-2027-01-CLIMA-02",
+    "title": "Researching and applying the potential of Artificial Intelligence to foster climate resilience at the regional and local levels",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-01-clima-02",
+    "summary_text": "The grant call focuses on leveraging Artificial Intelligence (AI) to enhance climate adaptation efforts in European regions. Key research topics include improving data accessibility for informed decision-making by local authorities and optimizing resource management and adaptation technologies in specific sectors such as agriculture, construction, and water management. Proposals should demonstrate innovative AI applications that address existing gaps, engage with regional authorities, and ensure the inclusivity and integrity of data used in climate resilience initiatives."
+  },
+  {
+    "grant_id": 50139277,
+    "provider": "HORIZON-MISS-2027-03-OCEAN-01",
+    "title": "Increasing riparian and coastal areas resilience to climate change, including in waterfront cities and islands.",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-03-ocean-01",
+    "summary_text": "This grant call focuses on enhancing the resilience of riparian and coastal areas, particularly in waterfront cities and islands, to climate change through innovative and cost-effective solutions. Key research topics include improving ecological functions, reducing vulnerability to climate-related risks, and promoting socio-economic benefits from the protection and restoration of these areas. The call encourages the use of Nature-based Solutions, integrated land-sea approaches, and collaboration with local authorities to implement and upscale effective strategies for climate adaptation and biodiversity conservation."
+  },
+  {
+    "grant_id": 50139318,
+    "provider": "HORIZON-MISS-2027-03-OCEAN-05",
+    "title": "Large-scale demonstration of protection, restoration and management of blue forest ecosystems in European sea basins",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-03-ocean-05",
+    "summary_text": "The grant call focuses on advancing the protection, restoration, and management of blue forest ecosystems within EU waters, emphasizing the assessment of ecological interactions and the conservation of marine and coastal habitats. Key research topics include innovative financing mechanisms for blue carbon ecosystems, community engagement in conservation efforts, and the development of comprehensive strategies that integrate these ecosystems into marine biodiversity frameworks. Proposals should address specific regional challenges within designated sea basins and aim to enhance biodiversity, fisheries, and carbon storage capacity while ensuring long-term community involvement and awareness."
+  },
+  {
+    "grant_id": 50139355,
+    "provider": "HORIZON-MISS-2027-03-OCEAN-02",
+    "title": "Circularity of seafood supply chain",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-03-ocean-02",
+    "summary_text": "The grant call focuses on enhancing the competitiveness and environmental sustainability of the EU's fisheries and aquaculture sectors through the integration of circular economy principles. Key research topics include innovative methods for waste management and valorization of by-products, development of alternative organic feed ingredients, and the implementation of digital tools for monitoring waste and pollution. Proposals should foster cross-sectoral collaboration among stakeholders and demonstrate the socio-economic benefits of these solutions while ensuring ecosystem health and compliance with organic production regulations."
+  },
+  {
+    "grant_id": 50139386,
+    "provider": "HORIZON-MISS-2027-03-OCEAN-03",
+    "title": "Green, circular and resilient harbours",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-03-ocean-03",
+    "summary_text": "The research topics focus on innovative solutions for restoring marine and freshwater ecosystems in port areas, enhancing sustainability and resilience against climate change, and reducing pollution. Key areas include the monitoring of invasive species, promoting biodiversity, implementing circular economy initiatives, and developing strategies for renewable energy and nature-based solutions. The initiative encourages collaboration among port authorities, local stakeholders, and scientific partners to share knowledge and best practices, ultimately aiming to achieve the objectives of the Mission \"Restore our Ocean and Waters\" by 2030."
+  },
+  {
+    "grant_id": 50139433,
+    "provider": "HORIZON-MISS-2027-03-OCEAN-04",
+    "title": "Towards community-driven business models: coastal and freshwaters sustainable tourism",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-03-ocean-04",
+    "summary_text": "The grant call focuses on developing innovative, community-driven business models for sustainable tourism in marine, coastal, and freshwater areas, emphasizing the engagement of local communities and stakeholders. Key research topics include the feasibility of site-specific initiatives that balance economic viability with environmental protection, capacity building for local entrepreneurship, and promoting sustainable practices to minimize tourism's negative impacts on ecosystems. Proposals should address specific regional challenges within designated sea basins and foster collaboration among diverse community groups, including vulnerable populations, while exploring financial mechanisms for scaling successful initiatives."
+  },
+  {
+    "grant_id": 50139729,
+    "provider": "HORIZON-MISS-2027-07-CLIMA-CIT-NEB-01",
+    "title": "Urban nature: supporting restoration of urban ecosystems, along urban transport networks and in the built environment  ",
+    "due_date": "['22-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-07-clima-cit-neb-01",
+    "summary_text": "The grant call focuses on developing innovative approaches, tools, and methods to enhance urban green spaces and tree canopy cover, aiming to improve climate resilience, biodiversity, and overall quality of life. Key research topics include assessing the impacts of urban greening on local ecosystems, identifying barriers to green space development, and exploring multifunctional solutions that integrate urban planning with environmental benefits. Projects must engage local communities, monitor the outcomes of implemented measures, and ensure sustainability beyond the project's duration."
+  },
+  {
+    "grant_id": 50139777,
+    "provider": "HORIZON-MISS-2027-07-CLIMA-CIT-CCRI-02",
+    "title": "Deploying innovative wastewater management, treatment and valorisation solutions in European cities and regions in the context of climate change",
+    "due_date": "['22-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-07-clima-cit-ccri-02",
+    "summary_text": "The grant call focuses on innovative urban wastewater management practices that enhance climate resilience and energy efficiency in European cities and regions. Key research topics include the development of nature-based solutions for stormwater management, resource recovery technologies, and strategies for water reuse, all aimed at reducing pollution and promoting circular economy principles. Additionally, the call emphasizes the need for integrated approaches that address governance, regulatory barriers, and financing to facilitate the replication and upscaling of successful wastewater management solutions across different urban contexts."
+  },
+  {
+    "grant_id": 361003,
+    "provider": "Administration for Community Living",
+    "title": "Senior Medicare Patrol State Project Grants - Pennsylvania",
+    "due_date": "2026-04-13 00:00:00",
+    "eligibility_israel": true,
+    "proposed_money": "Up to 1100000$",
+    "submission_link": "https://acl.gov/grants/open-opportunities",
+    "summary_text": "The key research topics and scientific focus areas of the ACL Senior Medicare Patrol (SMP) program include the prevention, detection, and reporting of health care fraud, errors, and abuse affecting Medicare beneficiaries. The program emphasizes outreach, education, and counseling to empower beneficiaries and their caregivers, enhance awareness of Medicare-related issues, and promote the reporting of suspicious activities. Additionally, the program focuses on developing effective communication strategies to disseminate fraud prevention information through various media and community engagement efforts."
+  },
+  {
+    "grant_id": 361365,
+    "provider": "Golden Field Office",
+    "title": "Next-Generation Geothermal Field Tests and Geothermal Resource Characterization and Confirmation",
+    "due_date": "2026-03-27 00:00:00",
+    "eligibility_israel": true,
+    "proposed_money": "From 1000000$ to 25000000$",
+    "submission_link": "https://eere-exchange.energy.gov",
+    "summary_text": "This NOFO focuses on field-scale testing of next-generation development technologies for geothermal energy, specifically at depths and temperatures suitable for full-scale projects. It emphasizes exploration drilling to gather data for characterizing hydrothermal prospects and aims to support the Department of Energy's R&D priorities through practical, real-world applications. The initiative aligns with strategic goals outlined in the GeoVision Roadmap and the GTO's Multi-Year Program Plan."
   }
 ]

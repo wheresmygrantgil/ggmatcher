@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-02-02T19:38:37.604074",
+  "generated_at": "2026-02-28T02:32:02.555166",
   "mode": "by-agency",
-  "total_grants": 915,
+  "total_grants": 954,
   "agencies": {
     "eu_horizon": {
       "agency": "EU Horizon Europe",
-      "total_grants": 648,
+      "total_grants": 685,
       "topics": [
         {
           "name": "Climate Change & Environment",
-          "count": 309,
+          "count": 325,
           "grant_ids": [
             48345988,
             48346362,
@@ -319,12 +319,28 @@
             50129041,
             50129079,
             50129614,
-            49891498
+            49891498,
+            50464627,
+            50136371,
+            50952579,
+            50952513,
+            50952589,
+            50952550,
+            50132993,
+            50139229,
+            50139206,
+            50139277,
+            50139318,
+            50139355,
+            50139386,
+            50139433,
+            50139729,
+            50139777
           ]
         },
         {
           "name": "Democracy & Governance",
-          "count": 147,
+          "count": 149,
           "grant_ids": [
             48346133,
             48349906,
@@ -472,12 +488,14 @@
             50128974,
             50129018,
             50129041,
-            49891498
+            49891498,
+            50139229,
+            50139777
           ]
         },
         {
           "name": "AI & Machine Learning",
-          "count": 110,
+          "count": 112,
           "grant_ids": [
             48346091,
             48346111,
@@ -588,12 +606,14 @@
             50133030,
             50142889,
             50136149,
-            50483144
+            50483144,
+            50464635,
+            50139206
           ]
         },
         {
           "name": "Education & Training",
-          "count": 100,
+          "count": 104,
           "grant_ids": [
             48346362,
             48346012,
@@ -694,12 +714,16 @@
             50142968,
             50143015,
             50142930,
-            50136209
+            50136209,
+            50150122,
+            50134367,
+            50132976,
+            50132993
           ]
         },
         {
           "name": "Circular Economy & Recycling",
-          "count": 93,
+          "count": 96,
           "grant_ids": [
             48345988,
             48346385,
@@ -793,12 +817,15 @@
             50483251,
             50483137,
             50483237,
-            50483230
+            50483230,
+            50139355,
+            50139386,
+            50139777
           ]
         },
         {
           "name": "Sustainable Transport",
-          "count": 84,
+          "count": 89,
           "grant_ids": [
             48346216,
             48346111,
@@ -883,12 +910,17 @@
             50483258,
             50483207,
             50483165,
-            50483158
+            50483158,
+            50464147,
+            50464110,
+            50134367,
+            50132976,
+            50139729
           ]
         },
         {
           "name": "Maritime & Shipping",
-          "count": 83,
+          "count": 84,
           "grant_ids": [
             48345723,
             48347024,
@@ -972,12 +1004,13 @@
             50483244,
             50483144,
             50483165,
-            50483230
+            50483230,
+            50150122
           ]
         },
         {
           "name": "Agriculture & Food",
-          "count": 72,
+          "count": 75,
           "grant_ids": [
             48345746,
             48349928,
@@ -1050,12 +1083,15 @@
             50149329,
             50142968,
             50143015,
-            50129041
+            50129041,
+            50136371,
+            50139206,
+            50139355
           ]
         },
         {
           "name": "Healthcare & Medical",
-          "count": 70,
+          "count": 73,
           "grant_ids": [
             48349928,
             47888746,
@@ -1126,12 +1162,15 @@
             49929087,
             49929064,
             50143015,
-            50483137
+            50483137,
+            50464635,
+            50952615,
+            50139777
           ]
         },
         {
           "name": "Sustainable Construction",
-          "count": 69,
+          "count": 72,
           "grant_ids": [
             48346295,
             48346091,
@@ -1201,12 +1240,15 @@
             50130123,
             50130830,
             50405984,
-            50129170
+            50129170,
+            50139206,
+            50139433,
+            50139729
           ]
         },
         {
           "name": "Cultural Heritage",
-          "count": 59,
+          "count": 60,
           "grant_ids": [
             48336424,
             50134442,
@@ -1266,12 +1308,13 @@
             50217298,
             50147617,
             50130123,
-            50135802
+            50135802,
+            50136371
           ]
         },
         {
           "name": "Renewable Energy",
-          "count": 53,
+          "count": 54,
           "grant_ids": [
             48345988,
             48346362,
@@ -1325,12 +1368,13 @@
             50483244,
             50483179,
             50483172,
-            49891498
+            49891498,
+            50139386
           ]
         },
         {
           "name": "Soil & Land Management",
-          "count": 50,
+          "count": 52,
           "grant_ids": [
             48347024,
             50135746,
@@ -1381,12 +1425,14 @@
             50147519,
             50142930,
             50136346,
-            50128974
+            50128974,
+            50136371,
+            50139277
           ]
         },
         {
           "name": "Smart Grid & Energy Systems",
-          "count": 49,
+          "count": 51,
           "grant_ids": [
             48346091,
             48345968,
@@ -1436,12 +1482,114 @@
             50483215,
             50483258,
             50483207,
-            50483179
+            50483179,
+            50952571,
+            50952597
+          ]
+        },
+        {
+          "name": "Robotics & Automation",
+          "count": 44,
+          "grant_ids": [
+            48346295,
+            47504098,
+            48346925,
+            48346875,
+            48346900,
+            48346948,
+            47888746,
+            49590799,
+            49590868,
+            49590771,
+            49590823,
+            50127801,
+            50135491,
+            50135468,
+            50142752,
+            50130600,
+            50130665,
+            50130622,
+            50129284,
+            50130395,
+            50129746,
+            50312579,
+            50130465,
+            50130689,
+            50130643,
+            50126911,
+            50126893,
+            50131715,
+            50131748,
+            50131280,
+            50135035,
+            50135296,
+            50135061,
+            50131822,
+            50132021,
+            50131894,
+            50128031,
+            50217615,
+            50217435,
+            50147756,
+            50130167,
+            50130209,
+            50464635,
+            50464110
+          ]
+        },
+        {
+          "name": "Energy Storage & Batteries",
+          "count": 44,
+          "grant_ids": [
+            48346407,
+            48346173,
+            48345815,
+            48345452,
+            48345544,
+            48345522,
+            49590847,
+            50129926,
+            50129240,
+            50129904,
+            50129883,
+            50129284,
+            50130301,
+            50130874,
+            50129507,
+            50129216,
+            50129191,
+            50130852,
+            50130896,
+            50130511,
+            50129307,
+            50131748,
+            50131259,
+            50127298,
+            50127953,
+            50129330,
+            50130277,
+            50129354,
+            50129264,
+            50130252,
+            50483244,
+            50483144,
+            50483165,
+            50483151,
+            50483158,
+            50483193,
+            50483251,
+            50483179,
+            50483172,
+            50952579,
+            50952571,
+            50952659,
+            50952563,
+            50952642
           ]
         },
         {
           "name": "Space & Earth Observation",
-          "count": 43,
+          "count": 44,
           "grant_ids": [
             48346173,
             47504098,
@@ -1485,100 +1633,8 @@
             50149727,
             50217229,
             50147543,
-            50128955
-          ]
-        },
-        {
-          "name": "Robotics & Automation",
-          "count": 42,
-          "grant_ids": [
-            48346295,
-            47504098,
-            48346925,
-            48346875,
-            48346900,
-            48346948,
-            47888746,
-            49590799,
-            49590868,
-            49590771,
-            49590823,
-            50127801,
-            50135491,
-            50135468,
-            50142752,
-            50130600,
-            50130665,
-            50130622,
-            50129284,
-            50130395,
-            50129746,
-            50312579,
-            50130465,
-            50130689,
-            50130643,
-            50126911,
-            50126893,
-            50131715,
-            50131748,
-            50131280,
-            50135035,
-            50135296,
-            50135061,
-            50131822,
-            50132021,
-            50131894,
-            50128031,
-            50217615,
-            50217435,
-            50147756,
-            50130167,
-            50130209
-          ]
-        },
-        {
-          "name": "Energy Storage & Batteries",
-          "count": 39,
-          "grant_ids": [
-            48346407,
-            48346173,
-            48345815,
-            48345452,
-            48345544,
-            48345522,
-            49590847,
-            50129926,
-            50129240,
-            50129904,
-            50129883,
-            50129284,
-            50130301,
-            50130874,
-            50129507,
-            50129216,
-            50129191,
-            50130852,
-            50130896,
-            50130511,
-            50129307,
-            50131748,
-            50131259,
-            50127298,
-            50127953,
-            50129330,
-            50130277,
-            50129354,
-            50129264,
-            50130252,
-            50483244,
-            50483144,
-            50483165,
-            50483151,
-            50483158,
-            50483193,
-            50483251,
-            50483179,
-            50483172
+            50128955,
+            50139729
           ]
         },
         {
@@ -1626,8 +1682,86 @@
           ]
         },
         {
+          "name": "Aviation & Aerospace",
+          "count": 34,
+          "grant_ids": [
+            48345723,
+            48347006,
+            48347131,
+            50129240,
+            50130921,
+            50130943,
+            50130557,
+            50128935,
+            50129307,
+            50139548,
+            50130810,
+            50128894,
+            50135061,
+            50147665,
+            50483151,
+            50464147,
+            50952500,
+            50952579,
+            50952571,
+            50952513,
+            50952667,
+            50952659,
+            50952563,
+            50952633,
+            50952589,
+            50952624,
+            50952642,
+            50952537,
+            50952606,
+            50952597,
+            50952651,
+            50952550,
+            50952615,
+            50952524
+          ]
+        },
+        {
+          "name": "Hydrogen & Fuel Cells",
+          "count": 32,
+          "grant_ids": [
+            49590847,
+            50139548,
+            50127032,
+            50138041,
+            50483265,
+            50483215,
+            50483244,
+            50483200,
+            50483144,
+            50483258,
+            50483207,
+            50483279,
+            50483165,
+            50483151,
+            50483158,
+            50483193,
+            50483251,
+            50483179,
+            50483223,
+            50483137,
+            50483272,
+            50483172,
+            50483237,
+            50483230,
+            50952579,
+            50952571,
+            50952659,
+            50952563,
+            50952589,
+            50952642,
+            50952597,
+            50952651
+          ]
+        },
+        {
           "name": "Other/Uncategorized",
-          "count": 30,
+          "count": 31,
           "grant_ids": [
             47504108,
             47504079,
@@ -1658,7 +1792,8 @@
             50142819,
             50136176,
             48939636,
-            50074515
+            50074515,
+            50464643
           ]
         },
         {
@@ -1696,38 +1831,8 @@
           ]
         },
         {
-          "name": "Hydrogen & Fuel Cells",
-          "count": 24,
-          "grant_ids": [
-            49590847,
-            50139548,
-            50127032,
-            50138041,
-            50483265,
-            50483215,
-            50483244,
-            50483200,
-            50483144,
-            50483258,
-            50483207,
-            50483279,
-            50483165,
-            50483151,
-            50483158,
-            50483193,
-            50483251,
-            50483179,
-            50483223,
-            50483137,
-            50483272,
-            50483172,
-            50483237,
-            50483230
-          ]
-        },
-        {
           "name": "Cybersecurity",
-          "count": 21,
+          "count": 22,
           "grant_ids": [
             48346925,
             48346988,
@@ -1749,7 +1854,8 @@
             50217662,
             50217298,
             50217480,
-            50147543
+            50147543,
+            50952524
           ]
         },
         {
@@ -1777,27 +1883,6 @@
           ]
         },
         {
-          "name": "Aviation & Aerospace",
-          "count": 15,
-          "grant_ids": [
-            48345723,
-            48347006,
-            48347131,
-            50129240,
-            50130921,
-            50130943,
-            50130557,
-            50128935,
-            50129307,
-            50139548,
-            50130810,
-            50128894,
-            50135061,
-            50147665,
-            50483151
-          ]
-        },
-        {
           "name": "Quantum Technologies",
           "count": 15,
           "grant_ids": [
@@ -1820,7 +1905,7 @@
         },
         {
           "name": "HPC & Computing",
-          "count": 8,
+          "count": 9,
           "grant_ids": [
             48618560,
             48618575,
@@ -1829,7 +1914,8 @@
             50132047,
             47347605,
             49783365,
-            50129148
+            50129148,
+            50952524
           ]
         },
         {
@@ -4816,12 +4902,172 @@
         ],
         "50074515": [
           "Other/Uncategorized"
+        ],
+        "50464627": [
+          "Climate Change & Environment"
+        ],
+        "50464635": [
+          "AI & Machine Learning",
+          "Robotics & Automation",
+          "Healthcare & Medical"
+        ],
+        "50464643": [
+          "Other/Uncategorized"
+        ],
+        "50464147": [
+          "Sustainable Transport",
+          "Aviation & Aerospace"
+        ],
+        "50464110": [
+          "Robotics & Automation",
+          "Sustainable Transport"
+        ],
+        "50136371": [
+          "Climate Change & Environment",
+          "Agriculture & Food",
+          "Soil & Land Management",
+          "Cultural Heritage"
+        ],
+        "50150122": [
+          "Maritime & Shipping",
+          "Education & Training"
+        ],
+        "50952500": [
+          "Aviation & Aerospace"
+        ],
+        "50952579": [
+          "Climate Change & Environment",
+          "Energy Storage & Batteries",
+          "Hydrogen & Fuel Cells",
+          "Aviation & Aerospace"
+        ],
+        "50952571": [
+          "Energy Storage & Batteries",
+          "Hydrogen & Fuel Cells",
+          "Smart Grid & Energy Systems",
+          "Aviation & Aerospace"
+        ],
+        "50952513": [
+          "Climate Change & Environment",
+          "Aviation & Aerospace"
+        ],
+        "50952667": [
+          "Aviation & Aerospace"
+        ],
+        "50952659": [
+          "Energy Storage & Batteries",
+          "Hydrogen & Fuel Cells",
+          "Aviation & Aerospace"
+        ],
+        "50952563": [
+          "Energy Storage & Batteries",
+          "Hydrogen & Fuel Cells",
+          "Aviation & Aerospace"
+        ],
+        "50952633": [
+          "Aviation & Aerospace"
+        ],
+        "50952589": [
+          "Climate Change & Environment",
+          "Hydrogen & Fuel Cells",
+          "Aviation & Aerospace"
+        ],
+        "50952624": [
+          "Aviation & Aerospace"
+        ],
+        "50952642": [
+          "Energy Storage & Batteries",
+          "Hydrogen & Fuel Cells",
+          "Aviation & Aerospace"
+        ],
+        "50952537": [
+          "Aviation & Aerospace"
+        ],
+        "50952606": [
+          "Aviation & Aerospace"
+        ],
+        "50952597": [
+          "Hydrogen & Fuel Cells",
+          "Smart Grid & Energy Systems",
+          "Aviation & Aerospace"
+        ],
+        "50952651": [
+          "Hydrogen & Fuel Cells",
+          "Aviation & Aerospace"
+        ],
+        "50952550": [
+          "Climate Change & Environment",
+          "Aviation & Aerospace"
+        ],
+        "50952615": [
+          "Aviation & Aerospace",
+          "Healthcare & Medical"
+        ],
+        "50952524": [
+          "Cybersecurity",
+          "Aviation & Aerospace",
+          "HPC & Computing"
+        ],
+        "50134367": [
+          "Sustainable Transport",
+          "Education & Training"
+        ],
+        "50132976": [
+          "Sustainable Transport",
+          "Education & Training"
+        ],
+        "50132993": [
+          "Climate Change & Environment",
+          "Education & Training"
+        ],
+        "50139229": [
+          "Climate Change & Environment",
+          "Democracy & Governance"
+        ],
+        "50139206": [
+          "Climate Change & Environment",
+          "AI & Machine Learning",
+          "Sustainable Construction",
+          "Agriculture & Food"
+        ],
+        "50139277": [
+          "Climate Change & Environment",
+          "Soil & Land Management"
+        ],
+        "50139318": [
+          "Climate Change & Environment"
+        ],
+        "50139355": [
+          "Climate Change & Environment",
+          "Circular Economy & Recycling",
+          "Agriculture & Food"
+        ],
+        "50139386": [
+          "Climate Change & Environment",
+          "Renewable Energy",
+          "Circular Economy & Recycling"
+        ],
+        "50139433": [
+          "Climate Change & Environment",
+          "Sustainable Construction"
+        ],
+        "50139729": [
+          "Climate Change & Environment",
+          "Space & Earth Observation",
+          "Sustainable Transport",
+          "Sustainable Construction"
+        ],
+        "50139777": [
+          "Climate Change & Environment",
+          "Circular Economy & Recycling",
+          "Healthcare & Medical",
+          "Democracy & Governance"
         ]
       }
     },
     "us_federal": {
       "agency": "US Federal (NIH, DOE, etc.)",
-      "total_grants": 267,
+      "total_grants": 269,
       "topics": [
         {
           "name": "Drug Discovery & Development",
@@ -4888,7 +5134,7 @@
         },
         {
           "name": "Genomics & Genetics",
-          "count": 53,
+          "count": 54,
           "grant_ids": [
             356763,
             356879,
@@ -4942,7 +5188,8 @@
             348260,
             358568,
             360863,
-            357123
+            357123,
+            361365
           ]
         },
         {
@@ -5526,7 +5773,7 @@
         },
         {
           "name": "Other/Uncategorized",
-          "count": 8,
+          "count": 9,
           "grant_ids": [
             357112,
             357170,
@@ -5535,7 +5782,8 @@
             358879,
             347026,
             356444,
-            358258
+            358258,
+            361003
           ]
         },
         {
@@ -5553,6 +5801,19 @@
           ]
         },
         {
+          "name": "Energy & Clean Tech (DOE)",
+          "count": 7,
+          "grant_ids": [
+            350952,
+            356623,
+            360678,
+            360814,
+            361167,
+            361166,
+            361365
+          ]
+        },
+        {
           "name": "Environmental Health",
           "count": 6,
           "grant_ids": [
@@ -5562,18 +5823,6 @@
             357376,
             357937,
             355417
-          ]
-        },
-        {
-          "name": "Energy & Clean Tech (DOE)",
-          "count": 6,
-          "grant_ids": [
-            350952,
-            356623,
-            360678,
-            360814,
-            361167,
-            361166
           ]
         },
         {
@@ -6800,6 +7049,13 @@
         ],
         "358258": [
           "Other/Uncategorized"
+        ],
+        "361003": [
+          "Other/Uncategorized"
+        ],
+        "361365": [
+          "Genomics & Genetics",
+          "Energy & Clean Tech (DOE)"
         ]
       }
     }

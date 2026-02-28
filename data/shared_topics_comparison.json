@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-02-02T19:38:38.246942",
+  "generated_at": "2026-02-28T02:32:03.212287",
   "mode": "shared",
-  "total_eu_grants": 648,
-  "total_us_grants": 267,
+  "total_eu_grants": 685,
+  "total_us_grants": 269,
   "thresholds": {
     "broad_threshold_pct": 30,
     "balance_ratio": 5
@@ -13,178 +13,178 @@
     {
       "topic": "Healthcare & Medical",
       "issue": "too_broad",
-      "detail": "US has 58.4% (>30%)",
+      "detail": "US has 58.0% (>30%)",
       "suggestion": "Split into more specific sub-topics"
     },
     {
       "topic": "Healthcare & Medical",
       "issue": "unbalanced",
-      "detail": "US has 5.4x more (10.8% vs 58.4%)",
+      "detail": "US has 5.4x more (10.7% vs 58.0%)",
       "suggestion": "Consider if topic is truly shared or agency-specific"
     },
     {
       "topic": "Climate & Environment",
       "issue": "too_broad",
-      "detail": "EU has 47.7% (>30%)",
+      "detail": "EU has 47.4% (>30%)",
       "suggestion": "Split into more specific sub-topics"
     },
     {
       "topic": "Climate & Environment",
       "issue": "unbalanced",
-      "detail": "EU has 8.5x more (47.7% vs 5.6%)",
+      "detail": "EU has 8.5x more (47.4% vs 5.6%)",
       "suggestion": "Consider if topic is truly shared or agency-specific"
     },
     {
       "topic": "AI & Machine Learning",
       "issue": "unbalanced",
-      "detail": "EU has 15.5x more (17.0% vs 1.1%)",
+      "detail": "EU has 14.9x more (16.4% vs 1.1%)",
       "suggestion": "Consider if topic is truly shared or agency-specific"
     },
     {
       "topic": "Energy & Renewables",
       "issue": "unbalanced",
-      "detail": "EU has 8.7x more (13.1% vs 1.5%)",
+      "detail": "EU has 9.1x more (13.7% vs 1.5%)",
       "suggestion": "Consider if topic is truly shared or agency-specific"
     },
     {
       "topic": "Cancer Research",
       "issue": "unbalanced",
-      "detail": "US has 9.4x more (1.4% vs 13.1%)",
+      "detail": "US has 10.0x more (1.3% vs 13.0%)",
       "suggestion": "Consider if topic is truly shared or agency-specific"
     },
     {
       "topic": "Materials Science",
       "issue": "unbalanced",
-      "detail": "EU has 6.0x more (11.4% vs 1.9%)",
+      "detail": "EU has 5.7x more (10.8% vs 1.9%)",
       "suggestion": "Consider if topic is truly shared or agency-specific"
     },
     {
       "topic": "Mental Health",
       "issue": "unbalanced",
-      "detail": "US has 7.8x more (1.4% vs 10.9%)",
+      "detail": "US has 8.3x more (1.3% vs 10.8%)",
       "suggestion": "Consider if topic is truly shared or agency-specific"
     },
     {
       "topic": "Agriculture & Food",
       "issue": "unbalanced",
-      "detail": "EU has 10.1x more (11.1% vs 1.1%)",
+      "detail": "EU has 9.9x more (10.9% vs 1.1%)",
       "suggestion": "Consider if topic is truly shared or agency-specific"
     },
     {
       "topic": "Neuroscience & Brain",
       "issue": "unbalanced",
-      "detail": "US has 13.6x more (0.8% vs 10.9%)",
+      "detail": "US has 15.4x more (0.7% vs 10.8%)",
       "suggestion": "Consider if topic is truly shared or agency-specific"
     },
     {
       "topic": "Drug Discovery",
       "issue": "unbalanced",
-      "detail": "US has 9.9x more (0.8% vs 7.9%)",
+      "detail": "US has 8.7x more (0.9% vs 7.8%)",
       "suggestion": "Consider if topic is truly shared or agency-specific"
     }
   ],
   "topics": [
     {
       "topic": "Healthcare & Medical",
-      "eu_percent": 10.8,
-      "us_percent": 58.4,
-      "eu_count": 70,
+      "eu_percent": 10.7,
+      "us_percent": 58.0,
+      "eu_count": 73,
       "us_count": 156
     },
     {
       "topic": "Climate & Environment",
-      "eu_percent": 47.7,
+      "eu_percent": 47.4,
       "us_percent": 5.6,
-      "eu_count": 309,
+      "eu_count": 325,
       "us_count": 15
     },
     {
       "topic": "Genomics & Genetics",
-      "eu_percent": 10.2,
-      "us_percent": 19.9,
-      "eu_count": 66,
-      "us_count": 53
+      "eu_percent": 10.1,
+      "us_percent": 20.1,
+      "eu_count": 69,
+      "us_count": 54
     },
     {
       "topic": "Aging & Geriatrics",
-      "eu_percent": 7.7,
-      "us_percent": 12.0,
-      "eu_count": 50,
+      "eu_percent": 7.4,
+      "us_percent": 11.9,
+      "eu_count": 51,
       "us_count": 32
     },
     {
       "topic": "AI & Machine Learning",
-      "eu_percent": 17.0,
+      "eu_percent": 16.4,
       "us_percent": 1.1,
-      "eu_count": 110,
+      "eu_count": 112,
       "us_count": 3
     },
     {
       "topic": "Energy & Renewables",
-      "eu_percent": 13.1,
+      "eu_percent": 13.7,
       "us_percent": 1.5,
-      "eu_count": 85,
+      "eu_count": 94,
       "us_count": 4
     },
     {
       "topic": "Cancer Research",
-      "eu_percent": 1.4,
-      "us_percent": 13.1,
+      "eu_percent": 1.3,
+      "us_percent": 13.0,
       "eu_count": 9,
       "us_count": 35
     },
     {
       "topic": "Materials Science",
-      "eu_percent": 11.4,
+      "eu_percent": 10.8,
       "us_percent": 1.9,
       "eu_count": 74,
       "us_count": 5
     },
     {
       "topic": "Biotechnology",
-      "eu_percent": 4.5,
+      "eu_percent": 4.2,
       "us_percent": 8.2,
       "eu_count": 29,
       "us_count": 22
     },
     {
       "topic": "Mental Health",
-      "eu_percent": 1.4,
-      "us_percent": 10.9,
+      "eu_percent": 1.3,
+      "us_percent": 10.8,
       "eu_count": 9,
       "us_count": 29
     },
     {
       "topic": "Agriculture & Food",
-      "eu_percent": 11.1,
+      "eu_percent": 10.9,
       "us_percent": 1.1,
-      "eu_count": 72,
+      "eu_count": 75,
       "us_count": 3
     },
     {
       "topic": "Neuroscience & Brain",
-      "eu_percent": 0.8,
-      "us_percent": 10.9,
+      "eu_percent": 0.7,
+      "us_percent": 10.8,
       "eu_count": 5,
       "us_count": 29
     },
     {
       "topic": "Data Science & Computing",
-      "eu_percent": 2.2,
-      "us_percent": 7.9,
+      "eu_percent": 2.0,
+      "us_percent": 7.8,
       "eu_count": 14,
       "us_count": 21
     },
     {
       "topic": "Drug Discovery",
-      "eu_percent": 0.8,
-      "us_percent": 7.9,
-      "eu_count": 5,
+      "eu_percent": 0.9,
+      "us_percent": 7.8,
+      "eu_count": 6,
       "us_count": 21
     },
     {
       "topic": "Infectious Diseases & Vaccines",
-      "eu_percent": 2.0,
+      "eu_percent": 1.9,
       "us_percent": 3.7,
       "eu_count": 13,
       "us_count": 10
@@ -193,105 +193,105 @@
   "all_topics": [
     {
       "topic": "Healthcare & Medical",
-      "eu_percent": 10.8,
-      "us_percent": 58.4,
-      "eu_count": 70,
+      "eu_percent": 10.7,
+      "us_percent": 58.0,
+      "eu_count": 73,
       "us_count": 156
     },
     {
       "topic": "Climate & Environment",
-      "eu_percent": 47.7,
+      "eu_percent": 47.4,
       "us_percent": 5.6,
-      "eu_count": 309,
+      "eu_count": 325,
       "us_count": 15
     },
     {
       "topic": "Genomics & Genetics",
-      "eu_percent": 10.2,
-      "us_percent": 19.9,
-      "eu_count": 66,
-      "us_count": 53
+      "eu_percent": 10.1,
+      "us_percent": 20.1,
+      "eu_count": 69,
+      "us_count": 54
     },
     {
       "topic": "Aging & Geriatrics",
-      "eu_percent": 7.7,
-      "us_percent": 12.0,
-      "eu_count": 50,
+      "eu_percent": 7.4,
+      "us_percent": 11.9,
+      "eu_count": 51,
       "us_count": 32
     },
     {
       "topic": "AI & Machine Learning",
-      "eu_percent": 17.0,
+      "eu_percent": 16.4,
       "us_percent": 1.1,
-      "eu_count": 110,
+      "eu_count": 112,
       "us_count": 3
     },
     {
       "topic": "Energy & Renewables",
-      "eu_percent": 13.1,
+      "eu_percent": 13.7,
       "us_percent": 1.5,
-      "eu_count": 85,
+      "eu_count": 94,
       "us_count": 4
     },
     {
       "topic": "Cancer Research",
-      "eu_percent": 1.4,
-      "us_percent": 13.1,
+      "eu_percent": 1.3,
+      "us_percent": 13.0,
       "eu_count": 9,
       "us_count": 35
     },
     {
       "topic": "Materials Science",
-      "eu_percent": 11.4,
+      "eu_percent": 10.8,
       "us_percent": 1.9,
       "eu_count": 74,
       "us_count": 5
     },
     {
       "topic": "Biotechnology",
-      "eu_percent": 4.5,
+      "eu_percent": 4.2,
       "us_percent": 8.2,
       "eu_count": 29,
       "us_count": 22
     },
     {
       "topic": "Mental Health",
-      "eu_percent": 1.4,
-      "us_percent": 10.9,
+      "eu_percent": 1.3,
+      "us_percent": 10.8,
       "eu_count": 9,
       "us_count": 29
     },
     {
       "topic": "Agriculture & Food",
-      "eu_percent": 11.1,
+      "eu_percent": 10.9,
       "us_percent": 1.1,
-      "eu_count": 72,
+      "eu_count": 75,
       "us_count": 3
     },
     {
       "topic": "Neuroscience & Brain",
-      "eu_percent": 0.8,
-      "us_percent": 10.9,
+      "eu_percent": 0.7,
+      "us_percent": 10.8,
       "eu_count": 5,
       "us_count": 29
     },
     {
       "topic": "Data Science & Computing",
-      "eu_percent": 2.2,
-      "us_percent": 7.9,
+      "eu_percent": 2.0,
+      "us_percent": 7.8,
       "eu_count": 14,
       "us_count": 21
     },
     {
       "topic": "Drug Discovery",
-      "eu_percent": 0.8,
-      "us_percent": 7.9,
-      "eu_count": 5,
+      "eu_percent": 0.9,
+      "us_percent": 7.8,
+      "eu_count": 6,
       "us_count": 21
     },
     {
       "topic": "Infectious Diseases & Vaccines",
-      "eu_percent": 2.0,
+      "eu_percent": 1.9,
       "us_percent": 3.7,
       "eu_count": 13,
       "us_count": 10
