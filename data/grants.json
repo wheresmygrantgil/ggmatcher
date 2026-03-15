@@ -9538,5 +9538,105 @@
     "proposed_money": "From 1000000$ to 25000000$",
     "submission_link": "https://eere-exchange.energy.gov",
     "summary_text": "This NOFO focuses on field-scale testing of next-generation development technologies for geothermal energy, specifically at depths and temperatures suitable for full-scale projects. It emphasizes exploration drilling to gather data for characterizing hydrothermal prospects and aims to support the Department of Energy's R&D priorities through practical, real-world applications. The initiative aligns with strategic goals outlined in the GeoVision Roadmap and the GTO's Multi-Year Program Plan."
+  },
+  {
+    "grant_id": 50633485,
+    "provider": "HORIZON-EIC-2026-BAS-02-SCALEUP",
+    "title": "HORIZON-EIC-2026-BAS-02-SCLATEUP",
+    "due_date": "['03-06-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-eic-2026-bas-02-scaleup",
+    "summary_text": "The EIC Scaling Club 2.0 focuses on supporting the growth of top deep tech companies in Europe, particularly those with high-growth potential in key technological areas such as AI, advanced materials, quantum, biotech, robotics, space technologies, and energy decarbonization. The initiative aims to enhance investment readiness, operational excellence, and access to talent and financing, while fostering a strong network among deep tech founders, mentors, and investors to facilitate international expansion and increase commercial deals. Additionally, it emphasizes the importance of diversity and aims to strengthen the visibility of European deep tech scale-ups on a global stage."
+  },
+  {
+    "grant_id": 50140738,
+    "provider": "HORIZON-MISS-2027-02-CANCER-02",
+    "title": "Clinical research by Comprehensive Cancer Infrastructures for the benefit of patients with common cancers",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-02-cancer-02",
+    "summary_text": "The grant call focuses on advancing clinical research for lung, bowel, breast, and prostate cancer through innovative diagnostics, treatment methods, and the development of comprehensive cancer infrastructures across EU Member States and Associated Countries. Key research topics include the implementation of therapeutic cancer vaccines, the establishment of clinical practice guidelines in regions with limited resources, and the promotion of participative research models that involve patients and caregivers. The aim is to address cancer disparities, enhance access to care, and foster collaboration among diverse stakeholders to improve patient outcomes."
+  },
+  {
+    "grant_id": 50140616,
+    "provider": "HORIZON-MISS-2027-02-CANCER-03",
+    "title": "Phase 1 including first-in-human clinical trials to test biomarker-guided medicines or multi-modal treatment interventions for patients with rare or very rare cancers or cancer subtypes",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-02-cancer-03",
+    "summary_text": "The grant call focuses on advancing research and treatment options for patients with rare or very rare cancers, emphasizing the development and validation of biomarker-guided medicines and multi-modal treatment interventions. Key areas include preclinical validation of promising drugs, early safety and efficacy assessments in phase 1 clinical trials, and the integration of patient-reported outcomes. Proposals should also promote collaboration among diverse stakeholders and ensure data sharing in line with open science principles."
+  },
+  {
+    "grant_id": 50140647,
+    "provider": "HORIZON-MISS-2027-02-CANCER-01",
+    "title": "Leveraging functional genomics to reveal novel targets for cancer treatment",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-02-cancer-01",
+    "summary_text": "The key research topics focus on understanding tumor heterogeneity in cancer initiation and progression, particularly in pediatric and rare cancers with limited treatment options. Proposals should aim to identify novel therapeutic targets through mechanistic studies and the integration of multimodal clinical data, leveraging advanced technologies in genomics and artificial intelligence. Collaboration across disciplines is encouraged to enhance data interoperability and contribute to the UNCAN.eu research platform, facilitating the development of innovative, genomically-informed cancer treatments."
+  },
+  {
+    "grant_id": 50140712,
+    "provider": "HORIZON-MISS-2027-02-CANCER-06",
+    "title": "Support a Young Cancer Survivor Quality of Life (QoL) research programme by cancer charities and funding agencies",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-02-cancer-06",
+    "summary_text": "The grant call focuses on enhancing the quality of life for young cancer patients and survivors aged 0-39 through transnational research and innovation projects. Key research topics include developing and implementing innovative approaches and tools to address long-term effects of cancer treatment, such as mental health issues and chronic pain, while ensuring accessibility and reusability of digital data for future research. The initiative emphasizes collaboration among cancer charities, funding agencies, and stakeholders to raise awareness and support local communities, with a strong involvement of patients and social sciences expertise."
+  },
+  {
+    "grant_id": 50140685,
+    "provider": "HORIZON-MISS-2027-02-CANCER-04",
+    "title": "Improving equitable health outcomes and added value for and with cancer patients through health-economics research, health systems research and outcomes research",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-02-cancer-04",
+    "summary_text": "The grant call focuses on enhancing cancer control programs across the EU by improving access to effective and cost-efficient healthcare for cancer patients and those at risk. Key research topics include health economics, epidemiological and outcomes research, and the development of models for cost-effectiveness analyses that address socio-economic inequalities and improve health outcomes. Proposals should also emphasize participative research involving patients and caregivers, and aim to optimize the organization and delivery of evidence-based cancer care in various settings."
+  },
+  {
+    "grant_id": 50140670,
+    "provider": "HORIZON-MISS-2027-02-CANCER-05",
+    "title": "Pre-commercial procurement of affordable solutions for healthcare systems in the areas of cancer technologies, cancer medical devices, or cancer medicines",
+    "due_date": "['21-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-miss-2027-02-cancer-05",
+    "summary_text": "The grant call focuses on the development and procurement of affordable, innovative solutions in cancer-centered healthcare, specifically targeting cancer technologies, medical devices, and medicines. It emphasizes the importance of end-user engagement, including cancer patients and healthcare providers, in the research and development process, and aims to facilitate the commercialization of validated solutions across multiple EU countries. Additionally, it encourages collaboration among public and private procurers to stimulate market readiness and improve health outcomes for cancer patients."
+  },
+  {
+    "grant_id": 51121453,
+    "provider": "HORIZON-EIC-2026-TRANSITIONOPEN",
+    "title": "EIC Transition Open",
+    "due_date": "['16-09-2026 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-eic-2026-transitionopen",
+    "summary_text": "The EIC Transition grant focuses on advancing innovative technologies from laboratory proof of concept (TRL 3) to viable demonstrators (TRL 5-6) through further development and validation activities. Key research topics include user-centric methodologies for technology maturation, market readiness, business model development, and regulatory considerations, all aimed at enhancing commercial viability and investment readiness in high-potential markets."
+  },
+  {
+    "grant_id": 361416,
+    "provider": "Bureau of Global Health Security and Diplomacy",
+    "title": "Advancing Global Health",
+    "due_date": "2027-02-14 00:00:00",
+    "eligibility_israel": true,
+    "proposed_money": "From 500000$ to 250000000$",
+    "submission_link": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&amp;table=x_g_usd4_d_grant_funding_opportunity&amp;sys_id=ee02bff31b9f76d0e02962cae54bcb66&amp;view=Default",
+    "summary_text": "The key research topics and scientific focus areas of this grant call include advancing global health strategies that aim to save lives, strengthen health systems, and enhance efficiency. Additionally, the initiative emphasizes fostering self-reliance in health systems and ensuring that U.S. investments contribute to American safety and prosperity, while addressing specific health challenges and priorities identified through bilateral agreements."
+  },
+  {
+    "grant_id": 361498,
+    "provider": "Office of Suicide Prevention",
+    "title": "Staff Sergeant Fox Suicide Prevention Grant Program Funding Opportunity",
+    "due_date": "2026-06-12 00:00:00",
+    "eligibility_israel": true,
+    "proposed_money": "From 100000$ to 750000$",
+    "submission_link": "https://www.mentalhealth.va.gov/ssgfox-grants/",
+    "summary_text": "The Staff Sergeant Fox Suicide Prevention Grant Program (SSG Fox SPGP) focuses on reducing Veteran suicide through community-based, non-clinical services aimed at improving mental health, well-being, financial stability, and social support for Veterans and Active-Duty Service Members. Key research topics include the effectiveness of case management, peer support, and innovative approaches to engage Veterans who are not currently connected to VA services, thereby addressing critical gaps in suicide prevention efforts."
   }
 ]
