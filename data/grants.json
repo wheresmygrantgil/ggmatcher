@@ -9638,5 +9638,55 @@
     "proposed_money": "From 100000$ to 750000$",
     "submission_link": "https://www.mentalhealth.va.gov/ssgfox-grants/",
     "summary_text": "The Staff Sergeant Fox Suicide Prevention Grant Program (SSG Fox SPGP) focuses on reducing Veteran suicide through community-based, non-clinical services aimed at improving mental health, well-being, financial stability, and social support for Veterans and Active-Duty Service Members. Key research topics include the effectiveness of case management, peer support, and innovative approaches to engage Veterans who are not currently connected to VA services, thereby addressing critical gaps in suicide prevention efforts."
+  },
+  {
+    "grant_id": 50161078,
+    "provider": "HORIZON-EIE-2027-01-CONNECT-03",
+    "title": "Enhancing the involvement of philanthropic organisations in innovation ecosystems",
+    "due_date": "['15-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-eie-2027-01-connect-03",
+    "summary_text": "The key research topics focus on enhancing collaboration between philanthropic organizations and higher education institutions to facilitate the commercialization of academic research and innovations. This includes developing strategies for technology transfer, creating experimentation spaces like living labs, and supporting the launch of spin-offs and startups through access to funding and networks. The aim is to bridge the gap between research and market-ready solutions by engaging various stakeholders, including venture capitalists and businesses, in the innovation process."
+  },
+  {
+    "grant_id": 50161057,
+    "provider": "HORIZON-EIE-2027-01-CONNECT-02",
+    "title": "Reinforcing synergies between experimentation spaces and innovation procurement",
+    "due_date": "['15-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-eie-2027-01-connect-02",
+    "summary_text": "The grant call focuses on advancing public sector modernization through innovative technologies to enhance the quality and efficiency of public services. It aims to bridge the gap between supply and demand for innovative solutions by fostering collaboration between public buyers, innovative companies (especially SMEs and startups), and regulatory bodies, facilitating the testing and deployment of new technologies in public procurement. Key research topics include the development of innovative solutions, the establishment of cooperative procurement strategies, and the use of experimentation spaces like test beds and living labs to accelerate the commercialization of innovations."
+  },
+  {
+    "grant_id": 50161094,
+    "provider": "HORIZON-EIE-2027-01-CONNECT-01",
+    "title": "Startup Europe",
+    "due_date": "['15-09-2027 03:00:00']",
+    "eligibility_israel": true,
+    "proposed_money": null,
+    "submission_link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details/horizon-eie-2027-01-connect-01",
+    "summary_text": "The grant call focuses on enhancing the market presence of European startups in strategic digital technologies and deep tech innovations, including areas such as Artificial Intelligence, Cybersecurity, Blockchain, and Greentech. It aims to connect startups and scaleups, particularly those in moderate or emerging innovator regions and women-led ventures, with local and European ecosystems to facilitate cross-border acceleration and investment opportunities. The initiative emphasizes supporting companies that have achieved market-product fit and ensuring they are equipped to navigate challenges in business development and funding."
+  },
+  {
+    "grant_id": 361664,
+    "provider": "U.S. National Science Foundation",
+    "title": "TechAccess: AI-Ready America",
+    "due_date": "2026-07-16 00:00:00",
+    "eligibility_israel": true,
+    "proposed_money": "From 3000000$ to 4000000$",
+    "submission_link": "http://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26508",
+    "summary_text": "The TechAccess: AI-Ready America initiative focuses on enhancing AI readiness and adoption across the U.S. by fostering collaboration among various stakeholders, including businesses and public organizations. Key research topics include the establishment of State/Territory Coordination Hubs to facilitate local AI strategies, the role of a National Coordination Lead to promote knowledge sharing, and the implementation of AI-Ready Catalyst Award Competitions to support innovative solutions addressing national AI readiness challenges."
+  },
+  {
+    "grant_id": 361714,
+    "provider": "Bureau of Global Health Security and Diplomacy",
+    "title": "Advancing Global Health",
+    "due_date": "2027-02-14 00:00:00",
+    "eligibility_israel": true,
+    "proposed_money": "From 500000$ to 250000000$",
+    "submission_link": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&amp;table=x_g_usd4_d_grant_funding_opportunity&amp;sys_id=ee02bff31b9f76d0e02962cae54bcb66&amp;view=Default",
+    "summary_text": "The key research topics and scientific focus areas of this grant call include advancing global health strategies that aim to save lives, strengthen health systems, and enhance efficiency. Additionally, the initiative emphasizes fostering self-reliance in health systems and ensuring that U.S. investments contribute to national safety and prosperity, with a focus on addressing specific health challenges and priorities identified through bilateral agreements."
   }
 ]
